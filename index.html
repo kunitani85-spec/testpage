@@ -3,263 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STRIDE RECRUIT | 株式会社ストライド 採用サイト</title>
-<meta name="description" content="株式会社ストライド 採用サイト。私たちと一緒に、次のフィールドへ。">
+<title>汀 -NAGISA- | 静けさに浸る、海辺の宿</title>
+<meta name="description" content="汀 -NAGISA- 瀬戸の海を望む、静けさに浸る宿。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ============ ヘッダー ============ -->
+<!-- ローディング画面(同日2回目は表示しない) -->
+<div class="preloader" id="preloader">
+  <p class="preloader-logo">汀 <span>NAGISA</span></p>
+  <div class="preloader-bar"><span></span></div>
+</div>
+
+<!-- ヘッダー -->
 <header class="header" id="header">
-  <div class="header-inner">
-    <a href="#top" class="logo">STRIDE<span>RECRUIT</span></a>
-
-    <nav class="gnav" id="gnav">
-      <ul class="gnav-list">
-        <li><a href="#about" class="gnav-link">私たちについて</a></li>
-        <li><a href="#member" class="gnav-link">社員紹介</a></li>
-        <li><a href="#support" class="gnav-link">募集要項</a></li>
-        <li><a href="#recruit" class="gnav-link">採用情報</a></li>
-        <li><a href="#entry" class="gnav-link gnav-cta">エントリー</a></li>
-      </ul>
-    </nav>
-
-    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="gnav">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <a href="#top" class="logo">汀 <span>NAGISA</span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">MENU</button>
 </header>
 
-<!-- ============ ファーストビュー ============ -->
-<section class="mv" id="top">
-  <div class="mv-slide mv-slide--1 is-active"></div>
-  <div class="mv-slide mv-slide--2"></div>
-  <div class="mv-slide mv-slide--3"></div>
-  <div class="mv-overlay"></div>
-  <div class="mv-content">
-    <p class="mv-en">JOIN OUR TEAM</p>
-    <h1 class="mv-title">次のフィールドへ、<br>一緒に踏み出そう。</h1>
-    <p class="mv-lead">私たちと共に、まだ見ぬ景色を目指す仲間を募集しています。</p>
-    <a href="#recruit" class="btn btn-primary mv-btn">採用情報を見る</a>
+<!-- フルスクリーンナビ -->
+<nav class="fullnav" id="fullnav">
+  <button class="fullnav-close" id="fullnavClose" aria-label="メニューを閉じる">CLOSE</button>
+  <ul class="fullnav-list">
+    <li><a href="#room" class="fullnav-link"><span class="ja">お部屋</span><span class="en">ROOM</span></a></li>
+    <li><a href="#cuisine" class="fullnav-link"><span class="ja">お食事</span><span class="en">CUISINE</span></a></li>
+    <li><a href="#onsen" class="fullnav-link"><span class="ja">温泉</span><span class="en">ONSEN</span></a></li>
+    <li><a href="#around" class="fullnav-link"><span class="ja">周辺散策</span><span class="en">AROUND</span></a></li>
+    <li><a href="#access" class="fullnav-link"><span class="ja">アクセス</span><span class="en">ACCESS</span></a></li>
+    <li><a href="#reserve" class="fullnav-link"><span class="ja">ご予約</span><span class="en">RESERVE</span></a></li>
+  </ul>
+</nav>
+
+<!-- ファーストビュー(動画演出) -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <div class="hero-image"></div>
   </div>
-  <div class="mv-scroll"><span></span>SCROLL</div>
+  <div class="hero-scroll"><span></span>SCROLL</div>
 </section>
 
-<!-- ============ 第一セクション：私たちについて ============ -->
-<section class="sec about" id="about">
-  <div class="sec-inner about-inner">
-    <div class="about-image">
-      <div class="img-placeholder ph-1">IMAGE</div>
+<!-- 予約バー -->
+<section class="reserve-bar" id="reserve">
+  <form class="reserve-form">
+    <div class="reserve-field">
+      <label for="checkin">チェックイン</label>
+      <input type="date" id="checkin" name="checkin">
     </div>
-    <div class="about-text">
-      <p class="sub-title">ABOUT US</p>
-      <h2 class="sec-title">私たちについて</h2>
-      <p class="body-text">
-        株式会社ストライドは、「挑戦する人を、もっと自由に。」を合言葉に事業を展開しています。
-        変化の速い時代だからこそ、一人ひとりの個性とスキルを掛け合わせ、
-        新しい価値を生み出すことにこだわってきました。
-        年齢や社歴に関係なく、挑戦したい人にはいくつでもチャンスがある環境です。
-        あなたのキャリアを、私たちと一緒に前へ進めませんか。
-      </p>
+    <div class="reserve-field">
+      <label for="nights">泊数</label>
+      <select id="nights" name="nights">
+        <option>1泊</option><option>2泊</option><option>3泊</option>
+        <option>4泊</option><option>5泊</option>
+      </select>
     </div>
-  </div>
-
-  <div class="loop-slider" aria-hidden="true">
-    <div class="loop-track">
-      <div class="loop-item ph-2">IMAGE</div>
-      <div class="loop-item ph-3">IMAGE</div>
-      <div class="loop-item ph-4">IMAGE</div>
-      <div class="loop-item ph-5">IMAGE</div>
-      <div class="loop-item ph-6">IMAGE</div>
-      <div class="loop-item ph-2">IMAGE</div>
-      <div class="loop-item ph-3">IMAGE</div>
-      <div class="loop-item ph-4">IMAGE</div>
-      <div class="loop-item ph-5">IMAGE</div>
-      <div class="loop-item ph-6">IMAGE</div>
+    <div class="reserve-field">
+      <label for="guests">人数</label>
+      <select id="guests" name="guests">
+        <option>1名</option><option>2名</option><option>3名</option>
+        <option>4名</option><option>5名</option><option>6名</option>
+      </select>
     </div>
-  </div>
+    <button type="submit" class="btn-reserve">空室を探す</button>
+  </form>
 </section>
 
-<!-- ============ 第二セクション：社員紹介 ============ -->
-<section class="sec member" id="member">
-  <div class="sec-inner">
-    <p class="sub-title center">MEMBER</p>
-    <h2 class="sec-title center">社員紹介</h2>
-
-    <div class="member-slider">
-      <div class="member-viewport">
-        <ul class="member-track" id="memberTrack">
-          <li class="member-card"><div class="img-placeholder ph-2 card-photo">PHOTO</div><p class="member-name">佐藤 直樹</p><p class="member-role">営業部 / 2018年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-3 card-photo">PHOTO</div><p class="member-name">田中 美咲</p><p class="member-role">企画部 / 2020年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-4 card-photo">PHOTO</div><p class="member-name">鈴木 健太</p><p class="member-role">開発部 / 2019年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-5 card-photo">PHOTO</div><p class="member-name">高橋 蓮</p><p class="member-role">人事部 / 2021年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-6 card-photo">PHOTO</div><p class="member-name">伊藤 陽菜</p><p class="member-role">マーケティング部 / 2022年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-1 card-photo">PHOTO</div><p class="member-name">渡辺 大輔</p><p class="member-role">営業部 / 2017年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-2 card-photo">PHOTO</div><p class="member-name">山本 結衣</p><p class="member-role">開発部 / 2023年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-3 card-photo">PHOTO</div><p class="member-name">中村 翔太</p><p class="member-role">企画部 / 2020年入社</p></li>
-          <li class="member-card"><div class="img-placeholder ph-4 card-photo">PHOTO</div><p class="member-name">小林 さくら</p><p class="member-role">人事部 / 2021年入社</p></li>
-        </ul>
-      </div>
-      <div class="slider-controls">
-        <button class="slider-btn prev" id="memberPrev" aria-label="前へ">&#10094;</button>
-        <button class="slider-btn next" id="memberNext" aria-label="次へ">&#10095;</button>
-      </div>
-    </div>
-
-    <div class="center-btn">
-      <a href="#" class="btn btn-outline">詳しく見る</a>
-    </div>
-  </div>
+<!-- リード文 -->
+<section class="lead">
+  <p class="lead-en">NAGISA</p>
+  <p class="lead-text">
+    朝日はこの場に座し、静かな光を眺める。<br>
+    夜は星のかけらが降るように、光の粒が瞬く。<br><br>
+    遠くを急がず、何かを求めることもせず、<br>
+    ただこの時間を慈しむ。<br><br>
+    寄せては返す波の音に耳を澄ませ、<br>
+    こころのざわめきを、そっと鎮めてゆく。<br><br>
+    汀にたゆたう、ひとときの休息を。
+  </p>
 </section>
 
-<!-- ============ 第三セクション：募集要項 ============ -->
-<section class="sec support" id="support">
-  <div class="sec-inner">
-    <p class="sub-title center">SUPPORT</p>
-    <h2 class="sec-title center">募集要項</h2>
-
-    <div class="tabs">
-      <div class="tab-buttons" role="tablist">
-        <button class="tab-btn is-active" data-tab="1" role="tab" aria-selected="true">新卒採用</button>
-        <button class="tab-btn" data-tab="2" role="tab" aria-selected="false">中途採用</button>
-        <button class="tab-btn" data-tab="3" role="tab" aria-selected="false">キャリア採用</button>
-        <button class="tab-btn" data-tab="4" role="tab" aria-selected="false">契約社員</button>
-        <button class="tab-btn" data-tab="5" role="tab" aria-selected="false">アルバイト・パート</button>
-      </div>
-
-      <div class="tab-panels">
-        <div class="tab-panel is-active" data-panel="1">
-          <div class="panel-image"><div class="img-placeholder ph-1">IMAGE</div></div>
-          <div class="panel-text">
-            <p class="sub-title">NEW GRADUATE</p>
-            <h3 class="panel-title">新卒採用</h3>
-            <p class="body-text">2027年3月卒業・卒業見込みの方を対象とした採用枠です。職種・学部不問。入社後は充実の研修プログラムでビジネスの基礎から丁寧に育成します。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-panel="2">
-          <div class="panel-image"><div class="img-placeholder ph-2">IMAGE</div></div>
-          <div class="panel-text">
-            <p class="sub-title">MID-CAREER</p>
-            <h3 class="panel-title">中途採用</h3>
-            <p class="body-text">経験を活かして即戦力として活躍したい方を募集しています。営業・企画・開発など幅広い職種でポジションをご用意しています。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-panel="3">
-          <div class="panel-image"><div class="img-placeholder ph-3">IMAGE</div></div>
-          <div class="panel-text">
-            <p class="sub-title">CAREER</p>
-            <h3 class="panel-title">キャリア採用</h3>
-            <p class="body-text">専門性を持ってマネジメント・専門職として活躍したい方向けの採用枠です。裁量権を持って組織を牽引していただきます。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-panel="4">
-          <div class="panel-image"><div class="img-placeholder ph-4">IMAGE</div></div>
-          <div class="panel-text">
-            <p class="sub-title">CONTRACT</p>
-            <h3 class="panel-title">契約社員</h3>
-            <p class="body-text">プロジェクト単位・期間限定で活躍したい方向けの雇用形態です。ライフスタイルに合わせた柔軟な働き方が可能です。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-panel="5">
-          <div class="panel-image"><div class="img-placeholder ph-5">IMAGE</div></div>
-          <div class="panel-text">
-            <p class="sub-title">PART-TIME</p>
-            <h3 class="panel-title">アルバイト・パート</h3>
-            <p class="body-text">未経験・学生・主婦(夫)歓迎。シフト相談可能で、はじめての方でも安心して働ける環境を整えています。</p>
-          </div>
-        </div>
-      </div>
+<!-- アクセス・マップ -->
+<section class="map-sec" id="access">
+  <div class="map-inner">
+    <p class="map-logo">汀 NAGISA</p>
+    <div class="map-illust" aria-hidden="true">
+      <svg viewBox="0 0 400 260" class="map-svg">
+        <path d="M20 200 Q80 160 140 190 T260 170 T380 200" fill="none" stroke="currentColor" stroke-width="1"/>
+        <path d="M40 90 Q100 60 160 85 T300 70" fill="none" stroke="currentColor" stroke-width="1"/>
+        <circle cx="180" cy="140" r="3" fill="currentColor"/>
+        <circle cx="250" cy="110" r="2" fill="currentColor"/>
+        <circle cx="120" cy="170" r="2" fill="currentColor"/>
+      </svg>
+      <p class="map-label map-label-1">汀 NAGISA</p>
+      <p class="map-label map-label-2">○○港</p>
+      <p class="map-label map-label-3">△△岬</p>
     </div>
-
-    <div class="support-list">
-      <h3 class="support-heading">サポート体制充実</h3>
-      <div class="support-grid">
-        <div class="support-item">
-          <div class="support-icon">01</div>
-          <p class="support-name">研修制度</p>
-        </div>
-        <div class="support-item">
-          <div class="support-icon">02</div>
-          <p class="support-name">資格取得支援</p>
-        </div>
-        <div class="support-item">
-          <div class="support-icon">03</div>
-          <p class="support-name">メンター制度</p>
-        </div>
-        <div class="support-item">
-          <div class="support-icon">04</div>
-          <p class="support-name">福利厚生充実</p>
-        </div>
-        <div class="support-item">
-          <div class="support-icon">05</div>
-          <p class="support-name">住宅・家族手当</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="center-btn">
-      <a href="#" class="btn btn-outline">詳しく見る</a>
-    </div>
+    <p class="map-caption">瀬戸の島影を望む、小さな入江のほとりに。</p>
   </div>
 </section>
 
-<!-- ============ 第四セクション：採用情報 ============ -->
-<section class="sec recruit" id="recruit">
-  <div class="recruit-bg"></div>
-  <div class="recruit-overlay"></div>
+<div class="photo-band ph-band-1"><span class="photo-caption">DUSK</span></div>
 
-  <div class="sec-inner recruit-inner">
-    <div class="recruit-left">
-      <p class="sub-title recruit-sub">RECRUIT</p>
-      <h2 class="sec-title recruit-title">採用情報</h2>
-      <div class="recruit-buttons">
-        <button class="recruit-btn is-active" data-img="1">新卒採用</button>
-        <button class="recruit-btn" data-img="2">採用2</button>
-        <button class="recruit-btn" data-img="3">採用3</button>
-        <button class="recruit-btn" data-img="4">採用4</button>
-      </div>
-    </div>
-    <div class="recruit-right">
-      <div class="recruit-image ph-3 is-active" data-img="1">IMAGE 1</div>
-      <div class="recruit-image ph-4" data-img="2">IMAGE 2</div>
-      <div class="recruit-image ph-5" data-img="3">IMAGE 3</div>
-      <div class="recruit-image ph-6" data-img="4">IMAGE 4</div>
-    </div>
+<!-- お部屋 -->
+<section class="content-block" id="room">
+  <div class="content-image"><div class="img-placeholder ph-a"></div></div>
+  <div class="content-text">
+    <p class="content-en">ROOM</p>
+    <h2 class="content-title">お部屋</h2>
+    <p class="content-body">
+      窓の外には、木々の間から覗く入江の景色。<br>
+      静けさに満ちた客室で、時の流れをゆるめる。<br>
+      すべての部屋から、汀の気配を感じられるように。
+    </p>
+    <a href="#" class="more-link">MORE <span>&rarr;</span></a>
   </div>
 </section>
 
-<!-- ============ フッター ============ -->
-<footer class="footer" id="entry">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <a href="#top" class="footer-logo">STRIDE<span>RECRUIT</span></a>
-      <p class="footer-company">株式会社ストライド</p>
-      <p class="footer-address">〒100-0001 東京都千代田区千代田1-1-1 ストライドビル10F</p>
-      <p class="footer-tel">TEL 03-0000-0000</p>
-    </div>
+<div class="photo-band ph-band-2"><span class="photo-caption">SKY</span></div>
 
-    <div class="footer-right">
-      <ul class="footer-menu">
-        <li><a href="#top">トップ</a></li>
-        <li><a href="#about">会社概要</a></li>
-        <li><a href="#about">私たちについて</a></li>
-        <li><a href="#">事業紹介</a></li>
-        <li><a href="#member">社員紹介</a></li>
-        <li><a href="#support">募集要項</a></li>
-        <li><a href="#recruit">採用情報</a></li>
-        <li><a href="#recruit">新卒採用</a></li>
-        <li><a href="#recruit">中途採用</a></li>
-        <li><a href="#">よくある質問</a></li>
-        <li><a href="#">プライバシーポリシー</a></li>
-        <li><a href="#">サイトマップ</a></li>
-        <li><a href="#entry">お問い合わせ</a></li>
-      </ul>
-    </div>
+<!-- お食事 -->
+<section class="content-block" id="cuisine">
+  <div class="content-image"><div class="img-placeholder ph-b"></div></div>
+  <div class="content-text">
+    <p class="content-en">CUISINE</p>
+    <h2 class="content-title">お食事</h2>
+    <p class="content-body">
+      海の恵みを短い手数で、素材のまま召し上がれ。<br>
+      季節ごとに移ろう一皿は、その日だけの景色を映す。<br>
+      派手さのない、しかし記憶に残る味わいを。
+    </p>
+    <a href="#" class="more-link">MORE <span>&rarr;</span></a>
   </div>
-  <p class="copyright">&copy; 2026 STRIDE Inc. All Rights Reserved.</p>
+</section>
+
+<div class="photo-band ph-band-3"><span class="photo-caption">SEA</span></div>
+
+<!-- 温泉 -->
+<section class="content-block" id="onsen">
+  <div class="content-image"><div class="img-placeholder ph-c"></div></div>
+  <div class="content-text">
+    <p class="content-en">ONSEN</p>
+    <h2 class="content-title">温泉</h2>
+    <p class="content-body">
+      湯に身を沈め、遠く水平線を眺める。<br>
+      朝は光の粒を、夜は星のまたたきを、湯面に映して。<br>
+      ただ静かに、時間だけが流れてゆく。
+    </p>
+    <a href="#" class="more-link">MORE <span>&rarr;</span></a>
+  </div>
+</section>
+
+<div class="photo-band ph-band-4"><span class="photo-caption">MOSS</span></div>
+
+<!-- 周辺散策 -->
+<section class="content-block" id="around">
+  <div class="content-image"><div class="img-placeholder ph-d"></div></div>
+  <div class="content-text">
+    <p class="content-en">AROUND</p>
+    <h2 class="content-title">周辺散策</h2>
+    <p class="content-body">
+      小さな港町を歩けば、潮の香りと猫の声。<br>
+      灯台まで続く道の先に、夕凪の海が広がる。<br>
+      宿を出て、島の時間にもうすこし浸ってみる。
+    </p>
+    <a href="#" class="more-link">MORE <span>&rarr;</span></a>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer class="footer" id="stay">
+  <p class="footer-logo">汀 <span>NAGISA</span></p>
+  <p class="footer-tel">0000-00-0000<small>(受付時間 9:00〜19:00)</small></p>
+  <p class="footer-address">〒000-0000 ○○県○○郡○○町000番地</p>
+  <p class="footer-copy">&copy; 2026 NAGISA</p>
 </footer>
 
 <script src="js/script.js"></script>
