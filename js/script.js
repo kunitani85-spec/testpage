@@ -1,149 +1,124 @@
 (() => {
   'use strict';
 
-  /* ---------- Preloader ---------- */
-  const preloader = document.getElementById('preloader');
-  window.addEventListener('load', () => {
-    setTimeout(() => preloader.classList.add('is-hidden'), 400);
+  /* ---------- Hamburger menu ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const gnav = document.getElementById('gnav');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = gnav.classList.toggle('is-open');
+    hamburger.classList.toggle('is-open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
   });
 
-  /* ---------- Header scroll state ---------- */
-  const header = document.getElementById('siteHeader');
-  const toTopBtn = document.getElementById('toTop');
-
-  function updateHeaderState() {
-    const scrolled = window.scrollY > 40;
-    header.classList.toggle('is-scrolled', scrolled);
-    toTopBtn.classList.toggle('is-visible', window.scrollY > 600);
-  }
-
-  /* ---------- Mobile nav ---------- */
-  const navToggle = document.getElementById('navToggle');
-  const mainNav = document.getElementById('mainNav');
-  navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('is-open');
-    navToggle.classList.toggle('is-open', isOpen);
-  });
-  mainNav.querySelectorAll('.nav-link').forEach((link) => {
+  gnav.querySelectorAll('.gnav-link').forEach((link) => {
     link.addEventListener('click', () => {
-      mainNav.classList.remove('is-open');
-      navToggle.classList.remove('is-open');
+      gnav.classList.remove('is-open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
     });
   });
 
-  /* ---------- To top ---------- */
-  toTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  /* ---------- MV crossfade slideshow ---------- */
+  const mvSlides = document.querySelectorAll('.mv-slide');
+  if (mvSlides.length) {
+    let mvIndex = 0;
+    setInterval(() => {
+      mvSlides[mvIndex].classList.remove('is-active');
+      mvIndex = (mvIndex + 1) % mvSlides.length;
+      mvSlides[mvIndex].classList.add('is-active');
+    }, 4000);
+  }
 
-  /* ---------- Scroll reveal (fade in / up / scale) ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.dataset.delay ? Number(el.dataset.delay) : 0;
-          setTimeout(() => el.classList.add('is-visible'), delay);
-          revealObserver.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-  );
-  revealEls.forEach((el) => revealObserver.observe(el));
+  /* ---------- Member slider (3 at a time, prev/next) ---------- */
+  const memberTrack = document.getElementById('memberTrack');
+  const memberPrev = document.getElementById('memberPrev');
+  const memberNext = document.getElementById('memberNext');
 
-  /* ---------- Count-up numbers ---------- */
-  const counters = document.querySelectorAll('.stat-num');
-  function animateCount(el) {
-    const target = Number(el.dataset.count);
-    const duration = 1600;
-    const start = performance.now();
+  if (memberTrack && memberPrev && memberNext) {
+    const cards = Array.from(memberTrack.children);
+    let currentIndex = 0;
 
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target).toLocaleString();
-      if (progress < 1) requestAnimationFrame(tick);
+    function getVisibleCount() {
+      const w = window.innerWidth;
+      if (w <= 560) return 1;
+      if (w <= 900) return 2;
+      return 3;
     }
-    requestAnimationFrame(tick);
-  }
-  const counterObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCount(entry.target);
-          counterObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-  counters.forEach((el) => counterObserver.observe(el));
 
-  /* ---------- Parallax layers ---------- */
-  const parallaxEls = Array.from(document.querySelectorAll('[data-speed]'));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let ticking = false;
+    function update() {
+      const visibleCount = getVisibleCount();
+      const maxIndex = Math.max(cards.length - visibleCount, 0);
+      currentIndex = Math.min(currentIndex, maxIndex);
 
-  function applyParallax() {
-    const viewportH = window.innerHeight;
-    parallaxEls.forEach((el) => {
-      const speed = Number(el.dataset.speed) || 0.2;
-      const rect = el.parentElement.getBoundingClientRect();
-      const offset = (rect.top) * speed;
-      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-    });
-    ticking = false;
-  }
+      const card = cards[0];
+      const style = getComputedStyle(memberTrack);
+      const gap = parseFloat(style.columnGap || style.gap || 0);
+      const step = card.getBoundingClientRect().width + gap;
 
-  function onScrollOrResize() {
-    updateHeaderState();
-    if (!reduceMotion) {
-      if (!ticking) {
-        requestAnimationFrame(applyParallax);
-        ticking = true;
-      }
+      memberTrack.style.transform = `translateX(${-currentIndex * step}px)`;
+      memberPrev.disabled = currentIndex <= 0;
+      memberNext.disabled = currentIndex >= maxIndex;
     }
-  }
 
-  window.addEventListener('scroll', onScrollOrResize, { passive: true });
-  window.addEventListener('resize', onScrollOrResize);
-  onScrollOrResize();
-  if (!reduceMotion) applyParallax();
-
-  /* ---------- Cursor glow (desktop only) ---------- */
-  const cursorGlow = document.getElementById('cursorGlow');
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-      cursorGlow.classList.add('is-active');
+    memberNext.addEventListener('click', () => {
+      const visibleCount = getVisibleCount();
+      const maxIndex = Math.max(cards.length - visibleCount, 0);
+      currentIndex = Math.min(currentIndex + visibleCount, maxIndex);
+      update();
     });
-    document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
-  }
 
-  /* ---------- Contact form (front-end only demo) ---------- */
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
-      contactForm.reset();
+    memberPrev.addEventListener('click', () => {
+      const visibleCount = getVisibleCount();
+      currentIndex = Math.max(currentIndex - visibleCount, 0);
+      update();
     });
+
+    window.addEventListener('resize', update);
+    update();
   }
 
-  /* ---------- Smooth anchor scroll offset for fixed header ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href');
-      if (id.length < 2) return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      const headerH = header.offsetHeight;
-      const top = target.getBoundingClientRect().top + window.scrollY - headerH + 1;
-      window.scrollTo({ top, behavior: 'smooth' });
+  /* ---------- Tabs (support section) ---------- */
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      tabButtons.forEach((b) => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+
+      tabPanels.forEach((panel) => {
+        panel.classList.toggle('is-active', panel.dataset.panel === target);
+      });
     });
   });
+
+  /* ---------- Recruit section: hover to swap image ---------- */
+  const recruitButtons = document.querySelectorAll('.recruit-btn');
+  const recruitImages = document.querySelectorAll('.recruit-image');
+
+  function setRecruitImage(target) {
+    recruitButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.img === target));
+    recruitImages.forEach((img) => img.classList.toggle('is-active', img.dataset.img === target));
+  }
+
+  recruitButtons.forEach((btn) => {
+    btn.addEventListener('mouseenter', () => setRecruitImage(btn.dataset.img));
+    btn.addEventListener('click', () => setRecruitImage(btn.dataset.img));
+    btn.addEventListener('focus', () => setRecruitImage(btn.dataset.img));
+  });
+
+  /* ---------- Header scroll shadow ---------- */
+  const header = document.getElementById('header');
+  function updateHeaderState() {
+    header.classList.toggle('is-scrolled', window.scrollY > 20);
+  }
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+  updateHeaderState();
 })();
