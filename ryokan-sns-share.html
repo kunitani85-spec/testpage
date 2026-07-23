@@ -3,156 +3,208 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ご宿泊の思い出をシェア | 湯の音の宿（デモ）</title>
-<meta name="description" content="旅館アプリ SNSシェア＆口コミ投稿機能プロトタイプ。QRコードから開いた想定の画面で、写真とキャプションを口コミに投稿したり、SNSに共有できます。">
+<title>新規投稿 | 湯の音の宿（デモ）</title>
+<meta name="description" content="旅館アプリ 投稿画面プロトタイプ。Instagramの投稿画面のようなUIで、写真とキャプションを口コミ・SNSに投稿できます。">
 <style>
   :root{
-    --bg:#f7f3ea;
-    --card:#ffffff;
-    --ink:#2c2620;
-    --sub:#7a7166;
-    --accent:#8a6d3b;
-    --accent-dark:#5f4a26;
-    --line:#e6ddc9;
-    --danger:#b3452f;
+    --ig-border:#dbdbdb;
+    --ig-divider:#efefef;
+    --ig-gap:#fafafa;
+    --ig-text:#262626;
+    --ig-sub:#8e8e8e;
+    --ig-blue:#0095f6;
+    --ig-blue-light:#b2dffc;
+    --ok:#3d6b2c;
+    --ok-bg:#eef5ea;
+    --err:#b3452f;
+    --err-bg:#fbeae5;
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
-    font-family:"Hiragino Sans","Noto Sans JP",sans-serif;
-    background:var(--bg);
-    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    background:#f0f0f0;
+    color:var(--ig-text);
     display:flex;
     justify-content:center;
-    padding:32px 16px 60px;
   }
-  .card{
+  .app{
     width:100%;
     max-width:420px;
-    background:var(--card);
-    border-radius:20px;
-    box-shadow:0 12px 30px rgba(90,70,30,0.08);
-    padding:28px 22px 26px;
+    background:#fff;
+    min-height:100vh;
   }
-  .eyebrow{
-    font-size:12px;
-    letter-spacing:.14em;
-    color:var(--accent);
+
+  /* 上部バー */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:48px;
+    padding:0 14px;
+    border-bottom:1px solid var(--ig-border);
+    position:sticky;
+    top:0;
+    background:#fff;
+    z-index:5;
+  }
+  .topbar button{
+    background:none;
+    border:none;
+    font-size:15px;
+    cursor:pointer;
+    padding:6px;
+  }
+  .topbar .cancel{ color:var(--ig-text); }
+  .topbar h1{
+    font-size:15px;
+    font-weight:600;
+    margin:0;
+  }
+  .topbar .share{
+    color:var(--ig-blue);
     font-weight:700;
-    margin:0 0 6px;
   }
-  h1{
-    font-size:21px;
-    margin:0 0 6px;
-    line-height:1.5;
+  .topbar .share.disabled{
+    color:var(--ig-blue-light);
+    cursor:default;
   }
-  .lead{
-    font-size:13.5px;
-    color:var(--sub);
-    line-height:1.7;
-    margin:0 0 24px;
+
+  /* 写真＋キャプション */
+  .composer{
+    display:flex;
+    gap:12px;
+    padding:14px 16px;
+    align-items:flex-start;
   }
   .photo-box{
-    position:relative;
-    width:100%;
-    aspect-ratio:4/3;
-    border-radius:14px;
-    border:2px dashed var(--line);
-    background:#faf7ee;
+    width:64px;
+    height:64px;
+    border-radius:4px;
+    border:1px solid var(--ig-border);
+    background:var(--ig-gap);
+    flex-shrink:0;
+    overflow:hidden;
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
     cursor:pointer;
-    margin-bottom:14px;
   }
   .photo-box img{
     width:100%;
     height:100%;
     object-fit:cover;
   }
-  .placeholder{
-    text-align:center;
-    color:var(--sub);
-    font-size:13px;
-    padding:0 20px;
-  }
-  .placeholder svg{
-    width:34px;height:34px;
-    color:var(--accent);
-    margin-bottom:8px;
+  .photo-box svg{
+    width:24px;
+    height:24px;
+    color:var(--ig-sub);
   }
   input[type=file]{ display:none; }
 
-  label.field-label{
-    display:block;
-    font-size:12.5px;
-    font-weight:700;
-    color:var(--accent-dark);
-    margin:18px 0 6px;
-  }
-  input[type=text]{
-    width:100%;
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:10px 12px;
-    font-size:14px;
-    font-family:inherit;
-    color:var(--ink);
-    background:#fffdf8;
-  }
-  input[type=text]:focus{
-    outline:none;
-    border-color:var(--accent);
-  }
-  textarea{
-    width:100%;
-    min-height:110px;
-    resize:vertical;
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:12px 13px;
-    font-size:14px;
-    line-height:1.7;
-    font-family:inherit;
-    color:var(--ink);
-    background:#fffdf8;
-  }
-  textarea:focus{
-    outline:none;
-    border-color:var(--accent);
-  }
-
-  .share-btn{
-    width:100%;
-    margin-top:12px;
-    padding:14px;
+  textarea.caption{
+    flex:1;
     border:none;
-    border-radius:12px;
-    background:var(--accent-dark);
-    color:#fff;
-    font-size:15px;
-    font-weight:700;
-    letter-spacing:.02em;
-    cursor:pointer;
+    resize:none;
+    font-size:14px;
+    line-height:1.6;
+    font-family:inherit;
+    color:var(--ig-text);
+    min-height:70px;
+    padding:2px 0;
+  }
+  textarea.caption:focus{ outline:none; }
+  textarea.caption::placeholder{ color:var(--ig-sub); }
+
+  /* 行（タグ付け風） */
+  .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 16px;
+    border-top:1px solid var(--ig-divider);
+  }
+  .row-label{
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .row-icon{
+    width:26px;
+    height:26px;
+    border-radius:7px;
+    background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
+    flex-shrink:0;
   }
-  .share-btn:first-of-type{ margin-top:20px; }
-  .share-btn:active{ background:var(--accent); }
-  .share-btn svg{ width:18px; height:18px; }
+  .row-icon svg{ width:15px; height:15px; color:#fff; }
+  .row input[type=text]{
+    border:none;
+    text-align:right;
+    font-size:14px;
+    font-family:inherit;
+    color:var(--ig-text);
+    flex:1;
+    margin-left:10px;
+  }
+  .row input[type=text]:focus{ outline:none; }
+  .row input[type=text]::placeholder{ color:var(--ig-sub); }
 
-  .share-btn-outline{
-    background:transparent;
-    border:1.5px solid var(--accent-dark);
-    color:var(--accent-dark);
+  /* トグルスイッチ */
+  .toggle{
+    position:relative;
+    width:44px;
+    height:26px;
+    flex-shrink:0;
   }
-  .share-btn-outline:active{ background:#f2ead9; }
+  .toggle input{
+    opacity:0;
+    width:0;
+    height:0;
+  }
+  .toggle-track{
+    position:absolute;
+    inset:0;
+    background:#ccc;
+    border-radius:999px;
+    transition:.18s;
+    cursor:pointer;
+  }
+  .toggle-track::before{
+    content:'';
+    position:absolute;
+    width:22px;
+    height:22px;
+    left:2px;
+    top:2px;
+    background:#fff;
+    border-radius:50%;
+    transition:.18s;
+    box-shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+  .toggle input:checked + .toggle-track{ background:var(--ig-blue); }
+  .toggle input:checked + .toggle-track::before{ transform:translateX(18px); }
+
+  .section-gap{
+    height:8px;
+    background:var(--ig-gap);
+    border-top:1px solid var(--ig-divider);
+    border-bottom:1px solid var(--ig-divider);
+  }
+
+  .hint{
+    padding:12px 16px 0;
+    font-size:12px;
+    color:var(--ig-sub);
+    line-height:1.7;
+  }
 
   .status{
-    margin-top:12px;
+    margin:12px 16px 0;
     font-size:12.5px;
     line-height:1.6;
     padding:10px 12px;
@@ -160,114 +212,119 @@
     display:none;
   }
   .status.show{ display:block; }
-  .status.ok{ background:#eef5ea; color:#3d6b2c; }
-  .status.err{ background:#fbeae5; color:var(--danger); }
+  .status.ok{ background:var(--ok-bg); color:var(--ok); }
+  .status.err{ background:var(--err-bg); color:var(--err); }
 
+  /* デモ補足エリア */
+  .demo-extra{
+    margin-top:10px;
+    border-top:8px solid var(--ig-gap);
+    padding:18px 16px 30px;
+  }
   .feed-link{
-    margin-top:16px;
     text-align:center;
+    margin-bottom:20px;
   }
   .feed-link a{
     font-size:13px;
     font-weight:700;
-    color:var(--accent-dark);
+    color:var(--ig-text);
     text-decoration:none;
+    border:1px solid var(--ig-border);
+    padding:8px 16px;
+    border-radius:8px;
   }
-
-  .howto{
-    margin-top:26px;
-    padding-top:18px;
-    border-top:1px solid var(--line);
+  .demo-extra h2{
+    font-size:12px;
+    color:var(--ig-sub);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    margin:0 0 8px;
   }
-  .howto h2{
-    font-size:13px;
-    color:var(--accent-dark);
-    margin:0 0 10px;
-  }
-  .howto ol{
-    margin:0;
+  .demo-extra ol{
+    margin:0 0 20px;
     padding-left:18px;
     font-size:12.5px;
-    color:var(--sub);
+    color:var(--ig-sub);
     line-height:1.9;
   }
-
-  .qr-note{
-    margin-top:22px;
-    padding-top:18px;
-    border-top:1px solid var(--line);
-    text-align:center;
+  .qr-note{ text-align:center; }
+  .qr-note img{
+    width:110px;
+    height:110px;
+    border-radius:8px;
+    border:1px solid var(--ig-border);
   }
   .qr-note p{
-    font-size:11.5px;
-    color:var(--sub);
+    font-size:11px;
+    color:var(--ig-sub);
     margin:8px 0 0;
     line-height:1.6;
-  }
-  .qr-note img{
-    width:120px;
-    height:120px;
-    border-radius:8px;
-    border:1px solid var(--line);
   }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <p class="eyebrow">SNS SHARE & REVIEW / DEMO</p>
-  <h1>ご宿泊ありがとうございました</h1>
-  <p class="lead">お写真とコメントを選んで投稿すると、旅館アプリ内の「みんなの口コミ」に掲載されます。SNSにも同じ内容でシェアできます。</p>
+<div class="app">
+  <header class="topbar">
+    <button class="cancel" id="cancelBtn" aria-label="閉じる">✕</button>
+    <h1>新規投稿</h1>
+    <button class="share disabled" id="postBtn" disabled>シェア</button>
+  </header>
 
-  <div class="photo-box" id="photoBox">
-    <img id="preview" alt="選択した写真のプレビュー" hidden>
-    <div class="placeholder" id="placeholder">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>
-      <div>タップして思い出の写真を選択</div>
+  <section class="composer">
+    <div class="photo-box" id="photoBox">
+      <img id="preview" alt="選択した写真のプレビュー" hidden>
+      <svg id="placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>
+      <input type="file" id="photoInput" accept="image/*" capture="environment">
     </div>
-    <input type="file" id="photoInput" accept="image/*" capture="environment">
-  </div>
-
-  <label class="field-label" for="posterName">お名前（口コミに表示・空欄でも可）</label>
-  <input type="text" id="posterName" placeholder="例）田中" maxlength="20">
-
-  <label class="field-label" for="caption">投稿コメント（編集できます）</label>
-  <textarea id="caption">湯の音の宿に泊まってきました♨️
+    <textarea id="caption" class="caption" placeholder="キャプションを書く…">湯の音の宿に泊まってきました♨️
 静かな時間と美味しいお料理で、心からリフレッシュできました。
 また訪れたいです。
 
 #湯の音の宿 #旅館 #温泉旅行 #女子旅 #国内旅行</textarea>
+  </section>
 
-  <button class="share-btn" id="postBtn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16"/><path d="M12 15V5M12 5l-4 4M12 5l4 4"/></svg>
-    口コミとして投稿する
-  </button>
+  <div class="row">
+    <span class="row-label">投稿者名</span>
+    <input type="text" id="posterName" placeholder="ゲスト" maxlength="20">
+  </div>
 
-  <button class="share-btn share-btn-outline" id="shareBtn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M12 3l-4 4M12 3l4 4"/><path d="M4 14v5a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg>
-    SNSにシェアする
-  </button>
+  <div class="section-gap"></div>
+
+  <div class="row">
+    <span class="row-label">
+      <span class="row-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </span>
+      Instagramなど SNSにもシェア
+    </span>
+    <label class="toggle">
+      <input type="checkbox" id="alsoShareToggle" checked>
+      <span class="toggle-track"></span>
+    </label>
+  </div>
+
+  <p class="hint">「シェア」を押すと、旅館アプリの口コミに投稿されます。SNS連携がオンの場合は、続けてキャプションが自動コピーされ、共有メニューが開きます。</p>
 
   <div class="status" id="status"></div>
 
-  <div class="feed-link">
-    <a href="ryokan-reviews.html">→ みんなの口コミを見る</a>
-  </div>
+  <div class="demo-extra">
+    <div class="feed-link"><a href="ryokan-reviews.html">みんなの口コミを見る</a></div>
 
-  <div class="howto">
-    <h2>使い方</h2>
+    <h2>使い方（デモ説明）</h2>
     <ol>
       <li>お部屋やロビーのQRコードを読み込むと、この画面が開きます</li>
-      <li>写真を選ぶ（その場で撮影もOK）</li>
-      <li>お名前とコメントは自由に編集できます</li>
-      <li>「口コミとして投稿する」で、旅館アプリの口コミ一覧に掲載されます</li>
-      <li>「SNSにシェアする」を押すと、コメントが自動コピーされ共有メニューが開きます</li>
+      <li>左上の四角をタップして写真を選択（その場で撮影もOK）</li>
+      <li>キャプションと投稿者名は自由に編集できます</li>
+      <li>右上の「シェア」で、旅館アプリの口コミ一覧に掲載されます</li>
+      <li>SNS連携がオンだと、続けて共有メニューが開き、Instagramなどにも投稿できます</li>
     </ol>
-  </div>
 
-  <div class="qr-note">
-    <img id="qrImg" alt="このページを開くQRコード">
-    <p>PCで表示中の場合は、上のQRコードをスマホで読み込むと同じ画面を試せます</p>
+    <div class="qr-note">
+      <img id="qrImg" alt="このページを開くQRコード">
+      <p>PCで表示中の場合は、上のQRコードをスマホで読み込むと同じ画面を試せます</p>
+    </div>
   </div>
 </div>
 
@@ -282,13 +339,16 @@
   const posterName = document.getElementById('posterName');
   const captionEl = document.getElementById('caption');
   const postBtn = document.getElementById('postBtn');
-  const shareBtn = document.getElementById('shareBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const alsoShareToggle = document.getElementById('alsoShareToggle');
   const statusEl = document.getElementById('status');
   const qrImg = document.getElementById('qrImg');
 
   let selectedFile = null;
 
   qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(location.href);
+
+  cancelBtn.addEventListener('click', () => { history.length > 1 ? history.back() : (location.href = 'ryokan-reviews.html'); });
 
   photoBox.addEventListener('click', () => photoInput.click());
 
@@ -299,6 +359,8 @@
     preview.src = URL.createObjectURL(file);
     preview.hidden = false;
     placeholder.hidden = true;
+    postBtn.disabled = false;
+    postBtn.classList.remove('disabled');
   });
 
   function setStatus(message, kind) {
@@ -352,6 +414,25 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
   }
 
+  async function shareToSns(caption) {
+    const copied = await copyCaption(caption);
+    const canShareFiles = !!(navigator.canShare && navigator.canShare({ files: [selectedFile] }));
+
+    if (navigator.share && canShareFiles) {
+      try {
+        await navigator.share({ files: [selectedFile], title: '旅館での思い出', text: caption });
+        return copied ? 'SNSの共有メニューも開きました（コメントはコピー済みです）。' : 'SNSの共有メニューも開きました。';
+      } catch (err) {
+        if (err && err.name === 'AbortError') {
+          return 'SNS共有はキャンセルされました。';
+        }
+      }
+    }
+    return copied
+      ? 'この端末はSNSへの直接共有に対応していないため、コメントをコピーしました。写真を保存してSNSアプリから投稿してください。'
+      : 'この端末はSNSへの直接共有に対応していません。写真を保存してSNSアプリから投稿してください。';
+  }
+
   postBtn.addEventListener('click', async () => {
     if (!selectedFile) {
       setStatus('先に写真を選んでください。', 'err');
@@ -360,64 +441,30 @@
     }
 
     postBtn.disabled = true;
+    const caption = captionEl.value;
+
     try {
       const imageDataUrl = await resizeImageToDataURL(selectedFile, 900, 0.8);
       const posts = loadPosts();
       posts.unshift({
         id: Date.now(),
         name: posterName.value.trim() || 'ゲスト',
-        caption: captionEl.value,
+        caption: caption,
         image: imageDataUrl,
         createdAt: new Date().toISOString()
       });
       savePosts(posts);
-      setStatus('口コミに投稿しました。「みんなの口コミを見る」から確認できます。', 'ok');
+
+      let message = '口コミに投稿しました。';
+      if (alsoShareToggle.checked) {
+        message += ' ' + await shareToSns(caption);
+      }
+      setStatus(message, 'ok');
+      setTimeout(() => { location.href = 'ryokan-reviews.html'; }, 1600);
     } catch (err) {
       setStatus('保存に失敗しました。写真のサイズを小さくして再度お試しください。', 'err');
-    } finally {
       postBtn.disabled = false;
     }
-  });
-
-  shareBtn.addEventListener('click', async () => {
-    if (!selectedFile) {
-      setStatus('先に写真を選んでください。', 'err');
-      photoInput.click();
-      return;
-    }
-
-    const caption = captionEl.value;
-    const copied = await copyCaption(caption);
-
-    const canShareFiles = !!(navigator.canShare && navigator.canShare({ files: [selectedFile] }));
-
-    if (navigator.share && canShareFiles) {
-      try {
-        await navigator.share({
-          files: [selectedFile],
-          title: '旅館での思い出',
-          text: caption
-        });
-        setStatus(
-          (copied ? 'コメントをコピーしました。' : '') + '共有先アプリの投稿画面で、コメントを貼り付けてください。',
-          'ok'
-        );
-        return;
-      } catch (err) {
-        if (err && err.name === 'AbortError') {
-          setStatus('共有をキャンセルしました。', 'err');
-          return;
-        }
-      }
-    }
-
-    setStatus(
-      (copied
-        ? 'コメントをコピーしました。お使いのブラウザは写真の自動共有に対応していないため、'
-        : 'お使いのブラウザは自動共有に対応していないため、') +
-      '写真を保存し、SNSアプリを開いてコメントを貼り付けて投稿してください。',
-      'err'
-    );
   });
 })();
 </script>
