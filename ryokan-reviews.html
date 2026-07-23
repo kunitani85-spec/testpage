@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>みんなの口コミ | 湯の音の宿（デモ）</title>
+<meta name="description" content="旅館アプリ 口コミ一覧プロトタイプ。宿泊者が投稿した写真とコメントが並びます（このブラウザ内にのみ保存されるデモです）。">
+<style>
+  :root{
+    --bg:#f7f3ea;
+    --card:#ffffff;
+    --ink:#2c2620;
+    --sub:#7a7166;
+    --accent:#8a6d3b;
+    --accent-dark:#5f4a26;
+    --line:#e6ddc9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Sans","Noto Sans JP",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    padding-bottom:80px;
+  }
+  header{
+    position:sticky;
+    top:0;
+    background:var(--bg);
+    padding:20px 16px 14px;
+    border-bottom:1px solid var(--line);
+    z-index:5;
+  }
+  .header-inner{
+    max-width:480px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.14em;
+    color:var(--accent);
+    font-weight:700;
+    margin:0 0 4px;
+  }
+  h1{
+    font-size:20px;
+    margin:0 0 2px;
+  }
+  .count{
+    font-size:12.5px;
+    color:var(--sub);
+  }
+
+  main{
+    max-width:480px;
+    margin:18px auto 0;
+    padding:0 16px;
+  }
+
+  .empty{
+    background:var(--card);
+    border-radius:16px;
+    padding:40px 24px;
+    text-align:center;
+    color:var(--sub);
+    font-size:13.5px;
+    line-height:1.8;
+  }
+  .empty a{
+    display:inline-block;
+    margin-top:14px;
+    color:var(--accent-dark);
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  .post{
+    background:var(--card);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 22px rgba(90,70,30,0.07);
+    margin-bottom:18px;
+  }
+  .post img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    display:block;
+    background:#efe8d8;
+  }
+  .post-body{
+    padding:14px 16px 16px;
+  }
+  .post-head{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .avatar{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--accent-dark);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .post-name{
+    font-size:13.5px;
+    font-weight:700;
+  }
+  .post-date{
+    font-size:11px;
+    color:var(--sub);
+  }
+  .post-caption{
+    font-size:13.5px;
+    line-height:1.75;
+    white-space:pre-wrap;
+    word-break:break-word;
+    margin:0;
+  }
+
+  .fab{
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    background:var(--accent-dark);
+    color:#fff;
+    padding:13px 22px;
+    border-radius:999px;
+    font-size:13.5px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 10px 24px rgba(60,45,15,0.25);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .fab svg{ width:16px; height:16px; }
+
+  .reset-link{
+    text-align:center;
+    margin-top:6px;
+  }
+  .reset-link button{
+    background:none;
+    border:none;
+    color:var(--sub);
+    font-size:11.5px;
+    text-decoration:underline;
+    cursor:pointer;
+    padding:8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <p class="eyebrow">REVIEWS / DEMO</p>
+    <h1>みんなの口コミ</h1>
+    <p class="count" id="count"></p>
+  </div>
+</header>
+
+<main id="main">
+</main>
+
+<a class="fab" href="ryokan-sns-share.html">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+  口コミを投稿する
+</a>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'ryokanReviewPosts';
+  const main = document.getElementById('main');
+  const countEl = document.getElementById('count');
+
+  function loadPosts() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const diffMs = Date.now() - d.getTime();
+    const diffMin = Math.floor(diffMs / 60000);
+    if (diffMin < 1) return 'たった今';
+    if (diffMin < 60) return diffMin + '分前';
+    const diffHour = Math.floor(diffMin / 60);
+    if (diffHour < 24) return diffHour + '時間前';
+    return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
+  }
+
+  function render() {
+    const posts = loadPosts();
+    countEl.textContent = posts.length + '件の投稿（このブラウザ内のみに保存されるデモです）';
+
+    if (posts.length === 0) {
+      main.innerHTML =
+        '<div class="empty">まだ投稿がありません。<br>宿泊の思い出を最初に投稿してみましょう。' +
+        '<br><a href="ryokan-sns-share.html">→ 投稿ページへ</a></div>';
+      return;
+    }
+
+    main.innerHTML = posts.map(post => {
+      const initial = (post.name || 'G').charAt(0);
+      const safeName = escapeHtml(post.name || 'ゲスト');
+      const safeCaption = escapeHtml(post.caption || '');
+      return (
+        '<article class="post">' +
+          '<img src="' + post.image + '" alt="' + safeName + 'さんの投稿写真">' +
+          '<div class="post-body">' +
+            '<div class="post-head">' +
+              '<div class="avatar">' + escapeHtml(initial) + '</div>' +
+              '<div>' +
+                '<div class="post-name">' + safeName + '</div>' +
+                '<div class="post-date">' + formatDate(post.createdAt) + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<p class="post-caption">' + safeCaption + '</p>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('') +
+    '<div class="reset-link"><button id="resetBtn" type="button">デモ用: すべての投稿を削除する</button></div>';
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (confirm('すべての投稿を削除します。よろしいですか？')) {
+        localStorage.removeItem(STORAGE_KEY);
+        render();
+      }
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>

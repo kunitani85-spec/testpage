@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ご宿泊の思い出をシェア | 湯の音の宿（デモ）</title>
-<meta name="description" content="旅館アプリ SNSシェア機能プロトタイプ。QRコードから開いた想定の画面で、写真とキャプションをワンタップでSNS共有できます。">
+<meta name="description" content="旅館アプリ SNSシェア＆口コミ投稿機能プロトタイプ。QRコードから開いた想定の画面で、写真とキャプションを口コミに投稿したり、SNSに共有できます。">
 <style>
   :root{
     --bg:#f7f3ea;
@@ -91,6 +91,20 @@
     color:var(--accent-dark);
     margin:18px 0 6px;
   }
+  input[type=text]{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:14px;
+    font-family:inherit;
+    color:var(--ink);
+    background:#fffdf8;
+  }
+  input[type=text]:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
   textarea{
     width:100%;
     min-height:110px;
@@ -111,7 +125,7 @@
 
   .share-btn{
     width:100%;
-    margin-top:20px;
+    margin-top:12px;
     padding:14px;
     border:none;
     border-radius:12px;
@@ -126,8 +140,16 @@
     justify-content:center;
     gap:8px;
   }
+  .share-btn:first-of-type{ margin-top:20px; }
   .share-btn:active{ background:var(--accent); }
   .share-btn svg{ width:18px; height:18px; }
+
+  .share-btn-outline{
+    background:transparent;
+    border:1.5px solid var(--accent-dark);
+    color:var(--accent-dark);
+  }
+  .share-btn-outline:active{ background:#f2ead9; }
 
   .status{
     margin-top:12px;
@@ -140,6 +162,17 @@
   .status.show{ display:block; }
   .status.ok{ background:#eef5ea; color:#3d6b2c; }
   .status.err{ background:#fbeae5; color:var(--danger); }
+
+  .feed-link{
+    margin-top:16px;
+    text-align:center;
+  }
+  .feed-link a{
+    font-size:13px;
+    font-weight:700;
+    color:var(--accent-dark);
+    text-decoration:none;
+  }
 
   .howto{
     margin-top:26px;
@@ -182,9 +215,9 @@
 <body>
 
 <div class="card">
-  <p class="eyebrow">SNS SHARE / DEMO</p>
+  <p class="eyebrow">SNS SHARE & REVIEW / DEMO</p>
   <h1>ご宿泊ありがとうございました</h1>
-  <p class="lead">お写真とコメントを選んで「シェアする」を押すと、コメントは自動でコピーされ、スマホの共有メニューが開きます。Instagramなどを選んで貼り付けるだけで投稿できます。</p>
+  <p class="lead">お写真とコメントを選んで投稿すると、旅館アプリ内の「みんなの口コミ」に掲載されます。SNSにも同じ内容でシェアできます。</p>
 
   <div class="photo-box" id="photoBox">
     <img id="preview" alt="選択した写真のプレビュー" hidden>
@@ -195,6 +228,9 @@
     <input type="file" id="photoInput" accept="image/*" capture="environment">
   </div>
 
+  <label class="field-label" for="posterName">お名前（口コミに表示・空欄でも可）</label>
+  <input type="text" id="posterName" placeholder="例）田中" maxlength="20">
+
   <label class="field-label" for="caption">投稿コメント（編集できます）</label>
   <textarea id="caption">湯の音の宿に泊まってきました♨️
 静かな時間と美味しいお料理で、心からリフレッシュできました。
@@ -202,21 +238,30 @@
 
 #湯の音の宿 #旅館 #温泉旅行 #女子旅 #国内旅行</textarea>
 
-  <button class="share-btn" id="shareBtn">
+  <button class="share-btn" id="postBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16"/><path d="M12 15V5M12 5l-4 4M12 5l4 4"/></svg>
+    口コミとして投稿する
+  </button>
+
+  <button class="share-btn share-btn-outline" id="shareBtn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M12 3l-4 4M12 3l4 4"/><path d="M4 14v5a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg>
-    写真とコメントをシェアする
+    SNSにシェアする
   </button>
 
   <div class="status" id="status"></div>
+
+  <div class="feed-link">
+    <a href="ryokan-reviews.html">→ みんなの口コミを見る</a>
+  </div>
 
   <div class="howto">
     <h2>使い方</h2>
     <ol>
       <li>お部屋やロビーのQRコードを読み込むと、この画面が開きます</li>
       <li>写真を選ぶ（その場で撮影もOK）</li>
-      <li>コメントは自由に編集できます</li>
-      <li>「シェアする」を押すと、コメントが自動コピーされ、共有メニューが開きます</li>
-      <li>Instagramなどを選び、投稿画面でコメントを貼り付けて投稿してください</li>
+      <li>お名前とコメントは自由に編集できます</li>
+      <li>「口コミとして投稿する」で、旅館アプリの口コミ一覧に掲載されます</li>
+      <li>「SNSにシェアする」を押すと、コメントが自動コピーされ共有メニューが開きます</li>
     </ol>
   </div>
 
@@ -228,11 +273,15 @@
 
 <script>
 (function(){
+  const STORAGE_KEY = 'ryokanReviewPosts';
+
   const photoBox = document.getElementById('photoBox');
   const photoInput = document.getElementById('photoInput');
   const preview = document.getElementById('preview');
   const placeholder = document.getElementById('placeholder');
+  const posterName = document.getElementById('posterName');
   const captionEl = document.getElementById('caption');
+  const postBtn = document.getElementById('postBtn');
   const shareBtn = document.getElementById('shareBtn');
   const statusEl = document.getElementById('status');
   const qrImg = document.getElementById('qrImg');
@@ -265,6 +314,70 @@
       return false;
     }
   }
+
+  function resizeImageToDataURL(file, maxDim, quality) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const objectUrl = URL.createObjectURL(file);
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > height && width > maxDim) {
+          height = Math.round(height * (maxDim / width));
+          width = maxDim;
+        } else if (height > maxDim) {
+          width = Math.round(width * (maxDim / height));
+          height = maxDim;
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(objectUrl);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = objectUrl;
+    });
+  }
+
+  function loadPosts() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function savePosts(posts) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  }
+
+  postBtn.addEventListener('click', async () => {
+    if (!selectedFile) {
+      setStatus('先に写真を選んでください。', 'err');
+      photoInput.click();
+      return;
+    }
+
+    postBtn.disabled = true;
+    try {
+      const imageDataUrl = await resizeImageToDataURL(selectedFile, 900, 0.8);
+      const posts = loadPosts();
+      posts.unshift({
+        id: Date.now(),
+        name: posterName.value.trim() || 'ゲスト',
+        caption: captionEl.value,
+        image: imageDataUrl,
+        createdAt: new Date().toISOString()
+      });
+      savePosts(posts);
+      setStatus('口コミに投稿しました。「みんなの口コミを見る」から確認できます。', 'ok');
+    } catch (err) {
+      setStatus('保存に失敗しました。写真のサイズを小さくして再度お試しください。', 'err');
+    } finally {
+      postBtn.disabled = false;
+    }
+  });
 
   shareBtn.addEventListener('click', async () => {
     if (!selectedFile) {
