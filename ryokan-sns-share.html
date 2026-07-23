@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご宿泊の思い出をシェア | 湯の音の宿（デモ）</title>
+<meta name="description" content="旅館アプリ SNSシェア機能プロトタイプ。QRコードから開いた想定の画面で、写真とキャプションをワンタップでSNS共有できます。">
+<style>
+  :root{
+    --bg:#f7f3ea;
+    --card:#ffffff;
+    --ink:#2c2620;
+    --sub:#7a7166;
+    --accent:#8a6d3b;
+    --accent-dark:#5f4a26;
+    --line:#e6ddc9;
+    --danger:#b3452f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Sans","Noto Sans JP",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 60px;
+  }
+  .card{
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 12px 30px rgba(90,70,30,0.08);
+    padding:28px 22px 26px;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.14em;
+    color:var(--accent);
+    font-weight:700;
+    margin:0 0 6px;
+  }
+  h1{
+    font-size:21px;
+    margin:0 0 6px;
+    line-height:1.5;
+  }
+  .lead{
+    font-size:13.5px;
+    color:var(--sub);
+    line-height:1.7;
+    margin:0 0 24px;
+  }
+  .photo-box{
+    position:relative;
+    width:100%;
+    aspect-ratio:4/3;
+    border-radius:14px;
+    border:2px dashed var(--line);
+    background:#faf7ee;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    cursor:pointer;
+    margin-bottom:14px;
+  }
+  .photo-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .placeholder{
+    text-align:center;
+    color:var(--sub);
+    font-size:13px;
+    padding:0 20px;
+  }
+  .placeholder svg{
+    width:34px;height:34px;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  input[type=file]{ display:none; }
+
+  label.field-label{
+    display:block;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--accent-dark);
+    margin:18px 0 6px;
+  }
+  textarea{
+    width:100%;
+    min-height:110px;
+    resize:vertical;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 13px;
+    font-size:14px;
+    line-height:1.7;
+    font-family:inherit;
+    color:var(--ink);
+    background:#fffdf8;
+  }
+  textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+
+  .share-btn{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:var(--accent-dark);
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.02em;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .share-btn:active{ background:var(--accent); }
+  .share-btn svg{ width:18px; height:18px; }
+
+  .status{
+    margin-top:12px;
+    font-size:12.5px;
+    line-height:1.6;
+    padding:10px 12px;
+    border-radius:10px;
+    display:none;
+  }
+  .status.show{ display:block; }
+  .status.ok{ background:#eef5ea; color:#3d6b2c; }
+  .status.err{ background:#fbeae5; color:var(--danger); }
+
+  .howto{
+    margin-top:26px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+  }
+  .howto h2{
+    font-size:13px;
+    color:var(--accent-dark);
+    margin:0 0 10px;
+  }
+  .howto ol{
+    margin:0;
+    padding-left:18px;
+    font-size:12.5px;
+    color:var(--sub);
+    line-height:1.9;
+  }
+
+  .qr-note{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .qr-note p{
+    font-size:11.5px;
+    color:var(--sub);
+    margin:8px 0 0;
+    line-height:1.6;
+  }
+  .qr-note img{
+    width:120px;
+    height:120px;
+    border-radius:8px;
+    border:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <p class="eyebrow">SNS SHARE / DEMO</p>
+  <h1>ご宿泊ありがとうございました</h1>
+  <p class="lead">お写真とコメントを選んで「シェアする」を押すと、コメントは自動でコピーされ、スマホの共有メニューが開きます。Instagramなどを選んで貼り付けるだけで投稿できます。</p>
+
+  <div class="photo-box" id="photoBox">
+    <img id="preview" alt="選択した写真のプレビュー" hidden>
+    <div class="placeholder" id="placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>
+      <div>タップして思い出の写真を選択</div>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" capture="environment">
+  </div>
+
+  <label class="field-label" for="caption">投稿コメント（編集できます）</label>
+  <textarea id="caption">湯の音の宿に泊まってきました♨️
+静かな時間と美味しいお料理で、心からリフレッシュできました。
+また訪れたいです。
+
+#湯の音の宿 #旅館 #温泉旅行 #女子旅 #国内旅行</textarea>
+
+  <button class="share-btn" id="shareBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M12 3l-4 4M12 3l4 4"/><path d="M4 14v5a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg>
+    写真とコメントをシェアする
+  </button>
+
+  <div class="status" id="status"></div>
+
+  <div class="howto">
+    <h2>使い方</h2>
+    <ol>
+      <li>お部屋やロビーのQRコードを読み込むと、この画面が開きます</li>
+      <li>写真を選ぶ（その場で撮影もOK）</li>
+      <li>コメントは自由に編集できます</li>
+      <li>「シェアする」を押すと、コメントが自動コピーされ、共有メニューが開きます</li>
+      <li>Instagramなどを選び、投稿画面でコメントを貼り付けて投稿してください</li>
+    </ol>
+  </div>
+
+  <div class="qr-note">
+    <img id="qrImg" alt="このページを開くQRコード">
+    <p>PCで表示中の場合は、上のQRコードをスマホで読み込むと同じ画面を試せます</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const photoBox = document.getElementById('photoBox');
+  const photoInput = document.getElementById('photoInput');
+  const preview = document.getElementById('preview');
+  const placeholder = document.getElementById('placeholder');
+  const captionEl = document.getElementById('caption');
+  const shareBtn = document.getElementById('shareBtn');
+  const statusEl = document.getElementById('status');
+  const qrImg = document.getElementById('qrImg');
+
+  let selectedFile = null;
+
+  qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(location.href);
+
+  photoBox.addEventListener('click', () => photoInput.click());
+
+  photoInput.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    selectedFile = file;
+    preview.src = URL.createObjectURL(file);
+    preview.hidden = false;
+    placeholder.hidden = true;
+  });
+
+  function setStatus(message, kind) {
+    statusEl.textContent = message;
+    statusEl.className = 'status show ' + (kind || 'ok');
+  }
+
+  async function copyCaption(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  shareBtn.addEventListener('click', async () => {
+    if (!selectedFile) {
+      setStatus('先に写真を選んでください。', 'err');
+      photoInput.click();
+      return;
+    }
+
+    const caption = captionEl.value;
+    const copied = await copyCaption(caption);
+
+    const canShareFiles = !!(navigator.canShare && navigator.canShare({ files: [selectedFile] }));
+
+    if (navigator.share && canShareFiles) {
+      try {
+        await navigator.share({
+          files: [selectedFile],
+          title: '旅館での思い出',
+          text: caption
+        });
+        setStatus(
+          (copied ? 'コメントをコピーしました。' : '') + '共有先アプリの投稿画面で、コメントを貼り付けてください。',
+          'ok'
+        );
+        return;
+      } catch (err) {
+        if (err && err.name === 'AbortError') {
+          setStatus('共有をキャンセルしました。', 'err');
+          return;
+        }
+      }
+    }
+
+    setStatus(
+      (copied
+        ? 'コメントをコピーしました。お使いのブラウザは写真の自動共有に対応していないため、'
+        : 'お使いのブラウザは自動共有に対応していないため、') +
+      '写真を保存し、SNSアプリを開いてコメントを貼り付けて投稿してください。',
+      'err'
+    );
+  });
+})();
+</script>
+
+</body>
+</html>
