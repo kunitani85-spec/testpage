@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>新規投稿 | 湯の音の宿（デモ）</title>
-<meta name="description" content="旅館アプリ 投稿画面プロトタイプ。Instagramの投稿画面のようなUIで、写真とキャプションを口コミ・SNSに投稿できます。">
+<meta name="description" content="旅館アプリ 投稿画面プロトタイプ。Instagramの投稿画面のようなUIで、写真とキャプションを旅館アプリ内の口コミに投稿できます。">
 <style>
   :root{
     --ig-border:#dbdbdb;
@@ -154,48 +154,6 @@
   .row input[type=text]:focus{ outline:none; }
   .row input[type=text]::placeholder{ color:var(--ig-sub); }
 
-  /* トグルスイッチ */
-  .toggle{
-    position:relative;
-    width:44px;
-    height:26px;
-    flex-shrink:0;
-  }
-  .toggle input{
-    opacity:0;
-    width:0;
-    height:0;
-  }
-  .toggle-track{
-    position:absolute;
-    inset:0;
-    background:#ccc;
-    border-radius:999px;
-    transition:.18s;
-    cursor:pointer;
-  }
-  .toggle-track::before{
-    content:'';
-    position:absolute;
-    width:22px;
-    height:22px;
-    left:2px;
-    top:2px;
-    background:#fff;
-    border-radius:50%;
-    transition:.18s;
-    box-shadow:0 1px 3px rgba(0,0,0,.3);
-  }
-  .toggle input:checked + .toggle-track{ background:var(--ig-blue); }
-  .toggle input:checked + .toggle-track::before{ transform:translateX(18px); }
-
-  .section-gap{
-    height:8px;
-    background:var(--ig-gap);
-    border-top:1px solid var(--ig-divider);
-    border-bottom:1px solid var(--ig-divider);
-  }
-
   .hint{
     padding:12px 16px 0;
     font-size:12px;
@@ -290,22 +248,7 @@
     <input type="text" id="posterName" placeholder="ゲスト" maxlength="20">
   </div>
 
-  <div class="section-gap"></div>
-
-  <div class="row">
-    <span class="row-label">
-      <span class="row-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
-      </span>
-      Instagramなど SNSにもシェア
-    </span>
-    <label class="toggle">
-      <input type="checkbox" id="alsoShareToggle" checked>
-      <span class="toggle-track"></span>
-    </label>
-  </div>
-
-  <p class="hint">「シェア」を押すと、旅館アプリの口コミに投稿されます。SNS連携がオンの場合は、続けてキャプションが自動コピーされ、共有メニューが開きます。</p>
+  <p class="hint">「シェア」を押すと、旅館アプリの口コミ一覧に投稿されます。</p>
 
   <div class="status" id="status"></div>
 
@@ -318,7 +261,6 @@
       <li>左上の四角をタップして写真を選択（その場で撮影もOK）</li>
       <li>キャプションと投稿者名は自由に編集できます</li>
       <li>右上の「シェア」で、旅館アプリの口コミ一覧に掲載されます</li>
-      <li>SNS連携がオンだと、続けて共有メニューが開き、Instagramなどにも投稿できます</li>
     </ol>
 
     <div class="qr-note">
@@ -340,7 +282,6 @@
   const captionEl = document.getElementById('caption');
   const postBtn = document.getElementById('postBtn');
   const cancelBtn = document.getElementById('cancelBtn');
-  const alsoShareToggle = document.getElementById('alsoShareToggle');
   const statusEl = document.getElementById('status');
   const qrImg = document.getElementById('qrImg');
 
@@ -366,15 +307,6 @@
   function setStatus(message, kind) {
     statusEl.textContent = message;
     statusEl.className = 'status show ' + (kind || 'ok');
-  }
-
-  async function copyCaption(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch (err) {
-      return false;
-    }
   }
 
   function resizeImageToDataURL(file, maxDim, quality) {
@@ -414,25 +346,6 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
   }
 
-  async function shareToSns(caption) {
-    const copied = await copyCaption(caption);
-    const canShareFiles = !!(navigator.canShare && navigator.canShare({ files: [selectedFile] }));
-
-    if (navigator.share && canShareFiles) {
-      try {
-        await navigator.share({ files: [selectedFile], title: '旅館での思い出', text: caption });
-        return copied ? 'SNSの共有メニューも開きました（コメントはコピー済みです）。' : 'SNSの共有メニューも開きました。';
-      } catch (err) {
-        if (err && err.name === 'AbortError') {
-          return 'SNS共有はキャンセルされました。';
-        }
-      }
-    }
-    return copied
-      ? 'この端末はSNSへの直接共有に対応していないため、コメントをコピーしました。写真を保存してSNSアプリから投稿してください。'
-      : 'この端末はSNSへの直接共有に対応していません。写真を保存してSNSアプリから投稿してください。';
-  }
-
   postBtn.addEventListener('click', async () => {
     if (!selectedFile) {
       setStatus('先に写真を選んでください。', 'err');
@@ -455,12 +368,8 @@
       });
       savePosts(posts);
 
-      let message = '口コミに投稿しました。';
-      if (alsoShareToggle.checked) {
-        message += ' ' + await shareToSns(caption);
-      }
-      setStatus(message, 'ok');
-      setTimeout(() => { location.href = 'ryokan-reviews.html'; }, 1600);
+      setStatus('口コミに投稿しました。', 'ok');
+      setTimeout(() => { location.href = 'ryokan-reviews.html'; }, 1200);
     } catch (err) {
       setStatus('保存に失敗しました。写真のサイズを小さくして再度お試しください。', 'err');
       postBtn.disabled = false;
