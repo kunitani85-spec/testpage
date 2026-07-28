@@ -161,7 +161,7 @@
   }
 
   /* ---------- Fireworks canvas (hero + quote banner) ---------- */
-  const FIREWORK_COLORS = ['#ff5d8f', '#ffd166', '#4cd7ff', '#b98bff', '#6ef2b0', '#ffffff'];
+  const FIREWORK_COLORS = ['#d9333f', '#d4af37', '#4a86c9', '#8b6bb5', '#6b9b6e', '#ffffff'];
 
   function createFireworksScene(canvas, opts = {}) {
     if (!canvas) return;
