@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商品詳細 | 湯の音の宿アプリ（デモ）</title>
+<meta name="description" content="客室や大浴場のQRコードを読み取るとこの購入ページに直接移動する想定の、商品詳細・購入デモページ。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page" id="page">
+  <header class="topbar">
+    <div class="topbar-row">
+      <a class="back-link" href="shop.html">‹ 商品一覧</a>
+    </div>
+  </header>
+
+  <div id="content"></div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/common.js"></script>
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  const product = RyokanStore.getProductById(params.get('id'));
+  const content = document.getElementById('content');
+
+  if (!product) {
+    content.innerHTML = '<div class="empty">商品が見つかりませんでした。<br><a href="shop.html">商品一覧に戻る</a></div>';
+    renderBottomNav('shop');
+    return;
+  }
+
+  content.innerHTML =
+    '<div class="product-hero" style="background:' + product.color + '33">' + product.emoji + '</div>' +
+    '<div class="product-body">' +
+      '<h1>' + RyokanStore.escapeHtml(product.name) + '</h1>' +
+      '<p class="price">¥' + product.price.toLocaleString() + '（税込）</p>' +
+      '<p class="desc">' + RyokanStore.escapeHtml(product.desc) + '</p>' +
+      '<div class="qty-row">' +
+        '<span>数量</span>' +
+        '<div class="qty-controls">' +
+          '<button type="button" id="qtyMinus" aria-label="減らす">−</button>' +
+          '<span class="qty-value" id="qtyValue">1</span>' +
+          '<button type="button" id="qtyPlus" aria-label="増やす">＋</button>' +
+        '</div>' +
+      '</div>' +
+      '<button class="btn btn-primary btn-block" id="buyBtn">この商品を購入する</button>' +
+    '</div>' +
+    '<div class="confirm-box" id="confirmBox"></div>' +
+    '<div class="qr-block">' +
+      '<img id="qrImg" alt="この商品ページを開くQRコード">' +
+      '<p>大浴場やお部屋のQRコードを読み取ると、このページに直接移動する想定です</p>' +
+    '</div>';
+
+  let qty = 1;
+  const qtyValue = document.getElementById('qtyValue');
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    qty = Math.max(1, qty - 1);
+    qtyValue.textContent = qty;
+  });
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    qty = Math.min(9, qty + 1);
+    qtyValue.textContent = qty;
+  });
+
+  document.getElementById('buyBtn').addEventListener('click', () => {
+    const total = product.price * qty;
+    const box = document.getElementById('confirmBox');
+    box.textContent = 'ご購入ありがとうございました（デモ）。' + product.name + ' × ' + qty + '　合計 ¥' + total.toLocaleString() + '。実際のアプリではここで決済処理とチェックアウト時の請求への合算などを行います。';
+    box.classList.add('show');
+    document.getElementById('buyBtn').disabled = true;
+  });
+
+  document.getElementById('qrImg').src =
+    'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(location.href);
+
+  renderBottomNav('shop');
+})();
+</script>
+</body>
+</html>

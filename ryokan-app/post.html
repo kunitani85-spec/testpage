@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投稿する | 湯の音の宿アプリ（デモ）</title>
+<meta name="description" content="宿泊の思い出をアプリ内タイムラインに投稿し、あわせてSNSの共有画面も開ける投稿デモページ。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page">
+  <header class="topbar">
+    <p class="eyebrow">NEW POST</p>
+    <h1>思い出を投稿する</h1>
+  </header>
+
+  <section class="composer">
+    <div class="photo-box" id="photoBox">
+      <img id="preview" alt="選択した写真のプレビュー" hidden>
+      <svg id="placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>
+      <input type="file" id="photoInput" accept="image/*" capture="environment">
+    </div>
+    <textarea id="caption" class="caption" placeholder="キャプションを書く…">湯の音の宿に泊まってきました♨️
+静かな時間と美味しいお料理で、心からリフレッシュできました。
+また訪れたいです。
+
+#湯の音の宿 #旅館 #温泉旅行 #女子旅 #国内旅行</textarea>
+  </section>
+
+  <div class="row">
+    <span class="row-label">投稿者名</span>
+    <input type="text" id="posterName" placeholder="ゲスト" maxlength="20">
+  </div>
+
+  <div class="actions-block">
+    <button class="btn btn-primary btn-block" id="postBtn" disabled>アプリ内のタイムラインに投稿する</button>
+    <button class="btn btn-outline btn-block" id="snsBtn" disabled>SNSの共有画面を開く（X / Instagram など）</button>
+  </div>
+
+  <p class="hint">
+    「タイムラインに投稿する」で、この旅館アプリをダウンロードした人なら誰でも見られるタイムラインに掲載されます。<br>
+    「SNSの共有画面を開く」は自動投稿ではありません。コメントをコピーしたうえで端末の共有メニューを開くので、開いた先のアプリ（Instagramなど）で貼り付けて投稿してください。
+  </p>
+
+  <div class="status" id="status"></div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/common.js"></script>
+<script>
+(function(){
+  const photoBox = document.getElementById('photoBox');
+  const photoInput = document.getElementById('photoInput');
+  const preview = document.getElementById('preview');
+  const placeholder = document.getElementById('placeholder');
+  const posterName = document.getElementById('posterName');
+  const captionEl = document.getElementById('caption');
+  const postBtn = document.getElementById('postBtn');
+  const snsBtn = document.getElementById('snsBtn');
+  const statusEl = document.getElementById('status');
+
+  let selectedFile = null;
+
+  photoBox.addEventListener('click', () => photoInput.click());
+
+  photoInput.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    selectedFile = file;
+    preview.src = URL.createObjectURL(file);
+    preview.hidden = false;
+    placeholder.hidden = true;
+    postBtn.disabled = false;
+    snsBtn.disabled = false;
+  });
+
+  function setStatus(message, kind) {
+    statusEl.textContent = message;
+    statusEl.className = 'status show ' + (kind || 'ok');
+  }
+
+  postBtn.addEventListener('click', async () => {
+    if (!selectedFile) {
+      setStatus('先に写真を選んでください。', 'err');
+      photoInput.click();
+      return;
+    }
+    postBtn.disabled = true;
+    try {
+      const imageDataUrl = await RyokanStore.resizeImageToDataURL(selectedFile, 900, 0.8);
+      RyokanStore.addPost({
+        name: posterName.value.trim(),
+        caption: captionEl.value,
+        image: imageDataUrl
+      });
+      setStatus('タイムラインに投稿しました。', 'ok');
+      setTimeout(() => { location.href = 'community.html'; }, 1000);
+    } catch (err) {
+      setStatus('保存に失敗しました。写真のサイズを小さくして再度お試しください。', 'err');
+      postBtn.disabled = false;
+    }
+  });
+
+  snsBtn.addEventListener('click', async () => {
+    if (!selectedFile) {
+      setStatus('先に写真を選んでください。', 'err');
+      photoInput.click();
+      return;
+    }
+
+    const caption = captionEl.value;
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(caption);
+      copied = true;
+    } catch (err) {
+      copied = false;
+    }
+
+    const canShareFiles = !!(navigator.canShare && navigator.canShare({ files: [selectedFile] }));
+
+    if (navigator.share && canShareFiles) {
+      try {
+        await navigator.share({ files: [selectedFile], title: '旅館での思い出', text: caption });
+        setStatus((copied ? 'コメントをコピーしました。' : '') + '共有先アプリの投稿画面で、コメントを貼り付けてください。', 'ok');
+        return;
+      } catch (err) {
+        if (err && err.name === 'AbortError') {
+          setStatus('共有をキャンセルしました。', 'err');
+          return;
+        }
+      }
+    }
+
+    setStatus(
+      (copied
+        ? 'コメントをコピーしました。この端末は写真の直接共有に対応していないため、'
+        : 'この端末は共有機能に対応していないため、') +
+      '写真を保存し、SNSアプリを開いてコメントを貼り付けて投稿してください。',
+      'err'
+    );
+  });
+
+  renderBottomNav('post');
+})();
+</script>
+</body>
+</html>

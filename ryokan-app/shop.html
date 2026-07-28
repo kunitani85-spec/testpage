@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>館内商品 | 湯の音の宿アプリ（デモ）</title>
+<meta name="description" content="大浴場で使用した商品などを、その場でアプリから購入できる館内商品一覧のデモページ。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page">
+  <header class="topbar">
+    <p class="eyebrow">SHOP</p>
+    <h1>館内商品</h1>
+  </header>
+
+  <div class="product-grid" id="productGrid"></div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/common.js"></script>
+<script>
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = RyokanStore.getProducts().map(p => (
+    '<a class="product-card" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+      '<div class="product-thumb" style="background:' + p.color + '33">' + p.emoji + '</div>' +
+      '<div class="info">' +
+        '<h3>' + RyokanStore.escapeHtml(p.name) + '</h3>' +
+        '<div class="price">¥' + p.price.toLocaleString() + '</div>' +
+      '</div>' +
+    '</a>'
+  )).join('');
+
+  renderBottomNav('shop');
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>みんなのタイムライン | 湯の音の宿アプリ（デモ）</title>
+<meta name="description" content="宿泊者が投稿した写真やコメントを見られるタイムライン。いいね・コメント機能つき。アプリをダウンロードした人なら誰でも閲覧できる想定のデモ。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="page">
+  <header class="topbar">
+    <p class="eyebrow">COMMUNITY TIMELINE</p>
+    <h1>みんなのタイムライン</h1>
+  </header>
+
+  <div class="timeline" id="timeline"></div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/common.js"></script>
+<script>
+(function(){
+  const timeline = document.getElementById('timeline');
+
+  function heartIcon(filled) {
+    return '<svg viewBox="0 0 24 24" fill="' + (filled ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="1.8"><path d="M12 20s-7-4.35-9.5-8.8C1 8 2.3 4.8 5.6 4.2 8 3.8 10 5 12 7.4 14 5 16 3.8 18.4 4.2 21.7 4.8 23 8 21.5 11.2 19 15.65 12 20 12 20z"/></svg>';
+  }
+  function commentIcon() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-8.4 8.5 8.6 8.6 0 01-3.8-.9L3 20l1.05-3.5a8.4 8.4 0 01-1-4A8.38 8.38 0 0111.5 4h.1a8.4 8.4 0 018.4 8.4z"/></svg>';
+  }
+
+  function render() {
+    const posts = RyokanStore.loadPosts();
+
+    if (posts.length === 0) {
+      timeline.innerHTML = '<div class="empty">まだ投稿がありません。<br>宿泊の思い出を最初に投稿してみましょう。<br><a href="post.html">→ 投稿ページへ</a></div>';
+      return;
+    }
+
+    timeline.innerHTML = posts.map(post => {
+      const initial = (post.name || 'G').charAt(0);
+      const safeName = RyokanStore.escapeHtml(post.name || 'ゲスト');
+      const safeCaption = RyokanStore.escapeHtml(post.caption || '');
+      const comments = post.comments || [];
+
+      return (
+        '<article class="post-card" data-id="' + post.id + '">' +
+          '<div class="post-head">' +
+            '<div class="avatar">' + RyokanStore.escapeHtml(initial) + '</div>' +
+            '<div>' +
+              '<div class="post-name">' + safeName + '</div>' +
+              '<div class="post-date">' + RyokanStore.formatRelativeDate(post.createdAt) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<img class="post-photo" src="' + post.image + '" alt="' + safeName + 'さんの投稿写真">' +
+          '<p class="post-caption">' + safeCaption + '</p>' +
+          '<div class="post-actions">' +
+            '<button type="button" class="action-btn like-btn ' + (post.likedByMe ? 'liked' : '') + '">' +
+              heartIcon(post.likedByMe) + '<span class="like-count">' + post.likes + '</span>' +
+            '</button>' +
+            '<button type="button" class="action-btn comment-toggle-btn">' +
+              commentIcon() + '<span>' + comments.length + '件のコメント</span>' +
+            '</button>' +
+          '</div>' +
+          '<div class="comments">' +
+            comments.map(c =>
+              '<div class="comment-item"><b>' + RyokanStore.escapeHtml(c.name) + '</b>' + RyokanStore.escapeHtml(c.text) + '</div>'
+            ).join('') +
+            '<form class="comment-form">' +
+              '<input type="text" class="comment-input" placeholder="コメントを追加…" maxlength="200" required>' +
+              '<button type="submit">送信</button>' +
+            '</form>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+
+    timeline.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = Number(btn.closest('.post-card').dataset.id);
+        RyokanStore.toggleLike(id);
+        render();
+      });
+    });
+
+    timeline.querySelectorAll('.comment-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.post-card').querySelector('.comments').classList.toggle('show');
+      });
+    });
+
+    timeline.querySelectorAll('.comment-form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = Number(form.closest('.post-card').dataset.id);
+        const input = form.querySelector('.comment-input');
+        const text = input.value.trim();
+        if (!text) return;
+        RyokanStore.addComment(id, { name: 'ゲスト', text });
+        render();
+        const card = timeline.querySelector('.post-card[data-id="' + id + '"]');
+        if (card) card.querySelector('.comments').classList.add('show');
+      });
+    });
+  }
+
+  render();
+  renderBottomNav('community');
+})();
+</script>
+</body>
+</html>
