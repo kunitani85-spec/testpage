@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>扇状スライドショー デモ</title>
+<style>
+  :root{
+    --paper:#f4f1ea;
+    --ink:#2b2b26;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--paper);
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    color:var(--ink);
+    padding:40px 20px;
+  }
+  .demo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+  }
+  .demo h1{
+    font-size:15px;
+    letter-spacing:.2em;
+    font-weight:500;
+    margin:0;
+  }
+
+  /* 扇状スライドショー本体 */
+  .fan-slideshow{
+    position:relative;
+    width:min(80vw,640px);
+    aspect-ratio:10/7;
+    filter:drop-shadow(0 18px 34px rgba(0,0,0,.28));
+  }
+  .fan-slideshow .slide{
+    position:absolute;
+    inset:0;
+    clip-path:url(#fanClip);
+    opacity:0;
+    transform:scale(1.04);
+    transition:opacity 1.4s ease, transform 6s ease;
+  }
+  .fan-slideshow .slide.is-active{
+    opacity:1;
+    transform:scale(1);
+    z-index:2;
+  }
+  .fan-slideshow .slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .fan-slideshow .slide .caption{
+    position:absolute;
+    left:6%;
+    bottom:8%;
+    color:#fff;
+    font-size:13px;
+    letter-spacing:.15em;
+    text-shadow:0 1px 6px rgba(0,0,0,.55);
+  }
+
+  .dots{
+    display:flex;
+    gap:8px;
+  }
+  .dots button{
+    width:8px;height:8px;border-radius:50%;
+    border:1px solid var(--ink);
+    background:transparent;
+    padding:0;
+    cursor:pointer;
+    transition:background .3s;
+  }
+  .dots button.is-active{background:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="demo">
+  <h1>扇 状 ス ラ イ ド シ ョ ー</h1>
+
+  <div class="fan-slideshow" id="fanSlideshow">
+    <div class="slide is-active">
+      <img alt="" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='560'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%233c4a2e'/%3E%3Cstop offset='1' stop-color='%23848a52'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='560' fill='url(%23g)'/%3E%3C/svg%3E">
+      <span class="caption">MOMIJI / 紅葉</span>
+    </div>
+    <div class="slide">
+      <img alt="" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='560'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23742b25'/%3E%3Cstop offset='1' stop-color='%23c76b4a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='560' fill='url(%23g)'/%3E%3C/svg%3E">
+      <span class="caption">AKANE / 茜</span>
+    </div>
+    <div class="slide">
+      <img alt="" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='560'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23233a4d'/%3E%3Cstop offset='1' stop-color='%234f7ca0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='560' fill='url(%23g)'/%3E%3C/svg%3E">
+      <span class="caption">AIZOME / 藍染</span>
+    </div>
+    <div class="slide">
+      <img alt="" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='560'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23bfa14a'/%3E%3Cstop offset='1' stop-color='%23e8d9a0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='560' fill='url(%23g)'/%3E%3C/svg%3E">
+      <span class="caption">KOGANE / 黄金</span>
+    </div>
+  </div>
+
+  <div class="dots" id="fanDots"></div>
+</div>
+
+<!-- 扇状マスク定義（objectBoundingBox なので要素サイズに追従してスケールします） -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <clipPath id="fanClip" clipPathUnits="objectBoundingBox">
+      <path d="
+        M0,0
+        L0.46,0
+        C0.72,0 0.94,0.18 1,0.55
+        C0.75,0.85 0.55,1 0.34,1
+        L0.11,1
+        C0.02,1 -0.02,0.86 0.06,0.78
+        C0.12,0.73 0.14,0.68 0.11,0.62
+        L0,0.55
+        Z
+      "/>
+    </clipPath>
+  </defs>
+</svg>
+
+<script>
+  const root = document.getElementById('fanSlideshow');
+  const slides = [...root.querySelectorAll('.slide')];
+  const dotsWrap = document.getElementById('fanDots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    if (i === 0) b.classList.add('is-active');
+    b.addEventListener('click', () => show(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = [...dotsWrap.children];
+
+  function show(i){
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = i;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+
+  setInterval(() => {
+    show((current + 1) % slides.length);
+  }, 3500);
+</script>
+
+</body>
+</html>
