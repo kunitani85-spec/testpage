@@ -48,13 +48,16 @@
   /* ---------- Portal slideshow (crossfade blur + crisp together) ---------- */
   const portalBlurs = document.querySelectorAll('.portal-blur');
   const portalCrisps = document.querySelectorAll('.portal-crisp');
+  const splitRightBgs = document.querySelectorAll('.split-right-bg-img');
   let portalIndex = 0;
 
   function showPortalSlide(i) {
     portalBlurs.forEach((s) => s.classList.remove('is-active'));
     portalCrisps.forEach((s) => s.classList.remove('is-active'));
+    splitRightBgs.forEach((s) => s.classList.remove('is-active'));
     portalBlurs[i].classList.add('is-active');
     portalCrisps[i].classList.add('is-active');
+    if (splitRightBgs[i]) splitRightBgs[i].classList.add('is-active');
     portalIndex = i;
   }
   if (portalBlurs.length) {
