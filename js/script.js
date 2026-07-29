@@ -128,7 +128,7 @@
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
+      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。なお、本サイトでは商品のご購入は承っておりません。';
       contactForm.reset();
     });
   }
