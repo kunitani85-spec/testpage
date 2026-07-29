@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUMMER ROOFTOP BBQ | GRAND MARINA HOTEL — 夏休みは、ホテルの屋上で乾杯を。</title>
+<meta name="description" content="GRAND MARINA HOTELの屋上テラスで過ごす、夏休み限定のBBQプラン。潮風とサンセット、花火に包まれながら、大切な人と特別な夏の夜を。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/bbq.css">
+</head>
+<body>
+
+<!-- ローディング画面 -->
+<div class="preloader" id="preloader">
+  <div class="preloader-logo">GRAND MARINA</div>
+  <div class="preloader-bar"><span></span></div>
+</div>
+
+<!-- ヘッダー -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="logo">GRAND MARINA</a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#top" class="nav-link">ABOUT</a>
+      <a href="#plan" class="nav-link">PLAN</a>
+      <a href="#news" class="nav-link">NEWS</a>
+      <a href="#plan" class="nav-link nav-cta">RESERVE</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ファーストビュー: 左右分割 + 丸窓スライドショー / スクロールで左側のみABOUTへ -->
+<section class="split-hero" id="top">
+  <div class="split-hero-inner">
+    <div class="split-left" id="splitLeft">
+      <div class="split-block split-block--hero">
+        <p class="hero-eyebrow reveal" data-anim="fade-up">SUMMER BBQ PLAN 2026</p>
+        <h1 class="hero-title">
+          <span class="reveal" data-anim="fade-up" data-delay="100">夏休みは、</span>
+          <span class="reveal" data-anim="fade-up" data-delay="220">ホテルの屋上で</span>
+          <span class="reveal accent" data-anim="fade-up" data-delay="340">乾杯を。</span>
+        </h1>
+        <p class="hero-desc reveal" data-anim="fade-up" data-delay="480">
+          潮風が心地いい屋上テラスで、ホテルシェフ監修のBBQディナー。花火とサンセットに包まれる、特別な夏休みのはじまり。
+        </p>
+        <div class="hero-actions reveal" data-anim="fade-up" data-delay="600">
+          <a href="#plan" class="btn btn-primary">プランを見る</a>
+          <a href="#plan" class="btn btn-ghost">予約する</a>
+        </div>
+      </div>
+
+      <div class="split-block split-block--about">
+        <p class="section-tag reveal" data-anim="fade-up">ABOUT</p>
+        <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">
+          特別な一夜を、<br>屋上で。
+        </h2>
+        <p class="about-text reveal" data-anim="fade-up" data-delay="200">
+          潮風薫る屋上テラスに広がるプライベート空間。炭火で焼き上げる地元食材のBBQと、沈みゆく夕陽、そして満天の星空。
+          忘れられない夏休みの思い出を、大切な人と。
+        </p>
+        <div class="about-stats">
+          <div class="about-stat reveal" data-anim="fade-up" data-delay="0">
+            <span class="stat-num" data-count="40">0</span><span class="stat-suffix">組</span>
+            <p>限定予約枠</p>
+          </div>
+          <div class="about-stat reveal" data-anim="fade-up" data-delay="120">
+            <span class="stat-num" data-count="62">0</span><span class="stat-suffix">日間</span>
+            <p>開催期間</p>
+          </div>
+          <div class="about-stat reveal" data-anim="fade-up" data-delay="240">
+            <span class="stat-num" data-count="17">0</span><span class="stat-suffix">時〜</span>
+            <p>スタート時間</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split-right">
+      <div class="portal">
+        <div class="portal-shape">
+          <div class="portal-blur is-active" data-slide="0"></div>
+          <div class="portal-blur" data-slide="1"></div>
+          <div class="portal-blur" data-slide="2"></div>
+          <div class="portal-blur" data-slide="3"></div>
+        </div>
+        <div class="portal-window">
+          <div class="portal-crisp is-active" data-slide="0"></div>
+          <div class="portal-crisp" data-slide="1"></div>
+          <div class="portal-crisp" data-slide="2"></div>
+          <div class="portal-crisp" data-slide="3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 画像全面ボタン + パララックス3枚スタック -->
+<section class="plan-stack" id="plan">
+  <a href="#" class="plan-layer plan-banner">
+    <div class="plan-banner-media"></div>
+    <div class="plan-scrim"></div>
+    <div class="plan-banner-body reveal" data-anim="fade-up">
+      <span class="plan-tag">SUMMER BBQ PLAN</span>
+      <h2>今すぐ、<br>プランを見る。</h2>
+      <p>限定40組。夏の夜を彩る特別コースです。</p>
+      <span class="btn btn-primary">プランを申し込む</span>
+    </div>
+  </a>
+
+  <article class="plan-layer plan-panel">
+    <div class="plan-media plan-media--01" data-speed="0.25"></div>
+    <div class="plan-scrim"></div>
+    <div class="plan-body reveal" data-anim="scale-in">
+      <span class="plan-panel-tag">OCEAN VIEW BBQ</span>
+      <h3>潮風感じる、<br>絶景ロケーション。</h3>
+      <a href="#plan" class="btn btn-outline">詳しく見る</a>
+    </div>
+  </article>
+
+  <article class="plan-layer plan-panel">
+    <div class="plan-media plan-media--02" data-speed="0.25"></div>
+    <div class="plan-scrim"></div>
+    <div class="plan-body reveal" data-anim="scale-in">
+      <span class="plan-panel-tag">SUNSET DINING</span>
+      <h3>茜色に染まる、<br>乾杯のひととき。</h3>
+      <a href="#plan" class="btn btn-outline">詳しく見る</a>
+    </div>
+  </article>
+
+  <article class="plan-layer plan-panel">
+    <div class="plan-media plan-media--03" data-speed="0.25"></div>
+    <div class="plan-scrim"></div>
+    <div class="plan-body reveal" data-anim="scale-in">
+      <span class="plan-panel-tag">STARLIGHT &amp; FIREWORKS</span>
+      <h3>夜空を彩る、<br>サプライズ花火。</h3>
+      <a href="#plan" class="btn btn-outline">詳しく見る</a>
+    </div>
+  </article>
+</section>
+
+<!-- 無限ループ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>SUMMER</span><span>BBQ</span><span>OCEAN VIEW</span><span>SUNSET</span><span>FIREWORKS</span><span>HOTEL STAY</span>
+    <span>SUMMER</span><span>BBQ</span><span>OCEAN VIEW</span><span>SUNSET</span><span>FIREWORKS</span><span>HOTEL STAY</span>
+  </div>
+</div>
+
+<!-- お知らせ -->
+<section class="news" id="news">
+  <div class="section-inner">
+    <p class="section-tag reveal" data-anim="fade-up">NEWS</p>
+    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">お知らせ</h2>
+
+    <ul class="news-list">
+      <li class="news-item reveal" data-anim="fade-up" data-delay="0">
+        <a href="#">
+          <time datetime="2026-06-01">2026.06.01</time>
+          <span class="news-cat">OPEN</span>
+          <span class="news-title">2026年サマーBBQプラン、予約受付を開始しました。</span>
+          <span class="news-arrow">→</span>
+        </a>
+      </li>
+      <li class="news-item reveal" data-anim="fade-up" data-delay="120">
+        <a href="#">
+          <time datetime="2026-06-15">2026.06.15</time>
+          <span class="news-cat">EVENT</span>
+          <span class="news-title">毎週土曜、屋上花火ナイトを開催します。</span>
+          <span class="news-arrow">→</span>
+        </a>
+      </li>
+      <li class="news-item reveal" data-anim="fade-up" data-delay="240">
+        <a href="#">
+          <time datetime="2026-07-10">2026.07.10</time>
+          <span class="news-cat">INFO</span>
+          <span class="news-title">満席日程が増えています。お早めのご予約をおすすめします。</span>
+          <span class="news-arrow">→</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a href="#top" class="logo">GRAND MARINA</a>
+    <nav class="footer-nav">
+      <a href="#top">ABOUT</a>
+      <a href="#plan">PLAN</a>
+      <a href="#news">NEWS</a>
+    </nav>
+    <div class="footer-sns">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-insta"></use></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><use href="#icon-x"></use></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><use href="#icon-yt"></use></svg></a>
+    </div>
+    <p class="footer-addr">〒000-0000 神奈川県横浜市海岸通り GRAND MARINA HOTEL ／ 屋上テラス 17:00〜21:00(夏季限定)</p>
+    <p class="footer-copy">&copy; 2026 GRAND MARINA HOTEL. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="トップへ戻る">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<!-- SVGアイコン定義 -->
+<svg style="display:none">
+  <defs>
+    <g id="icon-insta"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></g>
+    <g id="icon-x"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
+    <g id="icon-yt"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.5l6 2.5-6 2.5z" fill="currentColor"/></g>
+  </defs>
+</svg>
+
+<script src="js/bbq.js"></script>
+</body>
+</html>
