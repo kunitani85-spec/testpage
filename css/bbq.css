@@ -176,6 +176,17 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(43, 29, 20, 0.18);
 }
+/*
+ * Each slide's picture is defined ONCE per .portal-img-N class below and
+ * shared by both layers, so the blurred surround and the sharp window
+ * are always exactly the same image:
+ *   .portal-blur  -> full blob, same image, filter: blur() applied
+ *   .portal-crisp -> center circle (the "red frame" window), same image, no blur
+ */
+.portal-blur, .portal-crisp {
+  background-size: cover;
+  background-position: center;
+}
 .portal-blur {
   position: absolute; inset: -12%;
   opacity: 0;
@@ -197,17 +208,19 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .portal-crisp { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s var(--ease); }
 .portal-crisp.is-active { opacity: 1; }
 
-.portal-blur[data-slide="0"], .portal-crisp[data-slide="0"] {
-  background: radial-gradient(circle at 30% 30%, rgba(255,179,71,0.6), transparent 55%), linear-gradient(135deg, #ff7a3d, #7a1f0a 75%);
+/* Swap these to background-image: url(...) with real photos — both
+   .portal-blur and .portal-crisp pick up the same picture automatically. */
+.portal-img-0 {
+  background-image: radial-gradient(circle at 30% 30%, rgba(255,179,71,0.6), transparent 55%), linear-gradient(135deg, #ff7a3d, #7a1f0a 75%);
 }
-.portal-blur[data-slide="1"], .portal-crisp[data-slide="1"] {
-  background: radial-gradient(circle at 70% 25%, rgba(255,179,71,0.55), transparent 55%), linear-gradient(150deg, #ff8f5a, #5c1608 70%);
+.portal-img-1 {
+  background-image: radial-gradient(circle at 70% 25%, rgba(255,179,71,0.55), transparent 55%), linear-gradient(150deg, #ff8f5a, #5c1608 70%);
 }
-.portal-blur[data-slide="2"], .portal-crisp[data-slide="2"] {
-  background: radial-gradient(circle at 50% 75%, rgba(255,200,120,0.5), transparent 55%), linear-gradient(200deg, #e8632f, #40200f 70%);
+.portal-img-2 {
+  background-image: radial-gradient(circle at 50% 75%, rgba(255,200,120,0.5), transparent 55%), linear-gradient(200deg, #e8632f, #40200f 70%);
 }
-.portal-blur[data-slide="3"], .portal-crisp[data-slide="3"] {
-  background: radial-gradient(circle at 30% 70%, rgba(255,183,110,0.5), transparent 55%), linear-gradient(120deg, #2c6e8f, #0c2a3a 70%);
+.portal-img-3 {
+  background-image: radial-gradient(circle at 30% 70%, rgba(255,183,110,0.5), transparent 55%), linear-gradient(120deg, #2c6e8f, #0c2a3a 70%);
 }
 
 /* ---------- Plan stack: 画像全面ボタン + パララックス3枚が重なる ---------- */
