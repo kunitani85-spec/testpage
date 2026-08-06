@@ -640,6 +640,32 @@ ul { list-style: none; }
 [data-anim="scale-in"] { transform: scale(0.94); }
 .reveal.in-view { opacity: 1; transform: none; }
 
+/* jackInTheBox — for titles / catch copy (ported from Animate.css) */
+@keyframes jackInTheBox {
+  from {
+    opacity: 0;
+    transform: scale(0.1) rotate(30deg);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(-10deg);
+  }
+  70% {
+    transform: rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+.reveal[data-anim="jack-in-the-box"] {
+  transform-origin: center bottom;
+}
+.reveal[data-anim="jack-in-the-box"].in-view {
+  transition: none;
+  animation: jackInTheBox 1s var(--ease) both;
+}
+
 /* ==========================================================================
    Responsive
    ========================================================================== */
