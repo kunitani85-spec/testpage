@@ -61,7 +61,8 @@
   setActive();
 
   /* scroll reveal */
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = Array.from(document.querySelectorAll('.reveal'))
+    .filter((el) => !el.closest('.hero'));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -73,6 +74,21 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => io.observe(el));
+
+  /* hero title / catch copy — trigger on scroll instead of on load */
+  const heroReveals = document.querySelectorAll('.hero .reveal');
+  let heroTriggered = false;
+  const triggerHero = () => {
+    if (heroTriggered) return;
+    heroTriggered = true;
+    heroReveals.forEach((el) => {
+      const delay = el.getAttribute('data-delay') || 0;
+      setTimeout(() => el.classList.add('in-view'), Number(delay));
+    });
+    window.removeEventListener('scroll', triggerHero);
+  };
+  window.addEventListener('scroll', triggerHero, { passive: true, once: true });
+  setTimeout(triggerHero, 3200); // fallback so content still appears if the visitor never scrolls
 
   /* contact form */
   const form = document.getElementById('contactForm');
