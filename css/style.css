@@ -638,6 +638,7 @@ ul { list-style: none; }
 [data-anim="fade-up"] { transform: translateY(34px); }
 [data-anim="fade-in"] { transform: none; }
 [data-anim="scale-in"] { transform: scale(0.94); }
+[data-anim="scramble"] { transform: none; }
 .reveal.in-view { opacity: 1; transform: none; }
 
 /* jackInTheBox — for titles / catch copy (ported from Animate.css) */
