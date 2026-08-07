@@ -128,6 +128,70 @@
   window.addEventListener('scroll', triggerHero, { passive: true, once: true });
   setTimeout(triggerHero, 3200); // fallback so content still appears if the visitor never scrolls
 
+  /* field operations lightbox */
+  const opsPhotos = Array.from(document.querySelectorAll('#operations .ops-photo'));
+  const lightbox = document.getElementById('lightbox');
+  if (opsPhotos.length && lightbox) {
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const items = opsPhotos.map((el) => ({
+      src: el.querySelector('img').getAttribute('src'),
+      caption: el.getAttribute('data-label') || '',
+    }));
+    let currentIndex = 0;
+    let lastFocused = null;
+
+    const show = (index) => {
+      currentIndex = (index + items.length) % items.length;
+      const item = items[currentIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.caption;
+      lightboxCaption.textContent = item.caption;
+    };
+
+    const openLightbox = (index) => {
+      lastFocused = document.activeElement;
+      show(index);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lastFocused && lastFocused.focus();
+    };
+
+    opsPhotos.forEach((el, i) => {
+      el.addEventListener('click', () => openLightbox(i));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(i);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => show(currentIndex - 1));
+    lightboxNext.addEventListener('click', () => show(currentIndex + 1));
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') show(currentIndex - 1);
+      if (e.key === 'ArrowRight') show(currentIndex + 1);
+    });
+  }
+
   /* contact form */
   const form = document.getElementById('contactForm');
   const note = document.getElementById('formNote');

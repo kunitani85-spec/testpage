@@ -154,8 +154,9 @@
 
   <div class="ops-grid">
     <article class="ops-card reveal" data-anim="fade-up" data-delay="0">
-      <div class="photo-placeholder ops-photo" data-label="山岳医療支援">
+      <div class="photo-placeholder ops-photo" data-label="山岳医療支援" role="button" tabindex="0" aria-label="拡大表示: 山岳医療支援">
         <img src="images/山岳医療支援.avif" alt="山岳医療支援">
+        <span class="ops-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-expand"></use></svg></span>
       </div>
       <div class="ops-body">
         <span class="ops-num">01</span>
@@ -165,8 +166,9 @@
     </article>
 
     <article class="ops-card reveal" data-anim="fade-up" data-delay="100">
-      <div class="photo-placeholder ops-photo" data-label="都市浸水対策">
+      <div class="photo-placeholder ops-photo" data-label="都市浸水対策" role="button" tabindex="0" aria-label="拡大表示: 都市浸水対策">
         <img src="images/都市浸水対策.avif" alt="都市浸水対策">
+        <span class="ops-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-expand"></use></svg></span>
       </div>
       <div class="ops-body">
         <span class="ops-num">02</span>
@@ -176,8 +178,9 @@
     </article>
 
     <article class="ops-card reveal" data-anim="fade-up" data-delay="200">
-      <div class="photo-placeholder ops-photo" data-label="震災復旧支援">
+      <div class="photo-placeholder ops-photo" data-label="震災復旧支援" role="button" tabindex="0" aria-label="拡大表示: 震災復旧支援">
         <img src="images/震災復旧支援.avif" alt="震災復旧支援">
+        <span class="ops-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-expand"></use></svg></span>
       </div>
       <div class="ops-body">
         <span class="ops-num">03</span>
@@ -187,8 +190,9 @@
     </article>
 
     <article class="ops-card reveal" data-anim="fade-up" data-delay="0">
-      <div class="photo-placeholder ops-photo" data-label="孤立避難所支援">
+      <div class="photo-placeholder ops-photo" data-label="孤立避難所支援" role="button" tabindex="0" aria-label="拡大表示: 孤立避難所支援">
         <img src="images/孤立避難所支援.avif" alt="孤立避難所支援">
+        <span class="ops-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-expand"></use></svg></span>
       </div>
       <div class="ops-body">
         <span class="ops-num">04</span>
@@ -198,8 +202,9 @@
     </article>
 
     <article class="ops-card reveal" data-anim="fade-up" data-delay="100">
-      <div class="photo-placeholder ops-photo" data-label="火災ルート解析">
+      <div class="photo-placeholder ops-photo" data-label="火災ルート解析" role="button" tabindex="0" aria-label="拡大表示: 火災ルート解析">
         <img src="images/火災ルート解析.avif" alt="火災ルート解析">
+        <span class="ops-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-expand"></use></svg></span>
       </div>
       <div class="ops-body">
         <span class="ops-num">05</span>
@@ -209,8 +214,9 @@
     </article>
 
     <article class="ops-card reveal" data-anim="fade-up" data-delay="200">
-      <div class="photo-placeholder ops-photo" data-label="険路避難搬送">
+      <div class="photo-placeholder ops-photo" data-label="険路避難搬送" role="button" tabindex="0" aria-label="拡大表示: 険路避難搬送">
         <img src="images/険路避難搬送.avif" alt="険路避難搬送">
+        <span class="ops-zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-expand"></use></svg></span>
       </div>
       <div class="ops-body">
         <span class="ops-num">06</span>
@@ -470,8 +476,29 @@
     <g id="icon-x"><path d="M4.5 4l6 7.7L4.2 20h2.1l5.1-6.6L15.7 20H20l-6.3-8.1L19.4 4h-2.1l-4.7 6L8.8 4z" fill="currentColor"/></g>
     <g id="icon-linkedin"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8.3" r="1.3" fill="currentColor"/><path d="M6.8 11h2.4v7H6.8zM11 11h2.3v1.1c.5-.7 1.2-1.3 2.4-1.3 1.8 0 3 1.2 3 3.6V18h-2.4v-3.2c0-1-.4-1.7-1.3-1.7-.9 0-1.4.6-1.4 1.7V18H11z" fill="currentColor"/></g>
     <g id="icon-tiktok"><path d="M14 4h2.2c.2 1.9 1.4 3.4 3.4 3.6v2.2c-1.2 0-2.4-.4-3.4-1.1v6.1a5 5 0 11-5-5c.2 0 .4 0 .6.03v2.3a2.7 2.7 0 102.2 2.66V4z" fill="currentColor"/></g>
+    <g id="icon-close"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
+    <g id="icon-chevron-left"><path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="icon-chevron-right"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="icon-expand"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
   </defs>
 </svg>
+
+<!-- フィールド・オペレーション 画像ライトボックス -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="フィールド・オペレーション拡大表示">
+  <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">
+    <svg viewBox="0 0 24 24"><use href="#icon-close"></use></svg>
+  </button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="前の画像">
+    <svg viewBox="0 0 24 24"><use href="#icon-chevron-left"></use></svg>
+  </button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="次の画像">
+    <svg viewBox="0 0 24 24"><use href="#icon-chevron-right"></use></svg>
+  </button>
+  <figure class="lightbox-figure">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
 
 <script src="js/script.js"></script>
 </body>
