@@ -446,18 +446,32 @@ ul { list-style: none; }
 .operations { padding: 11vw 0 10vw; }
 .operations .section-inner { padding-bottom: 5vw; }
 
+/* editorial mosaic: one large feature tile + five supporting tiles of
+   varying width, photography full-bleed with captions overlaid directly
+   on the image — magazine spread rather than a uniform card grid. */
 .ops-grid {
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 6vw;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 300px;
   gap: 2px;
   background: var(--line-dark);
 }
-.ops-card { background: var(--ivory); display: flex; flex-direction: column; min-width: 0; }
-.ops-photo, .team-photo { height: 380px; }
+.ops-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  min-width: 0;
+  grid-column: span 4;
+}
+.ops-card--feature { grid-column: span 7; grid-row: span 2; }
+.ops-card:nth-child(2), .ops-card:nth-child(3) { grid-column: span 5; }
+
 .ops-photo {
+  position: absolute;
+  inset: 0;
   cursor: pointer;
   outline-offset: -4px;
 }
@@ -469,7 +483,7 @@ ul { list-style: none; }
 .ops-zoom {
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  top: 16px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -480,7 +494,7 @@ ul { list-style: none; }
   backdrop-filter: blur(4px);
   color: var(--text-light);
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(-6px);
   transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
 }
 .ops-photo:hover .ops-zoom, .ops-photo:focus-visible .ops-zoom {
@@ -488,22 +502,38 @@ ul { list-style: none; }
   transform: translateY(0);
 }
 .ops-zoom svg { width: 17px; height: 17px; }
-.ops-body { padding: 30px 6px 8px; }
+
+.ops-body {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 26px 28px 22px;
+  background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 9, 0.2) 45%, rgba(8, 8, 9, 0.88) 100%);
+  pointer-events: none;
+}
 .ops-num {
   display: block;
   font-family: var(--serif-en);
   font-size: 0.85rem;
-  color: var(--gold);
-  margin-bottom: 12px;
+  color: var(--gold-light);
+  margin-bottom: 8px;
 }
 .ops-body h3 {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 1.15rem;
-  color: var(--text-dark);
-  margin-bottom: 10px;
+  font-size: 1.05rem;
+  color: var(--text-light);
+  margin-bottom: 6px;
 }
-.ops-body p { font-size: 0.85rem; color: var(--text-mute); line-height: 1.8; }
+.ops-body p {
+  font-size: 0.82rem;
+  color: var(--text-light-mute);
+  line-height: 1.7;
+  max-width: 34ch;
+}
+.ops-card--feature .ops-body { padding: 34px 36px 28px; }
+.ops-card--feature .ops-num { font-size: 1rem; }
+.ops-card--feature .ops-body h3 { font-size: 1.7rem; margin-bottom: 10px; }
+.ops-card--feature .ops-body p { font-size: 0.92rem; max-width: 40ch; }
 
 /* ---------- news ---------- */
 .news { background: var(--charcoal); padding: 9vw 0; }
@@ -608,7 +638,7 @@ ul { list-style: none; }
   gap: 40px;
 }
 .team-card { min-width: 0; }
-.team-photo { margin-bottom: 22px; }
+.team-photo { height: 380px; margin-bottom: 22px; }
 .team-card h3 { font-family: var(--serif); font-weight: 500; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 6px; }
 .team-card p { font-family: var(--label); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--gold); }
 
@@ -802,8 +832,10 @@ ul { list-style: none; }
   .tech-media { aspect-ratio: 16/9; }
   .tech-row.reverse { direction: ltr; }
 
-  .ops-grid { grid-template-columns: repeat(2, 1fr); }
-  .ops-photo, .team-photo { height: 340px; }
+  .ops-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 260px; }
+  .ops-card:not(.ops-card--feature) { grid-column: span 1; grid-row: span 1; }
+  .ops-card--feature { grid-column: span 2; grid-row: span 2; }
+  .team-photo { height: 340px; }
 
   .news-inner { grid-template-columns: 1fr; gap: 50px; }
   .news-sns { border-left: none; padding-left: 0; border-top: 1px solid var(--line-light); padding-top: 30px; }
@@ -818,9 +850,10 @@ ul { list-style: none; }
   .section-inner { padding: 0 7vw; }
   .hero-title { font-size: clamp(2.2rem, 9vw, 3rem); }
   .hero-content { padding-bottom: 16vw; }
-  .ops-grid { grid-template-columns: 1fr; padding: 0 7vw; }
+  .ops-grid { grid-template-columns: 1fr; grid-auto-rows: 340px; padding: 0 7vw; }
+  .ops-card, .ops-card--feature { grid-column: span 1; grid-row: span 1; }
   .team-grid { grid-template-columns: 1fr; padding: 0 7vw; }
-  .ops-photo, .team-photo { height: 300px; }
+  .team-photo { height: 300px; }
   .form-row { grid-template-columns: 1fr; }
   .ct-row { grid-template-columns: 1fr; gap: 8px; }
   .timeline-item { grid-template-columns: 1fr; gap: 12px; }
