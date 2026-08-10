@@ -624,13 +624,21 @@ ul { list-style: none; }
 
 /* ---------- company / origin ---------- */
 .origin { position: relative; overflow: hidden; background: var(--ivory-2); padding: 10vw 0; border-bottom: 1px solid var(--line-dark); }
-.origin-inner {
+.origin-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
+  gap: 60px;
 }
-.origin-copy { position: relative; max-width: 620px; }
+.origin-copy {
+  position: relative;
+  /* mirrors .section-inner's left edge so the text lines up with every other section,
+     even though this row breaks out of the max-width container to let the photo bleed.
+     max-width lives on .origin-text/.section-tag, not here, so it caps the reading
+     line length instead of counting the alignment padding against it. */
+  padding-left: calc(max(0px, (100vw - 1180px) / 2) + 6vw);
+  padding-right: 24px;
+}
 .origin-media { min-width: 0; }
 .origin-photo { aspect-ratio: 4 / 5; }
 .origin-quote-mark {
@@ -647,6 +655,7 @@ ul { list-style: none; }
 }
 .origin-text {
   position: relative;
+  max-width: 560px;
   font-family: var(--serif-en);
   font-style: italic;
   font-size: clamp(1.15rem, 2vw, 1.55rem);
@@ -976,8 +985,9 @@ ul { list-style: none; }
   .business-head { grid-template-columns: 1fr; gap: 24px; }
   .business-head-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line-light); padding-bottom: 24px; }
 
-  .origin-inner { grid-template-columns: 1fr; gap: 40px; }
-  .origin-copy { max-width: none; }
+  .origin-grid { grid-template-columns: 1fr; gap: 40px; }
+  .origin-copy { padding-left: 6vw; padding-right: 6vw; }
+  .origin-text { max-width: none; }
   .origin-photo { aspect-ratio: 16 / 10; }
 
   .tech-row { grid-template-columns: 1fr; }
