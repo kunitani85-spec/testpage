@@ -60,43 +60,10 @@
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 
-  /* scramble reveal — characters cycle randomly before landing on the real text.
-     Fullwidth Latin/digits are used as filler for CJK titles (matches glyph width,
-     no per-frame jitter); plain half-width ASCII is used for Latin titles. */
-  const SCRAMBLE_SOURCE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const CJK_RE = /[　-〿぀-ヿ㐀-䶿一-鿿＀-￯]/;
-  const randomFullwidthChar = () => {
-    const c = SCRAMBLE_SOURCE[Math.floor(Math.random() * SCRAMBLE_SOURCE.length)];
-    return String.fromCharCode(c.charCodeAt(0) + 0xfee0); // ASCII → fullwidth form
-  };
-  const randomHalfwidthChar = () => SCRAMBLE_SOURCE[Math.floor(Math.random() * SCRAMBLE_SOURCE.length)];
-  const scrambleReveal = (el, duration = 900) => {
-    const finalText = el.textContent.trim();
-    const chars = Array.from(finalText);
-    const total = chars.length;
-    const randomChar = CJK_RE.test(finalText) ? randomFullwidthChar : randomHalfwidthChar;
-    const startTime = performance.now();
-    const frame = (now) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const lockCount = Math.floor(progress * total);
-      let out = '';
-      for (let i = 0; i < total; i++) {
-        const c = chars[i];
-        out += (c === ' ' || c === '　' || i < lockCount) ? c : randomChar();
-      }
-      el.textContent = out;
-      if (progress < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        el.textContent = finalText;
-      }
-    };
-    requestAnimationFrame(frame);
-  };
-  const startReveal = (el) => {
-    el.classList.add('in-view');
-    if (el.getAttribute('data-anim') === 'scramble') scrambleReveal(el);
-  };
+  /* scroll reveal — CSS handles every effect (fade-up / wipe / etc) purely
+     through the .in-view class, so this just needs to flip that class on
+     each element once it scrolls into view. */
+  const startReveal = (el) => el.classList.add('in-view');
 
   /* scroll reveal */
   const revealEls = Array.from(document.querySelectorAll('.reveal'))

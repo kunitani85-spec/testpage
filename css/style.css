@@ -1,26 +1,29 @@
 /* ==========================================================================
-   KAISAKU VISION TECHNOLOGIES — Editorial Aerospace Design System
+   KAISAKU VISION TECHNOLOGIES — Italian Motorsport / Editoriale Design System
+   Rosso Corsa red, near-black, warm panna cream — Bodoni Moda display serif
+   paired with Manrope, in the spirit of Italian automotive & fashion houses.
    ========================================================================== */
 
 :root {
-  --ivory: #f4f1ea;
-  --ivory-2: #ece7db;
-  --ink: #0d0d0e;
-  --ink-2: #141416;
-  --charcoal: #1c1b19;
-  --gold: #a9895a;
-  --gold-light: #cdb488;
-  --text-dark: #2a2822;
-  --text-mute: #6b6558;
-  --text-light: #f4f1ea;
-  --text-light-mute: rgba(244, 241, 234, 0.62);
-  --line-dark: rgba(20, 18, 14, 0.14);
-  --line-light: rgba(244, 241, 234, 0.16);
-  --serif: 'Noto Serif JP', 'Cormorant Garamond', serif;
-  --serif-en: 'Cormorant Garamond', 'Noto Serif JP', serif;
-  --sans: 'Noto Sans JP', 'Jost', sans-serif;
-  --label: 'Jost', 'Noto Sans JP', sans-serif;
+  --ivory: #f7f2e8;
+  --ivory-2: #efe6d6;
+  --ink: #14100d;
+  --ink-2: #1c1712;
+  --charcoal: #211b15;
+  --gold: #a6192e;
+  --gold-light: #e4432f;
+  --text-dark: #221c15;
+  --text-mute: #6f6355;
+  --text-light: #f7f2e8;
+  --text-light-mute: rgba(247, 242, 232, 0.62);
+  --line-dark: rgba(20, 16, 10, 0.14);
+  --line-light: rgba(247, 242, 232, 0.16);
+  --serif: 'Bodoni Moda', 'Noto Serif JP', serif;
+  --serif-en: 'Bodoni Moda', 'Noto Serif JP', serif;
+  --sans: 'Noto Sans JP', 'Manrope', sans-serif;
+  --label: 'Manrope', 'Noto Sans JP', sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --wipe-ease: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,7 +49,7 @@ img { max-width: 100%; display: block; }
 button { font-family: inherit; cursor: pointer; background: none; border: none; }
 ul { list-style: none; }
 
-::selection { background: var(--gold); color: var(--ink); }
+::selection { background: var(--gold); color: var(--ivory); }
 
 .section-inner {
   max-width: 1180px;
@@ -82,13 +85,13 @@ ul { list-style: none; }
   font-size: clamp(1.3rem, 5vw, 2.1rem);
   letter-spacing: 0.14em;
   color: var(--ivory);
-  font-weight: 300;
+  font-weight: 500;
   opacity: 0;
   padding: 0 8vw;
   text-align: center;
   animation: markIn 1.4s var(--ease) forwards;
 }
-.preloader-mark span { color: var(--gold); }
+.preloader-mark span { color: var(--gold-light); }
 @keyframes markIn { from { opacity: 0; letter-spacing: 0.32em; } to { opacity: 1; letter-spacing: 0.14em; } }
 
 /* ---------- header ---------- */
@@ -163,10 +166,10 @@ ul { list-style: none; }
 .nav-cta {
   border: 1px solid var(--line-light);
   padding: 9px 20px !important;
-  border-radius: 2px;
+  border-radius: 0;
 }
 .nav-cta::after { display: none; }
-.nav-cta:hover { border-color: var(--gold-light); background: rgba(205, 180, 136, 0.08); }
+.nav-cta:hover { border-color: var(--gold-light); background: rgba(228, 67, 47, 0.08); }
 
 .nav-toggle {
   display: none;
@@ -192,7 +195,7 @@ ul { list-style: none; }
   height: 100%;
   overflow: hidden;
   background:
-    radial-gradient(120% 140% at 20% 0%, rgba(169, 137, 90, 0.18), transparent 55%),
+    radial-gradient(120% 140% at 20% 0%, rgba(166, 25, 46, 0.18), transparent 55%),
     linear-gradient(155deg, #24231f 0%, #17171a 55%, #0c0c0e 100%);
 }
 .photo-placeholder::before {
@@ -273,14 +276,15 @@ ul { list-style: none; }
 }
 .hero-title {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(2.6rem, 6vw, 5.2rem);
-  line-height: 1.28;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
   color: var(--text-light);
   margin-bottom: 30px;
 }
 .hero-title .title-line { display: block; }
-.hero-title .accent em { font-style: italic; font-family: var(--serif-en); color: var(--gold-light); font-weight: 400; }
+.hero-title .accent em { font-style: italic; font-family: var(--serif-en); color: var(--gold-light); font-weight: 600; }
 .hero-desc {
   font-size: 0.98rem;
   font-weight: 300;
@@ -293,10 +297,11 @@ ul { list-style: none; }
 .btn {
   display: inline-block;
   font-family: var(--label);
+  font-weight: 600;
   font-size: 0.74rem;
   letter-spacing: 0.14em;
   padding: 16px 34px;
-  border-radius: 2px;
+  border-radius: 0;
   transition: all 0.45s var(--ease);
 }
 .btn-ghost-light {
@@ -306,7 +311,7 @@ ul { list-style: none; }
 .btn-ghost-light:hover { border-color: var(--gold-light); color: var(--gold-light); }
 .btn-primary {
   background: var(--gold);
-  color: var(--ink);
+  color: var(--ivory);
   border: 1px solid var(--gold);
 }
 .btn-primary:hover { background: transparent; color: var(--gold-light); }
@@ -331,18 +336,30 @@ ul { list-style: none; }
 
 /* ---------- section headers ---------- */
 .section-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--label);
+  font-weight: 700;
   font-size: 0.7rem;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   color: var(--gold);
   margin-bottom: 18px;
 }
+.section-tag::before {
+  content: '';
+  flex-shrink: 0;
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: currentColor;
+}
 .section-title {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(1.9rem, 3.6vw, 3rem);
   color: var(--text-dark);
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 .section-title.light { color: var(--text-light); }
 
@@ -388,9 +405,9 @@ ul { list-style: none; }
   margin-top: 0;
   font-family: var(--serif);
   font-size: clamp(1.15rem, 1.9vw, 1.55rem);
-  font-weight: 300;
+  font-weight: 500;
   color: var(--text-mute);
-  line-height: 2;
+  line-height: 1.75;
   max-width: 640px;
 }
 
@@ -431,8 +448,8 @@ ul { list-style: none; }
   font-weight: 300;
   font-size: 9rem;
   line-height: 1;
-  color: var(--ivory);
-  opacity: 0.045;
+  color: var(--gold-light);
+  opacity: 0.08;
   pointer-events: none;
   user-select: none;
   z-index: 0;
@@ -440,7 +457,7 @@ ul { list-style: none; }
 .tech-index {
   font-family: var(--serif-en);
   font-size: 0.95rem;
-  color: var(--gold);
+  color: var(--gold-light);
   letter-spacing: 0.1em;
   margin-bottom: 18px;
   padding-top: 14px;
@@ -457,7 +474,7 @@ ul { list-style: none; }
 }
 .tech-body h3 {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(1.5rem, 2.4vw, 2.1rem);
   color: var(--text-light);
   margin-bottom: 22px;
@@ -486,7 +503,7 @@ ul { list-style: none; }
   z-index: 2;
   font-family: var(--serif-en);
   font-style: italic;
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(1.4rem, 3.4vw, 2.6rem);
   color: var(--text-light);
   text-align: center;
@@ -659,7 +676,7 @@ ul { list-style: none; }
   font-family: var(--serif-en);
   font-style: italic;
   font-size: clamp(1.15rem, 2vw, 1.55rem);
-  font-weight: 300;
+  font-weight: 500;
   color: var(--text-dark);
   line-height: 1.85;
   letter-spacing: 0.01em;
@@ -706,7 +723,7 @@ ul { list-style: none; }
 .timeline-date {
   font-family: var(--serif-en);
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 600;
   color: var(--text-dark);
 }
 .timeline-date em { font-style: normal; color: var(--gold); }
@@ -748,15 +765,15 @@ ul { list-style: none; }
   font-weight: 300;
   font-size: 9rem;
   line-height: 1;
-  color: var(--ivory);
-  opacity: 0.05;
+  color: var(--gold-light);
+  opacity: 0.08;
   pointer-events: none;
   user-select: none;
   z-index: 0;
 }
 .business-content { position: relative; z-index: 1; }
-.business-index { font-family: var(--serif-en); font-size: 1rem; color: var(--gold); }
-.business-card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--text-light); margin: 20px 0 20px; }
+.business-index { font-family: var(--serif-en); font-size: 1rem; color: var(--gold-light); }
+.business-card h3 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; color: var(--text-light); margin: 20px 0 20px; }
 .business-card p { font-size: 0.9rem; color: var(--text-light-mute); line-height: 2; max-width: 440px; }
 
 /* ---------- team ---------- */
@@ -789,7 +806,7 @@ ul { list-style: none; }
 .contact-desc { margin-top: 26px; color: var(--text-light-mute); font-size: 0.95rem; line-height: 2; max-width: 440px; }
 .contact-hq { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--line-light); }
 .contact-hq p { font-size: 0.86rem; color: var(--text-light-mute); margin-bottom: 10px; line-height: 1.9; }
-.contact-hq a { color: var(--gold-light); border-bottom: 1px solid rgba(205,180,136,0.35); }
+.contact-hq a { color: var(--gold-light); border-bottom: 1px solid rgba(228,67,47,0.35); }
 .contact-note { max-width: 400px; margin-top: 16px; opacity: 0.85; }
 
 .contact-form { display: flex; flex-direction: column; gap: 26px; }
@@ -918,7 +935,7 @@ ul { list-style: none; }
   transition: all 0.35s var(--ease);
   z-index: 1;
 }
-.lightbox-close:hover, .lightbox-nav:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.lightbox-close:hover, .lightbox-nav:hover { background: var(--gold); border-color: var(--gold); color: var(--ivory); }
 .lightbox-close { top: 28px; right: 28px; }
 .lightbox-close svg { width: 18px; height: 18px; }
 .lightbox-nav { top: 50%; transform: translateY(-50%); }
@@ -931,33 +948,31 @@ ul { list-style: none; }
 [data-anim="fade-up"] { transform: translateY(34px); }
 [data-anim="fade-in"] { transform: none; }
 [data-anim="scale-in"] { transform: scale(0.94); }
-[data-anim="scramble"] { transform: none; }
 .reveal.in-view { opacity: 1; transform: none; }
 
-/* jackInTheBox — for titles / catch copy (ported from Animate.css) */
-@keyframes jackInTheBox {
-  from {
-    opacity: 0;
-    transform: scale(0.1) rotate(30deg);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(-10deg);
-  }
-  70% {
-    transform: rotate(3deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0);
-  }
-}
-.reveal[data-anim="jack-in-the-box"] {
-  transform-origin: center bottom;
-}
-.reveal[data-anim="jack-in-the-box"].in-view {
+/* wipe — a solid Rosso Corsa bar sweeps off the titles/catch copy like a
+   car cover pulled away at a launch reveal. the text itself is always at
+   full opacity; only the covering bar animates, so no JS text work needed. */
+.reveal[data-anim="wipe"] {
+  position: relative;
+  overflow: hidden;
+  opacity: 1;
+  transform: none;
   transition: none;
-  animation: jackInTheBox 1s var(--ease) both;
+}
+.reveal[data-anim="wipe"]::after {
+  content: '';
+  position: absolute;
+  inset: -2% -2%;
+  background: var(--gold-light);
+  transform: scaleX(1);
+  transform-origin: right center;
+  transition: transform 0.7s var(--wipe-ease);
+  z-index: 3;
+  pointer-events: none;
+}
+.reveal[data-anim="wipe"].in-view::after {
+  transform: scaleX(0);
 }
 
 /* ==========================================================================
