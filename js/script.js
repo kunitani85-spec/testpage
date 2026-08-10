@@ -70,15 +70,36 @@
      glyphs on every scroll tick and lock into the real character, left to
      right, as their own --d threshold is crossed by the element's scroll
      progress. Tied directly to scroll position (see updateScramble below),
-     not a one-shot timed animation, so it only moves while you scroll. */
-  const scrambleGroups = Array.from(document.querySelectorAll('.reveal[data-anim="scramble"]')).map((el) => {
-    wrapChars(el, 'scramble-char');
-    return {
+     not a one-shot timed animation, so it only moves while you scroll.
+     The hero title is the one exception (see scrambleReveal below): it
+     fades and scrambles once automatically, independent of scrolling. */
+  const allScrambleEls = Array.from(document.querySelectorAll('.reveal[data-anim="scramble"]'));
+  allScrambleEls.forEach((el) => wrapChars(el, 'scramble-char'));
+  const scrambleGroups = allScrambleEls
+    .filter((el) => !el.closest('.hero'))
+    .map((el) => ({
       el,
-      isHero: !!el.closest('.hero'),
       chars: Array.from(el.querySelectorAll('.scramble-char')).filter((s) => !/\s/.test(s.dataset.final)),
-    };
-  });
+    }));
+
+  /* hero title — a one-shot cascade (not scroll-linked): characters cycle
+     through random glyphs and settle left-to-right once triggered, while
+     the element itself fades in via the ordinary .reveal/.in-view opacity
+     transition. Triggered by the hero reveal timer below, not scrolling. */
+  const scrambleReveal = (el) => {
+    const chars = Array.from(el.querySelectorAll('.scramble-char')).filter((s) => !/\s/.test(s.dataset.final));
+    const total = chars.length;
+    chars.forEach((span, i) => {
+      span.classList.add('is-scrambling');
+      const settleAt = 200 + (i / Math.max(1, total)) * 460 + Math.random() * 90;
+      const spin = setInterval(() => { span.textContent = randomChar(span.dataset.final); }, 40);
+      setTimeout(() => {
+        clearInterval(spin);
+        span.textContent = span.dataset.final;
+        span.classList.remove('is-scrambling');
+      }, settleAt);
+    });
+  };
 
   /* quote — characters wrapped once so the scroll-linked --p progress (set
      below, alongside .brighten) can darken them in from a faint tint one by
@@ -145,10 +166,14 @@
   setActive();
 
   /* scroll reveal — CSS handles every effect (fade-up / scramble / etc)
-     purely through the .in-view class (or, for scramble, the continuous
-     --p-driven updateScramble loop below), so this just needs to flip that
-     class on each element once it scrolls into view. */
-  const startReveal = (el) => el.classList.add('in-view');
+     purely through the .in-view class (or, for the non-hero scramble
+     headings, the continuous --p-driven updateScramble loop below), so
+     this just needs to flip that class — except the hero title, which also
+     needs its one-shot character cascade kicked off here. */
+  const startReveal = (el) => {
+    el.classList.add('in-view');
+    if (el.getAttribute('data-anim') === 'scramble') scrambleReveal(el);
+  };
 
   /* scroll reveal — scramble headings are driven by updateScramble instead */
   const revealEls = Array.from(document.querySelectorAll('.reveal:not([data-anim="scramble"])'))
@@ -165,9 +190,10 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => io.observe(el));
 
-  /* hero title / catch copy — trigger on scroll instead of on load
-     (the hero's scramble title-lines are excluded — updateScramble drives them) */
-  const heroReveals = document.querySelectorAll('.hero .reveal:not([data-anim="scramble"])');
+  /* hero title / catch copy — trigger automatically shortly after load
+     (or on first scroll, whichever comes first), never dependent on how
+     far the visitor scrolls. Includes the scramble title-lines. */
+  const heroReveals = document.querySelectorAll('.hero .reveal');
   let heroTriggered = false;
   const triggerHero = () => {
     if (heroTriggered) return;
@@ -276,19 +302,16 @@
     });
   };
 
-  /* scramble headings — re-rolls every still-unsettled character on each
-     scroll tick and locks in the ones whose --d threshold the progress has
-     now passed. The hero title reads progress off actual scrollY (it rests
-     in view at load with nothing scrolled yet); every other heading reads
-     the same viewport-relative formula as updateScrollFx above. */
+  /* scramble headings (non-hero) — re-rolls every still-unsettled character
+     on each scroll tick and locks in the ones whose --d threshold the
+     progress has now passed, using the same viewport-relative formula as
+     updateScrollFx above. */
   const updateScramble = () => {
     const winH = window.innerHeight;
     const start = winH * 0.92;
     const end = winH * 0.32;
-    scrambleGroups.forEach(({ el, isHero, chars }) => {
-      const p = isHero
-        ? Math.min(1, Math.max(0, window.scrollY / 260))
-        : Math.min(1, Math.max(0, (start - el.getBoundingClientRect().top) / (start - end)));
+    scrambleGroups.forEach(({ el, chars }) => {
+      const p = Math.min(1, Math.max(0, (start - el.getBoundingClientRect().top) / (start - end)));
       el.style.opacity = p > 0 ? '1' : '0';
       const total = chars.length;
       chars.forEach((span, i) => {
