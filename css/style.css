@@ -624,7 +624,15 @@ ul { list-style: none; }
 
 /* ---------- company / origin ---------- */
 .origin { position: relative; overflow: hidden; background: var(--ivory-2); padding: 10vw 0; border-bottom: 1px solid var(--line-dark); }
-.origin-inner { position: relative; max-width: 720px; margin: 0 auto 0 0; }
+.origin-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+.origin-copy { position: relative; max-width: 620px; }
+.origin-media { min-width: 0; }
+.origin-photo { aspect-ratio: 4 / 5; }
 .origin-quote-mark {
   position: absolute;
   top: -0.5em;
@@ -967,6 +975,10 @@ ul { list-style: none; }
 
   .business-head { grid-template-columns: 1fr; gap: 24px; }
   .business-head-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--line-light); padding-bottom: 24px; }
+
+  .origin-inner { grid-template-columns: 1fr; gap: 40px; }
+  .origin-copy { max-width: none; }
+  .origin-photo { aspect-ratio: 16 / 10; }
 
   .tech-row { grid-template-columns: 1fr; }
   .tech-media { aspect-ratio: 16/9; }
