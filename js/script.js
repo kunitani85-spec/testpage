@@ -289,6 +289,7 @@
       const p = isHero
         ? Math.min(1, Math.max(0, window.scrollY / 260))
         : Math.min(1, Math.max(0, (start - el.getBoundingClientRect().top) / (start - end)));
+      el.style.opacity = p > 0 ? '1' : '0';
       const total = chars.length;
       chars.forEach((span, i) => {
         const d = total > 1 ? i / (total - 1) : 0;

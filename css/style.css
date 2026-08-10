@@ -958,13 +958,13 @@ ul { list-style: none; }
 [data-anim="scale-in"] { transform: scale(0.94); }
 .reveal.in-view { opacity: 1; transform: none; }
 
-/* scramble — characters are visible immediately (js/script.js wraps them
-   into spans and cycles random glyphs), so no fade/transform here; the
-   character cycling itself is the reveal. */
+/* scramble — hidden until scroll progress actually starts (opacity is set
+   by updateScramble in js/script.js, not left at the base .reveal 0 nor
+   forced to 1 here), then characters cycle through random glyphs and settle
+   left-to-right as their own --d threshold is crossed. */
 .reveal[data-anim="scramble"] {
-  opacity: 1;
   transform: none;
-  transition: none;
+  transition: opacity 0.25s ease;
 }
 .scramble-char-word { display: inline-block; }
 .scramble-char.is-scrambling { color: var(--gold-light); }
