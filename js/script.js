@@ -14,6 +14,12 @@
     return pool[Math.floor(Math.random() * pool.length)];
   };
 
+  // fraction of the 0..1 scroll-progress range each staggered character
+  // takes to go from fully random/faint to fully settled/solid. Staggering
+  // by d * (1 - SETTLE_WINDOW) guarantees the very last character's window
+  // still ends by p===1, since p never exceeds 1.
+  const SETTLE_WINDOW = 0.4;
+
   const accessibleLabel = (el) => Array.from(el.childNodes)
     .map((n) => (n.nodeName === 'BR' ? ' ' : n.textContent))
     .join('')
@@ -60,29 +66,19 @@
     walk(el);
   };
 
-  /* scramble-reveal headings — characters cycle through random glyphs, then
-     settle to the real text in a left-to-right cascade once triggered. */
-  const scrambleEls = Array.from(document.querySelectorAll('.reveal[data-anim="scramble"]'));
-  scrambleEls.forEach((el) => {
+  /* scramble-reveal headings — unsettled characters cycle through random
+     glyphs on every scroll tick and lock into the real character, left to
+     right, as their own --d threshold is crossed by the element's scroll
+     progress. Tied directly to scroll position (see updateScramble below),
+     not a one-shot timed animation, so it only moves while you scroll. */
+  const scrambleGroups = Array.from(document.querySelectorAll('.reveal[data-anim="scramble"]')).map((el) => {
     wrapChars(el, 'scramble-char');
-    el.querySelectorAll('.scramble-char').forEach((span) => {
-      if (!/\s/.test(span.dataset.final)) span.textContent = randomChar(span.dataset.final);
-    });
+    return {
+      el,
+      isHero: !!el.closest('.hero'),
+      chars: Array.from(el.querySelectorAll('.scramble-char')).filter((s) => !/\s/.test(s.dataset.final)),
+    };
   });
-  const scrambleReveal = (el) => {
-    const chars = Array.from(el.querySelectorAll('.scramble-char')).filter((s) => !/\s/.test(s.dataset.final));
-    const total = chars.length;
-    chars.forEach((span, i) => {
-      span.classList.add('is-scrambling');
-      const settleAt = 200 + (i / Math.max(1, total)) * 460 + Math.random() * 90;
-      const spin = setInterval(() => { span.textContent = randomChar(span.dataset.final); }, 40);
-      setTimeout(() => {
-        clearInterval(spin);
-        span.textContent = span.dataset.final;
-        span.classList.remove('is-scrambling');
-      }, settleAt);
-    });
-  };
 
   /* quote — characters wrapped once so the scroll-linked --p progress (set
      below, alongside .brighten) can darken them in from a faint tint one by
@@ -148,17 +144,14 @@
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 
-  /* scroll reveal — CSS handles every effect (fade-up / wipe / etc) purely
-     through the .in-view class, so this just needs to flip that class on
-     each element once it scrolls into view. scramble is the one exception:
-     it needs an explicit trigger to start cycling the wrapped characters. */
-  const startReveal = (el) => {
-    el.classList.add('in-view');
-    if (el.getAttribute('data-anim') === 'scramble') scrambleReveal(el);
-  };
+  /* scroll reveal — CSS handles every effect (fade-up / scramble / etc)
+     purely through the .in-view class (or, for scramble, the continuous
+     --p-driven updateScramble loop below), so this just needs to flip that
+     class on each element once it scrolls into view. */
+  const startReveal = (el) => el.classList.add('in-view');
 
-  /* scroll reveal */
-  const revealEls = Array.from(document.querySelectorAll('.reveal'))
+  /* scroll reveal — scramble headings are driven by updateScramble instead */
+  const revealEls = Array.from(document.querySelectorAll('.reveal:not([data-anim="scramble"])'))
     .filter((el) => !el.closest('.hero'));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -172,8 +165,9 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => io.observe(el));
 
-  /* hero title / catch copy — trigger on scroll instead of on load */
-  const heroReveals = document.querySelectorAll('.hero .reveal');
+  /* hero title / catch copy — trigger on scroll instead of on load
+     (the hero's scramble title-lines are excluded — updateScramble drives them) */
+  const heroReveals = document.querySelectorAll('.hero .reveal:not([data-anim="scramble"])');
   let heroTriggered = false;
   const triggerHero = () => {
     if (heroTriggered) return;
@@ -282,6 +276,37 @@
     });
   };
 
+  /* scramble headings — re-rolls every still-unsettled character on each
+     scroll tick and locks in the ones whose --d threshold the progress has
+     now passed. The hero title reads progress off actual scrollY (it rests
+     in view at load with nothing scrolled yet); every other heading reads
+     the same viewport-relative formula as updateScrollFx above. */
+  const updateScramble = () => {
+    const winH = window.innerHeight;
+    const start = winH * 0.92;
+    const end = winH * 0.32;
+    scrambleGroups.forEach(({ el, isHero, chars }) => {
+      const p = isHero
+        ? Math.min(1, Math.max(0, window.scrollY / 260))
+        : Math.min(1, Math.max(0, (start - el.getBoundingClientRect().top) / (start - end)));
+      const total = chars.length;
+      chars.forEach((span, i) => {
+        const d = total > 1 ? i / (total - 1) : 0;
+        // each char's own settle window is SETTLE_WINDOW wide, staggered by
+        // d so the last character's window ends exactly at p===1 instead of
+        // needing p>1 (which never happens — p is clamped to 1).
+        const charProgress = (p - d * (1 - SETTLE_WINDOW)) / SETTLE_WINDOW;
+        if (charProgress >= 1) {
+          if (span.textContent !== span.dataset.final) span.textContent = span.dataset.final;
+          span.classList.remove('is-scrambling');
+        } else {
+          span.textContent = randomChar(span.dataset.final);
+          span.classList.add('is-scrambling');
+        }
+      });
+    });
+  };
+
   /* pin-zoom — progress is the scroll fraction through the tall sticky track */
   const pinZoomTracks = Array.from(document.querySelectorAll('.pin-zoom-track'));
   const updatePinZoom = () => {
@@ -302,11 +327,13 @@
     requestAnimationFrame(() => {
       updateScrollFx();
       updatePinZoom();
+      updateScramble();
       fxTicking = false;
     });
   };
-  if (fxEls.length) window.addEventListener('scroll', onScrollFx, { passive: true });
-  if (pinZoomTracks.length) window.addEventListener('scroll', onScrollFx, { passive: true });
+  if (fxEls.length || pinZoomTracks.length || scrambleGroups.length) {
+    window.addEventListener('scroll', onScrollFx, { passive: true });
+  }
   window.addEventListener('resize', onScrollFx);
   onScrollFx();
 

@@ -971,9 +971,11 @@ ul { list-style: none; }
 
 /* quote — characters are wrapped once on load (js/script.js) and darken in
    from a faint tint to full color, one by one, as .quote-text's --p scroll
-   progress rises (same driver as .brighten, just per-character via --d). */
+   progress rises (same driver as .brighten, just per-character via --d).
+   Each char's own 0.4-wide settle window is staggered by d*0.6 so the very
+   last character still finishes exactly at --p:1 (--p never exceeds 1). */
 .quote-text .sc-char {
-  opacity: clamp(0.14, calc((var(--p, 0) - var(--d, 0)) * 3), 1);
+  opacity: clamp(0.14, calc((var(--p, 0) - var(--d, 0) * 0.6) / 0.4), 1);
 }
 .sc-char-word { display: inline-block; }
 
