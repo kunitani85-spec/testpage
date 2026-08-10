@@ -173,4 +173,65 @@
       form.reset();
     });
   }
+
+  /* scroll-linked progress (--p) — drives the brighten-text and photo-converge
+     effects. progress rises from 0 as an element enters the lower part of the
+     viewport to 1 once it nears the upper third, purely via a CSS custom
+     property so the interpolation itself lives in CSS. */
+  const fxEls = Array.from(document.querySelectorAll('.brighten, .converge-photo'));
+  const updateScrollFx = () => {
+    const winH = window.innerHeight;
+    const start = winH * 0.92;
+    const end = winH * 0.32;
+    fxEls.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+      el.style.setProperty('--p', p.toFixed(3));
+    });
+  };
+
+  /* pin-zoom — progress is the scroll fraction through the tall sticky track */
+  const pinZoomTracks = Array.from(document.querySelectorAll('.pin-zoom-track'));
+  const updatePinZoom = () => {
+    const winH = window.innerHeight;
+    pinZoomTracks.forEach((track) => {
+      const rect = track.getBoundingClientRect();
+      const range = rect.height - winH;
+      const p = range > 0 ? Math.min(1, Math.max(0, -rect.top / range)) : 0;
+      const photo = track.querySelector('.pin-zoom-photo');
+      photo && photo.style.setProperty('--p', p.toFixed(3));
+    });
+  };
+
+  let fxTicking = false;
+  const onScrollFx = () => {
+    if (fxTicking) return;
+    fxTicking = true;
+    requestAnimationFrame(() => {
+      updateScrollFx();
+      updatePinZoom();
+      fxTicking = false;
+    });
+  };
+  if (fxEls.length) window.addEventListener('scroll', onScrollFx, { passive: true });
+  if (pinZoomTracks.length) window.addEventListener('scroll', onScrollFx, { passive: true });
+  window.addEventListener('resize', onScrollFx);
+  onScrollFx();
+
+  /* case-study slider */
+  document.querySelectorAll('.case-slider').forEach((slider) => {
+    const slides = Array.from(slider.querySelectorAll('.case-slide'));
+    const pagerEl = slider.querySelector('.case-pager em');
+    const prevBtn = slider.querySelector('.case-prev');
+    const nextBtn = slider.querySelector('.case-next');
+    let index = 0;
+    const show = (i) => {
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => s.classList.toggle('active', n === index));
+      if (pagerEl) pagerEl.textContent = String(index + 1).padStart(2, '0');
+    };
+    prevBtn && prevBtn.addEventListener('click', () => show(index - 1));
+    nextBtn && nextBtn.addEventListener('click', () => show(index + 1));
+    show(0);
+  });
 })();

@@ -7,7 +7,7 @@
 <meta name="description" content="KAISAKU VISION TECHNOLOGIES株式会社 — 極限環境下での物資輸送と救助活動に特化した次世代自律型ドローンの開発。災害地への迅速な人道支援と、高級自家用自動飛行体験を提供します。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Noto+Serif+JP:wght@200;300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -69,21 +69,40 @@
 </section>
 
 <!-- ミッション -->
-<section class="mission" id="mission">
-  <span class="mission-ghost" aria-hidden="true">01</span>
-  <div class="section-inner mission-inner">
-    <div class="mission-head">
-      <p class="section-tag reveal" data-anim="fade-up">MISSION 01</p>
-      <h2 class="section-title reveal" data-anim="wipe" data-delay="100">
-        迅速な対応
-      </h2>
+<section class="statement" id="mission">
+  <div class="statement-inner">
+    <p class="section-tag reveal" data-anim="fade-up" style="justify-content:center">MISSION 01 — 迅速な対応</p>
+    <p class="brighten">
+      災害発生から救助までの「時間」こそが、唯一の通貨である。
+      私たちはその一分一秒を取り戻すために、空を設計する。
+      到達困難な現場に、最短距離で、確実に。
+    </p>
+    <a href="#technology" class="statement-link">コア・テクノロジーを見る</a>
+  </div>
+</section>
+
+<!-- 収束フォトコラージュ -->
+<section class="converge">
+  <div class="converge-stage">
+    <div class="photo-placeholder converge-photo" data-label="" style="top:6%; left:2%; --sx:-90px; --sy:-60px; --sr:-8deg;">
+      <img src="images/山岳医療支援.avif" alt="山岳医療支援">
     </div>
-    <div class="mission-copy">
-      <p class="mission-lead reveal" data-anim="wipe" data-delay="300">
-        災害発生から救助までの「時間」こそが、唯一の通貨である。<br>
-        私たちはその一分一秒を取り戻すために、空を設計する。
-      </p>
+    <div class="photo-placeholder converge-photo" data-label="" style="top:10%; right:4%; --sx:100px; --sy:-40px; --sr:6deg;">
+      <img src="images/都市浸水対策.avif" alt="都市浸水対策">
     </div>
+    <div class="photo-placeholder converge-photo" data-label="" style="bottom:10%; left:6%; --sx:-70px; --sy:80px; --sr:5deg;">
+      <img src="images/孤立避難所支援.avif" alt="孤立避難所支援">
+    </div>
+    <div class="photo-placeholder converge-photo" data-label="" style="bottom:6%; right:2%; --sx:110px; --sy:70px; --sr:-6deg;">
+      <img src="images/険路避難搬送.avif" alt="険路避難搬送">
+    </div>
+    <div class="photo-placeholder converge-center" data-label="">
+      <img src="images/ai-generated-IMAGE-9.avif" alt="Chief Aerospace Engineer">
+    </div>
+  </div>
+  <div class="converge-caption">
+    <p>私たちの技術は、現場で人の命を守るために存在する。専門チームひとりひとりの経験が、機体の設計に息づいている。</p>
+    <a href="#team" class="statement-link">チームを見る</a>
   </div>
 </section>
 
@@ -235,6 +254,35 @@
   </div>
 </section>
 
+<!-- ケーススタディ・スライダー -->
+<section class="case-slider">
+  <div class="case-slide active">
+    <div class="case-slide-photo"><img src="images/山岳医療支援.avif" alt="山岳医療支援"></div>
+    <div class="case-slide-scrim"></div>
+    <div class="case-slide-body">
+      <p class="case-slide-eyebrow">CASE 01 — MOUNTAIN RELIEF</p>
+      <h3>猛吹雪の山岳地帯、孤立集落への医療搬送</h3>
+      <p>陸路が完全に遮断された標高2,400mの避難所へ、悪天候下でも安定した飛行を維持する自律航法システムが医薬品を届けました。到達まで平時の8分の1の時間。</p>
+      <a href="#operations" class="statement-link">フィールド・オペレーションを見る</a>
+    </div>
+  </div>
+  <div class="case-slide">
+    <div class="case-slide-photo"><img src="images/都市浸水対策.avif" alt="都市浸水対策"></div>
+    <div class="case-slide-scrim"></div>
+    <div class="case-slide-body">
+      <p class="case-slide-eyebrow">CASE 02 — URBAN FLOOD RESPONSE</p>
+      <h3>市街地浸水、孤立した住民への物資供給</h3>
+      <p>ヘリコプターの着陸が困難な密集市街地において、複数機体による同時運用で72時間以内に450世帯へ生活物資を配送しました。</p>
+      <a href="#operations" class="statement-link">フィールド・オペレーションを見る</a>
+    </div>
+  </div>
+  <div class="case-nav">
+    <button class="case-prev" aria-label="前の事例"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <span class="case-pager"><em>01</em> / 02</span>
+    <button class="case-next" aria-label="次の事例"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+</section>
+
 <!-- 最新情報 -->
 <section class="news">
   <div class="section-inner news-inner">
@@ -338,6 +386,16 @@
   </div>
 </section>
 
+<!-- ピン留めズーム -->
+<div class="pin-zoom-track">
+  <div class="pin-zoom-stage">
+    <div class="pin-zoom-photo">
+      <img src="images/火災ルート解析.avif" alt="精密なセンサー解析">
+      <span class="pin-zoom-label">PRECISION SENSING &amp; ROUTE ANALYSIS</span>
+    </div>
+  </div>
+</div>
+
 <!-- 事業内容 -->
 <section class="business" id="business">
   <div class="section-inner business-head">
@@ -374,6 +432,26 @@
           <p>世界中の災害支援団体と連携し、緊急性の高い医療物資や救援物資を届けるためのグローバルな物流ネットワークを構築。最新の自律技術を活用した持続可能な物流の仕組みを提案します。</p>
         </div>
       </div>
+    </div>
+
+    <div style="margin-top:9vw;">
+      <h2 class="section-title light reveal" data-anim="wipe" data-delay="0">
+        誰も、取り残さない。<br>私たちの拠点で。
+      </h2>
+      <dl class="location-strip reveal" data-anim="fade-up" data-delay="150">
+        <div>
+          <dt>東京 本社</dt>
+          <dd>Global Support &amp; Fleet Coordination<br>Chiyoda City, Tokyo</dd>
+        </div>
+        <div>
+          <dt>研究開発拠点</dt>
+          <dd>AI Navigation &amp; Sensor R&amp;D<br>次世代自律航法の設計・検証</dd>
+        </div>
+        <div>
+          <dt>フィールド訓練センター</dt>
+          <dd>Operator Training &amp; Field Testing<br>実地環境でのミッション訓練</dd>
+        </div>
+      </dl>
     </div>
   </div>
 </section>
@@ -470,6 +548,36 @@
       <button type="submit" class="btn btn-primary btn-block">送信する</button>
       <p class="form-note" id="formNote"></p>
     </form>
+  </div>
+</section>
+
+<!-- 最終CTA -->
+<section class="final-cta">
+  <div class="section-inner">
+    <div class="final-cta-head">
+      <p class="section-tag reveal" data-anim="fade-up">GET IN TOUCH</p>
+      <h2 class="reveal" data-anim="wipe" data-delay="100">
+        次の一手について、対話から始めませんか。<br>専門チームが承ります。
+      </h2>
+      <a href="#contact" class="btn-outline-dark reveal" data-anim="fade-up" data-delay="200">
+        お問い合わせフォームへ
+        <svg viewBox="0 0 24 24"><path d="M5 19l14-14M5 5h14v14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <dl class="final-cta-cols reveal" data-anim="fade-up" data-delay="250">
+      <div>
+        <dt>Tokyo HQ &amp; Logistics</dt>
+        <dd>1-1 Chiyoda, Chiyoda City,<br>Tokyo 100-8111, Japan<br>T +81 3-5555-0100</dd>
+      </div>
+      <div>
+        <dt>Global Support</dt>
+        <dd><a href="mailto:ops@kaisakutech.vision">ops@kaisakutech.vision</a><br>平日 9:00–18:00（JST）対応</dd>
+      </div>
+      <div>
+        <dt>Aerospace Systems Inquiry</dt>
+        <dd>投資家・提携パートナー、医療機関・人道支援団体様からのお問い合わせを優先的に承ります。</dd>
+      </div>
+    </dl>
   </div>
 </section>
 
