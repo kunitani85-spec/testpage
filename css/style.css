@@ -25,7 +25,6 @@
   --sans: 'Noto Sans JP', 'Manrope', sans-serif;
   --label: 'Manrope', 'Noto Sans JP', sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --wipe-ease: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -959,30 +958,24 @@ ul { list-style: none; }
 [data-anim="scale-in"] { transform: scale(0.94); }
 .reveal.in-view { opacity: 1; transform: none; }
 
-/* wipe — a solid Rosso Corsa bar sweeps off the titles/catch copy like a
-   car cover pulled away at a launch reveal. the text itself is always at
-   full opacity; only the covering bar animates, so no JS text work needed. */
-.reveal[data-anim="wipe"] {
-  position: relative;
-  overflow: hidden;
+/* scramble — characters are visible immediately (js/script.js wraps them
+   into spans and cycles random glyphs), so no fade/transform here; the
+   character cycling itself is the reveal. */
+.reveal[data-anim="scramble"] {
   opacity: 1;
   transform: none;
   transition: none;
 }
-.reveal[data-anim="wipe"]::after {
-  content: '';
-  position: absolute;
-  inset: -2% -2%;
-  background: var(--gold-light);
-  transform: scaleX(1);
-  transform-origin: right center;
-  transition: transform 0.7s var(--wipe-ease);
-  z-index: 3;
-  pointer-events: none;
+.scramble-char-word { display: inline-block; }
+.scramble-char.is-scrambling { color: var(--gold-light); }
+
+/* quote — characters are wrapped once on load (js/script.js) and darken in
+   from a faint tint to full color, one by one, as .quote-text's --p scroll
+   progress rises (same driver as .brighten, just per-character via --d). */
+.quote-text .sc-char {
+  opacity: clamp(0.14, calc((var(--p, 0) - var(--d, 0)) * 3), 1);
 }
-.reveal[data-anim="wipe"].in-view::after {
-  transform: scaleX(0);
-}
+.sc-char-word { display: inline-block; }
 
 /* ==========================================================================
    Scroll-driven components (Primopiano-inspired scrollytelling)

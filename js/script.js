@@ -1,6 +1,94 @@
 (() => {
   'use strict';
 
+  /* character wrapping — shared by the scramble-reveal headings and the
+     scroll-linked darkening quote. Latin runs are grouped into per-word
+     inline-blocks so long headings can still wrap between words instead of
+     mid-word; CJK runs (no spaces) are wrapped character-by-character since
+     Japanese typography allows breaking between most characters anyway. */
+  const CJK_RE = /[　-鿿＀-￯]/;
+  const SCRAMBLE_FULLWIDTH = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+  const SCRAMBLE_HALFWIDTH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const randomChar = (ch) => {
+    const pool = CJK_RE.test(ch) ? SCRAMBLE_FULLWIDTH : SCRAMBLE_HALFWIDTH;
+    return pool[Math.floor(Math.random() * pool.length)];
+  };
+
+  const accessibleLabel = (el) => Array.from(el.childNodes)
+    .map((n) => (n.nodeName === 'BR' ? ' ' : n.textContent))
+    .join('')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const wrapChars = (el, charClass) => {
+    el.setAttribute('aria-label', accessibleLabel(el));
+    const total = Array.from(el.textContent).filter((c) => !/\s/.test(c)).length;
+    let idx = 0;
+    const makeCharSpan = (ch) => {
+      const span = document.createElement('span');
+      span.className = charClass;
+      span.textContent = ch;
+      span.dataset.final = ch;
+      if (!/\s/.test(ch)) {
+        span.style.setProperty('--d', total > 1 ? (idx / (total - 1)).toFixed(3) : '0');
+        idx += 1;
+      }
+      return span;
+    };
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.textContent;
+          const frag = document.createDocumentFragment();
+          if (CJK_RE.test(text)) {
+            Array.from(text).forEach((ch) => frag.appendChild(makeCharSpan(ch)));
+          } else {
+            text.split(/(\s+)/).filter((s) => s.length).forEach((chunk) => {
+              if (/^\s+$/.test(chunk)) { frag.appendChild(document.createTextNode(chunk)); return; }
+              const word = document.createElement('span');
+              word.className = `${charClass}-word`;
+              Array.from(chunk).forEach((ch) => word.appendChild(makeCharSpan(ch)));
+              frag.appendChild(word);
+            });
+          }
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          walk(child);
+        }
+      });
+    };
+    walk(el);
+  };
+
+  /* scramble-reveal headings — characters cycle through random glyphs, then
+     settle to the real text in a left-to-right cascade once triggered. */
+  const scrambleEls = Array.from(document.querySelectorAll('.reveal[data-anim="scramble"]'));
+  scrambleEls.forEach((el) => {
+    wrapChars(el, 'scramble-char');
+    el.querySelectorAll('.scramble-char').forEach((span) => {
+      if (!/\s/.test(span.dataset.final)) span.textContent = randomChar(span.dataset.final);
+    });
+  });
+  const scrambleReveal = (el) => {
+    const chars = Array.from(el.querySelectorAll('.scramble-char')).filter((s) => !/\s/.test(s.dataset.final));
+    const total = chars.length;
+    chars.forEach((span, i) => {
+      span.classList.add('is-scrambling');
+      const settleAt = 200 + (i / Math.max(1, total)) * 460 + Math.random() * 90;
+      const spin = setInterval(() => { span.textContent = randomChar(span.dataset.final); }, 40);
+      setTimeout(() => {
+        clearInterval(spin);
+        span.textContent = span.dataset.final;
+        span.classList.remove('is-scrambling');
+      }, settleAt);
+    });
+  };
+
+  /* quote — characters wrapped once so the scroll-linked --p progress (set
+     below, alongside .brighten) can darken them in from a faint tint one by
+     one as the banner scrolls through view. */
+  document.querySelectorAll('.scroll-chars').forEach((el) => wrapChars(el, 'sc-char'));
+
   /* preloader */
   window.addEventListener('load', () => {
     const pre = document.getElementById('preloader');
@@ -62,8 +150,12 @@
 
   /* scroll reveal — CSS handles every effect (fade-up / wipe / etc) purely
      through the .in-view class, so this just needs to flip that class on
-     each element once it scrolls into view. */
-  const startReveal = (el) => el.classList.add('in-view');
+     each element once it scrolls into view. scramble is the one exception:
+     it needs an explicit trigger to start cycling the wrapped characters. */
+  const startReveal = (el) => {
+    el.classList.add('in-view');
+    if (el.getAttribute('data-anim') === 'scramble') scrambleReveal(el);
+  };
 
   /* scroll reveal */
   const revealEls = Array.from(document.querySelectorAll('.reveal'))
@@ -178,7 +270,7 @@
      effects. progress rises from 0 as an element enters the lower part of the
      viewport to 1 once it nears the upper third, purely via a CSS custom
      property so the interpolation itself lives in CSS. */
-  const fxEls = Array.from(document.querySelectorAll('.brighten, .converge-photo'));
+  const fxEls = Array.from(document.querySelectorAll('.brighten, .converge-photo, .scroll-chars'));
   const updateScrollFx = () => {
     const winH = window.innerHeight;
     const start = winH * 0.92;
