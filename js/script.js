@@ -99,7 +99,7 @@
     parallaxEls.forEach((el) => {
       const speed = Number(el.dataset.speed) || 0.2;
       const offset = heroRect.top * speed;
-      el.style.transform = `translate3d(-50%, ${offset.toFixed(1)}px, 0)`;
+      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
     });
     ticking = false;
   }

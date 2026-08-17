@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAMPANA | 静けさの中に、時折きらめきが現れる。</title>
-<meta name="description" content="CAMPANA - 人道支援型ドローン開発と、高級自家用自動飛行ドローン。相反する2つの事業を、1つの美意識で束ねる。">
+<title>Kaisaku Tech Vision | 静けさの中に、時折きらめきが現れる。</title>
+<meta name="description" content="Kaisaku Tech Vision - 人道支援型ドローン開発と、高級自家用自動飛行ドローン。相反する2つの事業を、1つの美意識で束ねる。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,14 +14,14 @@
 
 <!-- ローディング画面 -->
 <div class="preloader" id="preloader">
-  <div class="preloader-logo">CAMPANA</div>
+  <img class="preloader-logo" src="images/logo-kaisaku.png" alt="Kaisaku Tech Vision">
   <div class="preloader-line"><span></span></div>
 </div>
 
 <!-- ヘッダー -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="#top" class="logo">CAMPANA</a>
+    <a href="#top" class="logo"><img src="images/logo-kaisaku.png" alt="Kaisaku Tech Vision"></a>
     <nav class="main-nav" id="mainNav">
       <a href="#philosophy" class="nav-link">Philosophy</a>
       <a href="#humanitarian" class="nav-link">人道支援</a>
@@ -38,24 +38,12 @@
 
 <!-- ヒーロー -->
 <section class="hero" id="top">
-  <div class="hero-sky"></div>
-  <div class="hero-glow" data-speed="0.15"></div>
-  <div class="hero-drone" data-speed="0.35" aria-hidden="true">
-    <svg viewBox="0 0 240 80" width="240" height="80" fill="none">
-      <line x1="20" y1="40" x2="220" y2="40" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-      <circle cx="30" cy="24" r="9" stroke="currentColor" stroke-width="0.6" opacity="0.7"/>
-      <circle cx="210" cy="24" r="9" stroke="currentColor" stroke-width="0.6" opacity="0.7"/>
-      <circle cx="30" cy="56" r="9" stroke="currentColor" stroke-width="0.6" opacity="0.7"/>
-      <circle cx="210" cy="56" r="9" stroke="currentColor" stroke-width="0.6" opacity="0.7"/>
-      <line x1="30" y1="24" x2="90" y2="40" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-      <line x1="210" y1="24" x2="150" y2="40" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-      <line x1="30" y1="56" x2="90" y2="40" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-      <line x1="210" y1="56" x2="150" y2="40" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-      <rect x="95" y="34" width="50" height="12" rx="3" stroke="currentColor" stroke-width="0.6" opacity="0.7"/>
-    </svg>
+  <div class="hero-media" data-speed="0.15">
+    <img src="images/hero-vtol-dusk.avif" alt="黄昏の被災地に着陸するVTOLドローン" fetchpriority="high">
   </div>
+  <div class="hero-sky"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow reveal" data-anim="fade-up">CAMPANA</p>
+    <p class="hero-eyebrow reveal" data-anim="fade-up">KAISAKU TECH VISION</p>
     <h1 class="hero-title">
       <span class="reveal" data-anim="fade-up" data-delay="100">静けさの中に、</span>
       <span class="reveal" data-anim="fade-up" data-delay="260">時折きらめきが現れる。</span>
@@ -73,6 +61,9 @@
     <h2 class="philosophy-quote reveal" data-anim="fade-up" data-delay="100">
       静けさの中に、<br>時折きらめきが現れる。
     </h2>
+    <figure class="philosophy-figure reveal" data-anim="fade-in" data-delay="200">
+      <img src="images/philosophy-landscape.avif" alt="静かな山と月を描いた抽象的な風景" loading="lazy">
+    </figure>
     <div class="philosophy-body">
       <p class="reveal" data-anim="fade-up" data-delay="150">
         ラフマニノフの《鐘》が湛える重々しい静けさと、リストの「ラ・カンパネラ」が弾ける軽やかなきらめき。
@@ -92,7 +83,13 @@
 
 <!-- 人道支援型ドローン開発 -->
 <section class="humanitarian" id="humanitarian">
-  <div class="humanitarian-media" aria-hidden="true"></div>
+  <div class="humanitarian-media">
+    <img src="images/humanitarian-canyon-flight.avif" alt="渓谷を飛行する人道支援ドローン" loading="lazy">
+    <figure class="humanitarian-portrait">
+      <img src="images/humanitarian-operator.avif" alt="現場のオペレーター" loading="lazy">
+      <figcaption>Field Operator</figcaption>
+    </figure>
+  </div>
   <div class="section-inner">
     <p class="section-label reveal" data-anim="fade-up">01 — Humanitarian</p>
     <h2 class="section-title serif reveal" data-anim="fade-up" data-delay="100">人道支援型<br>ドローン開発</h2>
@@ -118,12 +115,27 @@
         <span class="stat-label">輸送実績（件）</span>
       </div>
     </div>
+    <ul class="scene-gallery">
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="450">
+        <img src="images/humanitarian-cargo-delivery.avif" alt="孤立避難所への物資輸送" loading="lazy">
+        <span>孤立避難所支援</span>
+      </li>
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="520">
+        <img src="images/humanitarian-mountain-medical.avif" alt="山岳地帯での医療支援飛行" loading="lazy">
+        <span>山岳医療支援</span>
+      </li>
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="590">
+        <img src="images/humanitarian-flood-response.avif" alt="都市浸水地域での対策飛行" loading="lazy">
+        <span>都市浸水対策</span>
+      </li>
+    </ul>
   </div>
 </section>
 
 <!-- 高級自家用自動飛行 -->
 <section class="luxury" id="luxury">
-  <div class="luxury-media" aria-hidden="true">
+  <div class="luxury-media">
+    <img src="images/luxury-product-shot.avif" alt="高級自家用自動飛行ドローンのプロダクトショット" loading="lazy">
     <div class="luxury-glow gold-shimmer"></div>
   </div>
   <div class="section-inner">
@@ -133,18 +145,22 @@
       移動を、所有する体験へ。<br>
       精密に磨き上げられた自律飛行が、日常に煌めきを添える。
     </p>
+    <figure class="luxury-banner reveal" data-anim="fade-in" data-delay="250">
+      <img src="images/luxury-facility.avif" alt="夜間の格納施設に佇む自動飛行ドローン" loading="lazy">
+    </figure>
     <div class="feature-grid">
-      <article class="feature-card reveal" data-anim="fade-up" data-delay="250">
+      <article class="feature-card reveal" data-anim="fade-up" data-delay="300">
         <span class="feature-index">01</span>
         <h3>精密自律航法</h3>
         <p>独自のAI制御アルゴリズムが、都市の複雑な気流の中でも寸分の狂いのない飛行を実現する。</p>
       </article>
-      <article class="feature-card reveal" data-anim="fade-up" data-delay="350">
+      <article class="feature-card feature-card--media reveal" data-anim="fade-up" data-delay="380">
+        <img src="images/luxury-cockpit.avif" alt="カーボン素材のコックピット意匠" loading="lazy">
         <span class="feature-index">02</span>
         <h3>意匠と質感</h3>
         <p>機体外装には金属質の仕上げを採用。光の入り方まで計算された、所有する喜びのあるプロダクト。</p>
       </article>
-      <article class="feature-card reveal" data-anim="fade-up" data-delay="450">
+      <article class="feature-card reveal" data-anim="fade-up" data-delay="460">
         <span class="feature-index">03</span>
         <h3>専任コンシェルジュ</h3>
         <p>納車から日々の運用まで、専任スタッフが寄り添う。静かな一対一のサービス。</p>
@@ -159,34 +175,22 @@
     <p class="section-label reveal" data-anim="fade-up">Technology</p>
     <h2 class="section-title serif reveal" data-anim="fade-up" data-delay="100">技術と安全性</h2>
     <div class="tech-grid">
-      <div class="tech-diagram reveal" data-anim="fade-in" data-delay="150" aria-hidden="true">
-        <svg viewBox="0 0 400 260" width="100%" height="100%" fill="none">
-          <circle cx="200" cy="130" r="6" stroke="currentColor" stroke-width="0.7"/>
-          <circle cx="90" cy="60" r="4" stroke="currentColor" stroke-width="0.7"/>
-          <circle cx="320" cy="70" r="4" stroke="currentColor" stroke-width="0.7"/>
-          <circle cx="70" cy="190" r="4" stroke="currentColor" stroke-width="0.7"/>
-          <circle cx="330" cy="200" r="4" stroke="currentColor" stroke-width="0.7"/>
-          <circle cx="200" cy="30" r="4" stroke="currentColor" stroke-width="0.7"/>
-          <circle cx="200" cy="230" r="4" stroke="currentColor" stroke-width="0.7"/>
-          <line x1="200" y1="130" x2="90" y2="60" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
-          <line x1="200" y1="130" x2="320" y2="70" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
-          <line x1="200" y1="130" x2="70" y2="190" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
-          <line x1="200" y1="130" x2="330" y2="200" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
-          <line x1="200" y1="130" x2="200" y2="30" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
-          <line x1="200" y1="130" x2="200" y2="230" stroke="currentColor" stroke-width="0.4" opacity="0.6"/>
-          <path d="M40 220 Q140 40 360 50" stroke="currentColor" stroke-width="0.4" opacity="0.4" fill="none"/>
-        </svg>
-      </div>
+      <figure class="tech-photo reveal" data-anim="fade-in" data-delay="150">
+        <img src="images/tech-lab.avif" alt="AI制御システムを開発する研究施設" loading="lazy">
+      </figure>
       <div class="tech-list">
         <div class="tech-item reveal" data-anim="fade-up" data-delay="200">
+          <img class="tech-icon" src="images/icon-sensor.avif" alt="" loading="lazy">
           <h3>自律飛行制御</h3>
           <p>複数センサーの統合によるリアルタイム経路最適化。GPSの届かない環境でも自己位置を推定する。</p>
         </div>
         <div class="tech-item reveal" data-anim="fade-up" data-delay="300">
+          <img class="tech-icon" src="images/icon-chip.avif" alt="" loading="lazy">
           <h3>安全冗長設計</h3>
           <p>推進・通信・電源の各系統を多重化。単一障害が墜落に至らない設計思想を徹底している。</p>
         </div>
         <div class="tech-item reveal" data-anim="fade-up" data-delay="400">
+          <img class="tech-icon" src="images/icon-ai.avif" alt="" loading="lazy">
           <h3>AI衝突回避</h3>
           <p>周囲環境をミリ秒単位で解析し、障害物・気象変化に応じて飛行経路を静かに補正する。</p>
         </div>
@@ -262,8 +266,8 @@
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <span class="logo">CAMPANA</span>
-    <p>&copy; 2026 CAMPANA. All rights reserved.</p>
+    <img class="logo footer-logo" src="images/logo-kaisaku.png" alt="Kaisaku Tech Vision">
+    <p>&copy; 2026 Kaisaku Tech Vision. All rights reserved.</p>
   </div>
 </footer>
 
