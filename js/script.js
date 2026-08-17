@@ -1,20 +1,18 @@
 (() => {
   'use strict';
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ---------- Preloader ---------- */
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', () => {
-    setTimeout(() => preloader.classList.add('is-hidden'), 400);
+    setTimeout(() => preloader.classList.add('is-hidden'), 500);
   });
 
   /* ---------- Header scroll state ---------- */
   const header = document.getElementById('siteHeader');
-  const toTopBtn = document.getElementById('toTop');
-
   function updateHeaderState() {
-    const scrolled = window.scrollY > 40;
-    header.classList.toggle('is-scrolled', scrolled);
-    toTopBtn.classList.toggle('is-visible', window.scrollY > 600);
+    header.classList.toggle('is-scrolled', window.scrollY > 40);
   }
 
   /* ---------- Mobile nav ---------- */
@@ -31,12 +29,7 @@
     });
   });
 
-  /* ---------- To top ---------- */
-  toTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  /* ---------- Scroll reveal (fade in / up / scale) ---------- */
+  /* ---------- Scroll reveal (ゆっくりしたフェード) ---------- */
   const revealEls = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -53,13 +46,27 @@
   );
   revealEls.forEach((el) => revealObserver.observe(el));
 
+  /* ---------- Gold shimmer: 一瞬だけ光る演出（控えめに） ---------- */
+  const shimmerEls = document.querySelectorAll('.gold-shimmer');
+  const shimmerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-lit');
+          shimmerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  if (!reduceMotion) shimmerEls.forEach((el) => shimmerObserver.observe(el));
+
   /* ---------- Count-up numbers ---------- */
   const counters = document.querySelectorAll('.stat-num');
   function animateCount(el) {
     const target = Number(el.dataset.count);
-    const duration = 1600;
+    const duration = 1400;
     const start = performance.now();
-
     function tick(now) {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
@@ -81,18 +88,18 @@
   );
   counters.forEach((el) => counterObserver.observe(el));
 
-  /* ---------- Parallax layers ---------- */
+  /* ---------- Parallax (Hero) ---------- */
   const parallaxEls = Array.from(document.querySelectorAll('[data-speed]'));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let ticking = false;
 
   function applyParallax() {
-    const viewportH = window.innerHeight;
+    const heroEl = document.querySelector('.hero');
+    if (!heroEl) { ticking = false; return; }
+    const heroRect = heroEl.getBoundingClientRect();
     parallaxEls.forEach((el) => {
       const speed = Number(el.dataset.speed) || 0.2;
-      const rect = el.parentElement.getBoundingClientRect();
-      const offset = (rect.top) * speed;
-      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+      const offset = heroRect.top * speed;
+      el.style.transform = `translate3d(-50%, ${offset.toFixed(1)}px, 0)`;
     });
     ticking = false;
   }
@@ -111,16 +118,6 @@
   window.addEventListener('resize', onScrollOrResize);
   onScrollOrResize();
   if (!reduceMotion) applyParallax();
-
-  /* ---------- Cursor glow (desktop only) ---------- */
-  const cursorGlow = document.getElementById('cursorGlow');
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-      cursorGlow.classList.add('is-active');
-    });
-    document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
-  }
 
   /* ---------- Contact form (front-end only demo) ---------- */
   const contactForm = document.getElementById('contactForm');
