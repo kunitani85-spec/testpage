@@ -79,8 +79,9 @@
 
 <!-- 人道支援型ドローン開発 -->
 <section class="humanitarian" id="humanitarian">
-  <div class="humanitarian-media">
-    <img src="images/humanitarian-canyon-flight.avif" alt="渓谷を飛行する人道支援ドローン" loading="lazy">
+  <div class="humanitarian-media" id="humanitarianMedia">
+    <img class="media-img media-base" src="images/humanitarian-canyon-flight.avif" alt="渓谷を飛行する人道支援ドローン">
+    <img class="media-img media-hover" src="" alt="" aria-hidden="true">
     <figure class="humanitarian-portrait">
       <img src="images/humanitarian-operator.avif" alt="現場のオペレーター" loading="lazy">
       <figcaption>Field Operator</figcaption>
@@ -113,16 +114,28 @@
     </div>
     <ul class="scene-gallery">
       <li class="scene-item reveal" data-anim="fade-up" data-delay="450">
-        <img src="images/humanitarian-cargo-delivery.avif" alt="孤立避難所への物資輸送" loading="lazy">
-        <span>孤立避難所支援</span>
-      </li>
-      <li class="scene-item reveal" data-anim="fade-up" data-delay="520">
         <img src="images/humanitarian-mountain-medical.avif" alt="山岳地帯での医療支援飛行" loading="lazy">
         <span>山岳医療支援</span>
       </li>
-      <li class="scene-item reveal" data-anim="fade-up" data-delay="590">
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="500">
         <img src="images/humanitarian-flood-response.avif" alt="都市浸水地域での対策飛行" loading="lazy">
         <span>都市浸水対策</span>
+      </li>
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="550">
+        <img src="images/hero-vtol-dusk.avif" alt="震災復旧地における支援飛行" loading="lazy">
+        <span>震災復旧支援</span>
+      </li>
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="600">
+        <img src="images/humanitarian-cargo-delivery.avif" alt="孤立避難所への物資輸送" loading="lazy">
+        <span>孤立避難所支援</span>
+      </li>
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="650">
+        <img src="images/humanitarian-fire-route.avif" alt="火災地域でのルート解析飛行" loading="lazy">
+        <span>火災ルート解析</span>
+      </li>
+      <li class="scene-item reveal" data-anim="fade-up" data-delay="700">
+        <img src="images/humanitarian-canyon-flight.avif" alt="険路での避難搬送飛行" loading="lazy">
+        <span>険路避難搬送</span>
       </li>
     </ul>
   </div>
@@ -266,6 +279,12 @@
     <p>&copy; 2026 Kaisaku Tech Vision. All rights reserved.</p>
   </div>
 </footer>
+
+<!-- Lightbox (モバイルでの支援シーン画像ポップアップ) -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
 
 <script src="js/script.js"></script>
 </body>

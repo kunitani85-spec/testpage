@@ -329,12 +329,17 @@ button { font-family: inherit; cursor: pointer; }
   mask-image: linear-gradient(90deg, transparent, black 22%);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 22%);
 }
-.humanitarian-media img {
+.media-img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   filter: grayscale(0.55) contrast(1.08) brightness(0.92);
 }
+.media-base { position: relative; z-index: 0; }
+.media-hover { z-index: 1; opacity: 0; transition: opacity 0.6s var(--ease-slow); }
+.media-hover.is-active { opacity: 1; }
 .humanitarian-portrait {
+  z-index: 2;
   position: absolute; left: 40px; bottom: 40px; width: 130px;
   border: 1px solid rgba(184, 147, 95, 0.4);
   padding: 6px;
@@ -387,6 +392,8 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow 0.4s ease;
 }
 .scene-item img {
   width: 100%; height: 100%;
@@ -395,10 +402,14 @@ button { font-family: inherit; cursor: pointer; }
   transition: transform 0.6s var(--ease-slow), filter 0.6s ease;
 }
 .scene-item:hover img { transform: scale(1.05); filter: grayscale(0.1) contrast(1.05); }
+.scene-item.is-active { box-shadow: inset 0 0 0 1px rgba(212, 175, 106, 0.8); }
 .scene-item::after {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 45%);
+}
+@media (hover: none) {
+  .scene-item { cursor: pointer; }
 }
 .scene-item span {
   position: absolute; left: 12px; bottom: 12px; z-index: 1;
@@ -692,3 +703,35 @@ button { font-family: inherit; cursor: pointer; }
   .scene-gallery { grid-template-columns: repeat(2, 1fr); }
   .philosophy-figure { width: 60vw; }
 }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 3000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px;
+  background: rgba(10, 10, 10, 0.94);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s var(--ease-slow), visibility 0.35s var(--ease-slow);
+}
+.lightbox.is-open { opacity: 1; visibility: visible; }
+.lightbox-img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s var(--ease-slow) 0.05s, transform 0.4s var(--ease-slow) 0.05s;
+}
+.lightbox.is-open .lightbox-img { opacity: 1; transform: none; }
+.lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(237, 234, 227, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-light);
+  font-size: 22px;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.lightbox-close:hover { border-color: var(--color-gold-bright); color: var(--color-gold-bright); }

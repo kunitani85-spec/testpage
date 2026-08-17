@@ -119,6 +119,54 @@
   onScrollOrResize();
   if (!reduceMotion) applyParallax();
 
+  /* ---------- Humanitarian scene gallery: PC=hover swap / Mobile=lightbox ---------- */
+  const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const sceneItems = document.querySelectorAll('.scene-item');
+  const mediaHover = document.querySelector('.media-hover');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  sceneItems.forEach((item) => {
+    const img = item.querySelector('img');
+    if (hoverCapable && mediaHover) {
+      item.addEventListener('mouseenter', () => {
+        mediaHover.src = img.currentSrc || img.src;
+        mediaHover.alt = img.alt;
+        mediaHover.classList.add('is-active');
+        item.classList.add('is-active');
+      });
+      item.addEventListener('mouseleave', () => {
+        mediaHover.classList.remove('is-active');
+        item.classList.remove('is-active');
+      });
+    } else {
+      item.addEventListener('click', () => openLightbox(img.src, img.alt));
+    }
+  });
+
   /* ---------- Contact form (front-end only demo) ---------- */
   const contactForm = document.getElementById('contactForm');
   const formNote = document.getElementById('formNote');
