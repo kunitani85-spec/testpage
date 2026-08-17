@@ -162,9 +162,11 @@
         mediaHover.classList.remove('is-active');
         item.classList.remove('is-active');
       });
-    } else {
-      item.addEventListener('click', () => openLightbox(img.src, img.alt));
     }
+    // Always bind click too: guarantees the popup works on touch devices
+    // even when hover-capability detection is ambiguous (hybrid laptops,
+    // tablets, in-app browsers), and offers a harmless zoom-in on desktop.
+    item.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt));
   });
 
   /* ---------- Contact form (front-end only demo) ---------- */
