@@ -4,12 +4,14 @@
 
    This is the white-based sibling of the dark pattern (css/style.css at
    the project root). Structure, spacing, motion and section markup are
-   identical — only the color treatment changes. The header, footer, the
-   homepage Hero, the company page's opening band, the preloader and the
-   lightbox stay dark intentionally: they frame the page and hold the
-   Kaisaku wordmark, which is a light-colored logo file and needs a dark
-   backdrop to read. Every other section switches to white / ivory with
-   dark text.
+   identical — only the color treatment changes. Header, footer, preloader,
+   the mobile nav drawer and every section are light (white/ivory) with
+   dark text; the logo uses a recolored dark-text variant (see
+   images/logo-kaisaku-dark.png) generated from the original so it reads
+   on light backgrounds. Two things stay deliberately dark: the homepage
+   Hero, because it's a real dusk/night photograph and can't be relit
+   without distorting it, and the lightbox, following the near-universal
+   convention that photo viewers use a dark backdrop so images pop.
    ========================================================================== */
 
 :root {
@@ -80,15 +82,12 @@ button { font-family: inherit; cursor: pointer; }
   margin-bottom: 28px;
 }
 
-/* Default section-lead stays light-on-dark: it's used inside the
-   still-dark Hero-like bands (page-header). Sections that moved to a
-   white background override this locally (see Humanitarian / Luxury). */
 .section-lead {
   font-size: clamp(16px, 1.6vw, 19px);
   line-height: 2;
   max-width: 620px;
   margin-bottom: 20px;
-  color: var(--color-text-light);
+  color: rgba(28, 27, 26, 0.85);
 }
 
 .section-text {
@@ -134,10 +133,10 @@ button { font-family: inherit; cursor: pointer; }
   100% { transform: translateX(140%); opacity: 0; }
 }
 
-/* ---------- Preloader (kept dark: holds the light-colored logo) ---------- */
+/* ---------- Preloader ---------- */
 .preloader {
   position: fixed; inset: 0; z-index: 9999;
-  background: var(--color-black);
+  background: var(--color-white);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 22px;
   transition: opacity 0.8s var(--ease-slow), visibility 0.8s var(--ease-slow);
@@ -160,18 +159,21 @@ button { font-family: inherit; cursor: pointer; }
   100% { transform: translateX(430%); }
 }
 
-/* ---------- Header (kept dark: holds the light-colored logo) ---------- */
+/* ---------- Header ---------- */
+/* Always a light, mostly-opaque bar (rather than transparent-until-scrolled)
+   so the dark-text logo and nav links stay legible even over the Hero
+   photo, without needing a separate scroll-dependent color swap. */
 .site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  padding: 26px 0;
-  transition: padding 0.5s var(--ease-slow), background 0.5s var(--ease-slow), border-color 0.5s var(--ease-slow);
-  border-bottom: 1px solid transparent;
+  padding: 22px 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(28, 27, 26, 0.08);
+  transition: padding 0.5s var(--ease-slow), box-shadow 0.5s var(--ease-slow);
 }
 .site-header.is-scrolled {
-  padding: 16px 0;
-  background: rgba(10, 10, 10, 0.86);
-  backdrop-filter: blur(10px);
-  border-bottom-color: rgba(184, 147, 95, 0.15);
+  padding: 14px 0;
+  box-shadow: 0 6px 24px rgba(28, 27, 26, 0.06);
 }
 .header-inner {
   max-width: 1180px;
@@ -187,7 +189,7 @@ button { font-family: inherit; cursor: pointer; }
 .nav-link {
   font-size: 13px;
   letter-spacing: 0.08em;
-  color: rgba(237, 234, 227, 0.75);
+  color: rgba(28, 27, 26, 0.7);
   position: relative;
   padding-bottom: 4px;
   transition: color 0.2s ease;
@@ -198,7 +200,7 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--color-gold-bright);
   transition: right 0.25s var(--ease-snap);
 }
-.nav-link:hover { color: var(--color-text-light); }
+.nav-link:hover { color: var(--color-text-dark); }
 .nav-link:hover::after { right: 0; }
 .nav-link[aria-current="page"] { color: var(--color-gold-bright); }
 .nav-cta {
@@ -217,7 +219,7 @@ button { font-family: inherit; cursor: pointer; }
   border: none;
 }
 .nav-toggle span {
-  width: 22px; height: 1px; background: var(--color-text-light);
+  width: 22px; height: 1px; background: var(--color-text-dark);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -238,13 +240,13 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 60%;
-  filter: saturate(0.9) contrast(1.05);
+  filter: saturate(0.9) contrast(1.05) brightness(1.12);
 }
 .hero-sky {
   position: absolute; inset: 0;
   background:
     radial-gradient(ellipse 70% 45% at 50% 108%, rgba(184, 147, 95, 0.18) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(5,5,5,0.55) 0%, rgba(10,10,10,0.4) 32%, rgba(10,10,10,0.55) 62%, rgba(10,8,6,0.88) 100%);
+    linear-gradient(180deg, rgba(5,5,5,0.4) 0%, rgba(10,10,10,0.28) 32%, rgba(10,10,10,0.4) 62%, rgba(10,8,6,0.78) 100%);
 }
 .hero-content { position: relative; z-index: 2; padding: 0 24px; color: var(--color-text-light); }
 .hero-eyebrow {
@@ -660,8 +662,8 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- Company (下層ページ) ---------- */
 .page-header {
-  background: var(--color-black);
-  color: var(--color-text-light);
+  background: var(--color-ivory);
+  color: var(--color-text-dark);
   padding: 200px 0 80px;
 }
 .page-title {
@@ -811,11 +813,11 @@ button { font-family: inherit; cursor: pointer; }
 .company-cta .btn-gold { color: var(--color-text-dark); }
 .company-cta .btn-gold:hover { color: var(--color-white); }
 
-/* ---------- Footer (kept dark: holds the light-colored logo) ---------- */
+/* ---------- Footer ---------- */
 .site-footer {
-  background: var(--color-black);
+  background: var(--color-ivory);
   padding: 48px 0;
-  border-top: 1px solid rgba(237, 234, 227, 0.08);
+  border-top: 1px solid rgba(28, 27, 26, 0.08);
 }
 .footer-inner {
   max-width: 1180px;
@@ -832,13 +834,13 @@ button { font-family: inherit; cursor: pointer; }
 .footer-nav-link {
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: rgba(237, 234, 227, 0.55);
+  color: rgba(28, 27, 26, 0.6);
   transition: color 0.2s ease;
 }
 .footer-nav-link:hover { color: var(--color-gold-bright); }
 .footer-inner p {
   font-size: 12px;
-  color: rgba(237, 234, 227, 0.4);
+  color: rgba(28, 27, 26, 0.4);
 }
 
 /* ---------- Responsive ---------- */
@@ -847,7 +849,8 @@ button { font-family: inherit; cursor: pointer; }
     position: fixed; top: 0; right: 0; width: min(320px, 82vw);
     height: 100vh;
     height: 100dvh;
-    background: rgba(10, 10, 10, 0.97);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: -8px 0 32px rgba(28, 27, 26, 0.08);
     flex-direction: column; align-items: flex-start; justify-content: center;
     gap: 26px; padding: 40px;
     transform: translateX(100%);
