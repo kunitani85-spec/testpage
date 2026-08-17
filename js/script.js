@@ -18,15 +18,54 @@
   /* ---------- Mobile nav ---------- */
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');
-  navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('is-open');
+
+  // Locks body scroll while the panel is open. Plain `overflow: hidden`
+  // isn't enough on mobile Safari: a fixed-position panel opened mid-scroll
+  // renders offset by the scroll distance until the next repaint (looks
+  // "stuck halfway up"). Pinning the body itself with a negative top
+  // matching the scroll offset removes the scroll entirely, which avoids
+  // the glitch, then scroll position is restored on close.
+  let lockedScrollY = 0;
+  let isBodyLocked = false;
+  function lockBodyScroll() {
+    lockedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    isBodyLocked = true;
+  }
+  function unlockBodyScroll() {
+    if (!isBodyLocked) return;
+    isBodyLocked = false;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    // Force a synchronous reflow so the browser has recomputed the
+    // document's real (unlocked) height before we scroll — otherwise
+    // scrollTo can run against the still-collapsed layout and land short.
+    void document.body.offsetHeight;
+    // behavior: 'instant' bypasses the page's global smooth-scroll CSS —
+    // restoring position should be invisible, not an animated glide.
+    window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'instant' });
+  }
+
+  function setNavOpen(isOpen) {
+    mainNav.classList.toggle('is-open', isOpen);
     navToggle.classList.toggle('is-open', isOpen);
+    if (isOpen) {
+      lockBodyScroll();
+    } else {
+      unlockBodyScroll();
+    }
+  }
+
+  navToggle.addEventListener('click', () => {
+    setNavOpen(!mainNav.classList.contains('is-open'));
   });
   mainNav.querySelectorAll('.nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('is-open');
-      navToggle.classList.remove('is-open');
-    });
+    link.addEventListener('click', () => setNavOpen(false));
   });
 
   /* ---------- Scroll reveal (ゆっくりしたフェード) ---------- */

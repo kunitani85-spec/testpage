@@ -830,7 +830,9 @@ button { font-family: inherit; cursor: pointer; }
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .main-nav {
-    position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 82vw);
+    position: fixed; top: 0; right: 0; width: min(320px, 82vw);
+    height: 100vh;
+    height: 100dvh;
     background: rgba(10, 10, 10, 0.97);
     flex-direction: column; align-items: flex-start; justify-content: center;
     gap: 26px; padding: 40px;
