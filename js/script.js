@@ -216,16 +216,6 @@
     updateCapacity();
   }
 
-  /* ---------- Reservation forms (front-end only demo) ---------- */
-  document.querySelectorAll('.contact-form').forEach((form) => {
-    const note = form.querySelector('.form-note');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (note) note.textContent = 'ご予約ありがとうございます。担当者より折り返しご連絡いたします。';
-      form.reset();
-    });
-  });
-
   /* ---------- Smooth anchor scroll offset for fixed header ---------- */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
