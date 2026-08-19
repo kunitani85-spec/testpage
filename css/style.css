@@ -311,6 +311,7 @@ ul { list-style: none; }
 }
 .stay-visual svg { width: 38%; color: var(--accent); opacity: 0.9; }
 .stay-content p { color: var(--fg-dim); font-size: 15.5px; max-width: 540px; margin-bottom: 30px; }
+.stay-note { margin: -14px 0 26px; }
 
 /* ---------- Restaurant ---------- */
 .restaurant { padding: 140px 0; background: var(--bg-alt); }
@@ -326,31 +327,41 @@ ul { list-style: none; }
 .meal-time { font-family: var(--font-en); font-size: 30px; color: var(--fg); }
 .meal-desc { color: var(--fg-dim); font-size: 14px; margin: 6px 0 14px; }
 
-/* ---------- Seats demo (5-table availability) ---------- */
-.seats-demo {
+/* ---------- Capacity demo (1-day max 3 groups, shared AUBERGE / CAFE-RESTAURANT) ---------- */
+.capacity-demo {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
   padding: 46px 42px;
 }
-.seats-label { color: var(--fg-dim); font-size: 14.5px; max-width: 680px; margin-bottom: 30px; }
-.seats-toggle { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 34px; }
-.seats-btn {
-  font-family: var(--font-nav); font-size: 12.5px; letter-spacing: 1px;
-  padding: 9px 18px; border-radius: 20px; border: 1px solid var(--border);
-  background: transparent; color: var(--fg-dim); cursor: pointer; transition: all 0.3s ease;
+.capacity-label { color: var(--fg-dim); font-size: 14.5px; max-width: 680px; margin-bottom: 30px; }
+.capacity-total {
+  display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 18px 0; margin-bottom: 10px; font-size: 14px; color: var(--fg-dim);
 }
-.seats-btn:hover { border-color: var(--accent); color: var(--fg); }
-.seats-btn.is-active { background: var(--accent); border-color: var(--accent); color: #12100d; }
-.seats-table { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
-.seat {
-  width: 68px; height: 68px; border-radius: 50%; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px;
-  font-family: var(--font-nav); font-size: 9.5px; letter-spacing: 0.5px; text-align: center;
-  border: 1.5px solid var(--border); transition: all 0.4s var(--ease); text-transform: uppercase;
+.capacity-total-value { font-family: var(--font-en); font-weight: 600; font-size: 24px; color: var(--accent); }
+.capacity-message { min-height: 22px; font-size: 14px; color: var(--rose); margin-bottom: 28px; }
+.capacity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+.capacity-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  padding: 28px 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
 }
-.seat.is-stay { background: var(--accent); border-color: var(--accent); color: #12100d; font-weight: 600; }
-.seat.is-dinner { background: transparent; border-color: var(--rose); color: var(--rose); }
-.seats-result { font-size: 14.5px; color: var(--fg); }
-.seats-result b { font-family: var(--font-en); font-weight: 600; font-size: 18px; color: var(--accent); }
+.capacity-card h3 { font-family: var(--font-en); font-weight: 600; font-size: 18px; }
+.capacity-stepper { display: flex; align-items: center; gap: 16px; }
+.stepper-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+  background: transparent; color: var(--fg); font-size: 18px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.25s ease;
+}
+.stepper-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.stepper-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.stepper-value { font-family: var(--font-en); font-weight: 600; font-size: 20px; min-width: 68px; text-align: center; }
+.capacity-remain { font-size: 13.5px; color: var(--fg-dim); min-height: 36px; }
+.capacity-reset {
+  font-family: var(--font-nav); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  background: none; border: none; color: var(--fg-dim); cursor: pointer; text-decoration: underline;
+  text-underline-offset: 3px; transition: color 0.3s ease;
+}
+.capacity-reset:hover { color: var(--accent); }
 
 /* ---------- Cuisine ---------- */
 .cuisine { padding: 140px 0; }
@@ -597,6 +608,7 @@ ul { list-style: none; }
   .access-grid { grid-template-columns: 1fr; }
   .reserve-info-grid { grid-template-columns: 1fr; }
   .reserve-grid { grid-template-columns: 1fr; }
+  .capacity-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -617,7 +629,7 @@ ul { list-style: none; }
   .cursor-glow { display: none; }
   .hero-hours { flex-direction: column; align-items: stretch; }
   .hero-hour-card { min-width: 0; }
-  .seats-demo { padding: 32px 24px; }
-  .seat { width: 56px; height: 56px; font-size: 8.5px; }
+  .capacity-demo { padding: 32px 24px; }
+  .capacity-total { flex-direction: column; align-items: flex-start; gap: 4px; }
   .reserve-card { padding: 32px 24px; }
 }

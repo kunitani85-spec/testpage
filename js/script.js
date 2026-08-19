@@ -122,36 +122,98 @@
     document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
   }
 
-  /* ---------- Seats demo (5 tables shared between STAY and DINNER ONLY) ---------- */
-  const TOTAL_SEATS = 5;
-  const seatsToggle = document.getElementById('seatsToggle');
-  const seatsTable = document.getElementById('seatsTable');
-  const seatsResult = document.getElementById('seatsResult');
+  /* ---------- Capacity demo (1-day max 3 groups, shared AUBERGE / CAFE-RESTAURANT) ---------- */
+  const TOTAL_MAX = 3;
+  const AUBERGE_MAX = 2;
+  const CAFE_MAX = 3;
 
-  function renderSeats(stayCount) {
-    const dinnerOnly = TOTAL_SEATS - stayCount;
-    seatsTable.innerHTML = '';
-    for (let i = 0; i < TOTAL_SEATS; i++) {
-      const seat = document.createElement('div');
-      const isStay = i < stayCount;
-      seat.className = 'seat ' + (isStay ? 'is-stay' : 'is-dinner');
-      seat.innerHTML = isStay ? 'STAY' : 'DINNER<br>ONLY';
-      seatsTable.appendChild(seat);
+  const aubergeCountEl = document.getElementById('aubergeCount');
+  const cafeCountEl = document.getElementById('cafeCount');
+  const totalCountEl = document.getElementById('totalCount');
+  const aubergeRemainText = document.getElementById('aubergeRemainText');
+  const cafeRemainText = document.getElementById('cafeRemainText');
+  const capacityMessage = document.getElementById('capacityMessage');
+  const aubergePlusBtn = document.getElementById('aubergePlus');
+  const aubergeMinusBtn = document.getElementById('aubergeMinus');
+  const cafePlusBtn = document.getElementById('cafePlus');
+  const cafeMinusBtn = document.getElementById('cafeMinus');
+  const capacityResetBtn = document.getElementById('capacityReset');
+
+  if (aubergeCountEl && cafeCountEl && totalCountEl) {
+    let aubergeCount = 0;
+    let cafeCount = 0;
+
+    function updateCapacity() {
+      const total = aubergeCount + cafeCount;
+      const remainingTotal = TOTAL_MAX - total;
+      const aubergeRemaining = Math.max(0, Math.min(AUBERGE_MAX - aubergeCount, remainingTotal));
+      const cafeRemaining = Math.max(0, Math.min(CAFE_MAX - cafeCount, remainingTotal));
+
+      aubergeCountEl.textContent = aubergeCount;
+      cafeCountEl.textContent = cafeCount;
+      totalCountEl.textContent = total;
+
+      aubergePlusBtn.disabled = aubergeRemaining <= 0;
+      cafePlusBtn.disabled = cafeRemaining <= 0;
+      aubergeMinusBtn.disabled = aubergeCount <= 0;
+      cafeMinusBtn.disabled = cafeCount <= 0;
+
+      if (aubergeCount >= AUBERGE_MAX) {
+        aubergeRemainText.textContent = 'オーベルジュの上限（2組）に達しています。';
+      } else if (aubergeRemaining <= 0) {
+        aubergeRemainText.textContent = '本日のご予約枠が上限に達しているため、オーベルジュのご予約を承ることができません。';
+      } else {
+        aubergeRemainText.textContent = `残り${aubergeRemaining}組`;
+      }
+
+      if (cafeCount >= CAFE_MAX) {
+        cafeRemainText.textContent = 'カフェ・レストランの上限（3組）に達しています。';
+      } else if (cafeRemaining <= 0) {
+        cafeRemainText.textContent = '本日のご予約枠が上限に達しているため、カフェ・レストランのご予約を承ることができません。';
+      } else if (aubergeCount > 0) {
+        cafeRemainText.textContent = `本日はオーベルジュのご予約が${aubergeCount}組入っているため、カフェ・レストランのご予約は残り${cafeRemaining}組までとなります。`;
+      } else {
+        cafeRemainText.textContent = `残り${cafeRemaining}組`;
+      }
+
+      capacityMessage.textContent = total >= TOTAL_MAX ? '本日のご予約枠が上限に達しているため、これ以上のご予約はお受けできません。' : '';
     }
-    seatsResult.innerHTML = dinnerOnly > 0
-      ? `宿泊：<b>${stayCount}</b>卓　／　ディナーのみ：<b>${dinnerOnly}</b>卓ご予約いただけます`
-      : `宿泊：<b>${stayCount}</b>卓　／　ディナーのみのご予約は<b>満席</b>です`;
-  }
 
-  if (seatsToggle && seatsTable && seatsResult) {
-    seatsToggle.querySelectorAll('.seats-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        seatsToggle.querySelectorAll('.seats-btn').forEach((b) => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        renderSeats(Number(btn.dataset.stay));
-      });
+    aubergePlusBtn.addEventListener('click', () => {
+      const remainingTotal = TOTAL_MAX - (aubergeCount + cafeCount);
+      if (aubergeCount < AUBERGE_MAX && remainingTotal > 0) {
+        aubergeCount++;
+        updateCapacity();
+      }
     });
-    renderSeats(0);
+    aubergeMinusBtn.addEventListener('click', () => {
+      if (aubergeCount > 0) {
+        aubergeCount--;
+        updateCapacity();
+      }
+    });
+    cafePlusBtn.addEventListener('click', () => {
+      const remainingTotal = TOTAL_MAX - (aubergeCount + cafeCount);
+      if (cafeCount < CAFE_MAX && remainingTotal > 0) {
+        cafeCount++;
+        updateCapacity();
+      }
+    });
+    cafeMinusBtn.addEventListener('click', () => {
+      if (cafeCount > 0) {
+        cafeCount--;
+        updateCapacity();
+      }
+    });
+    if (capacityResetBtn) {
+      capacityResetBtn.addEventListener('click', () => {
+        aubergeCount = 0;
+        cafeCount = 0;
+        updateCapacity();
+      });
+    }
+
+    updateCapacity();
   }
 
   /* ---------- Reservation forms (front-end only demo) ---------- */
