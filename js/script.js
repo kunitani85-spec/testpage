@@ -122,16 +122,15 @@
     document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
   }
 
-  /* ---------- Contact form (front-end only demo) ---------- */
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+  /* ---------- Reservation forms (front-end only demo) ---------- */
+  document.querySelectorAll('.contact-form').forEach((form) => {
+    const note = form.querySelector('.form-note');
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      formNote.textContent = 'ご予約ありがとうございます。担当者より折り返しご連絡いたします。';
-      contactForm.reset();
+      if (note) note.textContent = 'ご予約ありがとうございます。担当者より折り返しご連絡いたします。';
+      form.reset();
     });
-  }
+  });
 
   /* ---------- Smooth anchor scroll offset for fixed header ---------- */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

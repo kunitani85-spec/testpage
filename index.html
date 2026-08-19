@@ -46,20 +46,39 @@
   <div class="hero-glow" data-speed="0.5"></div>
   <div class="hero-grid" data-speed="0.2"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow reveal" data-anim="fade-up">MODERN FRENCH RESTAURANT</p>
-    <h1 class="hero-title">
-      <span class="reveal" data-anim="fade-up" data-delay="100">光と旬が織りなす、</span>
-      <span class="reveal accent" data-anim="fade-up" data-delay="250">モダンフレンチ</span>
-      <span class="reveal" data-anim="fade-up" data-delay="400">の一皿。</span>
+    <p class="hero-eyebrow reveal" data-anim="fade-up">TWO EXPERIENCES, ONE LUMIÈRE</p>
+    <h1 class="hero-heading reveal" data-anim="fade-up" data-delay="100">
+      ふたつの扉、<span class="accent">ひとつの</span>LUMIÈRE。
     </h1>
-    <p class="hero-desc reveal" data-anim="fade-up" data-delay="550">
-      厳選された旬の食材と伝統のフレンチ技法。シェフが紡ぐストーリーを、特別な空間でお楽しみください。
-    </p>
-    <div class="hero-actions reveal" data-anim="fade-up" data-delay="700">
-      <a href="#menu" class="btn btn-primary">メニューを見る</a>
-      <a href="#contact" class="btn btn-ghost">ご予約はこちら</a>
-    </div>
   </div>
+
+  <div class="hero-split">
+    <a href="#auberge-form" class="hero-panel hero-panel-auberge reveal" data-anim="fade-up" data-delay="200">
+      <div class="hero-panel-bg"></div>
+      <div class="hero-panel-inner">
+        <svg class="hero-panel-icon" viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-bed"></use></svg>
+        <span class="hero-panel-tag">完全予約制 / 宿泊 + ディナー</span>
+        <h2 class="hero-panel-title">AUBERGE<br>LUMIÈRE</h2>
+        <p class="hero-panel-desc">一日限定の客室で過ごす、宿泊とディナーが一体になった隠れ家。</p>
+        <span class="hero-panel-cta">宿泊+ディナーを予約する
+          <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+    <a href="#table-form" class="hero-panel hero-panel-table reveal" data-anim="fade-up" data-delay="320">
+      <div class="hero-panel-bg"></div>
+      <div class="hero-panel-inner">
+        <svg class="hero-panel-icon" viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-cup"></use></svg>
+        <span class="hero-panel-tag">予約制 / ランチ・カフェ・ディナー</span>
+        <h2 class="hero-panel-title">TABLE<br>LUMIÈRE</h2>
+        <p class="hero-panel-desc">ランチ・カフェ・ディナー。街で気軽に予約できる、もうひとつのLUMIÈRE。</p>
+        <span class="hero-panel-cta">レストランを予約する
+          <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+
   <div class="scroll-indicator reveal" data-anim="fade-in" data-delay="1000">
     <span class="scroll-line"></span>
     <span class="scroll-text">SCROLL</span>
@@ -290,37 +309,106 @@
     <p class="section-tag reveal" data-anim="fade-up">RESERVATION</p>
     <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">ご予約</h2>
     <p class="contact-desc reveal" data-anim="fade-up" data-delay="200">
-      お気軽にご相談ください。記念日のご要望などもお申し付けください。
+      AUBERGEとTABLE、ご利用の目的に合わせてお選びください。どちらも完全予約制です。
     </p>
 
-    <form class="contact-form reveal" data-anim="fade-up" data-delay="300" id="contactForm">
-      <div class="form-row">
-        <label>
-          <span>お名前<em>必須</em></span>
-          <input type="text" name="name" required placeholder="山田 太郎">
-        </label>
-        <label>
-          <span>メールアドレス<em>必須</em></span>
-          <input type="email" name="email" required placeholder="example@mail.com">
-        </label>
+    <div class="reserve-grid">
+      <div class="reserve-card reveal" data-anim="fade-up" data-delay="300">
+        <span class="reserve-tag reserve-tag-auberge">AUBERGE ― 宿泊 + ディナー</span>
+        <h3>宿泊 + ディナーのご予約</h3>
+        <p class="reserve-desc">一日限定のお部屋でお過ごしいただく特別な滞在です。ご希望日の1週間前までにご連絡ください。</p>
+        <form class="contact-form" id="auberge-form">
+          <div class="form-row">
+            <label>
+              <span>お名前<em>必須</em></span>
+              <input type="text" name="name" required placeholder="山田 太郎">
+            </label>
+            <label>
+              <span>メールアドレス<em>必須</em></span>
+              <input type="email" name="email" required placeholder="example@mail.com">
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              <span>電話番号<em>必須</em></span>
+              <input type="tel" name="tel" required placeholder="000-0000-0000">
+            </label>
+            <label>
+              <span>ご宿泊日<em>必須</em></span>
+              <input type="date" name="stay-date" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              <span>人数<em>必須</em></span>
+              <input type="number" name="guests" min="1" max="8" required placeholder="2">
+            </label>
+            <label>
+              <span>プラン</span>
+              <select name="plan">
+                <option value="standard">1泊2食 スタンダードプラン</option>
+                <option value="anniversary">記念日スペシャルプラン</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            <span>ご要望</span>
+            <textarea name="message" rows="4" placeholder="記念日やアレルギーなどご要望があればご記入ください"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary btn-block">宿泊予約を送信する</button>
+          <p class="form-note"></p>
+        </form>
       </div>
-      <div class="form-row">
-        <label>
-          <span>電話番号</span>
-          <input type="tel" name="tel" placeholder="000-0000-0000">
-        </label>
-        <label>
-          <span>ご希望日時<em>必須</em></span>
-          <input type="datetime-local" name="datetime" required>
-        </label>
+
+      <div class="reserve-card reveal" data-anim="fade-up" data-delay="420">
+        <span class="reserve-tag reserve-tag-table">TABLE ― ランチ・カフェ・ディナー</span>
+        <h3>レストランのご予約</h3>
+        <p class="reserve-desc">ランチ・カフェタイム・ディナー、それぞれ予約制でご案内しています。</p>
+        <form class="contact-form" id="table-form">
+          <div class="form-row">
+            <label>
+              <span>お名前<em>必須</em></span>
+              <input type="text" name="name" required placeholder="山田 太郎">
+            </label>
+            <label>
+              <span>メールアドレス<em>必須</em></span>
+              <input type="email" name="email" required placeholder="example@mail.com">
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              <span>電話番号</span>
+              <input type="tel" name="tel" placeholder="000-0000-0000">
+            </label>
+            <label>
+              <span>ご利用シーン<em>必須</em></span>
+              <select name="scene" required>
+                <option value="" disabled selected>選択してください</option>
+                <option value="lunch">ランチ</option>
+                <option value="cafe">カフェ</option>
+                <option value="dinner">ディナー</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              <span>ご希望日時<em>必須</em></span>
+              <input type="datetime-local" name="datetime" required>
+            </label>
+            <label>
+              <span>人数<em>必須</em></span>
+              <input type="number" name="guests" min="1" max="10" required placeholder="2">
+            </label>
+          </div>
+          <label>
+            <span>ご要望・記念日など</span>
+            <textarea name="message" rows="4" placeholder="ご要望などご記入ください"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary btn-block">レストラン予約を送信する</button>
+          <p class="form-note"></p>
+        </form>
       </div>
-      <label>
-        <span>ご要望・記念日など</span>
-        <textarea name="message" rows="5" placeholder="ご予約人数やご要望などをご記入ください"></textarea>
-      </label>
-      <button type="submit" class="btn btn-primary btn-block">予約を送信する</button>
-      <p class="form-note" id="formNote"></p>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -389,6 +477,8 @@
       <circle cx="88" cy="70" r="2.4" fill="#0d0c0a"/>
       <circle cx="112" cy="70" r="2.4" fill="#0d0c0a"/>
     </g>
+    <g id="icon-bed"><path d="M4 34V14a2 2 0 012-2h6a4 4 0 014 4v6h16v-2a4 4 0 014-4h6a2 2 0 012 2v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M4 28h40v8H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="4" y1="40" x2="4" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="44" y1="40" x2="44" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+    <g id="icon-cup"><path d="M10 18h22v10a11 11 0 01-11 11 11 11 0 01-11-11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 21h3a5 5 0 010 10h-3" fill="none" stroke="currentColor" stroke-width="2"/><line x1="7" y1="41" x2="35" y2="41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 12c0-2 2-2 2-4M23 12c0-2 2-2 2-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></g>
     <g id="icon-leaf"><path d="M8 40C8 20 24 6 42 6c0 18-16 34-34 34Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 40C24 32 32 20 42 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
     <g id="icon-wine"><path d="M15 4h18l-2.5 20a11 11 0 01-13 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="24" y1="22" x2="24" y2="38" stroke="currentColor" stroke-width="2"/><line x1="15" y1="44" x2="33" y2="44" stroke="currentColor" stroke-width="2"/></g>
     <g id="icon-plate"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="10" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.6"/></g>
