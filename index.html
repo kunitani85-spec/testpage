@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant LUMIÈRE | モダンフレンチの真髄を、一皿に。</title>
-<meta name="description" content="Restaurant LUMIÈRE(リュミエール) - 旬の食材と光の演出が織りなすモダンフレンチレストラン。ランチ・ディナーコース、シェフのおまかせをご用意。">
+<title>LUMIÈRE | フランス料理を目的に訪れる、小さなオーベルジュ。</title>
+<meta name="description" content="LUMIÈRE(リュミエール) - 全5卓の小さなオーベルジュ。宿泊+ディナーのSTAY、宿泊なしでも楽しめるLUNCH（予約不要）・DINNER（完全予約制）のRESTAURANT、ふたつの過ごし方をご用意。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,13 +26,13 @@
   <div class="header-inner">
     <a href="#top" class="logo">LUMI<span>È</span>RE</a>
     <nav class="main-nav" id="mainNav">
-      <a href="#concept" class="nav-link">コンセプト</a>
-      <a href="#menu" class="nav-link">メニュー</a>
-      <a href="#chef" class="nav-link">シェフ</a>
-      <a href="#feature" class="nav-link">こだわり</a>
-      <a href="#voice" class="nav-link">お客様の声</a>
-      <a href="#access" class="nav-link">アクセス</a>
-      <a href="#contact" class="nav-link nav-cta">ご予約</a>
+      <a href="#concept" class="nav-link">CONCEPT</a>
+      <a href="#stay" class="nav-link">STAY</a>
+      <a href="#restaurant" class="nav-link">RESTAURANT</a>
+      <a href="#cuisine" class="nav-link">CUISINE</a>
+      <a href="#access" class="nav-link">ACCESS</a>
+      <a href="#stay-form" class="nav-link nav-cta">宿泊予約</a>
+      <a href="#dinner-form" class="nav-link nav-cta nav-cta-primary">ディナー予約</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="メニュー">
       <span></span><span></span><span></span>
@@ -46,40 +46,38 @@
   <div class="hero-glow" data-speed="0.5"></div>
   <div class="hero-grid" data-speed="0.2"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow reveal" data-anim="fade-up">TWO EXPERIENCES, ONE LUMIÈRE</p>
+    <p class="hero-eyebrow reveal" data-anim="fade-up">PETITE AUBERGE FRANÇAISE</p>
     <h1 class="hero-heading reveal" data-anim="fade-up" data-delay="100">
-      ふたつの扉、<span class="accent">ひとつの</span>LUMIÈRE。
+      フランス料理を目的に訪れる、<br>小さなオーベルジュ。
     </h1>
+    <p class="hero-sub reveal" data-anim="fade-up" data-delay="200">
+      泊まることも、<span class="accent">食べに訪れることも。</span>
+    </p>
+
+    <div class="hero-hours reveal" data-anim="fade-up" data-delay="300">
+      <div class="hero-hour-card">
+        <span class="hero-hour-label">LUNCH</span>
+        <span class="hero-hour-time">10:00 — 17:00</span>
+        <span class="hero-hour-note">ランチ・昼のお食事</span>
+        <span class="badge badge-noresv">ご予約不要</span>
+      </div>
+      <div class="hero-hour-card">
+        <span class="hero-hour-label">DINNER</span>
+        <span class="hero-hour-time">18:00 —</span>
+        <span class="hero-hour-note">ディナー</span>
+        <span class="badge badge-resv">完全予約制</span>
+      </div>
+    </div>
+
+    <p class="hero-note reveal" data-anim="fade-up" data-delay="400">宿泊なしでのお食事もご利用いただけます。</p>
+
+    <div class="hero-actions reveal" data-anim="fade-up" data-delay="500">
+      <a href="#stay-form" class="btn btn-primary">宿泊予約</a>
+      <a href="#dinner-form" class="btn btn-ghost">ディナーを予約</a>
+    </div>
   </div>
 
-  <div class="hero-split">
-    <a href="#auberge-form" class="hero-panel hero-panel-auberge reveal" data-anim="fade-up" data-delay="200">
-      <div class="hero-panel-bg"></div>
-      <div class="hero-panel-inner">
-        <svg class="hero-panel-icon" viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-bed"></use></svg>
-        <span class="hero-panel-tag">完全予約制 / 宿泊 + ディナー</span>
-        <h2 class="hero-panel-title">AUBERGE<br>LUMIÈRE</h2>
-        <p class="hero-panel-desc">一日限定の客室で過ごす、宿泊とディナーが一体になった隠れ家。</p>
-        <span class="hero-panel-cta">宿泊+ディナーを予約する
-          <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-    <a href="#table-form" class="hero-panel hero-panel-table reveal" data-anim="fade-up" data-delay="320">
-      <div class="hero-panel-bg"></div>
-      <div class="hero-panel-inner">
-        <svg class="hero-panel-icon" viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-cup"></use></svg>
-        <span class="hero-panel-tag">予約制 / ランチ・カフェ・ディナー</span>
-        <h2 class="hero-panel-title">TABLE<br>LUMIÈRE</h2>
-        <p class="hero-panel-desc">ランチ・カフェ・ディナー。街で気軽に予約できる、もうひとつのLUMIÈRE。</p>
-        <span class="hero-panel-cta">レストランを予約する
-          <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-    </a>
-  </div>
-
-  <div class="scroll-indicator reveal" data-anim="fade-in" data-delay="1000">
+  <div class="scroll-indicator reveal" data-anim="fade-in" data-delay="900">
     <span class="scroll-line"></span>
     <span class="scroll-text">SCROLL</span>
   </div>
@@ -93,8 +91,9 @@
       料理は、味覚の芸術。<br>一皿に宿る<span class="accent">物語</span>を。
     </h2>
     <p class="concept-text reveal" data-anim="fade-up" data-delay="200">
-      LUMIÈREは「光」を意味するフランス語。契約農家から届く旬の食材に、伝統のフレンチ技法と現代的な感性を掛け合わせ、
-      一皿ごとに新しい発見と余韻をお届けします。
+      LUMIÈREは「光」を意味するフランス語。全5卓の小さなオーベルジュだからこそできる、
+      一皿一皿への向き合い方があります。契約農家から届く旬の食材に、伝統のフレンチ技法と現代的な感性を掛け合わせ、
+      泊まるお客様にも、食事だけのお客様にも、変わらない体験をお届けします。
     </p>
 
     <div class="stats">
@@ -103,42 +102,119 @@
         <p class="stat-label">創業からの歴史</p>
       </div>
       <div class="stat-item reveal" data-anim="fade-up" data-delay="120">
+        <span class="stat-num" data-count="5">0</span><span class="stat-suffix">卓</span>
+        <p class="stat-label">全客席数（宿泊+ディナー共有）</p>
+      </div>
+      <div class="stat-item reveal" data-anim="fade-up" data-delay="240">
         <span class="stat-num" data-count="38">0</span><span class="stat-suffix">軒</span>
         <p class="stat-label">契約農家・漁港</p>
       </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="240">
+      <div class="stat-item reveal" data-anim="fade-up" data-delay="360">
         <span class="stat-num" data-count="180">0</span><span class="stat-suffix">種</span>
         <p class="stat-label">ワインセレクション</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="360">
-        <span class="stat-num" data-count="96">0</span><span class="stat-suffix">%</span>
-        <p class="stat-label">ご予約リピート率</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- メニュー -->
-<section class="menu" id="menu">
+<!-- STAY -->
+<section class="stay" id="stay">
   <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">MENU</p>
+    <div class="stay-grid">
+      <div class="stay-visual reveal" data-anim="fade-in" data-delay="0">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#icon-bed"></use></svg>
+      </div>
+      <div class="stay-content">
+        <p class="section-tag reveal" data-anim="fade-up">STAY</p>
+        <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">オーベルジュに泊まる</h2>
+        <p class="reveal" data-anim="fade-up" data-delay="200">
+          宿泊とフランス料理を楽しむ。一日限定の客室で、静かな時間をお過ごしください。
+          ご宿泊のお客様には、当日のディナー席もあわせてご用意いたします。
+        </p>
+        <a href="#stay-form" class="btn btn-primary reveal" data-anim="fade-up" data-delay="300">宿泊予約</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESTAURANT -->
+<section class="restaurant" id="restaurant">
+  <div class="section-inner">
+    <p class="section-tag reveal" data-anim="fade-up">RESTAURANT</p>
+    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">食事だけでも訪れていただけます</h2>
+    <p class="restaurant-lead reveal" data-anim="fade-up" data-delay="200">
+      宿泊されないお客様も、ランチ・ディナーをご利用いただけます。
+    </p>
+
+    <div class="meal-grid">
+      <div class="meal-card reveal" data-anim="fade-up" data-delay="0">
+        <span class="meal-name">LUNCH</span>
+        <span class="meal-time">10:00 — 17:00</span>
+        <span class="badge badge-noresv">予約不要</span>
+        <p class="meal-desc">宿泊されないお客様もお気軽にお越しください。ご予約なしでご利用いただけます。</p>
+        <a href="#cuisine-lunch" class="btn btn-ghost btn-small">ランチについて</a>
+      </div>
+      <div class="meal-card reveal" data-anim="fade-up" data-delay="120">
+        <span class="meal-name">DINNER</span>
+        <span class="meal-time">18:00 —</span>
+        <span class="badge badge-resv">完全予約制</span>
+        <p class="meal-desc">宿泊のお客様も、お食事のみのお客様もディナーをご利用いただけます。</p>
+        <a href="#dinner-form" class="btn btn-ghost btn-small">ディナーを予約</a>
+      </div>
+    </div>
+
+    <div class="seats-demo reveal" data-anim="fade-up" data-delay="200">
+      <p class="section-tag">全5卓という特徴</p>
+      <p class="seats-label">
+        ディナーのお席は全5卓。宿泊のお客様のディナー席を確保したうえで、残りの卓をディナーのみのお客様に開放しています。
+        そのため、ディナーのみでご予約いただける卓数は、宿泊予約の状況によって変動します。下のボタンで例をご確認いただけます。
+      </p>
+      <div class="seats-toggle" id="seatsToggle">
+        <button type="button" class="seats-btn is-active" data-stay="0">宿泊予約 0卓</button>
+        <button type="button" class="seats-btn" data-stay="1">宿泊予約 1卓</button>
+        <button type="button" class="seats-btn" data-stay="3">宿泊予約 3卓</button>
+        <button type="button" class="seats-btn" data-stay="4">宿泊予約 4卓</button>
+        <button type="button" class="seats-btn" data-stay="5">宿泊予約 5卓</button>
+      </div>
+      <div class="seats-table" id="seatsTable"></div>
+      <p class="seats-result" id="seatsResult"></p>
+    </div>
+  </div>
+</section>
+
+<!-- パララックス バナー -->
+<section class="quote-banner">
+  <div class="quote-bg" data-speed="0.4"></div>
+  <div class="quote-overlay"></div>
+  <p class="quote-text reveal" data-anim="scale-in">
+    “ LA CUISINE EST L'ART DE TRANSFORMER<br>DES INSTANTS EN SOUVENIRS. ”
+  </p>
+</section>
+
+<!-- お料理 -->
+<section class="cuisine" id="cuisine">
+  <div class="section-inner">
+    <p class="section-tag reveal" data-anim="fade-up">CUISINE</p>
     <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">
-      コースメニュー
+      お料理
     </h2>
   </div>
 
-  <div class="menu-grid">
-    <article class="dish-card reveal" data-anim="fade-up" data-delay="0">
+  <div class="cuisine-grid">
+    <article class="dish-card reveal" data-anim="fade-up" data-delay="0" id="cuisine-lunch">
       <div class="dish-media dish-lunch">
         <svg class="dish-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-dish-starter"></use></svg>
       </div>
       <div class="dish-body">
-        <span class="dish-type">LUNCH COURSE</span>
-        <h3>ランチコース</h3>
-        <p>前菜・スープ・メイン・デザートで巡る、昼の光を纏った軽やかな一皿。</p>
+        <div class="dish-head">
+          <span class="dish-type">LUNCH</span>
+          <span class="badge badge-noresv">予約不要</span>
+        </div>
+        <h3>ランチのお料理</h3>
+        <p>前菜・スープ・メイン・デザートで巡る、昼の光を纏った軽やかな一皿。10:00〜17:00、予約なしでお楽しみいただけます。</p>
         <div class="dish-meta">
           <span>お一人様</span>
-          <strong>¥10,000〜</strong>
+          <strong>¥6,800〜</strong>
         </div>
       </div>
     </article>
@@ -148,9 +224,12 @@
         <svg class="dish-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-dish-fish"></use></svg>
       </div>
       <div class="dish-body">
-        <span class="dish-type">DINNER PRIX FIXE</span>
+        <div class="dish-head">
+          <span class="dish-type">DINNER</span>
+          <span class="badge badge-resv">完全予約制</span>
+        </div>
         <h3>ディナーコース</h3>
-        <p>魚料理と肉料理を軸に、季節の食材を贅沢に重ねたフルコース。</p>
+        <p>魚料理と肉料理を軸に、季節の食材を贅沢に重ねたフルコース。18:00〜、全5卓のみのご案内です。</p>
         <div class="dish-meta">
           <span>お一人様</span>
           <strong>¥16,000〜</strong>
@@ -163,9 +242,12 @@
         <svg class="dish-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-dish-meat"></use></svg>
       </div>
       <div class="dish-body">
-        <span class="dish-type">CHEF'S OMAKASE</span>
+        <div class="dish-head">
+          <span class="dish-type">DINNER</span>
+          <span class="badge badge-resv">完全予約制</span>
+        </div>
         <h3>シェフのおまかせ</h3>
-        <p>その日最良の食材でシェフが即興で仕立てる、唯一無二のフルコース。</p>
+        <p>その日最良の食材でシェフが即興で仕立てる、唯一無二のフルコース。宿泊のお客様にもおすすめです。</p>
         <div class="dish-meta">
           <span>お一人様</span>
           <strong>¥22,000〜</strong>
@@ -178,9 +260,12 @@
         <svg class="dish-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-dish-wine"></use></svg>
       </div>
       <div class="dish-body">
-        <span class="dish-type">WINE PAIRING</span>
+        <div class="dish-head">
+          <span class="dish-type">DINNER ADD-ON</span>
+          <span class="badge badge-resv">完全予約制</span>
+        </div>
         <h3>ワインペアリング</h3>
-        <p>ソムリエが一皿ごとに厳選する、料理を引き立てるグラスワイン5種。</p>
+        <p>ソムリエが一皿ごとに厳選する、料理を引き立てるグラスワイン5種。ディナーにあわせてご案内します。</p>
         <div class="dish-meta">
           <span>お一人様 追加</span>
           <strong>¥8,000〜</strong>
@@ -188,15 +273,6 @@
       </div>
     </article>
   </div>
-</section>
-
-<!-- パララックス バナー -->
-<section class="quote-banner">
-  <div class="quote-bg" data-speed="0.4"></div>
-  <div class="quote-overlay"></div>
-  <p class="quote-text reveal" data-anim="scale-in">
-    “ LA CUISINE EST L'ART DE TRANSFORMER<br>DES INSTANTS EN SOUVENIRS. ”
-  </p>
 </section>
 
 <!-- シェフ -->
@@ -249,8 +325,8 @@
     </div>
     <div class="feature-card reveal" data-anim="fade-up" data-delay="360">
       <svg class="feature-icon" viewBox="0 0 48 48"><use href="#icon-seat"></use></svg>
-      <h3>特別な個室空間</h3>
-      <p>記念日や会食に。光と間を大切にした落ち着いた個室をご用意。</p>
+      <h3>全5卓の特別な空間</h3>
+      <p>小規模だからこそ叶う、光と間を大切にした落ち着いた空間をご用意。</p>
     </div>
   </div>
 </section>
@@ -264,23 +340,23 @@
   <div class="voice-track">
     <div class="voice-card reveal" data-anim="fade-up" data-delay="0">
       <p class="voice-star">★★★★★</p>
-      <p class="voice-text">記念日に伺いました。一皿ごとの説明が丁寧で、味わいだけでなく物語ごと楽しめる特別な時間でした。</p>
+      <p class="voice-text">記念日に宿泊で伺いました。一皿ごとの説明が丁寧で、味わいだけでなく物語ごと楽しめる特別な時間でした。</p>
       <p class="voice-name">M.K様（30代 / 東京都）</p>
     </div>
     <div class="voice-card reveal" data-anim="fade-up" data-delay="120">
       <p class="voice-star">★★★★★</p>
-      <p class="voice-text">ワインペアリングが絶妙で、料理の輪郭がより鮮やかに感じられました。接客も心地よかったです。</p>
+      <p class="voice-text">宿泊はせず、ディナーだけで利用しました。全5卓ならではの落ち着いた雰囲気で、ワインペアリングも絶妙でした。</p>
       <p class="voice-name">S.T様（40代 / 神奈川県）</p>
     </div>
     <div class="voice-card reveal" data-anim="fade-up" data-delay="240">
       <p class="voice-star">★★★★★</p>
-      <p class="voice-text">個室でゆったりと会食できました。季節ごとに訪れたくなる、上質で誠実な一皿ばかりです。</p>
+      <p class="voice-text">予約不要と知り、ふらりとランチに立ち寄りました。気軽なのに上質で、次は泊まりで訪れたいと思っています。</p>
       <p class="voice-name">A.N様（50代 / 京都府）</p>
     </div>
   </div>
 </section>
 
-<!-- アクセス / ご予約 -->
+<!-- アクセス -->
 <section class="access" id="access">
   <div class="section-inner">
     <p class="section-tag reveal" data-anim="fade-up">ACCESS</p>
@@ -289,9 +365,10 @@
     <div class="access-grid">
       <div class="access-info reveal" data-anim="fade-up" data-delay="0">
         <dl>
-          <dt>店舗名</dt><dd>Restaurant LUMIÈRE（リュミエール）</dd>
+          <dt>施設名</dt><dd>LUMIÈRE（リュミエール）</dd>
           <dt>所在地</dt><dd>〒000-0000 東京都港区サンプル町1-2-3 LUMIÈREビル 2F</dd>
-          <dt>営業時間</dt><dd>ランチ 11:30〜14:00 / ディナー 18:00〜22:00（月曜定休）</dd>
+          <dt>営業時間</dt><dd>昼 10:00〜17:00（ご予約不要）／ 夜 18:00〜（完全予約制・月曜定休）</dd>
+          <dt>客席数</dt><dd>全5卓（宿泊＋ディナー共有）</dd>
           <dt>電話番号</dt><dd>03-0000-0000</dd>
         </dl>
       </div>
@@ -304,20 +381,39 @@
   </div>
 </section>
 
+<!-- ご予約 -->
 <section class="contact" id="contact">
   <div class="section-inner">
     <p class="section-tag reveal" data-anim="fade-up">RESERVATION</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">ご予約</h2>
+    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">ご予約について</h2>
     <p class="contact-desc reveal" data-anim="fade-up" data-delay="200">
-      AUBERGEとTABLE、ご利用の目的に合わせてお選びください。どちらも完全予約制です。
+      ご利用の目的に合わせて、宿泊予約またはディナーのみのご予約をお選びください。
     </p>
 
+    <div class="reserve-info-grid">
+      <div class="reserve-info-card reveal" data-anim="fade-up" data-delay="0">
+        <span class="reserve-info-tag">STAY</span>
+        <h3>宿泊</h3>
+        <p>宿泊予約を承っています。宿泊のお客様にはディナーのお席をご用意します。</p>
+      </div>
+      <div class="reserve-info-card reveal" data-anim="fade-up" data-delay="100" id="lunch-info">
+        <span class="reserve-info-tag">LUNCH</span>
+        <h3>ランチ　10:00〜17:00</h3>
+        <p>ご予約なしでご利用いただけます。宿泊されないお客様もお気軽にお越しください。</p>
+      </div>
+      <div class="reserve-info-card reveal" data-anim="fade-up" data-delay="200">
+        <span class="reserve-info-tag">DINNER</span>
+        <h3>ディナー　18:00〜</h3>
+        <p>完全予約制です。宿泊されないお客様もディナーのみでご予約いただけます。ただし全5卓のため、宿泊予約の状況によってディナーのみのご予約可能数が変わります。</p>
+      </div>
+    </div>
+
     <div class="reserve-grid">
-      <div class="reserve-card reveal" data-anim="fade-up" data-delay="300">
-        <span class="reserve-tag reserve-tag-auberge">AUBERGE ― 宿泊 + ディナー</span>
-        <h3>宿泊 + ディナーのご予約</h3>
-        <p class="reserve-desc">一日限定のお部屋でお過ごしいただく特別な滞在です。ご希望日の1週間前までにご連絡ください。</p>
-        <form class="contact-form" id="auberge-form">
+      <div class="reserve-card reveal" data-anim="fade-up" data-delay="0">
+        <span class="reserve-tag reserve-tag-stay">STAY ― 宿泊 + ディナー</span>
+        <h3>宿泊のご予約</h3>
+        <p class="reserve-desc">一日限定のお部屋でお過ごしいただく特別な滞在です。ディナー席もあわせてご用意します。ご希望日の1週間前までにご連絡ください。</p>
+        <form class="contact-form" id="stay-form">
           <div class="form-row">
             <label>
               <span>お名前<em>必須</em></span>
@@ -360,11 +456,11 @@
         </form>
       </div>
 
-      <div class="reserve-card reveal" data-anim="fade-up" data-delay="420">
-        <span class="reserve-tag reserve-tag-table">TABLE ― ランチ・カフェ・ディナー</span>
-        <h3>レストランのご予約</h3>
-        <p class="reserve-desc">ランチ・カフェタイム・ディナー、それぞれ予約制でご案内しています。</p>
-        <form class="contact-form" id="table-form">
+      <div class="reserve-card reveal" data-anim="fade-up" data-delay="120">
+        <span class="reserve-tag reserve-tag-dinner">DINNER ONLY ― 食事のみ</span>
+        <h3>ディナーのみのご予約</h3>
+        <p class="reserve-desc">宿泊されないお客様も、ディナーのみでご予約いただけます。全5卓のため、空き状況は宿泊予約の状況により変動します。</p>
+        <form class="contact-form" id="dinner-form">
           <div class="form-row">
             <label>
               <span>お名前<em>必須</em></span>
@@ -381,19 +477,21 @@
               <input type="tel" name="tel" placeholder="000-0000-0000">
             </label>
             <label>
-              <span>ご利用シーン<em>必須</em></span>
-              <select name="scene" required>
-                <option value="" disabled selected>選択してください</option>
-                <option value="lunch">ランチ</option>
-                <option value="cafe">カフェ</option>
-                <option value="dinner">ディナー</option>
-              </select>
+              <span>ご希望日<em>必須</em></span>
+              <input type="date" name="dinner-date" required>
             </label>
           </div>
           <div class="form-row">
             <label>
-              <span>ご希望日時<em>必須</em></span>
-              <input type="datetime-local" name="datetime" required>
+              <span>ご希望時間<em>必須</em></span>
+              <select name="time" required>
+                <option value="" disabled selected>選択してください</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+              </select>
             </label>
             <label>
               <span>人数<em>必須</em></span>
@@ -404,7 +502,7 @@
             <span>ご要望・記念日など</span>
             <textarea name="message" rows="4" placeholder="ご要望などご記入ください"></textarea>
           </label>
-          <button type="submit" class="btn btn-primary btn-block">レストラン予約を送信する</button>
+          <button type="submit" class="btn btn-primary btn-block">ディナーを予約する</button>
           <p class="form-note"></p>
         </form>
       </div>
@@ -416,12 +514,11 @@
   <div class="footer-inner">
     <a href="#top" class="logo">LUMI<span>È</span>RE</a>
     <nav class="footer-nav">
-      <a href="#concept">コンセプト</a>
-      <a href="#menu">メニュー</a>
-      <a href="#chef">シェフ</a>
-      <a href="#feature">こだわり</a>
-      <a href="#voice">お客様の声</a>
-      <a href="#access">アクセス</a>
+      <a href="#concept">CONCEPT</a>
+      <a href="#stay">STAY</a>
+      <a href="#restaurant">RESTAURANT</a>
+      <a href="#cuisine">CUISINE</a>
+      <a href="#access">ACCESS</a>
       <a href="#contact">ご予約</a>
     </nav>
     <div class="footer-sns">
@@ -429,7 +526,7 @@
       <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><use href="#icon-x"></use></svg></a>
       <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><use href="#icon-fb"></use></svg></a>
     </div>
-    <p class="footer-copy">&copy; 2026 Restaurant LUMIÈRE. All Rights Reserved.</p>
+    <p class="footer-copy">&copy; 2026 LUMIÈRE. All Rights Reserved.</p>
   </div>
 </footer>
 

@@ -122,6 +122,38 @@
     document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
   }
 
+  /* ---------- Seats demo (5 tables shared between STAY and DINNER ONLY) ---------- */
+  const TOTAL_SEATS = 5;
+  const seatsToggle = document.getElementById('seatsToggle');
+  const seatsTable = document.getElementById('seatsTable');
+  const seatsResult = document.getElementById('seatsResult');
+
+  function renderSeats(stayCount) {
+    const dinnerOnly = TOTAL_SEATS - stayCount;
+    seatsTable.innerHTML = '';
+    for (let i = 0; i < TOTAL_SEATS; i++) {
+      const seat = document.createElement('div');
+      const isStay = i < stayCount;
+      seat.className = 'seat ' + (isStay ? 'is-stay' : 'is-dinner');
+      seat.innerHTML = isStay ? 'STAY' : 'DINNER<br>ONLY';
+      seatsTable.appendChild(seat);
+    }
+    seatsResult.innerHTML = dinnerOnly > 0
+      ? `宿泊：<b>${stayCount}</b>卓　／　ディナーのみ：<b>${dinnerOnly}</b>卓ご予約いただけます`
+      : `宿泊：<b>${stayCount}</b>卓　／　ディナーのみのご予約は<b>満席</b>です`;
+  }
+
+  if (seatsToggle && seatsTable && seatsResult) {
+    seatsToggle.querySelectorAll('.seats-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        seatsToggle.querySelectorAll('.seats-btn').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        renderSeats(Number(btn.dataset.stay));
+      });
+    });
+    renderSeats(0);
+  }
+
   /* ---------- Reservation forms (front-end only demo) ---------- */
   document.querySelectorAll('.contact-form').forEach((form) => {
     const note = form.querySelector('.form-note');
