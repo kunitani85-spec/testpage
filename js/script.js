@@ -112,6 +112,15 @@
   onScrollOrResize();
   if (!reduceMotion) applyParallax();
 
+  /* ---------- Show scrollbar only while actively scrolling ---------- */
+  const docEl = document.documentElement;
+  let scrollbarHideTimer = null;
+  window.addEventListener('scroll', () => {
+    docEl.classList.add('is-scrolling');
+    clearTimeout(scrollbarHideTimer);
+    scrollbarHideTimer = setTimeout(() => docEl.classList.remove('is-scrolling'), 900);
+  }, { passive: true });
+
   /* ---------- Cursor glow (desktop only) ---------- */
   const cursorGlow = document.getElementById('cursorGlow');
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

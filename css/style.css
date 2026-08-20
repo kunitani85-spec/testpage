@@ -24,7 +24,12 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+html.is-scrolling { scrollbar-color: var(--accent) transparent; }
 
 body {
   background: var(--bg);
@@ -41,7 +46,10 @@ ul { list-style: none; }
 
 ::selection { background: var(--accent-soft); color: var(--fg); }
 
-::-webkit-scrollbar { display: none; width: 0; height: 0; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: transparent; border-radius: 10px; transition: background 0.4s ease; }
+html.is-scrolling::-webkit-scrollbar-thumb { background: linear-gradient(var(--accent), var(--sage)); }
 
 /* ---------- Preloader ---------- */
 .preloader {
