@@ -29,7 +29,6 @@
       <a href="#concept" class="nav-link">CONCEPT</a>
       <a href="#stay" class="nav-link">STAY</a>
       <a href="#restaurant" class="nav-link">RESTAURANT</a>
-      <a href="#cuisine" class="nav-link">CUISINE</a>
       <a href="#access" class="nav-link">ACCESS</a>
       <a href="https://reserve.example.com/auberge" class="nav-link nav-cta" target="_blank" rel="noopener">オーベルジュ予約</a>
       <a href="https://reserve.example.com/dinner" class="nav-link nav-cta nav-cta-primary" target="_blank" rel="noopener">ディナー予約</a>
@@ -115,24 +114,38 @@
       泊まるお客様にも、食事だけのお客様にも、湖を眺めながらゆっくりと過ごす時間をお届けします。
     </p>
 
-    <div class="stats">
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="0">
-        <span class="stat-num" data-count="12">0</span><span class="stat-suffix">年</span>
-        <p class="stat-label">創業からの歴史</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="120">
-        <span class="stat-num" data-count="3">0</span><span class="stat-suffix">組</span>
-        <p class="stat-label">1日にお迎えする組数（上限）</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="240">
-        <span class="stat-num" data-count="38">0</span><span class="stat-suffix">軒</span>
-        <p class="stat-label">契約農家・漁港</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="360">
-        <span class="stat-num" data-count="180">0</span><span class="stat-suffix">種</span>
-        <p class="stat-label">ワインセレクション</p>
-      </div>
-    </div>
+  </div>
+
+  <div class="concept-photo reveal" data-anim="fade-in" data-delay="200">
+    <svg viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="conceptSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#eaf3f3"/>
+          <stop offset="100%" stop-color="#f8f3e7"/>
+        </linearGradient>
+        <radialGradient id="conceptSun" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff8e2" stop-opacity="0.9"/>
+          <stop offset="60%" stop-color="#fbe9bd" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#fbe9bd" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="conceptWater" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d3e6e6"/>
+          <stop offset="100%" stop-color="#93bac0"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1600" height="320" fill="url(#conceptSky)"/>
+      <circle cx="360" cy="150" r="200" fill="url(#conceptSun)"/>
+      <path d="M0 250 Q220 200 460 240 T940 226 T1380 246 T1600 226 V320 H0 Z" fill="#c7d6d1" opacity="0.65"/>
+      <path d="M0 278 Q200 244 400 272 Q620 240 820 270 Q1040 238 1240 270 Q1420 242 1600 264 V320 H0 Z" fill="#8fa888" opacity="0.85"/>
+      <rect x="0" y="310" width="1600" height="210" fill="url(#conceptWater)"/>
+      <g stroke="#f5faf9" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round">
+        <line x1="120" y1="360" x2="420" y2="360"/>
+        <line x1="520" y1="400" x2="860" y2="400"/>
+        <line x1="980" y1="372" x2="1200" y2="372"/>
+        <line x1="260" y1="440" x2="600" y2="440"/>
+        <line x1="1280" y1="418" x2="1560" y2="418"/>
+      </g>
+    </svg>
   </div>
 </section>
 
@@ -176,7 +189,6 @@
           <span class="meal-time">10:00 — 17:00</span>
           <span class="badge badge-noresv">予約不要</span>
           <p class="meal-desc">湖を眺めながら、昼のひとときを。宿泊されないお客様もお気軽にお越しください。</p>
-          <a href="#cuisine-lunch" class="btn btn-ghost btn-small">料理を見る</a>
         </div>
       </article>
       <article class="meal-card reveal" data-anim="fade-up" data-delay="120">
@@ -233,63 +245,6 @@
   </div>
 </section>
 
-<!-- パララックス バナー -->
-<section class="quote-banner">
-  <div class="quote-bg" data-speed="0.4"></div>
-  <div class="quote-overlay"></div>
-  <p class="quote-text reveal" data-anim="scale-in">
-    “ LA CUISINE EST L'ART DE TRANSFORMER<br>DES INSTANTS EN SOUVENIRS. ”
-  </p>
-</section>
-
-<!-- お料理 -->
-<section class="cuisine" id="cuisine">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">CUISINE</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">
-      お料理
-    </h2>
-  </div>
-
-  <div class="cuisine-grid">
-    <article class="dish-card reveal" data-anim="fade-up" data-delay="0" id="cuisine-lunch">
-      <div class="dish-media dish-lunch">
-        <svg class="dish-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-dish-starter"></use></svg>
-      </div>
-      <div class="dish-body">
-        <div class="dish-head">
-          <span class="dish-type">LUNCH</span>
-          <span class="badge badge-noresv">予約不要</span>
-        </div>
-        <h3>ランチのお料理</h3>
-        <p>前菜・スープ・メイン・デザートで巡る、湖の光を纏った軽やかな一皿。10:00〜17:00、予約なしでお楽しみいただけます。</p>
-        <div class="dish-meta">
-          <span>お一人様</span>
-          <strong>¥6,800〜</strong>
-        </div>
-      </div>
-    </article>
-
-    <article class="dish-card reveal" data-anim="fade-up" data-delay="120">
-      <div class="dish-media dish-dinner">
-        <svg class="dish-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-dish-fish"></use></svg>
-      </div>
-      <div class="dish-body">
-        <div class="dish-head">
-          <span class="dish-type">DINNER</span>
-          <span class="badge badge-resv">完全予約制</span>
-        </div>
-        <h3>ディナーコース</h3>
-        <p>魚料理と肉料理を軸に、季節の食材を贅沢に重ねたフルコース。夕暮れの湖を眺めながら、18:00〜一日最大3組限定でご案内します。</p>
-        <div class="dish-meta">
-          <span>お一人様</span>
-          <strong>¥16,000〜</strong>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
 <!-- シェフ -->
 <section class="chef" id="chef">
   <div class="section-inner">
@@ -342,22 +297,6 @@
       <svg class="feature-icon" viewBox="0 0 48 48"><use href="#icon-seat"></use></svg>
       <h3>一日3組だけの特別な空間</h3>
       <p>小規模だからこそ叶う、光と間を大切にした落ち着いた空間をご用意。</p>
-    </div>
-  </div>
-</section>
-
-<!-- お客様の声 -->
-<section class="voice" id="voice">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">VOICE</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">お客様の声</h2>
-    <p class="voice-lead reveal" data-anim="fade-up" data-delay="150">
-      ご利用いただいたお客様の声は、Googleの口コミでご紹介しています。
-    </p>
-    <div class="voice-google reveal" data-anim="fade-up" data-delay="250">
-      <svg class="voice-google-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-google"></use></svg>
-      <p>LUMIÈREでの体験を、ぜひGoogleの口コミでもご覧ください。</p>
-      <a href="https://www.google.com/maps/search/?api=1&query=LUMI%C3%88RE%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E7%94%BA1-2-3" class="btn btn-ghost" target="_blank" rel="noopener">Googleの口コミを見る</a>
     </div>
   </div>
 </section>
@@ -439,7 +378,6 @@
       <a href="#concept">CONCEPT</a>
       <a href="#stay">STAY</a>
       <a href="#restaurant">RESTAURANT</a>
-      <a href="#cuisine">CUISINE</a>
       <a href="#access">ACCESS</a>
       <a href="#contact">ご予約</a>
     </nav>
@@ -459,21 +397,6 @@
 <!-- SVGアイコン定義 -->
 <svg style="display:none">
   <defs>
-    <g id="icon-dish-starter">
-      <circle cx="100" cy="52" r="34" fill="currentColor" opacity="0.14"/>
-      <circle cx="100" cy="52" r="26" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.55"/>
-      <path d="M86 44 Q92 34 100 40 Q108 34 114 44 Q118 52 108 56 Q100 60 92 56 Q82 52 86 44Z" fill="currentColor" opacity="0.9"/>
-      <path d="M96 44 Q100 38 104 44" stroke="#0d0c0a" stroke-width="1.4" fill="none" opacity="0.5"/>
-      <path d="M70 78 Q100 66 130 78" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.4"/>
-    </g>
-    <g id="icon-dish-fish">
-      <circle cx="100" cy="52" r="34" fill="currentColor" opacity="0.14"/>
-      <circle cx="100" cy="52" r="26" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.55"/>
-      <path d="M78 52 Q92 38 116 44 Q126 46 128 52 Q126 58 116 60 Q92 66 78 52Z" fill="currentColor" opacity="0.9"/>
-      <path d="M78 52 L68 44 L70 52 L68 60 Z" fill="currentColor" opacity="0.9"/>
-      <circle cx="114" cy="50" r="1.8" fill="#0d0c0a"/>
-      <path d="M92 46 Q98 52 92 58" stroke="#0d0c0a" stroke-width="1.2" fill="none" opacity="0.4"/>
-    </g>
     <g id="icon-chef">
       <circle cx="100" cy="100" r="98" fill="currentColor" opacity="0.06"/>
       <path d="M100 40c-16 0-28 12-28 26 0 8 4 14 9 18-3 3-5 8-5 13v6h48v-6c0-5-2-10-5-13 5-4 9-10 9-18 0-14-12-26-28-26Z" fill="currentColor" opacity="0.85"/>
@@ -485,7 +408,6 @@
     <g id="icon-sun"><circle cx="24" cy="24" r="9" fill="none" stroke="currentColor" stroke-width="2"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="9.5" y1="9.5" x2="13.6" y2="13.6"/><line x1="34.4" y1="34.4" x2="38.5" y2="38.5"/><line x1="9.5" y1="38.5" x2="13.6" y2="34.4"/><line x1="34.4" y1="13.6" x2="38.5" y2="9.5"/></g></g>
     <g id="icon-moon"><path d="M34 26a14 14 0 01-18-18 14 14 0 1018 18Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></g>
     <g id="icon-bed"><path d="M4 34V14a2 2 0 012-2h6a4 4 0 014 4v6h16v-2a4 4 0 014-4h6a2 2 0 012 2v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M4 28h40v8H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="4" y1="40" x2="4" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="44" y1="40" x2="44" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
-    <g id="icon-cup"><path d="M10 18h22v10a11 11 0 01-11 11 11 11 0 01-11-11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 21h3a5 5 0 010 10h-3" fill="none" stroke="currentColor" stroke-width="2"/><line x1="7" y1="41" x2="35" y2="41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 12c0-2 2-2 2-4M23 12c0-2 2-2 2-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></g>
     <g id="icon-leaf"><path d="M8 40C8 20 24 6 42 6c0 18-16 34-34 34Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 40C24 32 32 20 42 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
     <g id="icon-wine"><path d="M15 4h18l-2.5 20a11 11 0 01-13 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="24" y1="22" x2="24" y2="38" stroke="currentColor" stroke-width="2"/><line x1="15" y1="44" x2="33" y2="44" stroke="currentColor" stroke-width="2"/></g>
     <g id="icon-plate"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="10" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.6"/></g>
@@ -493,7 +415,6 @@
     <g id="icon-insta"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></g>
     <g id="icon-x"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
     <g id="icon-fb"><path d="M14 21v-8h3l0.6-4H14V6.6c0-1.2.3-2 2-2h2V1.2C17.6 1.1 16.4 1 15 1c-3 0-5 1.8-5 5.2V9H7v4h3v8z" fill="currentColor"/></g>
-    <g id="icon-google"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="12" y="16.5" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="700" fill="currentColor">G</text></g>
   </defs>
 </svg>
 
