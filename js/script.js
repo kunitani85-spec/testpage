@@ -112,6 +112,15 @@
   onScrollOrResize();
   if (!reduceMotion) applyParallax();
 
+  /* ---------- Show scrollbar only while actively scrolling ---------- */
+  const docEl = document.documentElement;
+  let scrollbarHideTimer = null;
+  window.addEventListener('scroll', () => {
+    docEl.classList.add('is-scrolling');
+    clearTimeout(scrollbarHideTimer);
+    scrollbarHideTimer = setTimeout(() => docEl.classList.remove('is-scrolling'), 900);
+  }, { passive: true });
+
   /* ---------- Cursor glow (desktop only) ---------- */
   const cursorGlow = document.getElementById('cursorGlow');
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -122,15 +131,98 @@
     document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
   }
 
-  /* ---------- Contact form (front-end only demo) ---------- */
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
-      contactForm.reset();
+  /* ---------- Capacity demo (1-day max 3 groups, shared AUBERGE / CAFE-RESTAURANT) ---------- */
+  const TOTAL_MAX = 3;
+  const AUBERGE_MAX = 2;
+  const CAFE_MAX = 3;
+
+  const aubergeCountEl = document.getElementById('aubergeCount');
+  const cafeCountEl = document.getElementById('cafeCount');
+  const totalCountEl = document.getElementById('totalCount');
+  const aubergeRemainText = document.getElementById('aubergeRemainText');
+  const cafeRemainText = document.getElementById('cafeRemainText');
+  const capacityMessage = document.getElementById('capacityMessage');
+  const aubergePlusBtn = document.getElementById('aubergePlus');
+  const aubergeMinusBtn = document.getElementById('aubergeMinus');
+  const cafePlusBtn = document.getElementById('cafePlus');
+  const cafeMinusBtn = document.getElementById('cafeMinus');
+  const capacityResetBtn = document.getElementById('capacityReset');
+
+  if (aubergeCountEl && cafeCountEl && totalCountEl) {
+    let aubergeCount = 0;
+    let cafeCount = 0;
+
+    function updateCapacity() {
+      const total = aubergeCount + cafeCount;
+      const remainingTotal = TOTAL_MAX - total;
+      const aubergeRemaining = Math.max(0, Math.min(AUBERGE_MAX - aubergeCount, remainingTotal));
+      const cafeRemaining = Math.max(0, Math.min(CAFE_MAX - cafeCount, remainingTotal));
+
+      aubergeCountEl.textContent = aubergeCount;
+      cafeCountEl.textContent = cafeCount;
+      totalCountEl.textContent = total;
+
+      aubergePlusBtn.disabled = aubergeRemaining <= 0;
+      cafePlusBtn.disabled = cafeRemaining <= 0;
+      aubergeMinusBtn.disabled = aubergeCount <= 0;
+      cafeMinusBtn.disabled = cafeCount <= 0;
+
+      if (aubergeCount >= AUBERGE_MAX) {
+        aubergeRemainText.textContent = 'オーベルジュの上限（2組）に達しています。';
+      } else if (aubergeRemaining <= 0) {
+        aubergeRemainText.textContent = '本日のご予約枠が上限に達しているため、オーベルジュのご予約を承ることができません。';
+      } else {
+        aubergeRemainText.textContent = `残り${aubergeRemaining}組`;
+      }
+
+      if (cafeCount >= CAFE_MAX) {
+        cafeRemainText.textContent = 'カフェ・レストランの上限（3組）に達しています。';
+      } else if (cafeRemaining <= 0) {
+        cafeRemainText.textContent = '本日のご予約枠が上限に達しているため、カフェ・レストランのご予約を承ることができません。';
+      } else if (aubergeCount > 0) {
+        cafeRemainText.textContent = `本日はオーベルジュのご予約が${aubergeCount}組入っているため、カフェ・レストランのご予約は残り${cafeRemaining}組までとなります。`;
+      } else {
+        cafeRemainText.textContent = `残り${cafeRemaining}組`;
+      }
+
+      capacityMessage.textContent = total >= TOTAL_MAX ? '本日のご予約枠が上限に達しているため、これ以上のご予約はお受けできません。' : '';
+    }
+
+    aubergePlusBtn.addEventListener('click', () => {
+      const remainingTotal = TOTAL_MAX - (aubergeCount + cafeCount);
+      if (aubergeCount < AUBERGE_MAX && remainingTotal > 0) {
+        aubergeCount++;
+        updateCapacity();
+      }
     });
+    aubergeMinusBtn.addEventListener('click', () => {
+      if (aubergeCount > 0) {
+        aubergeCount--;
+        updateCapacity();
+      }
+    });
+    cafePlusBtn.addEventListener('click', () => {
+      const remainingTotal = TOTAL_MAX - (aubergeCount + cafeCount);
+      if (cafeCount < CAFE_MAX && remainingTotal > 0) {
+        cafeCount++;
+        updateCapacity();
+      }
+    });
+    cafeMinusBtn.addEventListener('click', () => {
+      if (cafeCount > 0) {
+        cafeCount--;
+        updateCapacity();
+      }
+    });
+    if (capacityResetBtn) {
+      capacityResetBtn.addEventListener('click', () => {
+        aubergeCount = 0;
+        cafeCount = 0;
+        updateCapacity();
+      });
+    }
+
+    updateCapacity();
   }
 
   /* ---------- Smooth anchor scroll offset for fixed header ---------- */
