@@ -352,9 +352,10 @@ ul { list-style: none; }
   content: ''; position: absolute; left: 0; top: 9px; width: 10px; height: 1px; background: var(--accent);
 }
 
-/* Bleed the chef portrait to the viewport's left edge on mid-width screens */
+/* Bleed the chef portrait / stay visual to the viewport's left edge on mid-width screens */
 @media (min-width: 981px) and (max-width: 1300px) {
-  .chef-portrait {
+  .chef-portrait,
+  .stay-visual {
     margin-left: calc(-1 * (max(0px, (100vw - 1240px) / 2) + 28px));
   }
 }
