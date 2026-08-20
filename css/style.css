@@ -352,6 +352,13 @@ ul { list-style: none; }
   content: ''; position: absolute; left: 0; top: 9px; width: 10px; height: 1px; background: var(--accent);
 }
 
+/* Bleed the chef portrait to the viewport's left edge on mid-width screens */
+@media (min-width: 981px) and (max-width: 1300px) {
+  .chef-portrait {
+    margin-left: calc(-1 * (max(0px, (100vw - 1240px) / 2) + 28px));
+  }
+}
+
 /* ---------- Feature ---------- */
 .feature { padding: 140px 0; background: var(--bg-alt); }
 .feature-grid {
@@ -370,27 +377,20 @@ ul { list-style: none; }
 /* ---------- Access ---------- */
 .access { padding: 140px 0; background: var(--bg-alt); }
 .access-grid {
-  display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 50px; align-items: stretch;
+  display: flex; flex-direction: column; gap: 40px; margin-top: 50px;
 }
 .access-info dl { display: grid; grid-template-columns: auto 1fr; gap: 18px 24px; }
 .access-info dt { font-family: var(--font-nav); color: var(--accent); font-size: 12px; letter-spacing: 2px; align-self: start; padding-top: 3px; }
 .access-info dd { color: var(--fg); font-size: 15px; }
 .map-placeholder {
-  min-height: 260px; height: 100%; border-radius: 4px; border: 1px solid var(--border);
+  width: 100%; min-height: 380px; border-radius: 4px; border: 1px solid var(--border);
   background:
-    repeating-linear-gradient(0deg, rgba(49,59,63,0.04) 0 1px, transparent 1px 34px),
-    repeating-linear-gradient(90deg, rgba(49,59,63,0.04) 0 1px, transparent 1px 34px),
-    linear-gradient(150deg, #ffffff, #eaf3f4);
+    radial-gradient(circle at 28% 22%, rgba(255,246,219,0.7), transparent 55%),
+    linear-gradient(155deg, #eaf3f4 0%, #f6f2e6 45%, #a9c9cf 100%);
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
-.map-placeholder::before {
-  content: ''; position: absolute; width: 90px; height: 90px; border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
-}
-.map-placeholder span {
-  font-family: var(--font-nav); letter-spacing: 4px; color: var(--fg-dim); font-size: 13px; position: relative;
-}
+.map-placeholder svg { width: 44px; height: 44px; color: var(--fg); opacity: 0.55; }
 
 /* ---------- Contact / Reservation ---------- */
 .contact { padding: 140px 0; }
@@ -467,7 +467,6 @@ ul { list-style: none; }
   .chef-grid { grid-template-columns: 1fr; gap: 40px; }
   .chef-portrait { max-width: 320px; margin: 0 auto; }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
-  .access-grid { grid-template-columns: 1fr; }
   .reserve-info-grid { grid-template-columns: 1fr; }
   .reserve-grid { grid-template-columns: 1fr; }
   .capacity-grid { grid-template-columns: 1fr; }
