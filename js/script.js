@@ -10,11 +10,13 @@
   /* ---------- Header scroll state ---------- */
   const header = document.getElementById('siteHeader');
   const toTopBtn = document.getElementById('toTop');
+  const stickyCta = document.getElementById('stickyCta');
 
   function updateHeaderState() {
     const scrolled = window.scrollY > 40;
     header.classList.toggle('is-scrolled', scrolled);
     toTopBtn.classList.toggle('is-visible', window.scrollY > 600);
+    stickyCta.classList.toggle('is-visible', window.scrollY > 600);
   }
 
   /* ---------- Mobile nav ---------- */
@@ -128,7 +130,7 @@
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。ビューティアドバイザーより折り返しご連絡いたします。';
+      formNote.textContent = 'お申し込みありがとうございます。内容確認後、担当より折り返しご連絡いたします。';
       contactForm.reset();
     });
   }
