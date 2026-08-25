@@ -1,149 +1,170 @@
+/* ==========================================================================
+   リユースプラス - サイト共通スクリプト
+   ========================================================================== */
 (() => {
   'use strict';
 
-  /* ---------- Preloader ---------- */
-  const preloader = document.getElementById('preloader');
-  window.addEventListener('load', () => {
-    setTimeout(() => preloader.classList.add('is-hidden'), 400);
-  });
-
-  /* ---------- Header scroll state ---------- */
+  /* ---------- ヘッダーのスクロール状態 / モバイルメニュー ---------- */
   const header = document.getElementById('siteHeader');
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
   const toTopBtn = document.getElementById('toTop');
 
   function updateHeaderState() {
-    const scrolled = window.scrollY > 40;
-    header.classList.toggle('is-scrolled', scrolled);
-    toTopBtn.classList.toggle('is-visible', window.scrollY > 600);
+    header.classList.toggle('is-scrolled', window.scrollY > 20);
+    toTopBtn.classList.toggle('is-visible', window.scrollY > 500);
   }
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+  updateHeaderState();
 
-  /* ---------- Mobile nav ---------- */
-  const navToggle = document.getElementById('navToggle');
-  const mainNav = document.getElementById('mainNav');
   navToggle.addEventListener('click', () => {
     const isOpen = mainNav.classList.toggle('is-open');
-    navToggle.classList.toggle('is-open', isOpen);
+    navToggle.classList.toggle('is-active', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
   });
-  mainNav.querySelectorAll('.nav-link').forEach((link) => {
+
+  // ナビリンクをクリックしたらモバイルメニューを閉じる
+  mainNav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       mainNav.classList.remove('is-open');
-      navToggle.classList.remove('is-open');
+      navToggle.classList.remove('is-active');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
   });
 
-  /* ---------- To top ---------- */
   toTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ---------- Scroll reveal (fade in / up / scale) ---------- */
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.dataset.delay ? Number(el.dataset.delay) : 0;
-          setTimeout(() => el.classList.add('is-visible'), delay);
-          revealObserver.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-  );
-  revealEls.forEach((el) => revealObserver.observe(el));
-
-  /* ---------- Count-up numbers ---------- */
-  const counters = document.querySelectorAll('.stat-num');
-  function animateCount(el) {
-    const target = Number(el.dataset.count);
-    const duration = 1600;
-    const start = performance.now();
-
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target).toLocaleString();
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  const counterObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCount(entry.target);
-          counterObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-  counters.forEach((el) => counterObserver.observe(el));
-
-  /* ---------- Parallax layers ---------- */
-  const parallaxEls = Array.from(document.querySelectorAll('[data-speed]'));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let ticking = false;
-
-  function applyParallax() {
-    const viewportH = window.innerHeight;
-    parallaxEls.forEach((el) => {
-      const speed = Number(el.dataset.speed) || 0.2;
-      const rect = el.parentElement.getBoundingClientRect();
-      const offset = (rect.top) * speed;
-      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-    });
-    ticking = false;
+  /* ---------- スクロールで要素をフェードイン ---------- */
+  const revealTargets = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    revealTargets.forEach((el) => observer.observe(el));
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
   }
 
-  function onScrollOrResize() {
-    updateHeaderState();
-    if (!reduceMotion) {
-      if (!ticking) {
-        requestAnimationFrame(applyParallax);
-        ticking = true;
+  /* ---------- よくある質問：アコーディオン ---------- */
+  document.querySelectorAll('.faq-question').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) {
+        answer.style.maxHeight = null;
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
       }
-    }
-  }
-
-  window.addEventListener('scroll', onScrollOrResize, { passive: true });
-  window.addEventListener('resize', onScrollOrResize);
-  onScrollOrResize();
-  if (!reduceMotion) applyParallax();
-
-  /* ---------- Cursor glow (desktop only) ---------- */
-  const cursorGlow = document.getElementById('cursorGlow');
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-      cursorGlow.classList.add('is-active');
-    });
-    document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
-  }
-
-  /* ---------- Contact form (front-end only demo) ---------- */
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
-      contactForm.reset();
-    });
-  }
-
-  /* ---------- Smooth anchor scroll offset for fixed header ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href');
-      if (id.length < 2) return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      const headerH = header.offsetHeight;
-      const top = target.getBoundingClientRect().top + window.scrollY - headerH + 1;
-      window.scrollTo({ top, behavior: 'smooth' });
     });
   });
+
+  /* ---------- お問い合わせフォームの入力チェック ---------- */
+  const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('formSuccess');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const telPattern = /^[0-9\-+()\s]{10,14}$/;
+
+  function setFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorEl = document.getElementById('error-' + fieldId);
+    field.closest('.form-row').classList.toggle('has-error', Boolean(message));
+    errorEl.textContent = message || '';
+  }
+
+  function validateForm() {
+    let isValid = true;
+
+    const name = document.getElementById('name').value.trim();
+    if (!name) {
+      setFieldError('name', 'お名前を入力してください。');
+      isValid = false;
+    } else {
+      setFieldError('name', '');
+    }
+
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+      setFieldError('email', 'メールアドレスを入力してください。');
+      isValid = false;
+    } else if (!emailPattern.test(email)) {
+      setFieldError('email', '正しいメールアドレスの形式で入力してください。');
+      isValid = false;
+    } else {
+      setFieldError('email', '');
+    }
+
+    // 電話番号は任意項目だが、入力がある場合のみ形式をチェック
+    const tel = document.getElementById('tel').value.trim();
+    if (tel && !telPattern.test(tel)) {
+      setFieldError('tel', 'ハイフンを含む正しい電話番号の形式で入力してください。');
+      isValid = false;
+    } else {
+      setFieldError('tel', '');
+    }
+
+    const method = document.getElementById('method').value;
+    if (!method) {
+      setFieldError('method', 'ご希望の買取方法を選択してください。');
+      isValid = false;
+    } else {
+      setFieldError('method', '');
+    }
+
+    const message = document.getElementById('message').value.trim();
+    if (!message) {
+      setFieldError('message', 'お問い合わせ内容を入力してください。');
+      isValid = false;
+    } else {
+      setFieldError('message', '');
+    }
+
+    const privacy = document.getElementById('privacy').checked;
+    if (!privacy) {
+      setFieldError('privacy', 'プライバシーポリシーへの同意が必要です。');
+      isValid = false;
+    } else {
+      setFieldError('privacy', '');
+    }
+
+    return isValid;
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    successMessage.textContent = '';
+
+    if (!validateForm()) {
+      const firstError = form.querySelector('.has-error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    // NOTE: 送信先は未確定のため、ここでは送信を模擬している。
+    // 本番運用時は fetch() 等で実際の送信先エンドポイントに置き換える。
+    const submitBtn = form.querySelector('.btn-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+
+    setTimeout(() => {
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'この内容で送信する';
+      successMessage.textContent = 'お問い合わせを受け付けました。担当者より1〜2営業日以内にご連絡いたします。';
+    }, 700);
+  });
+
 })();
