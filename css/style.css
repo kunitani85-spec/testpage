@@ -4,6 +4,7 @@
    ========================================================================== */
 
 :root {
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --navy-950: #060d1a;
   --navy-900: #0b1830;
   --navy-800: #112742;
@@ -77,6 +78,46 @@ ul { list-style: none; }
   100% { transform: translateX(350%); }
 }
 
+/* ---------- 遊び要素：泳ぐ魚 ---------- */
+.hero-fish-swim {
+  position: absolute; top: 20%; left: -60px; width: 40px; height: 40px; z-index: 1;
+  color: rgba(200, 162, 76, 0.55); pointer-events: none;
+  animation: fish-swim 16s linear infinite;
+}
+.hero-fish-swim svg { width: 100%; height: 100%; }
+@keyframes fish-swim {
+  0%   { transform: translate(0, 0) scaleX(1); }
+  46%  { transform: translate(112vw, -40px) scaleX(1); }
+  50%  { transform: translate(112vw, -40px) scaleX(-1); }
+  96%  { transform: translate(0, 26px) scaleX(-1); }
+  100% { transform: translate(0, 26px) scaleX(1); }
+}
+
+/* ---------- 遊び要素：ボタンの水しぶきホバー ---------- */
+.btn-splash { position: relative; overflow: hidden; }
+.btn-splash::after {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 0; height: 0;
+  background: rgba(255, 255, 255, 0.32); border-radius: 50%;
+  transform: translate(-50%, -50%); opacity: 0; pointer-events: none;
+  transition: width 0.5s var(--ease), height 0.5s var(--ease), opacity 0.5s var(--ease);
+}
+.btn-splash:hover::after { width: 240px; height: 240px; opacity: 1; }
+.btn-splash:active { transform: scale(0.96); }
+
+/* ---------- 1日の流れ（タイムライン） ---------- */
+.day-flow { max-width: 780px; margin: 0 auto 60px; background: var(--paper); border-radius: 8px; padding: 34px 36px; }
+.day-flow-title { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: var(--navy-800); margin-bottom: 20px; }
+.day-flow-icon { width: 20px; height: 20px; color: var(--gold-dark); }
+.day-flow-list { position: relative; }
+.day-flow-item { display: flex; align-items: center; gap: 16px; padding: 11px 0; position: relative; }
+.day-flow-item:not(:last-child)::after {
+  content: ''; position: absolute; left: 63px; top: 100%; width: 1px; height: 11px; background: var(--border-light);
+}
+.day-flow-time { width: 56px; flex-shrink: 0; font-family: var(--font-en); font-weight: 700; font-size: 14px; color: var(--navy-800); }
+.day-flow-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; transition: transform 0.35s var(--ease-bounce); }
+.day-flow-item:hover .day-flow-dot { transform: scale(1.6); }
+.day-flow-text { font-size: 14.5px; color: var(--ink); }
+
 /* ---------- Cursor glow ---------- */
 .cursor-glow {
   position: fixed; top: 0; left: 0; width: 420px; height: 420px;
@@ -96,7 +137,7 @@ ul { list-style: none; }
   padding: 16px 38px; font-family: var(--font-jp); font-weight: 700;
   font-size: 15px; letter-spacing: 1px;
   border-radius: 2px; border: 1px solid transparent; cursor: pointer;
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease);
+  transition: transform 0.4s var(--ease-bounce), box-shadow 0.35s var(--ease), background 0.35s var(--ease), color 0.35s var(--ease);
 }
 .btn-primary {
   background: var(--gold);
@@ -382,7 +423,8 @@ ul { list-style: none; }
   display: block; background: var(--white); border: 1px solid var(--border-light);
   overflow: hidden; text-align: center; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
-.interview-card:hover { transform: translateY(-8px) rotate(-0.6deg) scale(1.015); box-shadow: 0 24px 44px -20px rgba(11,24,48,0.3); }
+.interview-card { transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s var(--ease); }
+.interview-card:hover { transform: translateY(-8px) rotate(-0.6deg) scale(1.02); box-shadow: 0 24px 44px -20px rgba(11,24,48,0.3); }
 .interview-photo {
   height: 200px; display: flex; align-items: center; justify-content: center;
   background: linear-gradient(150deg, var(--navy-700), var(--navy-950));
@@ -542,9 +584,9 @@ ul { list-style: none; }
   border: 1px solid var(--border-light); padding: 30px 32px;
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
   clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.35s var(--ease);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s var(--ease-bounce);
 }
-.job-card:hover { border-color: var(--navy-700); box-shadow: 0 20px 44px -22px rgba(11,24,48,0.32); transform: translateY(-6px); }
+.job-card:hover { border-color: var(--navy-700); box-shadow: 0 20px 44px -22px rgba(11,24,48,0.32); transform: translateY(-6px) scale(1.01); }
 .job-card:hover .job-arrow { background: var(--navy-900); transform: translateX(4px); }
 .job-card:hover .job-arrow svg { color: #fff; }
 .job-type {
@@ -645,9 +687,11 @@ ul { list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   .speed-lines::before, .speed-lines::after,
   .hero-photo-1, .hero-photo-2,
-  .preloader-bar span, .scroll-line::after {
+  .preloader-bar span, .scroll-line::after,
+  .hero-fish-swim {
     animation: none;
   }
+  .hero-fish-swim { display: none; }
   .cursor-glow { display: none; }
 }
 

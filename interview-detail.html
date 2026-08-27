@@ -64,12 +64,20 @@
 
     <p class="detail-lead reveal" data-anim="fade-up" data-delay="150" id="detailLead"></p>
 
+    <div class="day-flow reveal" data-anim="fade-up" id="dayFlow" style="display:none;">
+      <p class="day-flow-title">
+        <svg viewBox="0 0 24 24" class="day-flow-icon"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        ある1日のスケジュール
+      </p>
+      <div class="day-flow-list" id="dayFlowList"></div>
+    </div>
+
     <div class="detail-qa" id="detailQa"></div>
 
     <div class="detail-nav reveal" data-anim="fade-up">
-      <a href="interview.html" class="btn btn-outline-navy btn-sm" id="prevInterview">← 前の社員</a>
-      <a href="interview.html" class="btn btn-outline-navy btn-sm">一覧へ戻る</a>
-      <a href="interview.html" class="btn btn-outline-navy btn-sm" id="nextInterview">次の社員 →</a>
+      <a href="interview.html" class="btn btn-outline-navy btn-sm btn-splash" id="prevInterview">← 前の社員</a>
+      <a href="interview.html" class="btn btn-outline-navy btn-sm btn-splash">一覧へ戻る</a>
+      <a href="interview.html" class="btn btn-outline-navy btn-sm btn-splash" id="nextInterview">次の社員 →</a>
     </div>
   </div>
 </section>
@@ -139,6 +147,18 @@
     document.getElementById('detailDept').textContent = person.dept;
     document.getElementById('detailCatch').textContent = `「${person.catch}」`;
     document.getElementById('detailLead').textContent = person.lead;
+
+    if (person.day && person.day.length) {
+      const dayFlow = document.getElementById('dayFlow');
+      const dayList = document.getElementById('dayFlowList');
+      person.day.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'day-flow-item';
+        row.innerHTML = `<span class="day-flow-time">${item.time}</span><span class="day-flow-dot"></span><span class="day-flow-text">${item.text}</span>`;
+        dayList.appendChild(row);
+      });
+      dayFlow.style.display = '';
+    }
 
     const qaWrap = document.getElementById('detailQa');
     person.qa.forEach((item, i) => {
