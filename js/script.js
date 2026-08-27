@@ -61,6 +61,83 @@
   }
   observeReveals();
 
+  /* ---------- Cursor glow (desktop only) ---------- */
+  const cursorGlow = document.getElementById('cursorGlow');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (cursorGlow && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('mousemove', (e) => {
+      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+      cursorGlow.classList.add('is-active');
+    });
+    document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
+  }
+
+  /* ---------- Parallax layers ---------- */
+  const parallaxEls = Array.from(document.querySelectorAll('[data-speed]'));
+  let ticking = false;
+
+  function applyParallax() {
+    parallaxEls.forEach((el) => {
+      const speed = Number(el.dataset.speed) || 0.2;
+      const rect = el.parentElement.getBoundingClientRect();
+      const offset = rect.top * speed;
+      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+    });
+    ticking = false;
+  }
+  function onScrollParallax() {
+    if (!reduceMotion && parallaxEls.length) {
+      if (!ticking) {
+        requestAnimationFrame(applyParallax);
+        ticking = true;
+      }
+    }
+  }
+  window.addEventListener('scroll', onScrollParallax, { passive: true });
+  window.addEventListener('resize', onScrollParallax);
+  if (!reduceMotion) applyParallax();
+
+  /* ---------- Count-up numbers ---------- */
+  const counters = document.querySelectorAll('.stat-num');
+  function animateCount(el) {
+    const target = Number(el.dataset.count);
+    const duration = 1500;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target).toLocaleString();
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  counters.forEach((el) => counterObserver.observe(el));
+
+  /* ---------- Section banner underline sweep ---------- */
+  const bannerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          bannerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  document.querySelectorAll('.section-banner').forEach((el) => bannerObserver.observe(el));
+
   /* ---------- Smooth anchor scroll offset for fixed header ---------- */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {

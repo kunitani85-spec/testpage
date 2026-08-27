@@ -18,6 +18,9 @@
   <div class="preloader-bar"><span></span></div>
 </div>
 
+<!-- カーソル追従の発光エフェクト -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <!-- ヘッダー -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
@@ -40,10 +43,11 @@
 
 <!-- ヒーロー -->
 <section class="hero" id="top">
-  <div class="hero-waves"></div>
+  <div class="hero-waves" data-speed="0.25"></div>
+  <div class="speed-lines"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <p class="hero-eyebrow reveal" data-anim="fade-up">RECRUIT SITE</p>
+      <p class="hero-eyebrow reveal" data-anim="fade-up"><span>RECRUIT SITE</span></p>
       <h1 class="hero-title">
         <span class="reveal" data-anim="fade-up" data-delay="100">LET'S CREATE THE</span><br>
         <span class="mark reveal" data-anim="fade-up" data-delay="250">FUTURE</span>
@@ -84,7 +88,7 @@
       </div>
     </div>
     <div class="message-text">
-      <p class="section-tag on-light reveal" data-anim="fade-up">MESSAGE</p>
+      <p class="section-tag on-light reveal" data-anim="fade-up"><span>MESSAGE</span></p>
       <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">
         みんなの力で、<br>日本を元気に。
       </h2>
@@ -108,6 +112,28 @@
     </div>
     <div class="triptych-item reveal" data-anim="fade-up" data-delay="240" style="background:linear-gradient(150deg,#4a6f97,#112742);">
       <span class="ph-label"><svg viewBox="0 0 48 48"><use href="#icon-truck"></use></svg>営業・販売</span>
+    </div>
+  </div>
+</section>
+
+<!-- 数字で見る魚寅 -->
+<section class="stats-section">
+  <div class="stats">
+    <div class="stat-item reveal" data-anim="fade-up" data-delay="0">
+      <span class="stat-num" data-count="350">0</span><span class="stat-suffix">種+</span>
+      <p class="stat-label">取扱魚種数</p>
+    </div>
+    <div class="stat-item reveal" data-anim="fade-up" data-delay="100">
+      <span class="stat-num" data-count="45">0</span><span class="stat-suffix">年</span>
+      <p class="stat-label">創業からの歴史</p>
+    </div>
+    <div class="stat-item reveal" data-anim="fade-up" data-delay="200">
+      <span class="stat-num" data-count="12">0</span><span class="stat-suffix">拠点</span>
+      <p class="stat-label">全国の拠点数</p>
+    </div>
+    <div class="stat-item reveal" data-anim="fade-up" data-delay="300">
+      <span class="stat-num" data-count="180">0</span><span class="stat-suffix">名</span>
+      <p class="stat-label">従業員数</p>
     </div>
   </div>
 </section>
@@ -256,7 +282,7 @@
 <!-- 募集職種 -->
 <section class="jobs" id="jobs">
   <div class="section-inner">
-    <p class="section-tag on-light reveal" data-anim="fade-up">RECRUIT</p>
+    <p class="section-tag on-light reveal" data-anim="fade-up"><span>RECRUIT</span></p>
     <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">募集職種</h2>
   </div>
   <div class="section-inner jobs-grid">
@@ -298,7 +324,7 @@
 <!-- エントリー・お問い合わせ -->
 <section class="contact" id="contact">
   <div class="section-inner">
-    <p class="section-tag on-light reveal" data-anim="fade-up">ENTRY</p>
+    <p class="section-tag on-light reveal" data-anim="fade-up"><span>ENTRY</span></p>
     <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">エントリー・お問い合わせ</h2>
     <p class="contact-desc reveal" data-anim="fade-up" data-delay="200">
       ご応募・ご質問など、お気軽にご連絡ください。担当者より折り返しご連絡いたします。
