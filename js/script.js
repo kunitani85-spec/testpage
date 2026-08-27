@@ -179,11 +179,54 @@
     });
   }
 
-  /* ---------- Interview carousel ---------- */
+  /* ---------- 募集職種（ボタン切り替え式スライド） ---------- */
+  const jobButtons = document.getElementById('jobSlideButtons');
+  if (jobButtons) {
+    const buttons = Array.from(jobButtons.querySelectorAll('.job-slide-btn'));
+    const slides = Array.from(document.querySelectorAll('.job-slide'));
+
+    function activateJobSlide(index) {
+      const current = slides.find((s) => s.classList.contains('is-active'));
+      const next = slides[index];
+      if (!next || current === next) return;
+
+      buttons.forEach((b) => b.classList.toggle('is-active', b.dataset.slide === String(index)));
+
+      if (current) current.classList.remove('is-active');
+      setTimeout(() => {
+        if (current) current.style.display = 'none';
+        next.style.display = 'grid';
+        void next.offsetWidth;
+        requestAnimationFrame(() => next.classList.add('is-active'));
+      }, 380);
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => activateJobSlide(Number(btn.dataset.slide)));
+    });
+  }
+
+  /* ---------- Interview carousel（ナンバリング付きスライドショー） ---------- */
   const interviewTrack = document.getElementById('interviewTrack');
   if (interviewTrack && typeof INTERVIEWS !== 'undefined') {
     let startIndex = 0;
     const visibleCount = 3;
+    const dotsWrap = document.getElementById('interviewDots');
+    const currentEl = document.getElementById('interviewCurrent');
+    const totalEl = document.getElementById('interviewTotal');
+    const pad2 = (n) => String(n + 1).padStart(2, '0');
+
+    function renderDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      INTERVIEWS.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'interview-dot' + (i === startIndex ? ' is-active' : '');
+        dot.setAttribute('aria-label', `${i + 1}番目の社員を表示`);
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+    }
 
     function renderInterviews() {
       interviewTrack.innerHTML = '';
@@ -201,16 +244,23 @@
           </div>`;
         interviewTrack.appendChild(card);
       }
+      if (currentEl) currentEl.textContent = pad2(startIndex);
+      if (totalEl) totalEl.textContent = `/ ${pad2(INTERVIEWS.length - 1)}`;
+      renderDots();
       observeReveals();
     }
 
-    function shift(delta) {
+    function goTo(index) {
       interviewTrack.classList.add('is-changing');
       setTimeout(() => {
-        startIndex = (startIndex + delta + INTERVIEWS.length) % INTERVIEWS.length;
+        startIndex = ((index % INTERVIEWS.length) + INTERVIEWS.length) % INTERVIEWS.length;
         renderInterviews();
         interviewTrack.classList.remove('is-changing');
-      }, 180);
+      }, 220);
+    }
+
+    function shift(delta) {
+      goTo(startIndex + delta);
     }
 
     document.getElementById('interviewPrev').addEventListener('click', () => shift(-1));
