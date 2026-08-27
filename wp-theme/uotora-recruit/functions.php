@@ -127,40 +127,6 @@ function uotora_fallback_menu() {
 }
 
 /**
- * エントリーフォームの送信処理（プラグイン不要・標準WP機能のみ）
- */
-function uotora_handle_contact_form() {
-	if ( ! isset( $_POST['uotora_contact_nonce'] ) || ! wp_verify_nonce( $_POST['uotora_contact_nonce'], 'uotora_contact' ) ) {
-		wp_die( '不正なリクエストです。' );
-	}
-
-	$name    = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
-	$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-	$tel     = isset( $_POST['tel'] ) ? sanitize_text_field( wp_unslash( $_POST['tel'] ) ) : '';
-	$job     = isset( $_POST['job'] ) ? sanitize_text_field( wp_unslash( $_POST['job'] ) ) : '';
-	$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
-
-	$redirect = isset( $_POST['_wp_http_referer'] ) ? esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ) : home_url( '/' );
-
-	if ( empty( $name ) || empty( $email ) || empty( $message ) ) {
-		wp_safe_redirect( add_query_arg( 'uotora_contact', 'error', $redirect ) . '#contact' );
-		exit;
-	}
-
-	$to      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
-	$subject = sprintf( '【%s】採用エントリーフォームより', get_bloginfo( 'name' ) );
-	$body    = "お名前: {$name}\nメール: {$email}\n電話番号: {$tel}\nご希望の職種: {$job}\n\nお問い合わせ内容:\n{$message}";
-	$headers = array( 'Reply-To: ' . $email );
-
-	wp_mail( $to, $subject, $body, $headers );
-
-	wp_safe_redirect( add_query_arg( 'uotora_contact', 'success', $redirect ) . '#contact' );
-	exit;
-}
-add_action( 'admin_post_uotora_contact', 'uotora_handle_contact_form' );
-add_action( 'admin_post_nopriv_uotora_contact', 'uotora_handle_contact_form' );
-
-/**
  * 抜粋の長さ調整
  */
 function uotora_excerpt_length( $length ) {

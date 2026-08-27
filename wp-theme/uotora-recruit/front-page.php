@@ -8,8 +8,6 @@ get_header();
 $hero_photo_1 = get_theme_mod( 'hero_photo_1', '' );
 $hero_photo_2 = get_theme_mod( 'hero_photo_2', '' );
 $message_photo = get_theme_mod( 'message_photo', '' );
-
-$contact_status = isset( $_GET['uotora_contact'] ) ? sanitize_key( wp_unslash( $_GET['uotora_contact'] ) ) : '';
 ?>
 
 <section class="hero" id="top">
@@ -289,48 +287,29 @@ $contact_status = isset( $_GET['uotora_contact'] ) ? sanitize_key( wp_unslash( $
 <section class="contact" id="contact">
 	<div class="section-inner">
 		<p class="section-tag on-light reveal" data-anim="fade-up"><span>ENTRY</span></p>
-		<h2 class="section-title reveal" data-anim="fade-up" data-delay="100">エントリー・お問い合わせ</h2>
+		<h2 class="section-title reveal" data-anim="fade-up" data-delay="100">エントリー</h2>
 		<p class="contact-desc reveal" data-anim="fade-up" data-delay="200">
-			ご応募・ご質問など、お気軽にご連絡ください。担当者より折り返しご連絡いたします。
+			ご希望に合わせて、エントリーページへお進みください。
 		</p>
 
-		<form class="contact-form reveal" data-anim="fade-up" data-delay="300" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-			<input type="hidden" name="action" value="uotora_contact">
-			<?php wp_referer_field(); ?>
-			<?php wp_nonce_field( 'uotora_contact', 'uotora_contact_nonce' ); ?>
-			<div class="form-row">
-				<label>
-					<span>お名前<em>必須</em></span>
-					<input type="text" name="name" required placeholder="山田 太郎">
-				</label>
-				<label>
-					<span>メールアドレス<em>必須</em></span>
-					<input type="email" name="email" required placeholder="example@mail.com">
-				</label>
-			</div>
-			<label>
-				<span>電話番号</span>
-				<input type="tel" name="tel" placeholder="000-0000-0000">
-			</label>
-			<label>
-				<span>ご希望の職種</span>
-				<input type="text" name="job" placeholder="例：鮮魚仕入れ・バイヤー">
-			</label>
-			<label>
-				<span>お問い合わせ内容<em>必須</em></span>
-				<textarea name="message" rows="5" required placeholder="ご質問やご経歴などをご記入ください"></textarea>
-			</label>
-			<button type="submit" class="btn btn-primary btn-block btn-splash">送信する</button>
-			<p class="form-note">
-				<?php
-				if ( 'success' === $contact_status ) {
-					echo 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
-				} elseif ( 'error' === $contact_status ) {
-					echo '必須項目が未入力です。もう一度ご確認ください。';
-				}
-				?>
-			</p>
-		</form>
+		<div class="entry-cards">
+			<a href="<?php echo esc_url( get_theme_mod( 'entry_url_new_grad', '#' ) ); ?>" class="entry-card reveal" data-anim="fade-up" data-delay="300">
+				<div class="entry-card-icon"><svg viewBox="0 0 48 48"><use href="#icon-cert"></use></svg></div>
+				<div class="entry-card-body">
+					<span class="entry-card-label">NEW GRADUATE</span>
+					<h3>新卒エントリーはこちら</h3>
+				</div>
+				<span class="entry-card-arrow"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</a>
+			<a href="<?php echo esc_url( get_theme_mod( 'entry_url_career', '#' ) ); ?>" class="entry-card reveal" data-anim="fade-up" data-delay="380">
+				<div class="entry-card-icon"><svg viewBox="0 0 48 48"><use href="#icon-truck"></use></svg></div>
+				<div class="entry-card-body">
+					<span class="entry-card-label">CAREER</span>
+					<h3>中途エントリーはこちら</h3>
+				</div>
+				<span class="entry-card-arrow"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</a>
+		</div>
 	</div>
 </section>
 

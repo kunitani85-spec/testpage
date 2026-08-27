@@ -153,17 +153,6 @@
     });
   });
 
-  /* ---------- Contact form (front-end only demo) ---------- */
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
-      contactForm.reset();
-    });
-  }
-
   /* ---------- Employee benefits tabs ---------- */
   const tabBar = document.getElementById('tabBar');
   if (tabBar) {

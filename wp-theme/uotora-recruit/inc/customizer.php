@@ -90,8 +90,10 @@ function uotora_customize_register( $wp_customize ) {
 	}
 
 	/* ---------- エントリー先メールアドレス ---------- */
-	$wp_customize->add_section( 'uotora_contact', array( 'title' => 'エントリーフォーム', 'priority' => 36 ) );
-	$wp_customize->add_setting( 'contact_email', array( 'default' => get_option( 'admin_email' ), 'sanitize_callback' => 'sanitize_email' ) );
-	$wp_customize->add_control( 'contact_email', array( 'label' => '送信先メールアドレス', 'section' => 'uotora_contact', 'type' => 'email' ) );
+	$wp_customize->add_section( 'uotora_contact', array( 'title' => 'エントリーボタンのリンク先', 'priority' => 36 ) );
+	$wp_customize->add_setting( 'entry_url_new_grad', array( 'default' => '#', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( 'entry_url_new_grad', array( 'label' => '新卒エントリーのURL', 'section' => 'uotora_contact', 'type' => 'url' ) );
+	$wp_customize->add_setting( 'entry_url_career', array( 'default' => '#', 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp_customize->add_control( 'entry_url_career', array( 'label' => '中途エントリーのURL', 'section' => 'uotora_contact', 'type' => 'url' ) );
 }
 add_action( 'customize_register', 'uotora_customize_register' );
