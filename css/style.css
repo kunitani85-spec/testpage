@@ -379,7 +379,7 @@ ul { list-style: none; }
 }
 .interview-track.is-changing { opacity: 0.35; }
 .interview-card {
-  background: var(--white); border: 1px solid var(--border-light);
+  display: block; background: var(--white); border: 1px solid var(--border-light);
   overflow: hidden; text-align: center; transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 .interview-card:hover { transform: translateY(-8px) rotate(-0.6deg) scale(1.015); box-shadow: 0 24px 44px -20px rgba(11,24,48,0.3); }
@@ -403,6 +403,50 @@ ul { list-style: none; }
 }
 .interview-name { font-size: 18px; font-weight: 700; margin: 8px 0 4px; color: var(--ink); }
 .interview-year { font-size: 12.5px; color: var(--fg-dim-light); }
+.interview-excerpt {
+  margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border-light);
+  font-size: 13.5px; color: var(--fg-dim-light); line-height: 1.7;
+}
+
+/* ---------- Interview list page ---------- */
+.interview-list { padding: 90px 0 120px; background: var(--paper); }
+.list-lead { max-width: 640px; margin: 0 auto 50px; text-align: center; color: var(--fg-dim-light); font-size: 15px; }
+.interview-list-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+}
+
+/* ---------- Interview detail page ---------- */
+.interview-detail { padding: 90px 0 120px; background: var(--white); }
+.detail-back { display: inline-flex; align-items: center; gap: 8px; color: var(--navy-700); font-size: 14px; font-weight: 600; margin-bottom: 30px; }
+.detail-back svg { width: 16px; height: 16px; }
+.detail-head { display: grid; grid-template-columns: 320px 1fr; gap: 50px; align-items: center; margin-bottom: 60px; }
+.detail-photo {
+  height: 320px; background: linear-gradient(150deg, var(--navy-700), var(--navy-950));
+  display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 0 100%);
+}
+.detail-photo::after {
+  content: ''; position: absolute; left: 0; top: 0; width: 40px; height: 40px;
+  background: var(--gold); clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+.detail-photo svg { width: 84px; height: 84px; color: rgba(255,255,255,0.85); position: relative; }
+.detail-role { display: inline-block; font-family: var(--font-en); font-size: 12px; letter-spacing: 2px; color: var(--navy-950); background: var(--gold); padding: 6px 14px; transform: skewX(-12deg); margin-bottom: 16px; }
+.detail-role span { display: inline-block; transform: skewX(12deg); }
+.detail-name { font-size: clamp(26px, 3.4vw, 36px); font-weight: 900; color: var(--ink); margin-bottom: 6px; }
+.detail-dept { color: var(--fg-dim-light); font-size: 14px; margin-bottom: 16px; }
+.detail-catch { font-size: 19px; font-weight: 700; color: var(--navy-800); border-left: 4px solid var(--gold); padding-left: 14px; }
+.detail-lead { max-width: 780px; margin: 0 auto 60px; font-size: 16px; line-height: 1.9; color: var(--fg-dim-light); text-align: center; }
+.detail-qa { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px; }
+.qa-item .qa-q {
+  display: flex; align-items: flex-start; gap: 12px; font-size: 17px; font-weight: 800; color: var(--ink); margin-bottom: 12px;
+}
+.qa-item .qa-q::before {
+  content: 'Q'; font-family: var(--font-en); color: #fff; background: var(--navy-900);
+  width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+.qa-item .qa-a { padding-left: 40px; color: var(--fg-dim-light); font-size: 15px; line-height: 1.9; }
+.detail-nav { max-width: 780px; margin: 70px auto 0; display: flex; justify-content: space-between; gap: 20px; }
 .interview-nav {
   display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 44px;
 }
@@ -588,6 +632,9 @@ ul { list-style: none; }
   .footer-cols { grid-template-columns: repeat(3, 1fr); }
   .cta-band { clip-path: polygon(0 20px, 100% 0, 100% calc(100% - 20px), 0 100%); margin: -20px 0; }
   .section-banner { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), 0 100%); }
+  .interview-list-grid { grid-template-columns: 1fr; }
+  .detail-head { grid-template-columns: 1fr; }
+  .detail-photo { height: 260px; }
 }
 
 @media (max-width: 560px) {

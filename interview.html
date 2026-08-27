@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社員インタビュー一覧 | 株式会社 魚寅 採用サイト</title>
+<meta name="description" content="株式会社 魚寅で働く社員のインタビュー一覧。仕入れ・加工・営業・店舗・管理部門、それぞれの仕事のやりがいをご紹介します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="preloader" id="preloader">
+  <div class="preloader-logo">魚寅<span>UOTORA RECRUIT</span></div>
+  <div class="preloader-bar"><span></span></div>
+</div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">魚寅</span>
+      <span class="logo-badge">RECRUIT</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#message" class="nav-link">会社紹介</a>
+      <a href="interview.html" class="nav-link">社員インタビュー</a>
+      <a href="index.html#benefits" class="nav-link">福利厚生</a>
+      <a href="index.html#jobs" class="nav-link">募集職種</a>
+      <a href="index.html#contact" class="nav-link nav-cta">エントリー</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="section-banner">
+  <p class="section-banner-en">INTERVIEW</p>
+  <p class="section-banner-jp">社員インタビュー一覧</p>
+</section>
+
+<section class="interview-list">
+  <div class="section-inner">
+    <p class="list-lead reveal" data-anim="fade-up">
+      仕入れ・加工・営業・店舗・管理部門。それぞれの立場で働く社員に、仕事のやりがいや魚寅で働く魅力を聞きました。
+    </p>
+    <div class="interview-list-grid" id="interviewListGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <p class="footer-logo">株式会社 魚寅</p>
+        <p class="footer-logo-sub">UOTORA CO., LTD.</p>
+      </div>
+      <div class="footer-info">
+        <dl>
+          <dt>所在地</dt><dd>〒000-0000 福岡県サンプル市サンプル町1-2-3</dd>
+          <dt>TEL</dt><dd>000-000-0000（代表）</dd>
+          <dt>代表者</dt><dd>代表取締役　寅田 一郎</dd>
+          <dt>事業内容</dt><dd>水産物の仕入れ・加工・販売</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="footer-cols" style="margin-top:36px;">
+      <div class="footer-col">
+        <h4>採用情報</h4>
+        <a href="index.html#message">会社紹介</a>
+        <a href="interview.html">社員インタビュー</a>
+        <a href="index.html#benefits">福利厚生</a>
+      </div>
+      <div class="footer-col">
+        <h4>エントリー</h4>
+        <a href="index.html#jobs">募集職種</a>
+        <a href="index.html#contact">お問い合わせ</a>
+      </div>
+      <div class="footer-col">
+        <h4>会社情報</h4>
+        <a href="index.html">TOPページ</a>
+        <a href="index.html">会社概要</a>
+      </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 株式会社 魚寅. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="トップへ戻る">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</button>
+
+<svg style="display:none">
+  <defs>
+    <g id="icon-person"><circle cx="24" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 42c0-10 8-18 18-18s18 8 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+  </defs>
+</svg>
+
+<script src="js/interviews-data.js"></script>
+<script src="js/script.js"></script>
+<script>
+  (() => {
+    const grid = document.getElementById('interviewListGrid');
+    if (!grid || typeof INTERVIEWS === 'undefined') return;
+    INTERVIEWS.forEach((p, i) => {
+      const card = document.createElement('a');
+      card.href = `interview-detail.html?id=${p.id}`;
+      card.className = 'interview-card reveal';
+      card.dataset.anim = 'fade-up';
+      card.dataset.delay = String((i % 3) * 100);
+      card.innerHTML = `
+        <div class="interview-photo"><svg viewBox="0 0 48 48"><use href="#icon-person"></use></svg></div>
+        <div class="interview-body">
+          <p class="interview-role">${p.role} / ${p.dept.split(' / ')[0]}</p>
+          <p class="interview-name">${p.name}</p>
+          <p class="interview-year">${p.dept.split(' / ')[1]}</p>
+          <p class="interview-excerpt">${p.catch}</p>
+        </div>`;
+      grid.appendChild(card);
+    });
+    if (window.observeReveals) window.observeReveals();
+  })();
+</script>
+</body>
+</html>

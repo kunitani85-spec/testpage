@@ -60,6 +60,7 @@
     });
   }
   observeReveals();
+  window.observeReveals = observeReveals;
 
   /* ---------- Cursor glow (desktop only) ---------- */
   const cursorGlow = document.getElementById('cursorGlow');
@@ -180,29 +181,23 @@
 
   /* ---------- Interview carousel ---------- */
   const interviewTrack = document.getElementById('interviewTrack');
-  if (interviewTrack) {
-    const profiles = [
-      { role: 'FISH BUYER / 仕入れ', name: '兵崎 一', year: '2015年入社' },
-      { role: 'PROCESSING / 加工', name: '解 慧芳', year: '2019年入社' },
-      { role: 'SALES / 営業', name: '竹内 研翔', year: '2012年入社' },
-      { role: 'STORE STAFF / 店舗', name: '山田 遥', year: '2021年入社' },
-      { role: 'MANAGEMENT / 管理部門', name: '中村 直樹', year: '2008年入社' },
-    ];
+  if (interviewTrack && typeof INTERVIEWS !== 'undefined') {
     let startIndex = 0;
     const visibleCount = 3;
 
     function renderInterviews() {
       interviewTrack.innerHTML = '';
       for (let i = 0; i < visibleCount; i++) {
-        const p = profiles[(startIndex + i) % profiles.length];
-        const card = document.createElement('div');
+        const p = INTERVIEWS[(startIndex + i) % INTERVIEWS.length];
+        const card = document.createElement('a');
         card.className = 'interview-card';
+        card.href = `interview-detail.html?id=${p.id}`;
         card.innerHTML = `
           <div class="interview-photo"><svg viewBox="0 0 48 48"><use href="#icon-person"></use></svg></div>
           <div class="interview-body">
-            <p class="interview-role">${p.role}</p>
+            <p class="interview-role">${p.role} / ${p.dept.split(' / ')[0]}</p>
             <p class="interview-name">${p.name}</p>
-            <p class="interview-year">${p.year}</p>
+            <p class="interview-year">${p.dept.split(' / ')[1]}</p>
           </div>`;
         interviewTrack.appendChild(card);
       }
@@ -212,7 +207,7 @@
     function shift(delta) {
       interviewTrack.classList.add('is-changing');
       setTimeout(() => {
-        startIndex = (startIndex + delta + profiles.length) % profiles.length;
+        startIndex = (startIndex + delta + INTERVIEWS.length) % INTERVIEWS.length;
         renderInterviews();
         interviewTrack.classList.remove('is-changing');
       }, 180);
