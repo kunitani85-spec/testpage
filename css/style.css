@@ -766,6 +766,67 @@ ul { list-style: none; }
   .cursor-glow { display: none; }
 }
 
+/* ---------- 会社概要ページ：会社概要テーブル ---------- */
+.about-table { padding: 100px 0 40px; background: var(--white); }
+.about-table-grid { max-width: 900px; margin: 0 auto; border-top: 1px solid var(--border-light); }
+.about-table-row {
+  display: grid; grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid var(--border-light);
+}
+.about-table-row dt {
+  margin: 0; padding: 22px 24px; font-weight: 700; color: var(--navy-800); background: var(--paper); font-size: 14px;
+}
+.about-table-row dd {
+  margin: 0; padding: 22px 24px; color: var(--fg-dim-light); font-size: 14.5px; line-height: 1.8;
+}
+
+/* ---------- 会社概要ページ：沿革 ---------- */
+.history { padding: 100px 0; background: var(--paper); }
+.history-list { max-width: 780px; margin: 50px auto 0; position: relative; padding-left: 100px; }
+.history-list::before {
+  content: ''; position: absolute; left: 56px; top: 6px; bottom: 6px; width: 2px; background: var(--border-light);
+}
+.history-item { position: relative; padding-bottom: 46px; }
+.history-item:last-child { padding-bottom: 0; }
+.history-item::before {
+  content: ''; position: absolute; left: -49px; top: 4px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--gold); border: 3px solid var(--paper); box-shadow: 0 0 0 1px var(--border-light);
+  transition: transform 0.35s var(--ease-bounce);
+}
+.history-item:hover::before { transform: scale(1.4); }
+.history-year {
+  position: absolute; left: -100px; top: -3px; width: 80px; text-align: right;
+  font-family: var(--font-en); font-weight: 700; font-size: 18px; color: var(--navy-800);
+}
+.history-text { font-size: 15px; color: var(--ink); }
+
+/* ---------- 会社概要ページ：アクセス ---------- */
+.access { padding: 100px 0 120px; background: var(--white); }
+.access-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 44px; margin-top: 50px; align-items: stretch; }
+.access-info dl { display: grid; grid-template-columns: auto 1fr; gap: 16px 24px; }
+.access-info dt { font-family: var(--font-en); color: var(--navy-600); font-size: 12px; letter-spacing: 2px; padding-top: 3px; }
+.access-info dd { color: var(--ink); font-size: 15px; }
+.map-placeholder {
+  min-height: 280px; position: relative; overflow: hidden;
+  background: linear-gradient(150deg, var(--navy-700), var(--navy-950));
+  clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.map-placeholder svg { width: 52px; height: 52px; color: rgba(255,255,255,0.7); }
+.map-placeholder span {
+  position: absolute; bottom: 20px; left: 24px; color: var(--fg-dim-dark);
+  font-family: var(--font-en); letter-spacing: 3px; font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .about-table-row { grid-template-columns: 1fr; }
+  .history-list { padding-left: 70px; }
+  .history-year { left: -70px; width: 56px; font-size: 15px; }
+  .history-item::before { left: -34px; }
+  .history-list::before { left: 41px; }
+  .access-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 760px) {
   .main-nav {
     position: fixed; top: 0; right: 0; height: 100vh; width: min(78%, 320px);
