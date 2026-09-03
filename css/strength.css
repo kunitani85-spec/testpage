@@ -22,13 +22,22 @@
 
 .strength-num-wrap { position: relative; display: flex; align-items: center; }
 .strength-num-big {
+  display: inline-block;
   font-family: var(--font-en); font-weight: 700;
   font-size: clamp(90px, 13vw, 190px);
   line-height: 1;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--c-line);
   letter-spacing: -0.02em;
+  animation: gentleFloat 6s ease-in-out infinite;
+  transition: -webkit-text-stroke-color 0.4s ease;
 }
+.strength-item:nth-child(2) .strength-num-big { animation-delay: 0.7s; }
+.strength-item:nth-child(3) .strength-num-big { animation-delay: 1.4s; }
+.strength-item:nth-child(4) .strength-num-big { animation-delay: 2.1s; }
+.strength-item:nth-child(5) .strength-num-big { animation-delay: 2.8s; }
+.strength-item:hover .strength-num-big { -webkit-text-stroke-color: var(--c-accent-2); }
+@media (prefers-reduced-motion: reduce) { .strength-num-big { animation: none; } }
 .strength-item-tag {
   position: absolute; top: 14%; left: 4px;
   font-family: var(--font-en); font-weight: 600; font-size: 13px; letter-spacing: 0.3em; color: var(--c-accent);

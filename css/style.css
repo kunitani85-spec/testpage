@@ -6,24 +6,24 @@
    ========================================================================== */
 
 :root {
-  --c-navy: #0b2740;
-  --c-navy-deep: #071a2b;
-  --c-navy-soft: #123a5c;
+  --c-navy: #0f2350;        /* ブランド基準色（背景・見出し／本文文字色） */
+  --c-navy-deep: #081426;   /* 最深部トーン（グラデーション用） */
+  --c-navy-soft: #0b3d5c;   /* ブランド第2色（背景・グラデーション用） */
   --c-black: #0a0d10;
-  --c-white: #ffffff;
-  --c-cream: #f7f6f1;
-  --c-cream-2: #eef0e9;
-  --c-ink: #1c2226;
-  --c-gray: #6b7480;
-  --c-gray-light: #a9b0b8;
-  --c-line: rgba(11, 39, 64, 0.12);
+  --c-white: #ffffff;       /* ブランド基準色（背景・白文字） */
+  --c-cream: #f7f8fa;
+  --c-cream-2: #eaf0f5;
+  --c-ink: #0f2350;
+  --c-gray: #5c6b80;
+  --c-gray-light: #99a7b8;
+  --c-line: rgba(15, 35, 80, 0.14);
   --c-line-light: rgba(255, 255, 255, 0.18);
 
-  --c-accent: #0f8b8d;      /* 海を連想するアクセント（ティール） */
-  --c-accent-2: #1cb5b0;    /* 明るいアクア */
-  --c-accent-pale: #dcefec; /* 淡いアクア背景 */
-  --c-warm: #d9622e;        /* 魚屋の温かさ（コーラル/朱色） */
-  --c-warm-pale: #f6e2d6;
+  --c-accent: #b71c2c;      /* アクセントカラー（ボタンhover等） */
+  --c-accent-2: #d6394a;    /* 明るいレッド（オンダーク装飾用） */
+  --c-accent-pale: #f7dee0; /* 淡いレッド背景 */
+  --c-warm: var(--c-navy-deep);
+  --c-warm-pale: #e4eaf1;
 
   --font-en: 'Oswald', sans-serif;
   --font-jp: 'Noto Sans JP', sans-serif;
@@ -119,17 +119,18 @@ button { font-family: inherit; cursor: pointer; }
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-3px); }
-.btn-primary { background: var(--c-accent); color: #fff; }
-.btn-primary:hover { background: var(--c-accent-2); }
-.btn-warm { background: var(--c-warm); color: #fff; }
-.btn-warm:hover { background: #c2531f; }
+.btn-primary { background: var(--c-navy-soft); color: #fff; box-shadow: 0 0 0 0 rgba(183,28,44,0); }
+.btn-primary:hover { background: var(--c-accent); box-shadow: 0 10px 28px -6px rgba(183,28,44,0.55); }
+.btn-warm { background: var(--c-navy); color: #fff; }
+.btn-warm:hover { background: var(--c-accent); box-shadow: 0 10px 28px -6px rgba(183,28,44,0.5); }
 .btn-outline { border-color: var(--c-navy); color: var(--c-navy); }
 .btn-outline:hover { background: var(--c-navy); color: #fff; }
 .btn-outline.on-dark { border-color: rgba(255,255,255,0.5); color: #fff; }
 .btn-outline.on-dark:hover { background: #fff; color: var(--c-navy); }
 .btn-block { width: 100%; justify-content: center; }
-.btn-arrow { font-size: 16px; transition: transform 0.4s var(--ease); }
-.btn:hover .btn-arrow { transform: translateX(6px); }
+.btn-arrow { font-size: 16px; transition: transform 0.4s var(--ease); display: inline-block; }
+.btn:hover .btn-arrow { transform: translateX(6px); animation: arrowBob 0.9s ease-in-out infinite; }
+@keyframes arrowBob { 0%, 100% { transform: translateX(6px); } 50% { transform: translateX(11px); } }
 
 /* ---------- スクロールリビール ---------- */
 .reveal { opacity: 0; }
@@ -246,9 +247,45 @@ button { font-family: inherit; cursor: pointer; }
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(7,26,43,0.35) 0%, rgba(7,26,43,0.55) 55%, rgba(7,26,43,0.92) 100%);
 }
+
+/* ---------- 気泡（海の躍動感） ---------- */
+.hero-bubbles {
+  position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none;
+}
+.hero-bubbles span {
+  position: absolute; bottom: -60px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%, rgba(255,255,255,0.65), rgba(255,255,255,0.08) 68%, transparent 72%);
+  opacity: 0; animation: bubbleRise linear infinite;
+}
+.hero-bubbles span:nth-child(1) { left: 6%;  width: 10px; height: 10px; animation-duration: 9s;  animation-delay: 0s; }
+.hero-bubbles span:nth-child(2) { left: 16%; width: 6px;  height: 6px;  animation-duration: 7s;  animation-delay: 1.2s; }
+.hero-bubbles span:nth-child(3) { left: 28%; width: 14px; height: 14px; animation-duration: 12s; animation-delay: 2.4s; }
+.hero-bubbles span:nth-child(4) { left: 41%; width: 8px;  height: 8px;  animation-duration: 8s;  animation-delay: 0.6s; }
+.hero-bubbles span:nth-child(5) { left: 55%; width: 12px; height: 12px; animation-duration: 10.5s; animation-delay: 3.2s; }
+.hero-bubbles span:nth-child(6) { left: 67%; width: 7px;  height: 7px;  animation-duration: 7.5s; animation-delay: 1.8s; }
+.hero-bubbles span:nth-child(7) { left: 79%; width: 15px; height: 15px; animation-duration: 13s;  animation-delay: 4s; }
+.hero-bubbles span:nth-child(8) { left: 90%; width: 9px;  height: 9px;  animation-duration: 9.5s; animation-delay: 2.6s; }
+@keyframes bubbleRise {
+  0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+  8%   { opacity: 0.75; }
+  50%  { transform: translateY(-52vh) translateX(14px) scale(1.05); }
+  92%  { opacity: 0.35; }
+  100% { transform: translateY(-92vh) translateX(-10px) scale(1.2); opacity: 0; }
+}
+
+/* ---------- 波（流動するウェーブアニメーション） ---------- */
 .page-hero-wave {
   position: absolute; left: 0; right: 0; bottom: -1px; z-index: 1; color: var(--c-cream);
+  height: 90px; overflow: hidden; line-height: 0;
 }
+.page-hero-wave .wave-layer {
+  position: absolute; bottom: -1px; left: 0; height: 100%; width: 200%;
+  display: block;
+}
+.page-hero-wave .wave-back { opacity: 0.45; animation: waveDriftBack 22s linear infinite; }
+.page-hero-wave .wave-front { opacity: 1; animation: waveDriftFront 13s linear infinite; }
+@keyframes waveDriftFront { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes waveDriftBack  { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .page-hero-inner {
   position: relative; z-index: 2;
   max-width: var(--container); margin: 0 auto; padding: 0 32px 84px;
@@ -286,27 +323,45 @@ button { font-family: inherit; cursor: pointer; }
   .page-hero-scroll { display: none; }
 }
 
-/* ---------- 背景トーン（写真の代わりに用いる質感グラデーション + 鱗パターン） ---------- */
+/* ---------- 背景トーン（写真の代わりに用いる質感グラデーション + 鱗パターン + 水面の揺らめき） ---------- */
 .tone-navy {
   background:
     radial-gradient(circle at 12% 18%, rgba(255,255,255,0.07) 0, transparent 42%),
-    radial-gradient(circle at 88% 78%, rgba(28,181,176,0.18) 0, transparent 46%),
+    radial-gradient(circle at 88% 78%, rgba(183,28,44,0.16) 0, transparent 46%),
     repeating-radial-gradient(circle at 0 0, transparent 0, transparent 37px, rgba(255,255,255,0.035) 38px, rgba(255,255,255,0.035) 39px),
     linear-gradient(135deg, var(--c-navy-deep), var(--c-navy) 60%, var(--c-navy-soft));
+  background-size: 100% 100%, 100% 100%, 100% 100%, 170% 170%;
+  animation: tideShift 20s ease-in-out infinite alternate;
 }
 .tone-teal {
   background:
-    radial-gradient(circle at 15% 22%, rgba(255,255,255,0.09) 0, transparent 42%),
-    radial-gradient(circle at 85% 80%, rgba(11,39,64,0.28) 0, transparent 46%),
+    radial-gradient(circle at 15% 22%, rgba(255,255,255,0.12) 0, transparent 42%),
+    radial-gradient(circle at 85% 80%, rgba(183,28,44,0.14) 0, transparent 46%),
     repeating-radial-gradient(circle at 0 0, transparent 0, transparent 37px, rgba(255,255,255,0.05) 38px, rgba(255,255,255,0.05) 39px),
-    linear-gradient(135deg, #052421, var(--c-accent) 70%, var(--c-accent-2));
+    linear-gradient(135deg, var(--c-navy), var(--c-navy-soft) 62%, #1c5b82);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 170% 170%;
+  animation: tideShift 18s ease-in-out infinite alternate;
 }
 .tone-warm {
   background:
-    radial-gradient(circle at 18% 20%, rgba(255,255,255,0.09) 0, transparent 42%),
-    radial-gradient(circle at 85% 78%, rgba(11,39,64,0.3) 0, transparent 46%),
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,0.1) 0, transparent 42%),
+    radial-gradient(circle at 85% 78%, rgba(15,35,80,0.34) 0, transparent 46%),
     repeating-radial-gradient(circle at 0 0, transparent 0, transparent 37px, rgba(255,255,255,0.045) 38px, rgba(255,255,255,0.045) 39px),
-    linear-gradient(135deg, #2a1408, var(--c-warm) 75%, #f2985e);
+    linear-gradient(135deg, var(--c-navy-deep), var(--c-accent) 78%, #e0596a);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 170% 170%;
+  animation: tideShift 24s ease-in-out infinite alternate;
+}
+@keyframes tideShift {
+  0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 30%; }
+  100% { background-position: 0% 0%, 0% 0%, 0% 0%, 100% 70%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tone-navy, .tone-teal, .tone-warm { animation: none; }
+  .hero-bubbles span { animation: none; opacity: 0; }
+  .page-hero-wave .wave-layer { animation: none; }
+  .page-hero-wave .wave-back { display: none; }
+  .btn:hover .btn-arrow { animation: none; }
 }
 
 /* ==========================================================================
@@ -399,9 +454,23 @@ button { font-family: inherit; cursor: pointer; }
 .tag-pill {
   display: inline-block; padding: 6px 16px; border-radius: 999px;
   border: 1px solid var(--c-line); font-size: 12px; letter-spacing: 0.06em; color: var(--c-gray);
+  transition: transform 0.3s var(--ease), background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+a.tag-pill:hover, .tag-pill:hover { transform: translateY(-2px); }
 .num-en {
   font-family: var(--font-en); font-weight: 700;
+}
+
+/* ---------- 浮遊アニメーション（大きな数字・アイコンに躍動感を） ---------- */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.float-anim { animation: gentleFloat 5s ease-in-out infinite; }
+.float-anim.delay-1 { animation-delay: 0.6s; }
+.float-anim.delay-2 { animation-delay: 1.2s; }
+@media (prefers-reduced-motion: reduce) {
+  .float-anim { animation: none; }
 }
 
 /* ---------- 共通: 画像比率プレースホルダー（写真差し替え想定の装飾ビジュアル） ---------- */

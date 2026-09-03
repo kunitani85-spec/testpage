@@ -101,7 +101,7 @@
 .access-info dt { font-family: var(--font-en); font-size: 12px; letter-spacing: 0.12em; color: var(--c-accent); }
 .access-info dd { font-size: 14.5px; line-height: 1.9; color: var(--c-ink); }
 .map-placeholder {
-  background: linear-gradient(135deg, var(--c-cream-2), #dfe6e2);
+  background: linear-gradient(135deg, var(--c-cream-2), #dbe3ec);
   min-height: 280px; height: 100%;
   display: flex; align-items: center; justify-content: center;
   color: var(--c-gray); font-family: var(--font-en); font-size: 12px; letter-spacing: 0.3em;
