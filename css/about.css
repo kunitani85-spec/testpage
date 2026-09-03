@@ -1,0 +1,139 @@
+/* ==========================================================================
+   ABOUT US — ブランド・思想型
+   ========================================================================== */
+
+/* ---------- Philosophy（理念） ---------- */
+.philosophy {
+  text-align: center;
+}
+.philosophy .container { max-width: 900px; }
+.philosophy-quote {
+  margin-top: 34px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 2.1;
+  color: var(--c-navy);
+}
+.philosophy-body {
+  margin: 40px auto 0;
+  max-width: 720px;
+  text-align: left;
+  font-size: 15px;
+  line-height: 2.2;
+  color: var(--c-gray);
+}
+.philosophy-body p + p { margin-top: 22px; }
+
+/* ---------- Our Style（3カード） ---------- */
+.style-cards {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+}
+.style-card {
+  background: var(--c-white);
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+}
+.style-num {
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 46px;
+  color: var(--c-accent-pale);
+  -webkit-text-stroke: 1.5px var(--c-accent);
+  line-height: 1;
+}
+.style-card h3 {
+  margin-top: 28px;
+  font-family: var(--font-jp);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--c-navy);
+}
+.style-card p {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--c-gray);
+}
+.style-card-foot {
+  margin-top: auto;
+  padding-top: 24px;
+}
+.style-card-foot .tag-pill { font-family: var(--font-en); letter-spacing: 0.16em; }
+
+@media (max-width: 860px) {
+  .style-cards { grid-template-columns: 1fr; }
+  .style-card { min-height: 0; padding: 40px 28px; }
+}
+
+/* ---------- Change & Keep ---------- */
+.ck-section { padding: 0; }
+.ck-head { text-align: center; padding: clamp(72px, 10vw, 120px) 32px 0; }
+.ck-split {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ck-col {
+  padding: clamp(56px, 7vw, 96px) clamp(28px, 6vw, 80px);
+  min-height: 460px;
+}
+.ck-col-change { background: var(--c-navy); color: #fff; }
+.ck-col-keep { background: var(--c-cream-2); color: var(--c-ink); }
+.ck-col-tag {
+  font-family: var(--font-en); font-weight: 700; font-size: 13px; letter-spacing: 0.32em;
+}
+.ck-col-change .ck-col-tag { color: var(--c-accent-2); }
+.ck-col-keep .ck-col-tag { color: var(--c-warm); }
+.ck-col-title {
+  margin-top: 18px; font-family: var(--font-jp); font-weight: 900;
+  font-size: clamp(24px, 2.6vw, 32px);
+}
+.ck-list { margin-top: 40px; }
+.ck-list li {
+  position: relative;
+  padding: 20px 0 20px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-top: 1px solid;
+}
+.ck-col-change .ck-list li { border-color: rgba(255,255,255,0.14); }
+.ck-col-keep .ck-list li { border-color: rgba(11,39,64,0.12); }
+.ck-list li:last-child { border-bottom: 1px solid; }
+.ck-col-change .ck-list li:last-child { border-color: rgba(255,255,255,0.14); }
+.ck-col-keep .ck-list li:last-child { border-color: rgba(11,39,64,0.12); }
+.ck-list li::before {
+  content: ""; position: absolute; left: 0; top: 29px; width: 12px; height: 1px;
+}
+.ck-col-change .ck-list li::before { background: var(--c-accent-2); }
+.ck-col-keep .ck-list li::before { background: var(--c-warm); }
+
+@media (max-width: 780px) {
+  .ck-split { grid-template-columns: 1fr; }
+  .ck-col { min-height: 0; }
+}
+
+/* ---------- Closing ---------- */
+.about-closing {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  padding: clamp(90px, 12vw, 160px) 32px;
+  overflow: hidden;
+}
+.about-closing::before { content: ""; position: absolute; inset: 0; z-index: 0; }
+.about-closing-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.about-closing-title {
+  font-family: var(--font-jp); font-weight: 900; font-size: clamp(26px, 4vw, 42px); line-height: 1.6;
+}
+.about-closing-body {
+  margin-top: 26px; font-size: 15px; line-height: 2.1; color: rgba(255,255,255,0.82);
+}

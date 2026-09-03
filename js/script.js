@@ -1,12 +1,6 @@
 (() => {
   'use strict';
 
-  /* ---------- Preloader ---------- */
-  const preloader = document.getElementById('preloader');
-  window.addEventListener('load', () => {
-    setTimeout(() => preloader.classList.add('is-hidden'), 400);
-  });
-
   /* ---------- Header scroll state ---------- */
   const header = document.getElementById('siteHeader');
   const toTopBtn = document.getElementById('toTop');
@@ -14,29 +8,43 @@
   function updateHeaderState() {
     const scrolled = window.scrollY > 40;
     header.classList.toggle('is-scrolled', scrolled);
-    toTopBtn.classList.toggle('is-visible', window.scrollY > 600);
+    if (toTopBtn) toTopBtn.classList.toggle('is-visible', window.scrollY > 600);
   }
 
   /* ---------- Mobile nav ---------- */
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');
-  navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('is-open');
-    navToggle.classList.toggle('is-open', isOpen);
-  });
-  mainNav.querySelectorAll('.nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('is-open');
-      navToggle.classList.remove('is-open');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      navToggle.classList.toggle('is-open', isOpen);
+      header.classList.toggle('is-open', isOpen);
     });
-  });
+    mainNav.querySelectorAll('.nav-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        navToggle.classList.remove('is-open');
+        header.classList.remove('is-open');
+      });
+    });
+  }
+
+  /* ---------- Active nav link ---------- */
+  const currentPage = (document.body.dataset.page || '').trim();
+  if (currentPage) {
+    document.querySelectorAll(`.nav-link[data-page="${currentPage}"]`).forEach((link) => {
+      link.classList.add('is-active');
+    });
+  }
 
   /* ---------- To top ---------- */
-  toTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  if (toTopBtn) {
+    toTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
-  /* ---------- Scroll reveal (fade in / up / scale) ---------- */
+  /* ---------- Scroll reveal (fade in / up / scale / left / right) ---------- */
   const revealEls = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver(
     (entries) => {
@@ -49,15 +57,15 @@
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
   );
   revealEls.forEach((el) => revealObserver.observe(el));
 
   /* ---------- Count-up numbers ---------- */
-  const counters = document.querySelectorAll('.stat-num');
+  const counters = document.querySelectorAll('[data-count]');
   function animateCount(el) {
     const target = Number(el.dataset.count);
-    const duration = 1600;
+    const duration = 1500;
     const start = performance.now();
 
     function tick(now) {
@@ -81,57 +89,9 @@
   );
   counters.forEach((el) => counterObserver.observe(el));
 
-  /* ---------- Parallax layers ---------- */
-  const parallaxEls = Array.from(document.querySelectorAll('[data-speed]'));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let ticking = false;
-
-  function applyParallax() {
-    const viewportH = window.innerHeight;
-    parallaxEls.forEach((el) => {
-      const speed = Number(el.dataset.speed) || 0.2;
-      const rect = el.parentElement.getBoundingClientRect();
-      const offset = (rect.top) * speed;
-      el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-    });
-    ticking = false;
-  }
-
-  function onScrollOrResize() {
-    updateHeaderState();
-    if (!reduceMotion) {
-      if (!ticking) {
-        requestAnimationFrame(applyParallax);
-        ticking = true;
-      }
-    }
-  }
-
-  window.addEventListener('scroll', onScrollOrResize, { passive: true });
-  window.addEventListener('resize', onScrollOrResize);
-  onScrollOrResize();
-  if (!reduceMotion) applyParallax();
-
-  /* ---------- Cursor glow (desktop only) ---------- */
-  const cursorGlow = document.getElementById('cursorGlow');
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    window.addEventListener('mousemove', (e) => {
-      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-      cursorGlow.classList.add('is-active');
-    });
-    document.addEventListener('mouseleave', () => cursorGlow.classList.remove('is-active'));
-  }
-
-  /* ---------- Contact form (front-end only demo) ---------- */
-  const contactForm = document.getElementById('contactForm');
-  const formNote = document.getElementById('formNote');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formNote.textContent = 'お問い合わせありがとうございます。担当者より折り返しご連絡いたします。';
-      contactForm.reset();
-    });
-  }
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+  window.addEventListener('resize', updateHeaderState);
+  updateHeaderState();
 
   /* ---------- Smooth anchor scroll offset for fixed header ---------- */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

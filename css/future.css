@@ -1,0 +1,64 @@
+/* ==========================================================================
+   FUTURE — 社会課題・未来型（7テーマのビジュアルカード）
+   ========================================================================== */
+
+.future-intro { text-align: center; }
+.future-intro .section-lead { margin: 22px auto 0; }
+
+.future-grid {
+  display: flex;
+  flex-direction: column;
+}
+.future-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  padding: clamp(48px, 7vw, 88px) 0;
+  border-bottom: 1px solid var(--c-line);
+}
+.future-card:last-child { border-bottom: none; }
+.future-card.on-navy-row { border-color: rgba(255,255,255,0.1); }
+
+.future-card-visual {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  color: #fff;
+}
+.future-card-visual .fv-num {
+  font-family: var(--font-en); font-weight: 700; font-size: 15px; letter-spacing: 0.1em;
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  opacity: 0.85;
+}
+.future-card-visual svg { width: 46%; height: 46%; }
+
+.future-card-body-tag { font-family: var(--font-en); font-weight: 600; font-size: 12px; letter-spacing: 0.3em; color: var(--c-accent); }
+.future-card-body h3 {
+  margin-top: 12px; font-family: var(--font-jp); font-weight: 900;
+  font-size: clamp(22px, 2.8vw, 30px); color: var(--c-navy); line-height: 1.55;
+}
+.future-card-body .sub { margin-top: 10px; font-family: var(--font-jp); font-weight: 700; font-size: 15px; color: var(--c-accent); }
+.future-card-body ul {
+  margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px;
+}
+.future-card-body ul li {
+  padding: 9px 18px; border: 1px solid var(--c-line); border-radius: 999px;
+  font-size: 13px; color: var(--c-gray);
+}
+
+@media (max-width: 720px) {
+  .future-card { grid-template-columns: 100px 1fr; }
+  .future-card-visual .fv-num { font-size: 11px; top: 8px; }
+}
+@media (max-width: 520px) {
+  .future-card { grid-template-columns: 1fr; text-align: left; }
+  .future-card-visual { width: 88px; }
+}
+
+/* ---------- Closing ---------- */
+.future-closing { position: relative; color: #fff; text-align: center; padding: clamp(100px, 13vw, 170px) 32px; overflow: hidden; }
+.future-closing-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.future-closing-title { font-family: var(--font-jp); font-weight: 900; font-size: clamp(28px, 4.4vw, 46px); line-height: 1.6; }
+.future-closing-body { margin-top: 28px; font-size: 15px; line-height: 2.1; color: rgba(255,255,255,0.82); }

@@ -1,0 +1,103 @@
+/* ==========================================================================
+   STRENGTH — 5つの強み・大きな数字型
+   ========================================================================== */
+
+.strength-intro { text-align: center; }
+.strength-intro .section-lead { margin-left: auto; margin-right: auto; }
+
+/* ---------- 5つの強み（大きな数字で見せる） ---------- */
+.strength-list { }
+.strength-item {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  padding: clamp(56px, 8vw, 96px) 0;
+  border-bottom: 1px solid var(--c-line);
+}
+.strength-item:first-child { padding-top: 0; }
+.strength-item:last-child { border-bottom: none; padding-bottom: 0; }
+.strength-item:nth-child(even) { direction: rtl; }
+.strength-item:nth-child(even) > * { direction: ltr; }
+
+.strength-num-wrap { position: relative; display: flex; align-items: center; }
+.strength-num-big {
+  font-family: var(--font-en); font-weight: 700;
+  font-size: clamp(90px, 13vw, 190px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--c-line);
+  letter-spacing: -0.02em;
+}
+.strength-item-tag {
+  position: absolute; top: 14%; left: 4px;
+  font-family: var(--font-en); font-weight: 600; font-size: 13px; letter-spacing: 0.3em; color: var(--c-accent);
+}
+
+.strength-body h3 {
+  font-family: var(--font-jp); font-weight: 900;
+  font-size: clamp(22px, 3vw, 32px); line-height: 1.6; color: var(--c-navy);
+}
+.strength-body h3 .accent { color: var(--c-accent); }
+.strength-body p { margin-top: 20px; font-size: 14.5px; line-height: 2.1; color: var(--c-gray); max-width: 480px; }
+.strength-body .tag-pill { margin-top: 22px; }
+
+@media (max-width: 780px) {
+  .strength-item, .strength-item:nth-child(even) {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    text-align: left;
+  }
+  .strength-num-big { font-size: 96px; }
+}
+
+/* ---------- 人を育てる力：研修FLOW ---------- */
+.train-flow {
+  margin-top: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.train-flow-step {
+  padding: 16px 28px;
+  border: 1px solid rgba(255,255,255,0.24);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.train-flow-arrow { padding: 0 18px; color: var(--c-accent-2); font-size: 18px; }
+@media (max-width: 640px) {
+  .train-flow { flex-direction: column; }
+  .train-flow-arrow { transform: rotate(90deg); padding: 6px 0; }
+}
+
+/* ---------- データで進化する力：産地〜小売FLOW ---------- */
+.data-flow {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+}
+.data-flow-step {
+  background: var(--c-white); padding: 36px 26px; text-align: center;
+}
+.data-flow-step-tag { font-family: var(--font-en); font-size: 11px; letter-spacing: 0.2em; color: var(--c-accent); }
+.data-flow-step h4 { margin-top: 10px; font-family: var(--font-jp); font-weight: 700; font-size: 18px; color: var(--c-navy); }
+@media (max-width: 700px) { .data-flow { grid-template-columns: 1fr; } }
+
+.keywords {
+  margin-top: 44px;
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+}
+.keywords .tag-pill { font-family: var(--font-en); letter-spacing: 0.14em; font-size: 12px; }
+
+/* ---------- Closing ---------- */
+.strength-closing { text-align: center; color: #fff; padding: clamp(90px, 12vw, 160px) 32px; }
+.strength-closing-inner { max-width: 720px; margin: 0 auto; }
+.strength-closing-title { font-family: var(--font-jp); font-weight: 900; font-size: clamp(26px, 4vw, 42px); line-height: 1.6; }
+.strength-closing-body { margin-top: 24px; font-size: 15px; line-height: 2.1; color: rgba(255,255,255,0.82); }
