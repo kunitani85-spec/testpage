@@ -336,15 +336,36 @@ main {
 
 .biz-origin__divider {
     flex: 0 0 auto;
-    width: 64px;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #fff;
+    transition: opacity .3s ease, flex-basis .5s ease, width .5s ease;
+}
+
+.biz-origin__divider-line {
+    flex: none;
+    width: 22px;
+    height: 1px;
+    background: rgba(15, 35, 80, .3);
+}
+
+.biz-origin__divider-circle {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid #b71c2c;
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: serif;
     font-size: 26px;
+    font-weight: 700;
     color: #b71c2c;
-    background: #fff;
-    transition: opacity .3s ease, flex-basis .5s ease, width .5s ease;
 }
 
 .biz-origin__row.is-expanded .biz-origin__divider {
@@ -365,8 +386,13 @@ main {
     font: inherit;
 }
 
+.biz-origin__card:first-child .biz-origin__head {
+    padding-right: 48px;
+}
+
 .biz-origin__card:last-child .biz-origin__head {
     text-align: right;
+    padding-left: 48px;
 }
 
 .biz-origin__card.is-active .biz-origin__head {
@@ -523,14 +549,28 @@ main {
 
     .biz-origin__divider {
         width: 100%;
-        padding: 6px 0;
+        flex-direction: column;
+        padding: 14px 0;
+        gap: 8px;
+    }
+
+    .biz-origin__divider-line {
+        width: 30px;
+    }
+
+    .biz-origin__divider-circle {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
     }
 
     .biz-origin__row.is-expanded .biz-origin__divider {
         display: none;
     }
 
-    .biz-origin__head {
+    .biz-origin__head,
+    .biz-origin__card:first-child .biz-origin__head,
+    .biz-origin__card:last-child .biz-origin__head {
         padding: 26px 20px;
     }
 
