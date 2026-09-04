@@ -1,0 +1,515 @@
+:root{
+    --wave-color:#5c2020;
+    --wave-width:3;
+    --border-color:#111;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+    font-family:"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    color:#111;
+    background:#fff;
+}
+
+
+/*==============================================
+ヘッダー
+===============================================*/
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 8;
+}
+
+.header__inner {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header__logo {
+    flex: none;
+    width: auto;
+    height: 50px;
+}
+
+.header__navgroup {
+    margin-left: auto;
+    display: flex;
+    flex: none;
+}
+
+.header__navgroup > * + * {
+    margin-left: 60px;
+}
+
+.header__navitem {
+    font-size: 16px;
+    color: #fff;
+    transition: opacity .2s ease;
+}
+
+.header__navitem:hover {
+    opacity: .65;
+}
+
+
+
+/* ===== ハンバーガーボタン ===== */
+.header__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 7;
+}
+
+.header__hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+/* 開いた状態 */
+.header__hamburger.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.header__hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.header__hamburger.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ===== ドロワーメニュー ===== */
+.header__drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 35, 80, 0.97);
+    z-index: 6;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.header__drawer.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.header__drawer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.header__drawer-nav a {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    font-family: serif;
+    transition: opacity 0.2s ease;
+}
+
+.header__drawer-nav a:hover {
+    opacity: 0.6;
+}
+
+/* ===== 1300px以下で切り替え ===== */
+@media screen and (max-width: 1300px) {
+    .header__navgroup {
+        display: none;
+    }
+
+    .header__hamburger {
+        display: flex;
+    }
+
+    .header__drawer {
+        display: flex;
+    }
+}
+
+/*==============================================
+
+ファーストビュー
+
+===============================================*/
+
+#firstview{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1;
+}
+
+
+
+
+/* ==== スクロールで波の位置を動かすための土台 ==== */
+.scroll-stage{
+    position:relative;
+    height:160vh; /* このぶんスクロールしている間、波が動く */
+}
+
+.hero-sticky{
+    position:sticky;
+    top:0;
+    height:100vh;
+    /*height: 70vh;*/
+    overflow:hidden;
+    border:1px solid var(--border-color);
+    background:#fff;
+}
+
+/* 右側：画像レイヤー（常に全面にあり、白レイヤーで覆われている部分だけ見えない） */
+.image-layer {
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/top-images.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* 左側：白レイヤー（波の形でクリップして右側を隠す） */
+.white-layer{
+    position:absolute;
+    inset:0;
+    background:#0B3D5C;
+    /* clip-path は JS で書き換える */
+}
+
+.hero-content{
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-left:6vw;
+    pointer-events:none;
+    z-index:2;
+}
+
+.hero-title{
+    font-size:clamp(48px,8vw,70px);
+    font-family: serif;
+    line-height:1.4;
+    letter-spacing:0.05em;
+    font-weight:400;
+    color:#fff;
+    margin:0 0 18px 0;
+    white-space:nowrap;
+    text-shadow: #808080 0.8px 0 0.8px;
+}
+
+.hero-sub{
+    font-size:clamp(14px,1.6vw,20px);
+    letter-spacing:0.08em;
+    color:#fff;
+    margin:0;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: #808080 0.8px 0 0.8px;
+}
+
+.hero-sub02{
+    font-size:clamp(14px,1.6vw,20px);
+    letter-spacing:0.08em;
+    color:#fff;
+    margin:0;
+    font-family: sans-serif;
+    text-shadow: #808080 0.8px 0 0.8px;
+}
+
+.scroll-hint{
+    position:absolute;
+    right:24px;
+    bottom:24px;
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:#111;
+    writing-mode:vertical-rl;
+    opacity:0.55;
+    z-index:2;
+    transition:opacity .4s ease;
+}
+.scroll-hint.hide{opacity:0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer_area{
+    margin-top: auto;
+}
+
+/*==============================================
+
+トップに戻る
+
+===============================================*/
+
+/*リンクの形状*/
+#page-top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #b71c2c;
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.6rem;
+    transition: all 0.3s;
+}
+
+#page-top a:hover {
+    background: #777;
+}
+
+/*リンクを右下に固定*/
+#page-top {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+/*　上に上がる動き　*/
+
+#page-top.UpMove {
+    animation: UpAnime 0.5s forwards;
+}
+
+@keyframes UpAnime {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*　下に下がる動き　*/
+
+#page-top.DownMove {
+    animation: DownAnime 0.5s forwards;
+}
+
+@keyframes DownAnime {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(100px);
+    }
+}
+
+
+/* ================================================
+魚寅横スクロール指定
+================================================ */
+
+.scroll-infinity {
+    padding-bottom: 50px;
+}
+
+@keyframes infinity-scroll-right {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+.scroll-infinity__wrap {
+    display: flex;
+    overflow: hidden;
+}
+
+.scroll-infinity__list {
+    display: flex;
+    list-style: none;
+    padding: 0
+}
+
+.scroll-infinity__list--right {
+    animation: infinity-scroll-right 200s infinite linear 0.5s both;
+}
+
+.scroll-infinity__item {
+    width: calc(100vw / 1);
+}
+
+.scroll-infinity__item > img {
+    width: 100%;
+}
+
+/*==============================================
+
+フッター
+
+===============================================*/
+
+
+footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #000;
+}
+
+footer hr {
+    margin-top: 100px;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #35466b;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer {
+    padding: 2rem;
+    font-size: 15px;
+    color: #fff;
+    background-color: #0f2350;
+}
+
+.footer__navi-heading {
+    font-weight: 600;
+}
+
+.footer__logo {
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.footer__navi li {
+    margin-bottom: 0.75rem;
+}
+
+.address {
+    color: #40567c;
+}
+
+.address a {
+    color: #40567c;
+}
+
+.address a:hover {
+    color: #fff;
+}
+
+.copyright p {
+    text-align: right;
+    color: #40567c;
+}
+
+.copyright a {
+    color: #40567c;
+}
+
+.copyright a:hover {
+    color: #fff;
+}
+
+.uotora_right {
+    background-color: #0f2350;
+}
+
+.uotora_right .scroll-infinity {
+    padding-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .md-flex {
+        margin-top: 50px;
+        display: flex;
+    }
+
+    .md-justify-between {
+        justify-content: space-between;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

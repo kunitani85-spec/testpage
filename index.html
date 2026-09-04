@@ -1,373 +1,635 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="no-js">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APEX MOTORS | 圧倒的スピード感を、その手に。</title>
-<meta name="description" content="APEX MOTORS - スピードと感動をお届けする自動車販売代理店。国内外の厳選車両を豊富に取り揃え。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <!--後ほど削除-->
+    <!-- SEO: タイトル・ディスクリプション -->
+    <title>株式会社魚寅 | UOTORA 【公式】| 魚で日本一を目指す。</title>
+    <meta name="description" content="魚を育て、仕入れ、加工し、食卓へ届ける。私たちは、海外での養殖から国内外の仕入れ、加工、販売まで、魚に関わる幅広い事業を展開しています。トライアルへ新鮮な養殖エビや魚を提供し、品質と信頼を積み重ねながら、魚の可能性を追求。水産業の未来を切り拓き、「魚で日本一の企業」を目指します。">
+    <meta name="keywords" content="キーワード">
+    <meta name="author" content="株式会社魚寅 | UOTORA 【公式】| 魚で日本一を目指す。">
+    <meta name="theme-color" content="cornflowerblue">
+
+    <!-- canonical（実際のサイトURLに変更してください） -->
+    <link rel="canonical" href="https://uotora-trial.com/">
+
+    <!-- ファビコン -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <!-- ヒーロー画像の先読み（LCP改善） -->
+    <link rel="preload" as="image" href="common/images/logo.png" fetchpriority="high">
+
+    <!-- サイトマップ -->
+    <link rel="sitemap" type="application/xml" href="https://uotora-trial.com/sitemap.xml">
+
+    <!-- OGP: SNS・LINE シェア用 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TRIAL TOURS">
+    <meta property="og:title" content="株式会社魚寅 | UOTORA 【公式】| 魚で日本一を目指す。">
+    <meta property="og:description" content="魚を育て、仕入れ、加工し、食卓へ届ける。私たちは、海外での養殖から国内外の仕入れ、加工、販売まで、魚に関わる幅広い事業を展開しています。トライアルへ新鮮な養殖エビや魚を提供し、品質と信頼を積み重ねながら、魚の可能性を追求。水産業の未来を切り拓き、「魚で日本一の企業」を目指します。">
+    <meta property="og:url" content="https://uotora-trial.com/">
+    <meta property="og:image" content="https://uotora-trial.com/common/images/1.jpg">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="株式会社魚寅 | UOTORA 【公式】| 魚で日本一を目指す。">
+    <meta name="twitter:description" content="魚を育て、仕入れ、加工し、食卓へ届ける。私たちは、海外での養殖から国内外の仕入れ、加工、販売まで、魚に関わる幅広い事業を展開しています。トライアルへ新鮮な養殖エビや魚を提供し、品質と信頼を積み重ねながら、魚の可能性を追求。水産業の未来を切り拓き、「魚で日本一の企業」を目指します。">
+    <meta name="twitter:image" content="https://uotora-trial.com/common/images/1.jpg">
+
+    <!-- CSS: サイトのスタイル -->
+
+    <!-- 構造化データ（JSON-LD） -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "TravelAgency",
+            "name": "株式会社魚寅",
+            "url": "https://uotora-trial.com/",
+            "telephone": "+81-092-626-5550",
+            "email": "@trial-net.co.jp",
+            "address": {
+                "@type": "PostalAddress",
+                "postalCode": "813-0034",
+                "addressRegion": "福岡県",
+                "addressLocality": "福岡市",
+                "streetAddress": "東区多の津1-12-2",
+                "addressCountry": "JP"
+            },
+            "description": "魚を育て、仕入れ、加工し、食卓へ届ける。私たちは、海外での養殖から国内外の仕入れ、加工、販売まで、魚に関わる幅広い事業を展開しています。トライアルへ新鮮な養殖エビや魚を提供し、品質と信頼を積み重ねながら、魚の可能性を追求。水産業の未来を切り拓き、「魚で日本一の企業」を目指します。",
+            "areaServed": [{
+                "@type": "Country",
+                "name": "JP"
+            }]
+        }
+
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="common/css/default.css?v=0826" />
+    <link rel="stylesheet" href="common/css/style.css?v=0826" />
+    <!--レイアウト崩れを防ぐ-->
+    <script>
+        document.documentElement.classList.remove("no-js");
+        document.documentElement.classList.add("js");
+
+    </script>
+
+    <!--同日判定-->
+    <script>
+        // 同日に訪問済みかどうかを描画前に同期判定
+        (function() {
+            try {
+                var KEY = "gyoten_intro_seen_date";
+                var today = new Date().toISOString().slice(0, 10);
+                if (localStorage.getItem(KEY) === today) {
+                    document.documentElement.classList.add("skip-intro"); // ← ここで即座に付与
+                }
+            } catch (e) {}
+        })();
+
+    </script>
+    <script>
+        // ブラウザ自動スクロール復元を無効化し、自前で管理する
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // ページ離脱前にスクロール位置を保存
+        window.addEventListener('beforeunload', function() {
+            try {
+                // skip-intro（2回目以降）のときだけ保存する
+                if (document.documentElement.classList.contains('skip-intro')) {
+                    sessionStorage.setItem('scrollY', window.scrollY);
+                } else {
+                    sessionStorage.removeItem('scrollY');
+                }
+            } catch (e) {}
+        });
+
+    </script>
 </head>
+
 <body>
+    <div id="fv">
+        <!-- 1. ローディング -->
+        <div id="loading" class="fade is-visible">
+            <div class="bubble-layer" id="bubbleLayer"></div>
 
-<!-- ローディング画面 -->
-<div class="preloader" id="preloader">
-  <div class="preloader-logo">APEX<span>MOTORS</span></div>
-  <div class="preloader-bar"><span></span></div>
-</div>
+            <svg class="horizon-wave" viewBox="0 0 800 60" preserveAspectRatio="none">
+                <path d="M0,30 C150,60 250,0 400,30 C550,60 650,0 800,30 L800,60 L0,60 Z" fill="#F4F8FA" opacity="0.15" />
+            </svg>
 
-<!-- カーソル追従スピードドット -->
-<div class="cursor-glow" id="cursorGlow"></div>
-
-<!-- ヘッダー -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <a href="#top" class="logo">APEX<span>MOTORS</span></a>
-    <nav class="main-nav" id="mainNav">
-      <a href="#concept" class="nav-link">コンセプト</a>
-      <a href="#lineup" class="nav-link">ラインナップ</a>
-      <a href="#feature" class="nav-link">選ばれる理由</a>
-      <a href="#voice" class="nav-link">お客様の声</a>
-      <a href="#access" class="nav-link">店舗情報</a>
-      <a href="#contact" class="nav-link nav-cta">お問い合わせ</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<!-- ヒーロー -->
-<section class="hero" id="top">
-  <div class="hero-bg" data-speed="0.3"></div>
-  <div class="speed-lines" data-speed="0.5"></div>
-  <div class="hero-grid" data-speed="0.2"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow reveal" data-anim="fade-up">CAR DEALERSHIP</p>
-    <h1 class="hero-title">
-      <span class="reveal" data-anim="fade-up" data-delay="100">圧倒的な</span>
-      <span class="reveal accent" data-anim="fade-up" data-delay="250">スピード感</span>
-      <span class="reveal" data-anim="fade-up" data-delay="400">を、その手に。</span>
-    </h1>
-    <p class="hero-desc reveal" data-anim="fade-up" data-delay="550">
-      国内外の厳選車両を豊富に取り揃え。あなたの理想のカーライフを、APEX MOTORSが全力で加速させます。
-    </p>
-    <div class="hero-actions reveal" data-anim="fade-up" data-delay="700">
-      <a href="#lineup" class="btn btn-primary">在庫を見る</a>
-      <a href="#contact" class="btn btn-ghost">無料相談する</a>
-    </div>
-  </div>
-  <div class="scroll-indicator reveal" data-anim="fade-in" data-delay="1000">
-    <span class="scroll-line"></span>
-    <span class="scroll-text">SCROLL</span>
-  </div>
-</section>
-
-<!-- コンセプト -->
-<section class="concept" id="concept">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">CONCEPT</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">
-      車は、移動の道具じゃない。<br>感情を動かす<span class="accent">エンジン</span>だ。
-    </h2>
-    <p class="concept-text reveal" data-anim="fade-up" data-delay="200">
-      APEX MOTORSは「速さ」を単なる数値ではなく、体験として届けることにこだわります。
-      一台一台を厳選し、専門知識を持つスタッフが、お客様にとって最高の一台をご提案します。
-    </p>
-
-    <div class="stats">
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="0">
-        <span class="stat-num" data-count="520">0</span><span class="stat-suffix">+</span>
-        <p class="stat-label">取扱車両数</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="120">
-        <span class="stat-num" data-count="23">0</span><span class="stat-suffix">年</span>
-        <p class="stat-label">創業からの歴史</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="240">
-        <span class="stat-num" data-count="98">0</span><span class="stat-suffix">%</span>
-        <p class="stat-label">顧客満足度</p>
-      </div>
-      <div class="stat-item reveal" data-anim="fade-up" data-delay="360">
-        <span class="stat-num" data-count="47">0</span><span class="stat-suffix">都道府県</span>
-        <p class="stat-label">全国納車対応</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ラインナップ -->
-<section class="lineup" id="lineup">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">LINEUP</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">
-      ラインナップ
-    </h2>
-  </div>
-
-  <div class="lineup-grid">
-    <article class="car-card reveal" data-anim="fade-up" data-delay="0">
-      <div class="car-media car-sports">
-        <svg class="car-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-car-sports"></use></svg>
-      </div>
-      <div class="car-body">
-        <span class="car-type">SPORTS</span>
-        <h3>スポーツカー</h3>
-        <p>心を揺さぶる加速性能。走る歓びを追求した一台。</p>
-        <div class="car-meta">
-          <span>本体価格</span>
-          <strong>¥3,980,000〜</strong>
+            <p class="loading-sub">UOTORA</p>
+            <p class="loading-title">魚寅</p>
+            <div class="wave-loader">
+                <span></span><span></span><span></span>
+            </div>
         </div>
-      </div>
-    </article>
 
-    <article class="car-card reveal" data-anim="fade-up" data-delay="120">
-      <div class="car-media car-suv">
-        <svg class="car-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-car-suv"></use></svg>
-      </div>
-      <div class="car-body">
-        <span class="car-type">SUV</span>
-        <h3>SUV / クロスオーバー</h3>
-        <p>力強さと快適さを両立。あらゆるシーンに対応。</p>
-        <div class="car-meta">
-          <span>本体価格</span>
-          <strong>¥2,780,000〜</strong>
+        <!-- 2. オープニング動画 -->
+        <div id="movie" class="fade">
+            <video id="introVideo" muted playsinline>
+                <source src="common/video/img_0276.mp4" type="video/mp4">
+            </video>
+            <button id="skip" type="button">SKIP</button>
         </div>
-      </div>
-    </article>
 
-    <article class="car-card reveal" data-anim="fade-up" data-delay="240">
-      <div class="car-media car-sedan">
-        <svg class="car-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-car-sedan"></use></svg>
-      </div>
-      <div class="car-body">
-        <span class="car-type">SEDAN</span>
-        <h3>セダン</h3>
-        <p>洗練されたフォルムと静粛性。上質な移動空間。</p>
-        <div class="car-meta">
-          <span>本体価格</span>
-          <strong>¥2,200,000〜</strong>
+
+        <!-- 3. ファーストビュー -->
+        <div id="firstview" class="fade">
+            <section class="harbor">
+
+                <div class="fv-top">
+                    <div class="header">
+                        <div class="header__inner">
+                            <a href="#"><img class="header__logo" src="common/images/logo.png" alt="ロゴ"></a>
+                            <div class="header__navgroup">
+                                <a class="header__navitem" href="#">TOP</a>
+                                <a class="header__navitem" href="concept.html">魚寅について</a>
+                                <a class="header__navitem" href="business.html">事業内容</a>
+                                <a class="header__navitem" href="strengths.html">魚寅の強み</a>
+                                <a class="header__navitem" href="sustainable.html">未来への取り組み</a>
+                                <a class="header__navitem" href="recruitsite/index.html">採用情報</a>
+                                <a class="header__navitem" href="contact.html">お問い合わせ</a>
+                            </div>
+                            <!-- ハンバーガーボタン -->
+                            <button class="header__hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!-- ドロワーメニュー（headerの外、bodyの直下に配置） -->
+                    <div class="header__drawer" id="drawerMenu" aria-hidden="true">
+                        <nav class="header__drawer-nav">
+                            <a href="#">TOP</a>
+                            <a href="concept.html">魚寅について</a>
+                            <a href="business.html">事業内容</a>
+                            <a href="strengths.html">魚寅の強み</a>
+                            <a href="sustainable.html">未来への取り組み</a>
+                            <a href="recruitsite/index.html">採用情報</a>
+                            <a href="contact.html">お問い合わせ</a>
+                        </nav>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="fv__video_btn">
+                    <div class="fv_title_area">
+                        <h1>魚で日本一の<br>企業になる</h1>
+                        <p>育てる。仕入れる。届ける。<br>
+                            魚の未来を、私たちの手でつくる。</p>
+                    </div>
+
+                    <button id="replayMovie" type="button">動画をもう一度見る</button>
+                </div>
+
+
+
+                <div class="l-about">
+                    <section class="c-blur">
+                        <div class="c-blur__bg" aria-hidden="true"></div>
+                        <div class="c-blur__tint" data-scroll-blur aria-hidden="true"></div>
+                        <div class="c-blur__overlay" data-scroll-blur aria-hidden="true"></div>
+                    </section>
+                    <section class="p-reveal">
+                        <hgroup class="p-reveal__group">
+                            <h2 class="p-reveal__title" data-fade-in>魚で日本一を目指す理由。</h2>
+                            <p class="p-reveal__sub" data-fade-in>私たちは、魚を通じて人々の暮らしを豊かにし、<br>
+                                地域や社会に必要とされる企業を目指しています。<br>
+                                魚を仕入れ、育て、加工し、食卓へ届ける。<br>
+                                一つひとつの仕事に責任を持ち、<br>
+                                品質と信頼を積み重ねながら、<br>
+                                魚の可能性を追求していく。<br>
+                                その先に、私たちが目指す「魚で日本一」があります。</p>
+
+                            <a class="parallax__link" href="concept.html">
+                                魚寅について
+                                <span class="parallax__circle">
+                                    <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </a>
+
+                        </hgroup>
+                    </section>
+
+                    <div class="scroll-infinity">
+                        <div class="scroll-infinity__wrap">
+                            <ul class="scroll-infinity__list scroll-infinity__list--right">
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                            </ul>
+                            <ul class="scroll-infinity__list scroll-infinity__list--right">
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                                <li class="scroll-infinity__item"><img src="common/images/uotora.png" /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
         </div>
-      </div>
-    </article>
 
-    <article class="car-card reveal" data-anim="fade-up" data-delay="360">
-      <div class="car-media car-ev">
-        <svg class="car-icon" viewBox="0 0 200 90" aria-hidden="true"><use href="#icon-car-ev"></use></svg>
-      </div>
-      <div class="car-body">
-        <span class="car-type">EV</span>
-        <h3>電気自動車</h3>
-        <p>静かなる加速、次世代の走行体験をあなたに。</p>
-        <div class="car-meta">
-          <span>本体価格</span>
-          <strong>¥3,300,000〜</strong>
+    </div>
+    <!--ローディング>動画再生>ファーストビュー箇所終わり-->
+    <main>
+        <section class="parallax parallax--about" id="about">
+
+            <div class="sectionPin pin">
+                <div class="pin_sticky">
+                    <div class="pin_wrapper">
+                        <div class="pin_textarea_stage">
+                            <div class="pin_textarea">
+                                <div class="pin_business_box">
+                                    <h3><span class="parallax__blue"><span class="parallax__eyebrow">●</span> BUSINESS</span>海から食卓まで、<br>
+                                        すべてをつなぐ仕事</h3>
+                                    <p class="pin_text">
+                                        私たちは魚を仕入れるだけではありません。<br>
+                                        海で育て、加工し、全国へ届けるまで。<br>
+                                        一貫した体制だからこそ、<br>
+                                        新鮮で安心できる品質を実現しています。
+                                    </p>
+                                </div>
+                                <div class="business_img"><img src="common/images/pro-01.jpg" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="image_box">
+                            <div class="image_box_tit img_s_box01">
+                                <p>（<span>01/</span>04）</p>
+                                <h3>海の恵みと<br>
+                                    向き合う。</h3>
+                                <h4>全国の漁港や自社養殖場から<br>
+                                    新鮮な魚を育みます。</h4>
+                            </div>
+                            <div class="image_box01">
+                                <img class="image" src="common/images/pro-03.jpg" alt="海" width="300" height="300">
+                            </div>
+                        </div>
+                        <div class="image_box">
+                            <div class="image_box_tit img_s_box02">
+                                <p>（<span>02/</span>04）</p>
+                                <h3>職人の技で、<br>
+                                    おいしさを磨く。</h3>
+                                <h4>徹底した衛生管理と加工技術で、<br>
+                                    魚の魅力を最大限に引き出します。</h4>
+                            </div><img class="image image__2" src="common/images/pro-05.jpg" alt="技" width="300" height="300">
+                        </div>
+                        <div class="image_box">
+                            <div class="image_box_tit img_s_box03">
+                                <p>（<span>03/</span>04）</p>
+                                <h3>品質そのまま、<br>
+                                    全国へ。</h3>
+                                <h4>鮮度を保つ物流体制で、<br>
+                                    お客様のもとへ確かな品質を届けます。</h4>
+                            </div><img class="image image__3" src="common/images/pro-07.jpg" alt="信頼" width="300" height="300">
+                        </div>
+                        <div class="image_box">
+                            <div class="image_box_tit img_s_box04">
+                                <p>（<span>04/</span>04）</p>
+                                <h3>その一皿の<br>
+                                    笑顔まで。</h3>
+                                <h4>海から食卓まで、一貫した仕事が<br>
+                                    毎日の「おいしい」を支えています。</h4>
+                            </div><img class="image image__4" src="common/images/pro-09.jpg" alt="食卓" width="300" height="300">
+                        </div>
+                        <div class="image_box">
+                            <a class="parallax__link parallax__link_red" href="business.html">
+                                事業内容を見る
+                                <span class="parallax__circle">
+                                    <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <section class="parallax parallax--product" id="product">
+            <div class="product_tltle">
+                <h3><span class="parallax__white"><span class="parallax__eyebrow">●</span> STRENGTHS</span>選ばれる理由の一つは、<br>
+                    一つひとつの積み重ね</h3>
+                <p class="text">仕入れから販売までの一貫体制、鮮度と品質へのこだわり、そしてDXによる新たな挑戦。<br>私たちは、変わらない誠実さと進化する技術で、海の恵みを最高のかたちでお届けします。</p>
+            </div>
+            <div class="product_wrapper">
+                <section class="section" data-section>
+                    <div class="section__inner" data-section-inner>
+                        <div class="product_box">
+                            <div class="product_left"><img src="common/images/about-01.jpg" alt=""></div>
+                            <div class="product_right">
+                                <h3 class="product_right_01">一貫した生産・販売体制</h3>
+                                <p>仕入れ・養殖・加工・販売までを自社で一貫して行うことで、<br>鮮度や品質を徹底管理。すべての工程に責任を持ち、お客様へ安心して選んでいただける商品をお届けしています。</p>
+                                <div class="product_btn">
+                                    <a class="parallax__link" href="strengths.html">
+                                        詳しく見る
+                                        <span class="parallax__circle">
+                                            <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section" data-section>
+                    <div class="section__inner" data-section-inner>
+                        <div class="product_box">
+                            <div class="product_left"><img src="common/images/about-02.jpg" alt=""></div>
+                            <div class="product_right">
+                                <h3 class="product_right_02">鮮度と品質へのこだわり</h3>
+                                <p>長年培ってきた目利きの技術と、徹底した品質・衛生管理のもと、魚本来のおいしさを最大限に引き出します。安全性はもちろん、鮮度にも妥協することなく、一つひとつ丁寧に仕上げています。</p>
+                                <div class="product_btn">
+                                    <a class="parallax__link" href="strengths.html">
+                                        詳しく見る
+                                        <span class="parallax__circle">
+                                            <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section">
+                    <div class="section__inner">
+                        <div class="product_box">
+                            <div class="product_left"><img src="common/images/about-03.jpg" alt=""></div>
+                            <div class="product_right">
+                                <h3 class="product_right_03">鮮魚DX</h3>
+                                <p>仕入れから販売までの情報をデータでつなぎ、鮮度・品質・物流を最適化。AIやIoTなどのデジタル技術を活用し、食品ロスの削減や業務効率化を進めながら、持続可能な水産業の未来を築いています。</p>
+                                <div class="product_btn">
+                                    <a class="parallax__link" href="strengths.html">
+                                        詳しく見る
+                                        <span class="parallax__circle">
+                                            <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="parallax parallax--sustainability" id="sustainability">
+            <div class="sustainability">
+                <div class="l-sustainability">
+                    <section class="c-blur c-blur-sustainability">
+                        <div class="c-blur-sustainability__bg" aria-hidden="true"></div>
+                        <div class="c-blur-sustainability__tint" data-scroll-blur aria-hidden="true"></div>
+                        <div class="c-blur-sustainability__overlay" data-scroll-blur aria-hidden="true"></div>
+                    </section>
+
+                    <section class="p-reveal p-reveal02">
+                        <hgroup class="p-reveal__group">
+                            <h3 class="p-blur-area"><span class="parallax__white"><span class="parallax__eyebrow">●</span> FUTURE</span></h3>
+                            <h2 class="p-reveal__title" data-fade-in>未来へつなぐ、<br>私たちの取り組み</h2>
+                            <p class="p-reveal__sub" data-fade-in>海の恵みを未来へ届けるために。<br>
+                                私たちは環境への配慮と資源の保全を大切にし、持続可能な水産業の実現を目指しています。<br>
+                                一人ひとりの小さな積み重ねが、豊かな海と未来の食文化につながると信じています。</p>
+
+                            <a class="parallax__link" href="future.html">
+                                未来への取り組み
+                                <span class="parallax__circle">
+                                    <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </hgroup>
+                    </section>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="news" id="news">
+            <div class="news__inner">
+                <div class="news__title_box">
+                    <h3 class="news__title"><span class="parallax__blue"><span class="parallax__eyebrow">●</span> NEWS</span>新着情報</h3>
+
+                    <div class="news_btn">
+                        <a class="parallax__link parallax__link_red02" href="news.html">
+                            記事一覧
+                            <span class="parallax__circle">
+                                <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <ul class="news__list">
+                    <li>
+                        <a href="news-detail.html">
+                            <img src="common/images/news-images.jpg" alt="サムネイル">
+                            <div class="news__right_box">
+                                <span class="news__date">2026.07.10</span>
+                                <h3>夏季休業のお知らせ</h3>
+                                <span class="news__cate">お知らせ</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="news-detail.html">
+                            <img src="common/images/news-images.jpg" alt="サムネイル">
+                            <div class="news__right_box">
+                                <span class="news__date">2026.06.20</span>
+                                <h3>ここにタイトルが入ります。</h3>
+                                <span class="news__cate">お知らせ</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="news-detail.html">
+                            <img src="common/images/news-images.jpg" alt="サムネイル">
+                            <div class="news__right_box">
+                                <span class="news__date">2026.05.15</span>
+                                <h3>ここにタイトルが入ります。</h3>
+                                <span class="news__cate">採用情報</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="parallax parallax--recruit" id="recruit">
+            <div class="parallax__inner">
+                <div class="recruit__bg"></div>
+                <div class="recruit__z1">
+                    <div class="recruit__title">
+                        <h3><span class="parallax__white"><span class="parallax__eyebrow">●</span> RECRUIT</span>海から食卓までを、<br>共につなぐ。</h3>
+                        <p class="parallax__text">
+                            私たちと一緒に、魚食文化を未来へつなぐ仲間を募集しています。
+                        </p>
+                    </div>
+                    <div class="recruit_btn">
+                        <a class="parallax__link" href="recruitsite/index.html">
+                            採用情報
+                            <span class="parallax__circle">
+                                <svg class="parallax__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="slider__lr">
+                    <div class="marquee-right">
+                        <ul>
+                            <li><img src="common/images/recruit-01.jpg"></li>
+                            <li><img src="common/images/recruit-02.jpg"></li>
+                            <li><img src="common/images/recruit-03.jpg"></li>
+                            <li><img src="common/images/recruit-04.jpg"></li>
+                            <li><img src="common/images/recruit-01.jpg"></li>
+                            <li><img src="common/images/recruit-02.jpg"></li>
+                            <li><img src="common/images/recruit-03.jpg"></li>
+                            <li><img src="common/images/recruit-04.jpg"></li>
+                        </ul>
+                    </div>
+                    <div class="marquee-left">
+                        <ul>
+                            <li><img src="common/images/recruit-05.jpg"></li>
+                            <li><img src="common/images/recruit-06.jpg"></li>
+                            <li><img src="common/images/recruit-07.jpg"></li>
+                            <li><img src="common/images/recruit-08.jpg"></li>
+                            <li><img src="common/images/recruit-05.jpg"></li>
+                            <li><img src="common/images/recruit-06.jpg"></li>
+                            <li><img src="common/images/recruit-07.jpg"></li>
+                            <li><img src="common/images/recruit-08.jpg"></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <p id="page-top"><a href="#">Page Top</a></p>
+
+    <div class="footer_area">
+        <footer class="footer">
+            <hr>
+            <div class="md-flex md-justify-between">
+                <div class="footer_left">
+                    <a href="#" class="footer__logo">
+                        <img src="common/images/logo.png" width="150" height="100" alt="Logo">
+                    </a>
+                    <div class="address">
+                        <p>〒813-0034<br>
+                            福岡市東区多の津1-12-2</p>
+                        <br>
+                        <p>TEL:<a href="#">092-626-5550</a></p>
+                        <p>FAX:092-626-5551</p>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div>
+                        <ul class="footer__navi">
+                            <li><a href="#">TOP</a></li>
+                            <li><a href="concept.html">魚寅について</a></li>
+                            <li><a href="business.html">事業内容</a></li>
+                            <li><a href="business.html">養殖事業</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="footer__navi">
+                            <li><a href="strengths.html">魚寅の強み</a></li>
+                            <li><a href="sustainable.html">未来への取り組み</a></li>
+                            <li><a href="news.html">新着情報</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="footer__navi">
+                            <li><a href="recruitsite/index.html">採用情報</a></li>
+                            <li><a href="company.html">会社概要</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="footer__navi">
+                            <li><a href="contact.html">お問い合わせ</a></li>
+                            <li><a href="sitemap.html">サイトマップ</a></li>
+                            <li><a href="privacy-policy.html">プライバシーポリシー</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2026 <a href="#">UOTORA Inc.</a> All Rights Reserved.</p>
+            </div>
+        </footer>
+        <div class="uotora_right">
+
+            <div class="scroll-infinity">
+                <div class="scroll-infinity__wrap">
+                    <ul class="scroll-infinity__list scroll-infinity__list--right">
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                    </ul>
+                    <ul class="scroll-infinity__list scroll-infinity__list--right">
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                        <li class="scroll-infinity__item"><img src="common/images/uotora_footer.png" /></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- パララックス バナー -->
-<section class="quote-banner">
-  <div class="quote-bg" data-speed="0.4"></div>
-  <div class="quote-overlay"></div>
-  <p class="quote-text reveal" data-anim="scale-in">
-    “ SPEED IS NOT JUST A NUMBER.<br>IT'S A FEELING. ”
-  </p>
-</section>
-
-<!-- 選ばれる理由 -->
-<section class="feature" id="feature">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">WHY APEX</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">選ばれる理由</h2>
-  </div>
-  <div class="feature-grid">
-    <div class="feature-card reveal" data-anim="fade-up" data-delay="0">
-      <svg class="feature-icon" viewBox="0 0 48 48"><use href="#icon-truck"></use></svg>
-      <h3>全国納車対応</h3>
-      <p>47都道府県どこでも、専門スタッフが安全にお届けします。</p>
     </div>
-    <div class="feature-card reveal" data-anim="fade-up" data-delay="120">
-      <svg class="feature-icon" viewBox="0 0 48 48"><use href="#icon-shield"></use></svg>
-      <h3>安心の保証制度</h3>
-      <p>購入後も安心の長期保証で、万が一のトラブルもサポート。</p>
-    </div>
-    <div class="feature-card reveal" data-anim="fade-up" data-delay="240">
-      <svg class="feature-icon" viewBox="0 0 48 48"><use href="#icon-expert"></use></svg>
-      <h3>専門スタッフ在籍</h3>
-      <p>整備士資格を持つプロが、車両の状態を徹底チェック。</p>
-    </div>
-    <div class="feature-card reveal" data-anim="fade-up" data-delay="360">
-      <svg class="feature-icon" viewBox="0 0 48 48"><use href="#icon-coin"></use></svg>
-      <h3>低金利ローン</h3>
-      <p>業界最低水準の金利で、無理のないお支払いプランをご提案。</p>
-    </div>
-  </div>
-</section>
-
-<!-- お客様の声 -->
-<section class="voice" id="voice">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">VOICE</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">お客様の声</h2>
-  </div>
-  <div class="voice-track">
-    <div class="voice-card reveal" data-anim="fade-up" data-delay="0">
-      <p class="voice-star">★★★★★</p>
-      <p class="voice-text">担当の方が親身に相談に乗ってくれて、理想の一台に出会えました。納車も丁寧で大満足です。</p>
-      <p class="voice-name">T.S様（30代 / 東京都）</p>
-    </div>
-    <div class="voice-card reveal" data-anim="fade-up" data-delay="120">
-      <p class="voice-star">★★★★★</p>
-      <p class="voice-text">遠方でしたが全国納車に対応してもらえて助かりました。車の状態も想像以上に良かったです。</p>
-      <p class="voice-name">K.M様（40代 / 大阪府）</p>
-    </div>
-    <div class="voice-card reveal" data-anim="fade-up" data-delay="240">
-      <p class="voice-star">★★★★★</p>
-      <p class="voice-text">ローンの相談も丁寧で、無理のないプランを組んでもらえました。次もぜひお願いしたいです。</p>
-      <p class="voice-name">R.Y様（20代 / 福岡県）</p>
-    </div>
-  </div>
-</section>
-
-<!-- 店舗情報 / お問い合わせ -->
-<section class="access" id="access">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">ACCESS</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">店舗情報</h2>
-
-    <div class="access-grid">
-      <div class="access-info reveal" data-anim="fade-up" data-delay="0">
-        <dl>
-          <dt>店舗名</dt><dd>APEX MOTORS 本店</dd>
-          <dt>所在地</dt><dd>〒000-0000 東京都千代田区サンプル町1-2-3</dd>
-          <dt>営業時間</dt><dd>10:00〜19:00（水曜定休）</dd>
-          <dt>電話番号</dt><dd>0120-000-000</dd>
-        </dl>
-      </div>
-      <div class="access-map reveal" data-anim="fade-in" data-delay="150">
-        <div class="map-placeholder">
-          <span>MAP</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="section-inner">
-    <p class="section-tag reveal" data-anim="fade-up">CONTACT</p>
-    <h2 class="section-title reveal" data-anim="fade-up" data-delay="100">お問い合わせ</h2>
-    <p class="contact-desc reveal" data-anim="fade-up" data-delay="200">
-      お気軽にご相談ください。専門スタッフが丁寧にご対応いたします。
-    </p>
-
-    <form class="contact-form reveal" data-anim="fade-up" data-delay="300" id="contactForm">
-      <div class="form-row">
-        <label>
-          <span>お名前<em>必須</em></span>
-          <input type="text" name="name" required placeholder="山田 太郎">
-        </label>
-        <label>
-          <span>メールアドレス<em>必須</em></span>
-          <input type="email" name="email" required placeholder="example@mail.com">
-        </label>
-      </div>
-      <label>
-        <span>電話番号</span>
-        <input type="tel" name="tel" placeholder="000-0000-0000">
-      </label>
-      <label>
-        <span>お問い合わせ内容<em>必須</em></span>
-        <textarea name="message" rows="5" required placeholder="ご希望の車種やご質問などをご記入ください"></textarea>
-      </label>
-      <button type="submit" class="btn btn-primary btn-block">送信する</button>
-      <p class="form-note" id="formNote"></p>
-    </form>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <a href="#top" class="logo">APEX<span>MOTORS</span></a>
-    <nav class="footer-nav">
-      <a href="#concept">コンセプト</a>
-      <a href="#lineup">ラインナップ</a>
-      <a href="#feature">選ばれる理由</a>
-      <a href="#voice">お客様の声</a>
-      <a href="#access">店舗情報</a>
-      <a href="#contact">お問い合わせ</a>
-    </nav>
-    <div class="footer-sns">
-      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><use href="#icon-insta"></use></svg></a>
-      <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><use href="#icon-x"></use></svg></a>
-      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><use href="#icon-yt"></use></svg></a>
-    </div>
-    <p class="footer-copy">&copy; 2026 APEX MOTORS. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<button class="to-top" id="toTop" aria-label="トップへ戻る">
-  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
-</button>
-
-<!-- SVGアイコン定義 -->
-<svg style="display:none">
-  <defs>
-    <g id="icon-car-sports">
-      <path d="M10 66 L10 60 Q10 56 15 55 L34 52 L52 34 Q60 26 74 25 L122 24 Q136 24 146 33 L164 50 L184 54 Q192 56 192 63 L192 66 Z" fill="currentColor" opacity="0.92"/>
-      <path d="M166 46 L184 50 Q188 51 188 54 L166 52 Z" fill="currentColor" opacity="0.92"/>
-      <path d="M62 32 L78 30 L76 48 L50 49 Z" fill="rgba(0,0,0,0.4)"/>
-      <path d="M88 29 L134 28 L150 46 L88 47 Z" fill="rgba(0,0,0,0.32)"/>
-      <circle cx="54" cy="67" r="15" fill="#0a0a0f"/>
-      <circle cx="54" cy="67" r="6.5" fill="currentColor"/>
-      <circle cx="156" cy="67" r="15" fill="#0a0a0f"/>
-      <circle cx="156" cy="67" r="6.5" fill="currentColor"/>
-    </g>
-    <g id="icon-car-suv">
-      <path d="M24 66 L24 42 Q24 34 32 32 L44 29 Q48 20 60 20 L146 20 Q158 20 166 30 L178 44 Q190 46 190 56 L190 66 Z" fill="currentColor" opacity="0.92"/>
-      <path d="M40 33 L58 26 L58 46 L36 46 Z" fill="rgba(0,0,0,0.38)"/>
-      <path d="M68 25 L142 25 L158 45 L68 45 Z" fill="rgba(0,0,0,0.3)"/>
-      <rect x="60" y="16" width="60" height="4" rx="2" fill="currentColor" opacity="0.6"/>
-      <circle cx="58" cy="68" r="16" fill="#0a0a0f"/>
-      <circle cx="58" cy="68" r="7" fill="currentColor"/>
-      <circle cx="164" cy="68" r="16" fill="#0a0a0f"/>
-      <circle cx="164" cy="68" r="7" fill="currentColor"/>
-    </g>
-    <g id="icon-car-sedan">
-      <path d="M12 64 L12 58 Q12 54 16 53 L34 50 L48 32 Q54 25 64 25 L92 25 L92 44 L100 44 L100 25 L134 25 Q144 25 152 34 L166 49 L184 52 Q192 53 192 60 L192 64 Z" fill="currentColor" opacity="0.92"/>
-      <path d="M58 31 L88 30 L88 46 L44 47 Z" fill="rgba(0,0,0,0.36)"/>
-      <path d="M104 30 L132 30 L154 46 L104 47 Z" fill="rgba(0,0,0,0.28)"/>
-      <circle cx="52" cy="65" r="14" fill="#0a0a0f"/>
-      <circle cx="52" cy="65" r="6" fill="currentColor"/>
-      <circle cx="154" cy="65" r="14" fill="#0a0a0f"/>
-      <circle cx="154" cy="65" r="6" fill="currentColor"/>
-    </g>
-    <g id="icon-car-ev">
-      <path d="M14 64 L14 59 Q14 55 19 54 L36 50 L54 31 Q62 24 76 24 L128 24 Q142 24 152 34 L168 50 L186 54 Q192 55 192 61 L192 64 Z" fill="currentColor" opacity="0.92"/>
-      <path d="M64 29 L86 28 L84 45 L52 46 Z" fill="rgba(0,0,0,0.36)"/>
-      <path d="M96 27 L138 27 L154 45 L96 46 Z" fill="rgba(0,0,0,0.28)"/>
-      <path d="M108 30 L98 46 L108 46 L100 60 L124 40 L112 40 Z" fill="#00e5ff"/>
-      <path d="M20 58 Q30 55 40 58" stroke="#00e5ff" stroke-width="2" fill="none" opacity="0.7"/>
-      <circle cx="56" cy="65" r="14" fill="#0a0a0f"/>
-      <circle cx="56" cy="65" r="6" fill="currentColor"/>
-      <circle cx="158" cy="65" r="14" fill="#0a0a0f"/>
-      <circle cx="158" cy="65" r="6" fill="currentColor"/>
-    </g>
-    <g id="icon-truck"><path d="M4 14h22v16H4zM26 20h8l6 6v4h-14zM10 34a4 4 0 100-8 4 4 0 000 8zM34 34a4 4 0 100-8 4 4 0 000 8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></g>
-    <g id="icon-shield"><path d="M24 4l16 6v12c0 11-7 18-16 22-9-4-16-11-16-22V10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16 24l6 6 12-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
-    <g id="icon-expert"><circle cx="24" cy="16" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 42c0-9 7-16 16-16s16 7 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
-    <g id="icon-coin"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 14v20M18 18h9a4 4 0 010 8h-6a4 4 0 000 8h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
-    <g id="icon-insta"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></g>
-    <g id="icon-x"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></g>
-    <g id="icon-yt"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.5l6 2.5-6 2.5z" fill="currentColor"/></g>
-  </defs>
-</svg>
-
-<script src="js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--フェード-->
+    <script src="common/js/script.js"></script>
 </body>
+
 </html>

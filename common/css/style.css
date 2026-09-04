@@ -1,0 +1,1995 @@
+/* 共通フェード制御 --------------------------------------- */
+
+.fade {
+    opacity: 0;
+    transition: opacity .55s ease;
+}
+
+.fade.is-visible {
+    opacity: 1;
+}
+
+/* ================================================
+ファーストビュー動画ローディング
+================================================ */
+
+/* ローディング・動画再生中は<main>を隠す */
+html:not(.intro-done) main,
+html:not(.intro-done) .footer_area {
+    display: none;
+}
+
+/* 動画(ローディング〜オープニング動画終了まで)再生中はスクロール禁止 */
+html.no-scroll,
+html.no-scroll body {
+    overflow: hidden;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+/* 同日2回目以降の訪問:ローディング・動画を出さずファーストビューを即表示 */
+html.skip-intro #loading,
+html.skip-intro #movie {
+    display: none;
+}
+
+html.skip-intro #firstview {
+    display: block;
+    opacity: 1;
+}
+
+html.skip-intro.no-scroll,
+html.skip-intro.no-scroll body {
+    overflow: auto;
+    height: auto;
+}
+
+
+/* ==========================================================
+0. #fv ラッパー(はみ出し防止)
+========================================================== */
+
+#fv {
+    position: relative;
+    width: 100%;
+}
+
+/* ==========================================================
+1. ローディング
+========================================================== */
+
+#loading {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 28%, var(--ocean-mid), var(--ocean-deep) 72%);
+}
+
+.loading-title {
+    font-family: var(--font-display);
+    color: var(--foam);
+    font-size: clamp(22px, 5vw, 32px);
+    letter-spacing: .12em;
+    z-index: 2;
+}
+
+.loading-sub {
+    font-size: 12px;
+    letter-spacing: .25em;
+    color: rgba(244, 248, 250, .65);
+    z-index: 2;
+}
+
+.wave-loader {
+    display: flex;
+    gap: 12px;
+    z-index: 2;
+}
+
+.wave-loader span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--catch-gold);
+    animation: waveBounce 1s infinite ease-in-out;
+}
+
+.wave-loader span:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.wave-loader span:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes waveBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: .55;
+    }
+
+    50% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+}
+
+.horizon-wave {
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: auto;
+    opacity: .45;
+    z-index: 1;
+}
+
+.bubble-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -30px;
+    border-radius: 50%;
+    background: rgba(244, 248, 250, .3);
+    animation-name: rise;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: .6;
+    }
+
+    100% {
+        transform: translate(12px, -110vh);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================
+2. オープニング動画
+========================================================== */
+
+#movie {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    display: none;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+}
+
+#movie video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skip {
+    position: absolute;
+    right: 24px;
+    bottom: 28px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    color: var(--foam);
+    font-size: 13px;
+    letter-spacing: .15em;
+    background: rgba(244, 248, 250, .12);
+    border: 1px solid rgba(244, 248, 250, .45);
+    backdrop-filter: blur(6px);
+    transition: background .25s ease, transform .25s ease;
+}
+
+#skip:hover {
+    background: rgba(244, 248, 250, .25);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================
+3. ファーストビュー
+========================================================== */
+
+#firstview {
+    display: none;
+}
+
+.harbor {
+    position: relative;
+    width: 100%;
+}
+
+.harbor::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.fv__video_btn {
+    position: absolute;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 5;
+}
+
+.fv_title_area {
+    position: absolute;
+    bottom: 15%;
+    left: 5%;
+    right: 5%;
+}
+
+.fv_title_area h1 {
+    font-size: 70px;
+    font-family: serif;
+    color: #fff;
+    text-shadow: #808080 0.8px 0 0.8px;
+}
+
+.fv_title_area p{
+    color: #fff;
+    text-shadow: #808080 0.8px 0 0.8px;
+}
+
+@media screen and (max-width: 1300px) {
+    .fv_title_area h1 {
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .fv_title_area {
+        bottom: 18%;
+    }
+
+    .fv_title_area h1 {
+        font-size: 32px;
+        line-height: 1.4;
+    }
+
+    .fv_title_area p {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+}
+
+#replayMovie {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    padding: 8px 20px;
+    font-size: 12px;
+    letter-spacing: .1em;
+    color: var(--foam);
+    border-radius: 999px;
+    background: rgba(11, 61, 92, .55);
+    border: 1px solid rgba(244, 248, 250, .4);
+    backdrop-filter: blur(6px);
+    transition: background .25s ease;
+}
+
+#replayMovie:hover {
+    background: rgba(11, 61, 92, .8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wave-loader span,
+    .fade,
+    #replayMovie,
+    #skip {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/*==============================================
+ヘッダー
+===============================================*/
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 8;
+}
+
+.header__inner {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header__logo {
+    flex: none;
+    width: auto;
+    height: 50px;
+}
+
+.header__navgroup {
+    margin-left: auto;
+    display: flex;
+    flex: none;
+}
+
+.header__navgroup > * + * {
+    margin-left: 60px;
+}
+
+.header__navitem {
+    font-size: 16px;
+    color: #fff;
+    transition: opacity .2s ease;
+}
+
+.header__navitem:hover {
+    opacity: .65;
+}
+
+
+
+/* ===== ハンバーガーボタン ===== */
+.header__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 7;
+}
+
+.header__hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+/* 開いた状態 */
+.header__hamburger.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.header__hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.header__hamburger.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ===== ドロワーメニュー ===== */
+.header__drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 35, 80, 0.97);
+    z-index: 6;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.header__drawer.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.header__drawer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.header__drawer-nav a {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    font-family: serif;
+    transition: opacity 0.2s ease;
+}
+
+.header__drawer-nav a:hover {
+    opacity: 0.6;
+}
+
+/* ===== 1300px以下で切り替え ===== */
+@media screen and (max-width: 1300px) {
+    .header__navgroup {
+        display: none;
+    }
+
+    .header__hamburger {
+        display: flex;
+    }
+
+    .header__drawer {
+        display: flex;
+    }
+}
+
+/* ================================================
+ファーストビュー 背景ぼかしステージ本体 (ABOUT)
+================================================ */
+
+.l-about {
+    width: 100%;
+}
+
+.c-blur {
+    position: sticky;
+    inset-block-start: 0;
+    height: 100vh;
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    contain: paint;
+    overflow: clip;
+}
+
+.c-blur__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("../images/top-images.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.c-blur__tint {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: rgba(15, 35, 80, 0.5);
+    opacity: 0;
+    will-change: opacity;
+}
+
+@keyframes c-blur-tint-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@supports (animation-timeline: scroll()) {
+    .c-blur__tint[data-scroll-blur] {
+        animation: c-blur-tint-in linear forwards;
+        animation-timeline: scroll(root block);
+        animation-range: 0 100vh;
+    }
+}
+
+.c-blur__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: rgba(15, 35, 80, var(--blur-tint-alpha));
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    will-change: backdrop-filter;
+}
+
+/* アルファ値専用のカスタムプロパティを定義(補間可能にする) */
+@property --blur-tint-alpha {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+}
+
+@keyframes c-blur-deepen {
+    from {
+        -webkit-backdrop-filter: blur(0);
+        backdrop-filter: blur(0);
+        --blur-tint-alpha: 0;
+    }
+
+    to {
+        -webkit-backdrop-filter: blur(var(--blur-max));
+        backdrop-filter: blur(var(--blur-max));
+        --blur-tint-alpha: 0.5;
+    }
+}
+
+/* JSフォールバック用のCSS側も合わせて修正 */
+@supports not (animation-timeline: scroll()) {
+    .c-blur__overlay[data-scroll-blur] {
+        -webkit-backdrop-filter: blur(var(--blur-amount, 0px));
+        backdrop-filter: blur(var(--blur-amount, 0px));
+        background-color: rgba(15, 35, 80, var(--blur-tint-alpha, 0));
+    }
+}
+
+/* ------------------------------------------------
+第一実装: CSS だけでスクロール量に連動してぼかす
+------------------------------------------------ */
+
+@keyframes c-blur-deepen {
+    from {
+        -webkit-backdrop-filter: blur(0);
+        backdrop-filter: blur(0);
+    }
+
+    to {
+        -webkit-backdrop-filter: blur(var(--blur-max));
+        backdrop-filter: blur(var(--blur-max));
+    }
+}
+
+@supports (animation-timeline: scroll()) {
+    .c-blur__overlay[data-scroll-blur] {
+        animation: c-blur-deepen linear forwards;
+        animation-timeline: scroll(root block);
+        animation-range: 0 100vh;
+        animation-duration: auto;
+    }
+}
+
+/* ------------------------------------------------
+JS フォールバック: animation-timeline 非対応ブラウザ向け
+（Safari / Firefox 等）
+------------------------------------------------ */
+
+@supports not (animation-timeline: scroll()) {
+    .c-blur__overlay[data-scroll-blur] {
+        -webkit-backdrop-filter: blur(var(--blur-amount, 0px));
+        backdrop-filter: blur(var(--blur-amount, 0px));
+    }
+}
+
+/* ================================================
+prefers-reduced-motion: 動きを減らす設定への配慮
+================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .c-blur__overlay[data-scroll-blur] {
+        animation: none;
+        -webkit-backdrop-filter: blur(0);
+        backdrop-filter: blur(0);
+    }
+}
+
+/* ================================================
+p-reveal: 第1セクション（フェードインする見出し）
+背景がぼけきった先に現れる見せ場。十分なスクロール量を
+確保するため縦に長く取り、進入で見出しがフェードインする。
+================================================ */
+
+.p-reveal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+    background-color: #1a2238;
+}
+
+.p-reveal__group {
+    margin: 0;
+    text-align: center;
+}
+
+.p-reveal__title {
+    margin: 0 0 12px;
+    font-size: 70px;
+    font-weight: 700;
+    color: var(--blur-color-text);
+    color: #fff;
+    font-family: serif;
+}
+
+.p-reveal__sub {
+    margin: 0 0 50px 0;
+    font-size: 24px;
+    line-height: 3;
+    letter-spacing: 0.08em;
+    color: rgba(244, 246, 250, 0.7);
+    color: #fff;
+    font-family: serif;
+}
+
+/* 出現演出の本体（出現演出スニペットを踏襲）*/
+.js .p-reveal__title[data-fade-in],
+.js .p-reveal__sub[data-fade-in] {
+    opacity: 0;
+    transform: translateY(var(--blur-fade-distance));
+    transition:
+        opacity var(--blur-fade-duration) var(--blur-fade-easing),
+        transform var(--blur-fade-duration) var(--blur-fade-easing);
+    will-change: opacity, transform;
+}
+
+/* ビューポート進入後に付与される最終状態。 */
+.js .p-reveal__title.is-visible,
+.js .p-reveal__sub.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: auto;
+}
+
+/* prefers-reduced-motion: フェードインは即時最終状態で見せる（出現演出スニペット踏襲） */
+@media (prefers-reduced-motion: reduce) {
+
+    .js .p-reveal__title[data-fade-in],
+    .js .p-reveal__sub[data-fade-in] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        will-change: auto;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .p-reveal__title {
+        font-size: 48px;
+        margin: 0 0 100px;
+        color: #fff;
+    }
+    .p-reveal__sub {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .p-reveal__sub {
+        font-size: 14px;
+    }
+}
+
+/* ================================================
+魚寅横スクロール指定
+================================================ */
+
+.scroll-infinity {
+    padding-bottom: 50px;
+}
+
+@keyframes infinity-scroll-right {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+.scroll-infinity__wrap {
+    display: flex;
+    overflow: hidden;
+}
+
+.scroll-infinity__list {
+    display: flex;
+    list-style: none;
+    padding: 0
+}
+
+.scroll-infinity__list--right {
+    animation: infinity-scroll-right 200s infinite linear 0.5s both;
+}
+
+.scroll-infinity__item {
+    width: calc(100vw / 1);
+}
+
+.scroll-infinity__item > img {
+    width: 100%;
+}
+
+/* ==========================================================
+4. メインコンテンツ(BUSINESS / Product / News / Recruit)
+========================================================== */
+
+main {
+    position: relative;
+    display: block;
+    background: var(--foam);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .4s ease;
+}
+
+.parallax {
+    position: relative;
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 24px;
+    color: var(--foam);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.parallax::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* iOS Safari 等モバイルは fixed 背景の描画が不安定・重いため通常スクロールに切替 */
+@media (max-width: 767px) {
+    .parallax {
+        background-attachment: scroll;
+        min-height: 56vh;
+        padding: 72px 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .parallax {
+        background-attachment: scroll;
+    }
+}
+
+/* ==========================================================
+4. メインコンテンツ(BUSINESS)
+========================================================== */
+
+.parallax--about {
+    padding: 100px 0px 100px 100px;
+}
+
+.parallax--about::before {
+    background-color: #fff;
+}
+
+@media screen and (max-width: 1300px) {
+    .parallax--about {
+        padding: 20px 0px 100px 20px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .parallax--about {
+        padding: 20px 0px 100px 20px;
+    }
+}
+
+
+/*横スクロール設定*/
+
+.sectionPin {
+    width: 100%;
+    height: 200vh;
+}
+
+.pin_sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-x: clip;
+    view-timeline: --sticky-timeline;
+}
+
+.pin_wrapper {
+    display: flex;
+    gap: 100px;
+    flex-direction: row;
+    align-items: center;
+    width: max-content;
+    /* ← ここを変更 */
+    height: 100%;
+    animation: slide-image linear both;
+    animation-timeline: view();
+    animation-range: contain;
+}
+
+@keyframes slide-image {
+    from {
+        translate: 0 0;
+    }
+
+    to {
+        translate: var(--pin-distance, -350px) 0;
+    }
+}
+
+.pin_textarea_stage {
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.pin_textarea {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1300px;
+    min-width: 100vw;
+    flex-shrink: 0;
+}
+
+.pin_business_box {
+    width: 90%;
+}
+
+.pin_textarea h3 {
+    color: #0f2350;
+    font-size: 70px;
+    font-family: serif;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.parallax__blue {
+    font-family: sans-serif;
+    display: block;
+    font-size: 12px;
+    letter-spacing: .3em;
+    margin-bottom: 14px;
+    color: #0f2350 !important;
+}
+
+.parallax__eyebrow {
+    font-size: 12px;
+    letter-spacing: .3em;
+    color: #b71c2c;
+    margin-bottom: 14px;
+}
+
+.pin_text {
+    font-size: 24px;
+    width: calc(50vw - 100px);
+    color: #0f2350;
+    text-align: left;
+    font-family: serif;
+    line-height: 3;
+    font-weight: bold;
+}
+
+.business_img img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+@media screen and (max-width: 1300px) {
+    .pin_textarea h3 {
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .pin_textarea {
+        display: grid;
+        grid-template-columns: 1fr;
+        max-width: 1300px;
+        flex-shrink: 1;
+    }
+
+    .pin_textarea h3 {
+        font-size: 32px;
+    }
+
+    .pin_text {
+        width: 100%;
+    }
+}
+
+
+/*横スクロール時のボックス達*/
+
+.image_box {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    flex-shrink: 0;
+    width: max-content;
+}
+
+.image_box_tit p {
+    color: #0f2350;
+    font-size: 24px;
+    text-align: left;
+    font-family: serif;
+    position: relative;
+    z-index: 1;
+}
+
+.image_box_tit span {
+    color: #0f2350;
+    font-size: 32px;
+    text-align: left;
+    font-family: serif;
+    font-weight: bold;
+}
+
+.image_box_tit h3 {
+    color: #0f2350;
+    font-size: 50px;
+    text-align: left;
+    font-family: serif;
+    position: relative;
+    z-index: 1;
+}
+
+.image_box_tit h4 {
+    color: #0f2350;
+    font-size: 24px;
+    text-align: left;
+    font-family: serif;
+    line-height: 2.4;
+    position: relative;
+    z-index: 1;
+}
+
+.img_s_box01 {
+    position: relative;
+}
+
+.img_s_box01::before {
+    content: "";
+    display: inline-block;
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    right: -50px;
+    top: -100px;
+    background-image: url(../images/pro-02.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.img_s_box01::after {
+    content: "海";
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    font-size: 200px;
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+    font-family: serif;
+    color: #dfe5ef;
+}
+
+.img_s_box02 {
+    position: relative;
+}
+
+.img_s_box02::before {
+    content: "";
+    display: inline-block;
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    right: -150px;
+    bottom: -105px;
+    background-image: url(../images/pro-04.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.img_s_box02::after {
+    content: "技";
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    font-size: 200px;
+    position: absolute;
+    right: 10px;
+    top: -160px;
+    font-family: serif;
+    color: #dfe5ef;
+}
+
+.img_s_box03 {
+    position: relative;
+}
+
+.img_s_box03::before {
+    content: "";
+    display: inline-block;
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    z-index: 1;
+    background-image: url(../images/pro-06.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.img_s_box03::after {
+    content: "信頼";
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    font-size: 200px;
+    position: absolute;
+    right: -100px;
+    bottom: 100px;
+    font-family: serif;
+    color: #dfe5ef;
+}
+
+.img_s_box04 {
+    position: relative;
+}
+
+.img_s_box04::before {
+    content: "";
+    display: inline-block;
+    width: 160px;
+    height: 120px;
+    position: absolute;
+    right: -40%;
+    bottom: -110px;
+    z-index: 1;
+    background-image: url(../images/pro-08.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.img_s_box04::after {
+    content: "食卓";
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    font-size: 200px;
+    position: absolute;
+    right: -170px;
+    top: -160px;
+    font-family: serif;
+    color: #dfe5ef;
+}
+
+/* 最後のimage_boxに画面半分分の余白を追加 */
+.pin_wrapper > .image_box:last-child {
+    padding-right: 50vw;
+}
+
+/* animation-timeline による個別range指定を削除し、クラスベースに変更 */
+.image {
+    width: 500px;
+    height: 360px;
+    border-radius: 8px;
+    clip-path: inset(30% round 20%);
+}
+
+/* JS から付与されるクラスで開く */
+.image.is-revealed {
+    clip-path: inset(0);
+}
+
+/* image__2〜4 の animation-range 指定も削除（不要になる） */
+.image__2,
+.image__3,
+.image__4 {
+    animation: none;
+}
+
+/* ==========================================================
+4. メインコンテンツ(Product)
+========================================================== */
+
+.parallax--product {
+    padding: 100px 100px 100px 100px;
+    position: relative;
+    min-height: 72vh;
+    display: block;
+    text-align: center;
+}
+
+.parallax--product::before {
+    background-color: #0f2350;
+}
+
+@media screen and (max-width:767px) {
+    .parallax--product {
+        padding: 20px 0px 100px 20px;
+    }
+}
+
+.product_tltle {
+    position: relative;
+    z-index: 1;
+}
+
+.parallax__white {
+    font-family: sans-serif;
+    display: block;
+    font-size: 12px;
+    letter-spacing: .3em;
+    margin-bottom: 14px;
+    color: #fff !important;
+}
+
+.product_tltle h3 {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 70px;
+    font-family: serif;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.product_tltle .text {
+    margin-bottom: 100px;
+    display: grid;
+    font-size: max(24px, 1.0vw);
+    line-height: 3;
+    font-family: serif;
+    text-align: left;
+    color: #fff;
+}
+
+.parallax--product .section {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.parallax--product .section:nth-of-type(1) {
+    background-color: #0f2350;
+}
+
+.parallax--product .section:nth-of-type(2) {
+    background-color: #0f2350;
+}
+
+.parallax--product .section:nth-of-type(3) {
+    background-color: #0f2350;
+}
+
+.parallax--product .section__inner {
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: inherit;
+    display: grid;
+    place-items: center;
+}
+
+.product_box {
+    display: flex;
+}
+
+.product_left {
+    width: 40%;
+}
+
+.product_left img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.product_right {
+    width: 60%;
+    max-width: 560px;
+    margin: 80px auto 0;
+    position: relative;
+}
+
+@media screen and (max-width: 767px) {
+    .parallax--product .section {
+        height: auto;
+        min-height: 100vh;
+        position: relative;
+        padding: 60px 0;
+    }
+
+    .parallax--product .section__inner {
+        position: relative;
+        inset: auto;
+        height: auto;
+    }
+
+    .product_box {
+        flex-direction: column;
+    }
+
+    .product_left,
+    .product_right {
+        width: 100%;
+    }
+
+    .product_right {
+        margin: 30px 0 0;
+    }
+
+    .product_right_01::after,
+    .product_right_02::after,
+    .product_right_03::after {
+        font-size: 80px;
+        right: 0;
+        top: -70px;
+    }
+}
+
+.product_right h3 {
+    font-size: 32px;
+    color: #fff;
+    font-family: serif;
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.product_right_01::after {
+    content: "01";
+    display: inline-block;
+    font-size: 150px;
+    position: absolute;
+    right: 50px;
+    top: -150px;
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+}
+
+.product_right_02::after {
+    content: "02";
+    display: inline-block;
+    font-size: 150px;
+    position: absolute;
+    right: 50px;
+    top: -150px;
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+}
+
+.product_right_03::after {
+    content: "03";
+    display: inline-block;
+    font-size: 150px;
+    position: absolute;
+    right: 50px;
+    top: -150px;
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+}
+
+.product_right p {
+    font-size: 20px;
+    text-align: left;
+    font-family: serif;
+    color: #fff;
+    margin-bottom: 50px;
+    line-height: 3;
+}
+
+.product_btn {
+    text-align: left;
+}
+
+.parallax--sustainability {
+    padding: 100px 100px 0;
+    background-color: #0f2350;
+}
+
+.sustainability {
+    position: relative;
+    width: 100%;
+}
+
+@media screen and (max-width: 1300px) {
+    .parallax--sustainability {
+        padding: 60px 40px 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .parallax--sustainability {
+        padding: 40px 20px 0;
+    }
+}
+
+@media screen and (max-width:1300px) {
+
+    .product_tltle h3 {
+        font-size: 48px;
+    }
+    .pin_text {
+        font-size: 20px;
+    }
+    .image_box_tit p{
+        font-size: 20px;
+    }
+    .image_box_tit span {
+        font-size: 28px;
+    }
+        
+    .image_box_tit h3{
+        font-size: 38px;
+    }
+    .image_box_tit h4{
+        font-size: 18px;
+    }
+    
+    .img_s_box01::after{
+        font-size: 150px;
+        right: 50px;
+        bottom: 50px;
+    }
+    
+    .img_s_box02::after{
+        font-size: 150px;
+        top: -100px;
+        right: 50px;
+    }
+    
+    .img_s_box03::after{
+        font-size: 150px;
+        right: -10px;
+        bottom: 50px;
+    }
+    .img_s_box04::after {
+        font-size: 150px;
+        right: -50px;
+        top: -100px;
+    }
+    
+    
+    .product_tltle .text{
+        font-size: max(20px, 1.0vw);
+    }
+    .product_right h3{
+        font-size: 28px;
+    }
+    .product_right p{
+        font-size: 18px;
+    }
+}
+
+/* ================================================
+背景ぼかしステージ本体 (SUSTAINABILITY)
+================================================ */
+
+.l-sustainability {
+    width: 100%;
+}
+
+/* ================================================
+SUSTAINABILITY専用 背景ぼかしステージ
+既存の .c-blur__bg / __tint / __overlay とは
+クラス名を完全に分離し、衝突を避ける
+================================================ */
+/* アニメーション・transition関係は一切書かない */
+.c-blur-sustainability__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("../images/about-04.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.c-blur-sustainability__tint {
+    display: none;
+}
+
+.c-blur-sustainability__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background-color: rgba(15, 35, 80, 0);
+    pointer-events: none;
+}
+
+/* ===== モーション抑制 ===== */
+@media (prefers-reduced-motion: reduce) {
+    .c-blur-sustainability__overlay {
+        animation: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: transparent;
+    }
+}
+
+/* ==========================================================
+4. メインコンテンツ(News)
+========================================================== */
+.news {
+    background: var(--foam);
+    padding: 90px 24px;
+}
+
+.news__inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+}
+
+.news__title_box {
+    width: 25%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.news__eyebrow {
+    font-size: 12px;
+    letter-spacing: .3em;
+    color: var(--catch-red);
+    margin-bottom: 14px;
+}
+
+.news__title {
+    color: #0f2350;
+    font-size: 70px;
+    font-family: sans-serif;
+    text-align: left;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+.news_btn {
+    margin-top: auto;
+    width: 100%;
+}
+
+.news__list {
+    width: 75%;
+    list-style: none;
+    text-align: left;
+    border-top: 1px solid rgba(13, 43, 62, .12);
+    margin-bottom: 32px;
+}
+
+.news__list li {
+    padding: 18px 4px;
+    border-bottom: 1px solid rgba(13, 43, 62, .12);
+}
+
+.news__list li img {
+    width: 100%;
+    max-width: 200px;
+    height: 150px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    margin-right: 30px;
+}
+
+.news__list li a {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.news__date {
+    flex: none;
+    font-size: 13px;
+    color: var(--ocean-mid);
+    letter-spacing: .05em;
+}
+
+.news__list a {
+    color: var(--ink);
+    font-size: 14px;
+    transition: color .2s ease;
+}
+
+.news__list a:hover {
+    color: var(--catch-red);
+}
+
+.news__cate {
+    border: 1px solid #0D2B3E;
+    border-radius: 50px;
+    padding: 2px 30px;
+    display: inline-block;
+}
+
+.news__more {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: .1em;
+    color: var(--ocean-deep);
+    border-bottom: 1px solid var(--ocean-deep);
+    padding-bottom: 2px;
+    transition: color .2s ease, border-color .2s ease;
+}
+
+.news__more:hover {
+    color: var(--catch-red);
+    border-color: var(--catch-red);
+}
+
+
+@media screen and (max-width: 1300px) {
+    .news__title {
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .news {
+        padding: 60px 20px;
+    }
+
+    .news__inner {
+        flex-direction: column;
+    }
+
+    .news__title_box,
+    .news__list {
+        width: 100%;
+    }
+
+    .news__title_box {
+        margin-bottom: 24px;
+    }
+
+    .news__title {
+        font-size: 32px;
+    }
+}
+
+
+/* ==========================================================
+4. メインコンテンツ(Recruit)
+========================================================== */
+
+.parallax--recruit {
+    position: relative;
+    width: 100%;
+    background-color: #0f2350;
+}
+
+.recruit__bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(15, 35, 80, 0.7);
+}
+
+.recruit__z1 {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.recruit__title {
+    margin-bottom: 50px;
+}
+
+.recruit__title h3 {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 70px;
+    font-family: serif;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.recruit__title .parallax__text {
+    position: relative;
+    z-index: 1;
+    font-family: serif;
+    text-align: center;
+}
+
+.recruit_images {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    position: sticky;
+    top: 0;
+    animation: reveal-sky linear both;
+    animation-timeline: view();
+    animation-range: contain 0% contain 70%;
+}
+
+@keyframes reveal-sky {
+    from {
+        clip-path: ellipse(60px 80px);
+    }
+
+    to {
+        clip-path: ellipse(60% 130%);
+    }
+}
+
+/* recruitセクションだけ共通.parallaxのflex/制約を解除 */
+.parallax--recruit {
+    display: block;
+    padding: 0;
+    overflow: visible;
+    text-align: initial;
+}
+
+.parallax--recruit .parallax__inner {
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.recruit_images {
+    display: block;
+    width: 100%;
+}
+
+.recruit_btn {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+@media screen and (max-width:1300px){
+.recruit__title h3{
+    font-size: 48px;
+}
+}
+
+@media screen and (max-width: 767px) {
+    .recruit__title h3 {
+        font-size: 30px;
+    }
+}
+
+/* ==========================================================
+4. 無限スクロール(Recruit)
+========================================================== */
+
+.marquee-right {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.marquee-right ul {
+    animation: marquee-right 20s linear infinite;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+}
+
+.marquee-right ul li {
+    list-style: none;
+    padding: 0 5px;
+    width: calc(100vw / 4 - 10px);
+}
+
+.marquee-right img {
+    display: block;
+    width: 100%;
+}
+
+@keyframes marquee-right {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee-left {
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.marquee-left ul {
+    animation: marquee-left 20s linear infinite;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+}
+
+.marquee-left ul li {
+    list-style: none;
+    padding: 0 5px;
+    width: calc(100vw / 4 - 10px);
+}
+
+.marquee-left img {
+    display: block;
+    width: 100%;
+}
+
+@keyframes marquee-left {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+/* ==========================================================
+ボタン 基礎共通
+========================================================== */
+
+.parallax__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    color: #fff;
+    font-family: serif;
+}
+
+.parallax__circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    color: inherit;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    flex-shrink: 0;
+}
+
+.parallax__arrow {
+    pointer-events: none;
+}
+
+/* ホバー時:円の背景だけ変える。矢印は白に。テキスト色は触らない */
+.parallax__link:hover .parallax__circle {
+    background-color: #B71C2C;
+    color: #fff;
+    border-color: #B71C2C;
+}
+
+/*色変更*/
+
+.parallax__link_red {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    color: #0f2350;
+    font-family: serif;
+}
+
+.parallax__link_red02 {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    color: #0f2350;
+    font-family: serif;
+}
+
+/*==============================================
+
+トップに戻る
+
+===============================================*/
+
+/*リンクの形状*/
+#page-top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #b71c2c;
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.6rem;
+    transition: all 0.3s;
+}
+
+#page-top a:hover {
+    background: #777;
+}
+
+/*リンクを右下に固定*/
+#page-top {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+/*　上に上がる動き　*/
+
+#page-top.UpMove {
+    animation: UpAnime 0.5s forwards;
+}
+
+@keyframes UpAnime {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*　下に下がる動き　*/
+
+#page-top.DownMove {
+    animation: DownAnime 0.5s forwards;
+}
+
+@keyframes DownAnime {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(100px);
+    }
+}
+
+/*==============================================
+
+フッター
+
+===============================================*/
+
+
+footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #000;
+}
+
+footer hr {
+    margin-top: 100px;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #35466b;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer {
+    padding: 2rem;
+    font-size: 15px;
+    color: #fff;
+    background-color: #0f2350;
+}
+
+.footer__navi-heading {
+    font-weight: 600;
+}
+
+.footer__logo {
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.footer__navi li {
+    margin-bottom: 0.75rem;
+}
+
+.address {
+    color: #40567c;
+}
+
+.address a {
+    color: #40567c;
+}
+
+.address a:hover {
+    color: #fff;
+}
+
+.copyright p {
+    text-align: right;
+    color: #40567c;
+}
+
+.copyright a {
+    color: #40567c;
+}
+
+.copyright a:hover {
+    color: #fff;
+}
+
+.uotora_right {
+    background-color: #0f2350;
+}
+
+.uotora_right .scroll-infinity {
+    padding-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .md-flex {
+        margin-top: 50px;
+        display: flex;
+    }
+
+    .md-justify-between {
+        justify-content: space-between;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
