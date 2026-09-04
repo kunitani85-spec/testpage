@@ -726,20 +726,38 @@ main {
 }
 
 .biz-wave {
-    padding-bottom: 0;
+    position: relative;
+    height: 220px;
+    background: #0f2350;
     line-height: 0;
 }
 
-.biz-wave .scroll-infinity__item img {
+.biz-wave__clip {
+    position: absolute;
+    inset: 0;
+    clip-path: url(#waveRibbonClip);
+}
+
+.biz-wave__scroll,
+.biz-wave__scroll .scroll-infinity__wrap,
+.biz-wave__scroll .scroll-infinity__list {
+    height: 100%;
+}
+
+.biz-wave__scroll {
+    padding-bottom: 0;
+}
+
+.biz-wave__scroll .scroll-infinity__item img {
     width: 100%;
-    height: 220px;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
 
 @media screen and (max-width: 767px) {
-    .biz-wave .scroll-infinity__item img {
-        height: 140px;
+    .biz-wave {
+        height: 150px;
     }
 }
 
