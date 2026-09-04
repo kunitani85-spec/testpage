@@ -89,9 +89,9 @@
 
         <!-- ② OUR ORIGIN / AQUACULTURE 切り替えアコーディオン -->
         <section class="biz-origin" id="origin">
-            <div class="biz-origin__row">
-                <div class="biz-origin__card is-active" data-card="origin">
-                    <button class="biz-origin__head" type="button" data-target="card-origin" aria-expanded="true">
+            <div class="biz-origin__row" id="originRow">
+                <div class="biz-origin__card" data-card="origin">
+                    <button class="biz-origin__head" type="button" data-target="card-origin" aria-expanded="false">
                         <span class="biz-origin__head-index">01｜OUR ORIGIN</span>
                         <span class="biz-origin__head-title">魚寅の原点は、<br>手作りの寿司。</span>
                     </button>
@@ -123,9 +123,12 @@
                                     <p class="biz-origin__item-desc">伝統の技術を大切にしながら、海外でも品質にこだわった商品づくりを進めています。</p>
                                 </div>
                             </div>
+                            <button class="biz-origin__back" type="button">← 戻る</button>
                         </div>
                     </div>
                 </div>
+
+                <div class="biz-origin__divider" aria-hidden="true">×</div>
 
                 <div class="biz-origin__card" data-card="aquaculture">
                     <button class="biz-origin__head" type="button" data-target="card-aquaculture" aria-expanded="false">
@@ -160,6 +163,7 @@
                                     <p class="biz-origin__item-desc">プリプリとした食感と旨みを活かし、安心・安全な商品をお届けしています。</p>
                                 </div>
                             </div>
+                            <button class="biz-origin__back" type="button">← 戻る</button>
                         </div>
                     </div>
                 </div>

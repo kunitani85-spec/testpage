@@ -316,16 +316,42 @@ main {
     transition: flex-basis .5s ease, background-color .35s ease;
 }
 
-.biz-origin__card + .biz-origin__card {
+.biz-origin__card:last-child {
     border-left: 1px solid rgba(15, 35, 80, .15);
 }
 
-.biz-origin__card.is-active {
-    flex-basis: 76%;
+/* 展開中: 選ばれた方を100%に、もう片方と×は完全に隠す */
+.biz-origin__row.is-expanded .biz-origin__card.is-active {
+    flex-basis: 100%;
 }
 
-.biz-origin__card:not(.is-active) {
-    flex-basis: 24%;
+.biz-origin__row.is-expanded .biz-origin__card:not(.is-active) {
+    flex-basis: 0%;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.biz-origin__divider {
+    flex: 0 0 auto;
+    width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: serif;
+    font-size: 26px;
+    color: #b71c2c;
+    background: #fff;
+    transition: opacity .3s ease, flex-basis .5s ease, width .5s ease;
+}
+
+.biz-origin__row.is-expanded .biz-origin__divider {
+    flex-basis: 0%;
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .biz-origin__head {
@@ -339,7 +365,7 @@ main {
     font: inherit;
 }
 
-.biz-origin__card:nth-child(2) .biz-origin__head {
+.biz-origin__card:last-child .biz-origin__head {
     text-align: right;
 }
 
@@ -374,12 +400,6 @@ main {
     color: #fff;
 }
 
-.biz-origin__card:not(.is-active) .biz-origin__head-title {
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-}
-
 .biz-origin__body {
     display: grid;
     grid-template-rows: 0fr;
@@ -400,6 +420,27 @@ main {
 
 .biz-origin__card.is-active .biz-origin__body-inner {
     padding: 0 28px 40px;
+}
+
+.biz-origin__back {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 26px;
+    font: inherit;
+    font-family: sans-serif;
+    font-size: 13px;
+    letter-spacing: .05em;
+    color: #0f2350;
+    background: #fff;
+    border: 1px solid rgba(15, 35, 80, .3);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.biz-origin__back:hover {
+    background: #0f2350;
+    color: #fff;
 }
 
 .biz-origin__panel-lead {
@@ -462,24 +503,31 @@ main {
     }
 
     .biz-origin__card,
-    .biz-origin__card.is-active,
-    .biz-origin__card:not(.is-active) {
+    .biz-origin__row.is-expanded .biz-origin__card.is-active,
+    .biz-origin__row.is-expanded .biz-origin__card:not(.is-active) {
         flex-basis: auto;
     }
 
-    .biz-origin__card + .biz-origin__card {
+    .biz-origin__row.is-expanded .biz-origin__card:not(.is-active) {
+        display: none;
+    }
+
+    .biz-origin__card:last-child {
         border-left: none;
         border-top: 1px solid rgba(15, 35, 80, .15);
     }
 
-    .biz-origin__card:nth-child(2) .biz-origin__head {
+    .biz-origin__card:last-child .biz-origin__head {
         text-align: left;
     }
 
-    .biz-origin__card:not(.is-active) .biz-origin__head-title {
-        opacity: 1;
-        height: auto;
-        overflow: visible;
+    .biz-origin__divider {
+        width: 100%;
+        padding: 6px 0;
+    }
+
+    .biz-origin__row.is-expanded .biz-origin__divider {
+        display: none;
     }
 
     .biz-origin__head {
