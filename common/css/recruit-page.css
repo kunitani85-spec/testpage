@@ -155,7 +155,7 @@ main {
 ===============================================*/
 
 .field-section {
-    background: linear-gradient(180deg, #0B3D5C 0%, #0f2350 100%);
+    background: linear-gradient(180deg, #0f4c81 0%, #1c7fc4 45%, #2e9be0 100%);
     padding: calc(var(--header-h) + 60px) 24px 80px;
     overflow: hidden;
     position: relative;
@@ -170,13 +170,14 @@ main {
 
 .field-tag {
     display: inline-block;
-    background: none;
-    color: #E3A857;
+    background: #bfe6f7;
+    color: #0f4c81;
     font-family: sans-serif;
     font-weight: 700;
     font-size: 13px;
     letter-spacing: .15em;
-    padding: 0;
+    padding: 6px 20px;
+    border-radius: 3px;
     margin-bottom: 12px;
 }
 
@@ -194,7 +195,7 @@ main {
     display: block;
     width: 60px;
     height: 3px;
-    background: #E3A857;
+    background: #7fd6f2;
     margin: 14px auto 0;
 }
 
@@ -212,8 +213,8 @@ main {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 1px solid rgba(244, 248, 250, .5);
-    background: rgba(244, 248, 250, .08);
+    border: 1px solid rgba(255, 255, 255, .6);
+    background: rgba(255, 255, 255, .08);
     color: #fff;
     font-size: 22px;
     display: flex;
@@ -224,7 +225,7 @@ main {
 }
 
 .field-arrow:hover {
-    background: rgba(244, 248, 250, .25);
+    background: rgba(255, 255, 255, .25);
 }
 
 .field-slide-wrap {
@@ -281,7 +282,7 @@ main {
 
 .field-info__eyebrow {
     display: block;
-    color: #E3A857;
+    color: #bfe6f7;
     font-family: sans-serif;
     font-weight: 700;
     letter-spacing: .2em;
@@ -303,12 +304,12 @@ main {
     display: block;
     width: 46px;
     height: 2px;
-    background: #E3A857;
+    background: #7fd6f2;
     margin-top: 20px;
 }
 
 .field-info__desc {
-    color: rgba(244, 248, 250, .85);
+    color: #eaf6fd;
     font-size: 16px;
     line-height: 1.9;
     margin: 0;
@@ -331,7 +332,7 @@ main {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: rgba(244, 248, 250, .4);
+    background: rgba(255, 255, 255, .4);
     border: none;
     padding: 0;
     cursor: pointer;
@@ -364,23 +365,23 @@ main {
     text-align: center;
     cursor: pointer;
     transition: transform .2s ease, box-shadow .2s ease;
-    box-shadow: 0 6px 16px rgba(15, 35, 80, .12);
+    box-shadow: 0 6px 16px rgba(6, 40, 70, .12);
 }
 
 .field-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(15, 35, 80, .18);
+    box-shadow: 0 12px 24px rgba(6, 40, 70, .18);
 }
 
 .field-card.is-active {
-    box-shadow: 0 0 0 2px #b71c2c inset, 0 12px 24px rgba(15, 35, 80, .18);
+    box-shadow: 0 0 0 2px #1c7fc4 inset, 0 12px 24px rgba(6, 40, 70, .18);
 }
 
 .field-card__icon {
     width: 48px;
     height: 48px;
     margin-bottom: 14px;
-    color: #b71c2c;
+    color: #1c7fc4;
 }
 
 .field-card__icon svg {
@@ -398,7 +399,7 @@ main {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .1em;
-    color: #b71c2c;
+    color: #1c7fc4;
     margin-bottom: 4px;
 }
 
@@ -406,13 +407,13 @@ main {
     font-family: serif;
     font-size: 15px;
     font-weight: 700;
-    color: #0f2350;
+    color: #12314a;
     line-height: 1.5;
 }
 
 .field-card__arrow {
     margin-top: 14px;
-    color: #b71c2c;
+    color: #1c7fc4;
     font-size: 16px;
 }
 
@@ -482,7 +483,7 @@ main {
 
 .people-intro {
     position: relative;
-    background: radial-gradient(120% 140% at 20% 10%, #0B3D5C 0%, #0f2350 55%, #0b2740 100%);
+    background: radial-gradient(120% 140% at 20% 10%, #4db3e6 0%, #1c7fc4 45%, #0f4c81 100%);
     padding: 120px 24px;
     overflow: hidden;
     isolation: isolate;
@@ -499,7 +500,7 @@ main {
 .people-intro__badge {
     display: inline-block;
     background: #fff;
-    color: #b71c2c;
+    color: #1c7fc4;
     font-family: sans-serif;
     font-weight: 800;
     font-size: 34px;
@@ -519,7 +520,7 @@ main {
 }
 
 .people-intro__lead {
-    color: rgba(244, 248, 250, .85);
+    color: #eaf6fd;
     font-size: 16px;
     line-height: 2;
     margin: 0 auto;
@@ -638,7 +639,7 @@ main {
 }
 
 .benefits-body {
-    background: linear-gradient(180deg, #0B3D5C 0%, #0f2350 100%);
+    background: linear-gradient(180deg, #0f4c81 0%, #1c7fc4 45%, #2e9be0 100%);
     padding: 0 24px 100px;
 }
 
@@ -653,7 +654,7 @@ main {
 
 .benefits-banner {
     display: inline-block;
-    background: #0f2350;
+    background: #1c7fc4;
     color: #fff;
     font-family: sans-serif;
     font-weight: 800;
@@ -662,7 +663,7 @@ main {
     padding: 16px 46px;
     border-radius: 4px;
     transform: rotate(-1deg);
-    box-shadow: 0 10px 24px rgba(15, 35, 80, .35);
+    box-shadow: 0 10px 24px rgba(15, 76, 129, .35);
 }
 
 .benefits-header {
@@ -673,7 +674,7 @@ main {
 
 .benefits-eyebrow {
     display: block;
-    color: #E3A857;
+    color: #bfe6f7;
     font-family: sans-serif;
     font-weight: 700;
     letter-spacing: .2em;
@@ -691,7 +692,7 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    border: 1px solid rgba(244, 248, 250, .4);
+    border: 1px solid rgba(255, 255, 255, .5);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -699,13 +700,13 @@ main {
 .benefits-tab {
     flex: 1;
     background: #fff;
-    color: #0f2350;
+    color: #0f4c81;
     font-family: sans-serif;
     font-weight: 700;
     font-size: 15px;
     padding: 18px 10px;
     border: none;
-    border-right: 1px solid rgba(15, 35, 80, .15);
+    border-right: 1px solid rgba(15, 76, 129, .15);
     cursor: pointer;
     transition: background-color .2s ease, color .2s ease;
 }
@@ -715,11 +716,11 @@ main {
 }
 
 .benefits-tab:hover:not(.is-active) {
-    background: #eef2f7;
+    background: #eaf6fd;
 }
 
 .benefits-tab.is-active {
-    background: #0f2350;
+    background: #1c7fc4;
     color: #fff;
 }
 
@@ -762,7 +763,7 @@ main {
 }
 
 .benefits-panel__sub {
-    color: #E3A857;
+    color: #7fd6f2;
     font-weight: 700;
     font-size: 17px;
     line-height: 1.7;
@@ -770,7 +771,7 @@ main {
 }
 
 .benefits-panel__desc {
-    color: rgba(244, 248, 250, .85);
+    color: #eaf6fd;
     font-size: 15px;
     line-height: 1.9;
     margin: 0;
@@ -789,8 +790,8 @@ main {
 
     .benefits-tab {
         flex: 1 1 50%;
-        border-right: 1px solid rgba(15, 35, 80, .15);
-        border-bottom: 1px solid rgba(15, 35, 80, .15);
+        border-right: 1px solid rgba(15, 76, 129, .15);
+        border-bottom: 1px solid rgba(15, 76, 129, .15);
         font-size: 13px;
         padding: 14px 8px;
     }
