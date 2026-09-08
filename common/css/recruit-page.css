@@ -629,6 +629,190 @@ main {
 }
 
 /*==============================================
+③ EMPLOYEE BENEFITS 福利厚生
+===============================================*/
+
+.benefits-top {
+    background: #fff;
+    height: 56px;
+}
+
+.benefits-body {
+    background: linear-gradient(180deg, #0B3D5C 0%, #0f2350 100%);
+    padding: 0 24px 100px;
+}
+
+.benefits-banner-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: -38px;
+    margin-bottom: 34px;
+}
+
+.benefits-banner {
+    display: inline-block;
+    background: #0f2350;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    letter-spacing: .04em;
+    padding: 16px 46px;
+    border-radius: 4px;
+    transform: rotate(-1deg);
+    box-shadow: 0 10px 24px rgba(15, 35, 80, .35);
+}
+
+.benefits-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 40px;
+}
+
+.benefits-eyebrow {
+    display: block;
+    color: #E3A857;
+    font-family: sans-serif;
+    font-weight: 700;
+    letter-spacing: .2em;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.benefits-lead {
+    color: #fff;
+    font-size: 16px;
+    margin: 0;
+}
+
+.benefits-tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    border: 1px solid rgba(244, 248, 250, .4);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.benefits-tab {
+    flex: 1;
+    background: #fff;
+    color: #0f2350;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 18px 10px;
+    border: none;
+    border-right: 1px solid rgba(15, 35, 80, .15);
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.benefits-tab:last-child {
+    border-right: none;
+}
+
+.benefits-tab:hover:not(.is-active) {
+    background: #eef2f7;
+}
+
+.benefits-tab.is-active {
+    background: #0f2350;
+    color: #fff;
+}
+
+.benefits-panels {
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.benefits-panel {
+    display: none;
+    grid-template-columns: minmax(280px, 560px) 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.benefits-panel.is-active {
+    display: grid;
+}
+
+.benefits-panel__photo {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16 / 11;
+    box-shadow: 0 20px 46px rgba(0, 0, 0, .35);
+}
+
+.benefits-panel__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.benefits-panel__title {
+    color: #fff;
+    font-family: serif;
+    font-weight: 700;
+    font-size: 34px;
+    margin: 0 0 20px;
+}
+
+.benefits-panel__sub {
+    color: #E3A857;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0 0 22px;
+}
+
+.benefits-panel__desc {
+    color: rgba(244, 248, 250, .85);
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+    .benefits-banner {
+        font-size: 24px;
+        padding: 12px 30px;
+    }
+
+    .benefits-tabs {
+        flex-wrap: wrap;
+        border-radius: 4px;
+    }
+
+    .benefits-tab {
+        flex: 1 1 50%;
+        border-right: 1px solid rgba(15, 35, 80, .15);
+        border-bottom: 1px solid rgba(15, 35, 80, .15);
+        font-size: 13px;
+        padding: 14px 8px;
+    }
+
+    .benefits-panel {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .benefits-panel__title {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .benefits-tab {
+        flex: 1 1 100%;
+        border-right: none;
+    }
+}
+
+/*==============================================
 トップに戻る（style.cssと同一）
 ===============================================*/
 
