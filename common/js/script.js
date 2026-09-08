@@ -59,10 +59,24 @@
 function setPinDistance() {
     var wrapper = document.querySelector('.pin_wrapper');
     if (!wrapper) return;
-    // 最後の要素が画面中央に来るよう、画面幅の半分を引いた値にする
-    var lastBox = wrapper.querySelector('.image_box:last-child');
-    var extra = lastBox ? lastBox.offsetWidth / 2 : 0;
-    var distance = wrapper.scrollWidth - window.innerWidth - extra;
+    var lastLink = wrapper.querySelector('.image_box:last-child .parallax__link');
+    var distance;
+    if (lastLink) {
+        // 最後のボタンが画面右端で見切れないよう、実際のボタン位置から
+        // 逆算する（padding-right: 50vw を含む image_box 全体の半分では
+        // ボタンの右端が画面外にはみ出すことがあったため）。
+        var margin = 24;
+        wrapper.classList.add('pin-measuring');
+        var wrapperLeft = wrapper.getBoundingClientRect().left;
+        var linkRight = lastLink.getBoundingClientRect().right;
+        wrapper.classList.remove('pin-measuring');
+        distance = (linkRight - wrapperLeft) - window.innerWidth + margin;
+    } else {
+        var lastBox = wrapper.querySelector('.image_box:last-child');
+        var extra = lastBox ? lastBox.offsetWidth / 2 : 0;
+        distance = wrapper.scrollWidth - window.innerWidth - extra;
+    }
+    if (distance < 0) distance = 0;
     wrapper.style.setProperty('--pin-distance', '-' + distance + 'px');
 }
 

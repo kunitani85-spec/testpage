@@ -833,6 +833,12 @@ main {
     animation-range: contain;
 }
 
+/* JSがボタンの実際の位置を計測する間、一時的にアニメーションを止める */
+.pin_wrapper.pin-measuring {
+    animation: none !important;
+    translate: 0 !important;
+}
+
 @keyframes slide-image {
     from {
         translate: 0 0;
@@ -1003,6 +1009,7 @@ main {
     position: absolute;
     right: -50px;
     top: -100px;
+    z-index: 1;
     background-image: url(../images/pro-02.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -1034,6 +1041,7 @@ main {
     position: absolute;
     right: -150px;
     bottom: -105px;
+    z-index: 1;
     background-image: url(../images/pro-04.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -1781,6 +1789,15 @@ SUSTAINABILITY専用 背景ぼかしステージ
 .marquee-left img {
     display: block;
     width: 100%;
+}
+
+/* スマホ: 1枚あたりを大きくして、背景の帯がしっかり見えるようにする */
+@media screen and (max-width: 767px) {
+
+    .marquee-right ul li,
+    .marquee-left ul li {
+        width: calc(100vw / 2 - 10px);
+    }
 }
 
 @keyframes marquee-left {

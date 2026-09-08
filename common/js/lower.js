@@ -99,9 +99,21 @@
 function setPinDistance() {
     var wrapper = document.querySelector('.pin_wrapper');
     if (!wrapper) return;
-    var lastBox = wrapper.querySelector('.image_box:last-child');
-    var extra = lastBox ? lastBox.offsetWidth / 2 : 0;
-    var distance = wrapper.scrollWidth - window.innerWidth - extra;
+    var lastLink = wrapper.querySelector('.image_box:last-child .parallax__link');
+    var distance;
+    if (lastLink) {
+        var margin = 24;
+        wrapper.classList.add('pin-measuring');
+        var wrapperLeft = wrapper.getBoundingClientRect().left;
+        var linkRight = lastLink.getBoundingClientRect().right;
+        wrapper.classList.remove('pin-measuring');
+        distance = (linkRight - wrapperLeft) - window.innerWidth + margin;
+    } else {
+        var lastBox = wrapper.querySelector('.image_box:last-child');
+        var extra = lastBox ? lastBox.offsetWidth / 2 : 0;
+        distance = wrapper.scrollWidth - window.innerWidth - extra;
+    }
+    if (distance < 0) distance = 0;
     wrapper.style.setProperty('--pin-distance', '-' + distance + 'px');
 }
 requestAnimationFrame(function () {
