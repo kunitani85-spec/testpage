@@ -151,6 +151,46 @@ main {
 }
 
 /*==============================================
+セクション間の波ディバイダー（共通）
+===============================================*/
+
+.section-wave {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 70px;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.section-wave__svg {
+    width: 200%;
+    height: 100%;
+    display: block;
+    animation: sectionWaveScroll 22s linear infinite;
+}
+
+@keyframes sectionWaveScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-wave__svg {
+        animation: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .section-wave {
+        height: 40px;
+    }
+}
+
+/*==============================================
 ⓪ MV ファーストビュー
 ===============================================*/
 
@@ -270,8 +310,10 @@ main {
 ===============================================*/
 
 .rabout {
+    position: relative;
     background: #fff;
     padding: 100px 24px 0;
+    overflow: hidden;
 }
 
 .rabout-inner {
@@ -1030,6 +1072,11 @@ main {
 /*==============================================
 ③ EMPLOYEE BENEFITS 福利厚生
 ===============================================*/
+
+.benefits-section {
+    position: relative;
+    overflow: hidden;
+}
 
 .benefits-top {
     background: #fff;
