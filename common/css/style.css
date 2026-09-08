@@ -626,13 +626,15 @@ p-reveal: 第1セクション（フェードインする見出し）
 }
 
 .p-reveal__sub {
-    margin: 0 0 50px 0;
+    margin: 0 auto 50px;
+    max-width: 700px;
     font-size: 24px;
     line-height: 3;
     letter-spacing: 0.08em;
     color: rgba(244, 246, 250, 0.7);
     color: #fff;
     font-family: serif;
+    text-wrap: balance;
 }
 
 /* 出現演出の本体（出現演出スニペットを踏襲）*/
