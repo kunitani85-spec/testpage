@@ -78,6 +78,51 @@
     </svg>
 
     <main>
+        <!-- ⓪ MV ファーストビュー -->
+        <section class="rmv" id="top">
+            <div class="rmv-bg" data-parallax="0.25"></div>
+            <div class="rmv-overlay"></div>
+            <div class="rmv-content">
+                <p class="rmv-en">RECRUIT <span>採用情報</span></p>
+                <h1 class="rmv-title">魚を愛する人が集まり、<br>挑戦し、未来を変えていく。</h1>
+                <p class="rmv-lead">私たちと共に、まだ見ぬ景色を目指す仲間を募集しています。</p>
+            </div>
+            <div class="rmv-scroll"><span></span>SCROLL</div>
+        </section>
+
+        <!-- ⓪ ABOUT 私たちについて -->
+        <section class="rabout" id="about">
+            <div class="rabout-inner">
+                <div class="rabout-image" data-parallax="0.12">
+                    <img src="../common/images/recruit-01.jpg" alt="販売スタッフ">
+                </div>
+                <div class="rabout-text">
+                    <span class="rabout-tag">ABOUT</span>
+                    <h2 class="rabout-title">魚を好きになる。<br>
+                        仕事が好きになる。<br>
+                        日本中の魚屋と、<br>
+                        魚に興味がある人が、<br>
+                        集まる場所へ。</h2>
+                    <p class="rabout-desc">魚を扱う仕事に興味がある人も、これまで魚屋で働いてきた人も。
+                        私たちは、そんな人たちが、集まり、学び、挑戦できる環境をつくっています。
+                        専門的な知識や現場のリアル、新しい商品や市場の情報など、
+                        魚に関わるさまざまな情報を発信しながら、
+                        私たちと一緒に水産業の可能性を広げていこう!</p>
+                </div>
+            </div>
+
+            <div class="rabout-loop" aria-hidden="true">
+                <div class="rabout-loop__track">
+                    <div class="rabout-loop__item"><img src="../common/images/recruit-02.jpg" alt=""></div>
+                    <div class="rabout-loop__item"><img src="../common/images/recruit-04.jpg" alt=""></div>
+                    <div class="rabout-loop__item"><img src="../common/images/recruit-07.jpg" alt=""></div>
+                    <div class="rabout-loop__item"><img src="../common/images/recruit-02.jpg" alt=""></div>
+                    <div class="rabout-loop__item"><img src="../common/images/recruit-04.jpg" alt=""></div>
+                    <div class="rabout-loop__item"><img src="../common/images/recruit-07.jpg" alt=""></div>
+                </div>
+            </div>
+        </section>
+
         <!-- ① FIELD 職種紹介 スライドショー -->
         <section class="field-section" id="field">
             <div class="field-header">
@@ -310,6 +355,60 @@
             </div>
         </section>
 
+        <!-- ④ INTERVIEW 社員インタビュー -->
+        <section class="rinterview" id="member">
+            <div class="rinterview-header">
+                <span class="rinterview-tag">INTERVIEW</span>
+                <h2 class="rinterview-title">社員インタビュー</h2>
+                <p class="rinterview-lead">人が集まる。想いがつながる。魚の未来が動き出す。</p>
+            </div>
+
+            <div class="rinterview-slider">
+                <div class="rinterview-viewport">
+                    <ul class="rinterview-track" id="interviewTrack">
+                        <li class="rinterview-card">
+                            <div class="rinterview-photo"><img src="../common/images/recruit-01.jpg" alt=""></div>
+                            <p class="rinterview-name">髙田 純一</p>
+                            <p class="rinterview-role">販売部 / 2018年入社</p>
+                        </li>
+                        <li class="rinterview-card">
+                            <div class="rinterview-photo"><img src="../common/images/recruit-05.jpg" alt=""></div>
+                            <p class="rinterview-name">堀内 菜穂子</p>
+                            <p class="rinterview-role">デジタル部 / 2020年入社</p>
+                        </li>
+                        <li class="rinterview-card">
+                            <div class="rinterview-photo"><img src="../common/images/recruit-08.jpg" alt=""></div>
+                            <p class="rinterview-name">竹内 翔平</p>
+                            <p class="rinterview-role">経営企画部 / 2019年入社</p>
+                        </li>
+                        <li class="rinterview-card">
+                            <div class="rinterview-photo"><img src="../common/images/recruit-02.jpg" alt=""></div>
+                            <p class="rinterview-name">高橋 蓮</p>
+                            <p class="rinterview-role">商品部 / 2021年入社</p>
+                        </li>
+                        <li class="rinterview-card">
+                            <div class="rinterview-photo"><img src="../common/images/img_0135.jpg" alt=""></div>
+                            <p class="rinterview-name">伊藤 陽菜</p>
+                            <p class="rinterview-role">人材育成部 / 2022年入社</p>
+                        </li>
+                        <li class="rinterview-card">
+                            <div class="rinterview-photo"><img src="../common/images/recruit-04.jpg" alt=""></div>
+                            <p class="rinterview-name">渡辺 大輔</p>
+                            <p class="rinterview-role">物流部 / 2017年入社</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rinterview-controls">
+                    <button class="rinterview-btn rinterview-btn--prev" id="interviewPrev" type="button" aria-label="前へ">‹</button>
+                    <button class="rinterview-btn rinterview-btn--next" id="interviewNext" type="button" aria-label="次へ">›</button>
+                </div>
+            </div>
+
+            <div class="rinterview-cta">
+                <a href="#" class="r-btn r-btn--outline">詳しく見る</a>
+            </div>
+        </section>
+
         <!-- ③ EMPLOYEE BENEFITS 福利厚生 -->
         <section class="benefits-section" id="benefits">
             <div class="benefits-top"></div>
@@ -388,7 +487,75 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="benefits-support">
+                    <h3 class="benefits-support__heading">安心して働けるサポート体制も充実</h3>
+                    <div class="benefits-support__grid">
+                        <div class="benefits-support__item">
+                            <span class="benefits-support__icon">
+                                <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1" /><path d="M9 8h6M9 12h6M9 16h3" /></svg>
+                            </span>
+                            <p class="benefits-support__name">研修制度</p>
+                        </div>
+                        <div class="benefits-support__item">
+                            <span class="benefits-support__icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M8 21l1-6h6l1 6" /><path d="M9 14l3 3 3-3" /></svg>
+                            </span>
+                            <p class="benefits-support__name">資格取得支援</p>
+                        </div>
+                        <div class="benefits-support__item">
+                            <span class="benefits-support__icon">
+                                <svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3" /><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5" /><circle cx="17" cy="8" r="2.4" /><path d="M15.3 11.3c2.2.5 3.7 2 3.7 4" /></svg>
+                            </span>
+                            <p class="benefits-support__name">メンター制度</p>
+                        </div>
+                        <div class="benefits-support__item">
+                            <span class="benefits-support__icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
+                            </span>
+                            <p class="benefits-support__name">福利厚生充実</p>
+                        </div>
+                        <div class="benefits-support__item">
+                            <span class="benefits-support__icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 21V10l5 3V10l5 3V10l5 3V10l3 2v6" /><path d="M3 21h18" /></svg>
+                            </span>
+                            <p class="benefits-support__name">住宅・家族手当</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-cta">
+                    <a href="#" class="r-btn r-btn--outline-light">詳しく見る</a>
+                </div>
             </div>
+        </section>
+
+        <!-- ⑤ RECRUIT 募集要項 -->
+        <section class="rrecruit" id="recruit">
+            <div class="rrecruit-bg" data-parallax="0.15"></div>
+            <div class="rrecruit-overlay"></div>
+
+            <div class="rrecruit-inner">
+                <div class="rrecruit-left">
+                    <span class="rrecruit-tag">RECRUIT</span>
+                    <h2 class="rrecruit-title">募集要項</h2>
+                    <p class="rrecruit-lead">あなたの挑戦を、ここから。</p>
+                    <div class="rrecruit-buttons">
+                        <button class="rrecruit-btn is-active" type="button" data-img="1">新卒採用</button>
+                        <button class="rrecruit-btn" type="button" data-img="2">高校生採用</button>
+                        <button class="rrecruit-btn" type="button" data-img="3">キャリア採用</button>
+                        <button class="rrecruit-btn" type="button" data-img="4">パート・アルバイト</button>
+                    </div>
+                </div>
+                <div class="rrecruit-right">
+                    <div class="rrecruit-image is-active" data-img="1"><img src="../common/images/recruit-01.jpg" alt="新卒採用"></div>
+                    <div class="rrecruit-image" data-img="2"><img src="../common/images/recruit-03.jpg" alt="高校生採用"></div>
+                    <div class="rrecruit-image" data-img="3"><img src="../common/images/recruit-05.jpg" alt="キャリア採用"></div>
+                    <div class="rrecruit-image" data-img="4"><img src="../common/images/recruit-07.jpg" alt="パート・アルバイト"></div>
+                </div>
+            </div>
+
+            <canvas class="rwave-canvas" id="rwaveCanvas" aria-hidden="true"></canvas>
         </section>
     </main>
 
@@ -473,6 +640,10 @@
     <script src="../common/js/lower.js"></script>
     <script src="../common/js/field-slider.js"></script>
     <script src="../common/js/benefits-tabs.js"></script>
+    <script src="../common/js/interview-slider.js"></script>
+    <script src="../common/js/recruit-cta.js"></script>
+    <script src="../common/js/wave-canvas.js"></script>
+    <script src="../common/js/site-parallax.js"></script>
 </body>
 
 </html>

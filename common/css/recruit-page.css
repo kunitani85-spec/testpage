@@ -151,6 +151,235 @@ main {
 }
 
 /*==============================================
+⓪ MV ファーストビュー
+===============================================*/
+
+.rmv {
+    position: relative;
+    height: calc(100vh - var(--header-h));
+    min-height: 480px;
+    overflow: hidden;
+}
+
+.rmv-bg {
+    position: absolute;
+    inset: -10% 0;
+    background: url("../images/top-images.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+}
+
+.rmv-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 35, 80, .65) 0%, rgba(15, 76, 129, .55) 55%, rgba(15, 35, 80, .75) 100%);
+}
+
+.rmv-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.rmv-en {
+    font-family: sans-serif;
+    letter-spacing: .3em;
+    font-size: 14px;
+    color: #fff;
+    margin: 0 0 20px;
+}
+
+.rmv-en span {
+    color: #ff8a5c;
+    margin-left: 6px;
+    letter-spacing: .1em;
+}
+
+.rmv-title {
+    color: #fff;
+    font-family: serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.6;
+    letter-spacing: .04em;
+    margin: 0 0 24px;
+}
+
+.rmv-lead {
+    color: #eaf6fd;
+    font-size: 16px;
+    margin: 0;
+}
+
+.rmv-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 12px;
+    letter-spacing: .2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.rmv-scroll span {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, .6);
+    overflow: hidden;
+    position: relative;
+}
+
+.rmv-scroll span::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    animation: rmvScrollLine 1.8s infinite;
+}
+
+@keyframes rmvScrollLine {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+@media screen and (max-width: 767px) {
+    .rmv-title {
+        font-size: 26px;
+    }
+}
+
+/*==============================================
+⓪ ABOUT 私たちについて
+===============================================*/
+
+.rabout {
+    background: #fff;
+    padding: 100px 24px 0;
+}
+
+.rabout-inner {
+    max-width: 1200px;
+    margin: 0 auto 70px;
+    display: flex;
+    align-items: center;
+    gap: 64px;
+}
+
+.rabout-image {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    will-change: transform;
+}
+
+.rabout-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.rabout-text {
+    flex: 1;
+}
+
+.rabout-tag {
+    display: inline-block;
+    color: #ff8a5c;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .2em;
+    margin-bottom: 14px;
+}
+
+.rabout-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0f2350;
+    line-height: 1.6;
+    letter-spacing: .02em;
+    margin: 0 0 22px;
+}
+
+.rabout-desc {
+    font-size: 15px;
+    line-height: 2;
+    color: #5a6b7d;
+    margin: 0;
+}
+
+.rabout-loop {
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.rabout-loop__track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: raboutLoopScroll 26s linear infinite;
+}
+
+.rabout-loop__item {
+    width: 300px;
+    height: 210px;
+    flex-shrink: 0;
+}
+
+.rabout-loop__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@keyframes raboutLoopScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@media screen and (max-width: 900px) {
+    .rabout-inner {
+        flex-direction: column;
+        gap: 36px;
+    }
+
+    .rabout-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .rabout-tag {
+        display: block;
+        text-align: center;
+    }
+
+    .rabout-desc {
+        text-align: center;
+    }
+}
+
+/*==============================================
 ① FIELD 職種紹介 スライドショー
 ===============================================*/
 
@@ -630,6 +859,175 @@ main {
 }
 
 /*==============================================
+④ INTERVIEW 社員インタビュー
+===============================================*/
+
+.rinterview {
+    background: #fff;
+    padding: 100px 24px 120px;
+}
+
+.rinterview-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+}
+
+.rinterview-tag {
+    display: inline-block;
+    color: #ff8a5c;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .2em;
+    margin-bottom: 12px;
+}
+
+.rinterview-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #0f2350;
+    margin: 0 0 16px;
+}
+
+.rinterview-lead {
+    font-size: 15px;
+    color: #5a6b7d;
+    margin: 0;
+}
+
+.rinterview-slider {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.rinterview-viewport {
+    overflow: hidden;
+}
+
+.rinterview-track {
+    display: flex;
+    gap: 30px;
+}
+
+.rinterview-card {
+    flex: 0 0 calc((100% - 60px) / 3);
+    text-align: center;
+}
+
+.rinterview-photo {
+    aspect-ratio: 3 / 4;
+    border-radius: 50px 6px 50px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.rinterview-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.rinterview-name {
+    font-weight: 700;
+    font-size: 16px;
+    color: #0f2350;
+    margin: 0 0 4px;
+}
+
+.rinterview-role {
+    font-size: 13px;
+    color: #5a6b7d;
+    margin: 0;
+}
+
+.rinterview-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 32px;
+}
+
+.rinterview-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #1c7fc4;
+    color: #1c7fc4;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.rinterview-btn:hover {
+    background: #1c7fc4;
+    color: #fff;
+}
+
+.rinterview-btn:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+.rinterview-btn:disabled:hover {
+    background: #fff;
+    color: #1c7fc4;
+}
+
+.rinterview-cta {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.r-btn {
+    display: inline-block;
+    padding: 14px 44px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .05em;
+    transition: all .3s ease;
+}
+
+.r-btn--outline {
+    border: 2px solid #1c7fc4;
+    color: #1c7fc4;
+}
+
+.r-btn--outline:hover {
+    background: #1c7fc4;
+    color: #fff;
+}
+
+.r-btn--outline-light {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.r-btn--outline-light:hover {
+    background: #fff;
+    color: #1c7fc4;
+}
+
+@media screen and (max-width: 900px) {
+    .rinterview-card {
+        flex: 0 0 calc((100% - 30px) / 2);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .rinterview-card {
+        flex: 0 0 100%;
+    }
+}
+
+/*==============================================
 ③ EMPLOYEE BENEFITS 福利厚生
 ===============================================*/
 
@@ -777,6 +1175,70 @@ main {
     margin: 0;
 }
 
+.benefits-support {
+    margin-top: 70px;
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+}
+
+.benefits-support__heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 32px;
+}
+
+.benefits-support__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.benefits-support__item {
+    background: rgba(255, 255, 255, .08);
+    border-radius: 10px;
+    padding: 26px 12px;
+    transition: transform .25s ease, background-color .25s ease;
+}
+
+.benefits-support__item:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, .16);
+}
+
+.benefits-support__icon {
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 12px;
+    color: #ff8a5c;
+}
+
+.benefits-support__icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.benefits-support__name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.benefits-cta {
+    text-align: center;
+    margin-top: 46px;
+}
+
 @media screen and (max-width: 900px) {
     .benefits-banner {
         font-size: 24px;
@@ -804,12 +1266,165 @@ main {
     .benefits-panel__title {
         font-size: 26px;
     }
+
+    .benefits-support__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (max-width: 480px) {
     .benefits-tab {
         flex: 1 1 100%;
         border-right: none;
+    }
+}
+
+/*==============================================
+⑤ RECRUIT 募集要項
+===============================================*/
+
+.rrecruit {
+    position: relative;
+    padding: 0;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.rrecruit-bg {
+    position: absolute;
+    inset: -10% 0;
+    background: url("../images/pro-01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+}
+
+.rrecruit-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 35, 80, .55) 0%, rgba(15, 76, 129, .45) 60%, rgba(15, 35, 80, .8) 100%);
+}
+
+.rrecruit-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 24px;
+}
+
+.rrecruit-left {
+    flex: 1;
+}
+
+.rrecruit-tag {
+    display: inline-block;
+    color: #ff8a5c;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .2em;
+    margin-bottom: 14px;
+}
+
+.rrecruit-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 12px;
+}
+
+.rrecruit-lead {
+    font-size: 15px;
+    color: #eaf6fd;
+    margin: 0;
+}
+
+.rrecruit-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+    max-width: 320px;
+}
+
+.rrecruit-btn {
+    text-align: left;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.rrecruit-btn:hover,
+.rrecruit-btn.is-active {
+    background: #ff8a5c;
+    border-color: #ff8a5c;
+}
+
+.rrecruit-right {
+    flex: 1;
+    position: relative;
+    min-height: 380px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.rrecruit-image {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.rrecruit-image.is-active {
+    opacity: 1;
+}
+
+.rrecruit-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.rwave-canvas {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 900px) {
+    .rrecruit-inner {
+        flex-direction: column;
+        padding: 80px 24px 60px;
+    }
+
+    .rrecruit-right {
+        width: 100%;
+        min-height: 260px;
+    }
+
+    .rrecruit-title {
+        font-size: 28px;
     }
 }
 
