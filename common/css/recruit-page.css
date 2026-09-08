@@ -170,8 +170,8 @@ main {
 
 .field-tag {
     display: inline-block;
-    background: #bfe6f7;
-    color: #0f4c81;
+    background: rgba(255, 138, 92, .18);
+    color: #ff8a5c;
     font-family: sans-serif;
     font-weight: 700;
     font-size: 13px;
@@ -195,7 +195,7 @@ main {
     display: block;
     width: 60px;
     height: 3px;
-    background: #7fd6f2;
+    background: #ff8a5c;
     margin: 14px auto 0;
 }
 
@@ -374,14 +374,14 @@ main {
 }
 
 .field-card.is-active {
-    box-shadow: 0 0 0 2px #1c7fc4 inset, 0 12px 24px rgba(6, 40, 70, .18);
+    box-shadow: 0 0 0 2px #ff8a5c inset, 0 12px 24px rgba(6, 40, 70, .18);
 }
 
 .field-card__icon {
     width: 48px;
     height: 48px;
     margin-bottom: 14px;
-    color: #1c7fc4;
+    color: #ff8a5c;
 }
 
 .field-card__icon svg {
@@ -399,7 +399,7 @@ main {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .1em;
-    color: #1c7fc4;
+    color: #ff8a5c;
     margin-bottom: 4px;
 }
 
@@ -413,7 +413,7 @@ main {
 
 .field-card__arrow {
     margin-top: 14px;
-    color: #1c7fc4;
+    color: #ff8a5c;
     font-size: 16px;
 }
 
@@ -500,7 +500,7 @@ main {
 .people-intro__badge {
     display: inline-block;
     background: #fff;
-    color: #1c7fc4;
+    color: #ff8a5c;
     font-family: sans-serif;
     font-weight: 800;
     font-size: 34px;
@@ -720,7 +720,7 @@ main {
 }
 
 .benefits-tab.is-active {
-    background: #1c7fc4;
+    background: #ff8a5c;
     color: #fff;
 }
 
