@@ -1,0 +1,680 @@
+/*==============================================
+採用サイト 専用スタイル
+default.css（リセット・共通カラー）と合わせて読み込む。
+===============================================*/
+
+body {
+    background-color: #0B3D5C;
+}
+
+/*==============================================
+ヘッダー（style.cssと同一）
+===============================================*/
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 8;
+}
+
+.header__inner {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header__logo {
+    flex: none;
+    width: auto;
+    height: 50px;
+}
+
+.header__navgroup {
+    margin-left: auto;
+    display: flex;
+    flex: none;
+}
+
+.header__navgroup>*+* {
+    margin-left: 60px;
+}
+
+.header__navitem {
+    font-size: 16px;
+    color: #fff;
+    transition: opacity .2s ease;
+}
+
+.header__navitem:hover {
+    opacity: .65;
+}
+
+.header__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 7;
+}
+
+.header__hamburger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.header__hamburger.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.header__hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.header__hamburger.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.header__drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 35, 80, 0.97);
+    z-index: 6;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.header__drawer.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.header__drawer-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.header__drawer-nav a {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    font-family: serif;
+    transition: opacity 0.2s ease;
+}
+
+.header__drawer-nav a:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1300px) {
+    .header__navgroup {
+        display: none;
+    }
+
+    .header__hamburger {
+        display: flex;
+    }
+
+    .header__drawer {
+        display: flex;
+    }
+}
+
+main {
+    display: block;
+}
+
+/*==============================================
+① FIELD 職種紹介 スライドショー
+===============================================*/
+
+.field-section {
+    background: linear-gradient(180deg, #0f4c81 0%, #1c7fc4 45%, #2e9be0 100%);
+    padding: calc(var(--header-h) + 60px) 24px 80px;
+    overflow: hidden;
+    position: relative;
+}
+
+.field-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.field-tag {
+    display: inline-block;
+    background: #bfe6f7;
+    color: #0f4c81;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .15em;
+    padding: 6px 20px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+}
+
+.field-title {
+    color: #fff;
+    font-family: serif;
+    font-weight: 700;
+    font-size: 42px;
+    letter-spacing: .15em;
+    margin: 0 0 14px;
+}
+
+.field-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #7fd6f2;
+    margin: 14px auto 0;
+}
+
+.field-slider {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.field-arrow {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .6);
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.field-arrow:hover {
+    background: rgba(255, 255, 255, .25);
+}
+
+.field-slide-wrap {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(280px, 560px) 1fr;
+    align-items: center;
+    gap: 40px;
+    min-height: 380px;
+}
+
+.field-fish {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    clip-path: url(#fieldFishClip);
+}
+
+.field-fish__photo {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+
+.field-fish__photo.is-active {
+    opacity: 1;
+}
+
+.field-fish__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.field-info {
+    position: relative;
+    min-height: 220px;
+}
+
+.field-info__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .5s ease, transform .5s ease;
+    pointer-events: none;
+}
+
+.field-info__slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.field-info__eyebrow {
+    display: block;
+    color: #bfe6f7;
+    font-family: sans-serif;
+    font-weight: 700;
+    letter-spacing: .2em;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.field-info__title {
+    color: #fff;
+    font-family: serif;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: .1em;
+    margin: 0 0 24px;
+}
+
+.field-info__title::after {
+    content: "";
+    display: block;
+    width: 46px;
+    height: 2px;
+    background: #7fd6f2;
+    margin-top: 20px;
+}
+
+.field-info__desc {
+    color: #eaf6fd;
+    font-size: 16px;
+    line-height: 1.9;
+    margin: 0;
+}
+
+/*==============================================
+② ドット / アイコンカード
+===============================================*/
+
+.field-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 36px 0 48px;
+    position: relative;
+    z-index: 1;
+}
+
+.field-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .4);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.field-dot.is-active {
+    background: #fff;
+    transform: scale(1.3);
+}
+
+.field-cards {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.field-card {
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 26px 12px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+    box-shadow: 0 6px 16px rgba(6, 40, 70, .12);
+}
+
+.field-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(6, 40, 70, .18);
+}
+
+.field-card.is-active {
+    box-shadow: 0 0 0 2px #1c7fc4 inset, 0 12px 24px rgba(6, 40, 70, .18);
+}
+
+.field-card__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 14px;
+    color: #1c7fc4;
+}
+
+.field-card__icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.field-card__eyebrow {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: #1c7fc4;
+    margin-bottom: 4px;
+}
+
+.field-card__label {
+    font-family: serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #12314a;
+    line-height: 1.5;
+}
+
+.field-card__arrow {
+    margin-top: 14px;
+    color: #1c7fc4;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 1100px) {
+    .field-cards {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    .field-info__title {
+        font-size: 44px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .field-slide-wrap {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .field-info {
+        min-height: 180px;
+        text-align: center;
+    }
+
+    .field-info__title::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .field-section {
+        padding: calc(var(--header-h) + 30px) 16px 60px;
+    }
+
+    .field-title {
+        font-size: 30px;
+    }
+
+    .field-slider {
+        gap: 10px;
+    }
+
+    .field-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .field-info__title {
+        font-size: 34px;
+    }
+
+    .field-info__desc {
+        font-size: 14px;
+    }
+
+    .field-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/*==============================================
+トップに戻る（style.cssと同一）
+===============================================*/
+
+#page-top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #b71c2c;
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.6rem;
+    transition: all 0.3s;
+}
+
+#page-top a:hover {
+    background: #777;
+}
+
+#page-top {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+#page-top.UpMove {
+    animation: UpAnime 0.5s forwards;
+}
+
+@keyframes UpAnime {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#page-top.DownMove {
+    animation: DownAnime 0.5s forwards;
+}
+
+@keyframes DownAnime {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(100px);
+    }
+}
+
+/*==============================================
+フッター（style.cssと同一）
+===============================================*/
+
+footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #000;
+}
+
+footer hr {
+    margin-top: 100px;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #35466b;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer {
+    padding: 2rem;
+    font-size: 15px;
+    color: #fff;
+    background-color: #0f2350;
+}
+
+.footer__navi-heading {
+    font-weight: 600;
+}
+
+.footer__logo {
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.footer__navi li {
+    margin-bottom: 0.75rem;
+}
+
+.address {
+    color: #40567c;
+}
+
+.address a {
+    color: #40567c;
+}
+
+.address a:hover {
+    color: #fff;
+}
+
+.copyright p {
+    text-align: right;
+    color: #40567c;
+}
+
+.copyright a {
+    color: #40567c;
+}
+
+.copyright a:hover {
+    color: #fff;
+}
+
+.uotora_right {
+    background-color: #0f2350;
+}
+
+.uotora_right .scroll-infinity {
+    padding-bottom: 5px;
+}
+
+.scroll-infinity {
+    padding-bottom: 50px;
+}
+
+@keyframes infinity-scroll-right {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+.scroll-infinity__wrap {
+    display: flex;
+    overflow: hidden;
+}
+
+.scroll-infinity__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.scroll-infinity__list--right {
+    animation: infinity-scroll-right 200s infinite linear 0.5s both;
+}
+
+.scroll-infinity__item {
+    width: calc(100vw / 1);
+}
+
+.scroll-infinity__item>img {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .md-flex {
+        margin-top: 50px;
+        display: flex;
+    }
+
+    .md-justify-between {
+        justify-content: space-between;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
