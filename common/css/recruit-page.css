@@ -980,8 +980,23 @@ main {
     text-align: center;
 }
 
+.rinterview-photo-wrap {
+    position: relative;
+}
+
+.rinterview-photo-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #bde2f1;
+    border-radius: 50px 6px 50px;
+    transform: rotate(-4deg);
+    z-index: 0;
+}
+
 .rinterview-photo {
     position: relative;
+    z-index: 1;
     aspect-ratio: 3 / 4;
     border-radius: 50px 6px 50px;
     overflow: hidden;
