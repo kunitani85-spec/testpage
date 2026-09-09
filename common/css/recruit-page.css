@@ -379,7 +379,7 @@ main {
     display: flex;
     gap: 16px;
     width: max-content;
-    animation: raboutLoopScroll 26s linear infinite;
+    animation: raboutLoopScroll 52s linear infinite;
 }
 
 .rabout-loop__set {
