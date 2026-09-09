@@ -382,6 +382,12 @@ main {
     animation: raboutLoopScroll 26s linear infinite;
 }
 
+.rabout-loop__set {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
 .rabout-loop__item {
     width: 300px;
     height: 210px;
@@ -397,7 +403,7 @@ main {
 
 @keyframes raboutLoopScroll {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to { transform: translateX(calc(-1 * var(--loop-shift, 316px))); }
 }
 
 @media screen and (max-width: 900px) {
