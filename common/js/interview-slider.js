@@ -1,6 +1,8 @@
 /* ================================================
    common/js/interview-slider.js
    採用サイト「社員インタビュー」カードスライダー
+   常に3枚(レスポンシブ時は2枚/1枚)表示され続ける
+   無限ループ+自動再生カルーセル
 ================================================ */
 (function () {
     "use strict";
@@ -11,43 +13,97 @@
 
     if (!track || !prevBtn || !nextBtn) return;
 
-    var cards = Array.prototype.slice.call(track.children);
-    var current = 0;
+    var originalCards = Array.prototype.slice.call(track.children);
+    var total = originalCards.length;
+    if (!total) return;
 
-    function getVisibleCount() {
-        var w = window.innerWidth;
-        if (w <= 560) return 1;
-        if (w <= 900) return 2;
-        return 3;
+    var AUTOPLAY_MS = 4000;
+    var timer = null;
+    var index = total;
+    var reduceMotion =
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    originalCards.forEach(function (card) {
+        track.appendChild(card.cloneNode(true));
+    });
+    originalCards.forEach(function (card) {
+        track.insertBefore(card.cloneNode(true), track.firstChild);
+    });
+
+    var cards = Array.prototype.slice.call(track.children);
+
+    function stepWidth() {
+        var style = getComputedStyle(track);
+        var gap = parseFloat(style.columnGap || style.gap || 0) || 0;
+        return cards[0].getBoundingClientRect().width + gap;
     }
 
-    function update() {
-        var visibleCount = getVisibleCount();
-        var maxIndex = Math.max(cards.length - visibleCount, 0);
-        current = Math.min(current, maxIndex);
+    function moveTo(newIndex, animate) {
+        track.style.transition = animate ? "" : "none";
+        track.style.transform = "translateX(" + (-newIndex * stepWidth()) + "px)";
+    }
 
-        var style = getComputedStyle(track);
-        var gap = parseFloat(style.columnGap || style.gap || 0);
-        var step = cards[0].getBoundingClientRect().width + gap;
+    function settle() {
+        if (index >= total * 2) {
+            index -= total;
+            moveTo(index, false);
+        } else if (index < total) {
+            index += total;
+            moveTo(index, false);
+        }
+    }
 
-        track.style.transform = "translateX(" + (-current * step) + "px)";
-        prevBtn.disabled = current <= 0;
-        nextBtn.disabled = current >= maxIndex;
+    track.addEventListener("transitionend", settle);
+
+    function next() {
+        index += 1;
+        moveTo(index, true);
+    }
+
+    function prev() {
+        index -= 1;
+        moveTo(index, true);
+    }
+
+    function startAutoplay() {
+        stopAutoplay();
+        if (reduceMotion) return;
+        timer = setInterval(next, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+    }
+
+    function restartAutoplay() {
+        stopAutoplay();
+        startAutoplay();
     }
 
     nextBtn.addEventListener("click", function () {
-        var visibleCount = getVisibleCount();
-        var maxIndex = Math.max(cards.length - visibleCount, 0);
-        current = Math.min(current + visibleCount, maxIndex);
-        update();
+        next();
+        restartAutoplay();
     });
 
     prevBtn.addEventListener("click", function () {
-        var visibleCount = getVisibleCount();
-        current = Math.max(current - visibleCount, 0);
-        update();
+        prev();
+        restartAutoplay();
     });
 
-    window.addEventListener("resize", update);
-    update();
+    var slider = track.closest(".rinterview-slider");
+    if (slider) {
+        slider.addEventListener("mouseenter", stopAutoplay);
+        slider.addEventListener("mouseleave", startAutoplay);
+    }
+
+    window.addEventListener("resize", function () {
+        moveTo(index, false);
+    });
+
+    moveTo(index, false);
+    startAutoplay();
 })();
