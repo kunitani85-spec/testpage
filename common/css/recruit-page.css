@@ -514,8 +514,23 @@ main {
     min-height: 380px;
 }
 
+.field-fish-wrap {
+    position: relative;
+}
+
+.field-fish-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #bde2f1;
+    border-radius: 6px;
+    transform: rotate(-4deg);
+    z-index: 0;
+}
+
 .field-fish {
     position: relative;
+    z-index: 1;
     aspect-ratio: 16 / 10;
     clip-path: url(#fieldFishClip);
 }
