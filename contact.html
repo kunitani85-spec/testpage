@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>お問い合わせ｜株式会社R.I.N</title>
+  <meta name="description" content="株式会社R.I.Nへのお問い合わせ・無料体験のご予約はこちら。">
+  <meta property="og:title" content="お問い合わせ｜株式会社R.I.N">
+  <meta property="og:description" content="株式会社R.I.Nへのお問い合わせ・無料体験のご予約はこちら。">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="株式会社R.I.N トップへ">
+        <span class="logo-mark" aria-hidden="true">RIN</span>
+        <span class="logo-text"><small>家庭用医療機器の販売</small><strong>株式会社R.I.N</strong></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="global-nav" aria-expanded="false" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="global-nav" id="global-nav" aria-label="グローバルナビゲーション">
+        <ul>
+          <li><a href="index.html">トップ</a></li>
+          <li><a href="products.html">製品紹介</a></li>
+          <li><a href="news.html">新着情報</a></li>
+          <li><a href="seraphia.html">リフレッシュ空間セラフィア</a></li>
+          <li><a href="company.html">企業情報</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li class="nav-contact"><a href="contact.html" aria-current="page">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="en">Contact</span>
+        <h1>お問い合わせ</h1>
+        <p>製品に関するご質問、無料体験会のご予約など、お気軽にお問い合わせください。</p>
+      </div>
+    </section>
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <div class="container">
+        <ol>
+          <li><a href="index.html">トップ</a></li>
+          <li aria-current="page">お問い合わせ</li>
+        </ol>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container contact-wrap">
+        <div class="contact-tel-box reveal">
+          <p>お電話でのお問い合わせ</p>
+          <a href="tel:0000000000" class="tel">00-0000-0000</a>
+          <small>受付時間 10:00〜18:00（日・祝除く）</small>
+        </div>
+
+        <div class="section-head reveal">
+          <span class="en">Form</span>
+          <h2>お問い合わせフォーム</h2>
+          <p>以下のフォームに必要事項をご入力のうえ、送信してください。<br>内容を確認後、担当者より折り返しご連絡いたします。</p>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="form-row" data-required>
+            <span class="label">お問い合わせ種別<span class="req">必須</span></span>
+            <div>
+              <div class="radio-group">
+                <label><input type="radio" name="type" value="product">製品について</label>
+                <label><input type="radio" name="type" value="trial">無料体験のご予約</label>
+                <label><input type="radio" name="type" value="other">その他</label>
+              </div>
+              <p class="form-error">お問い合わせ種別を選択してください。</p>
+            </div>
+          </div>
+          <div class="form-row" data-required>
+            <label for="name">お名前<span class="req">必須</span></label>
+            <div>
+              <input type="text" id="name" name="name" class="form-control" autocomplete="name" placeholder="例）山田 花子">
+              <p class="form-error">お名前を入力してください。</p>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="kana">フリガナ<span class="opt">任意</span></label>
+            <div><input type="text" id="kana" name="kana" class="form-control" placeholder="例）ヤマダ ハナコ"></div>
+          </div>
+          <div class="form-row" data-required>
+            <label for="email">メールアドレス<span class="req">必須</span></label>
+            <div>
+              <input type="email" id="email" name="email" class="form-control" autocomplete="email" placeholder="例）example@example.com">
+              <p class="form-error">正しいメールアドレスを入力してください。</p>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="tel">電話番号<span class="opt">任意</span></label>
+            <div><input type="tel" id="tel" name="tel" class="form-control" autocomplete="tel" placeholder="例）000-0000-0000"></div>
+          </div>
+          <div class="form-row" data-required>
+            <label for="message">お問い合わせ内容<span class="req">必須</span></label>
+            <div>
+              <textarea id="message" name="message" class="form-control" placeholder="お問い合わせ内容をご記入ください。無料体験のご予約の場合は、ご希望の日時もお書き添えください。"></textarea>
+              <p class="form-error">お問い合わせ内容を入力してください。</p>
+            </div>
+          </div>
+
+          <div class="form-agree">
+            <label><input type="checkbox" id="agree"><span><a href="privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する</span></label>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary" disabled>送信する</button>
+          </div>
+        </form>
+
+        <div class="form-complete" id="form-complete" role="status">
+          <h2>お問い合わせありがとうございます</h2>
+          <p>内容を確認のうえ、担当者より折り返しご連絡いたします。<br>今しばらくお待ちくださいませ。</p>
+          <a href="index.html" class="btn btn-outline">トップへ戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a href="index.html" class="logo">
+            <span class="logo-mark" aria-hidden="true">RIN</span>
+        <span class="logo-text"><small>家庭用医療機器の販売</small><strong>株式会社R.I.N</strong></span>
+          </a>
+          <p class="footer-address">〒000-0000 ○○県○○市○○町0-0-0<br>TEL：00-0000-0000<br>受付時間 10:00〜18:00（日・祝除く）</p>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="index.html">トップ</a></li>
+          <li><a href="products.html">製品紹介</a></li>
+          <li><a href="news.html">新着情報</a></li>
+          <li><a href="seraphia.html">リフレッシュ空間セラフィア</a></li>
+          <li><a href="company.html">企業情報</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <small>&copy; R.I.N Co., Ltd. All Rights Reserved.</small>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="page-top" aria-label="ページの先頭へ戻る">↑</a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
